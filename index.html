@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PRYCOT.</title>
+  <meta name="description" content="PRYCOT. Independent music label and digital distribution service.">
+  <style>
+    :root {
+      --background: #ffffff;
+      --foreground: #111111;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      background: var(--background);
+      color: var(--foreground);
+      font-family: Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      position: relative;
+      padding: 28px 32px;
+    }
+
+    .logo {
+      position: absolute;
+      top: 28px;
+      left: 32px;
+      margin: 0;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: clamp(32px, 4vw, 58px);
+      font-weight: 800;
+      font-style: italic;
+      letter-spacing: -0.075em;
+      line-height: 0.9;
+    }
+
+    .tagline {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 22px 20px; }
+      .logo { top: 22px; left: 20px; font-size: 34px; }
+      .tagline {
+        top: 70px;
+        left: 20px;
+        transform: none;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1 class="logo">PRYCOT.</h1>
+    <p class="tagline">RELEASE WORLDWIDE. PAY IN CRYPTO.</p>
+  </main>
+</body>
+</html>

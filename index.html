@@ -7,68 +7,200 @@
   <meta name="description" content="PRYCOT. Independent music label and digital distribution service.">
   <style>
     :root {
-      --background: #ffffff;
-      --foreground: #111111;
+      --bg: #0a0a0a;
+      --fg: #f4f4f2;
+      --muted: #9b9b98;
+      --line: #292929;
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
-
+    html { scroll-behavior: smooth; }
     body {
-      background: var(--background);
-      color: var(--foreground);
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
       font-family: Helvetica, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
+    a { color: inherit; text-decoration: none; }
+
     .page {
       min-height: 100vh;
-      position: relative;
-      padding: 30px 34px;
+      padding: 30px 34px 42px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
     }
 
     .logo {
-      position: absolute;
-      top: 30px;
-      left: 34px;
       margin: 0;
-      font-family: Helvetica, Arial, sans-serif;
-      font-size: clamp(32px, 4vw, 58px);
+      font-size: clamp(34px, 4.5vw, 62px);
+      line-height: .82;
       font-weight: 800;
       font-style: italic;
-      letter-spacing: -0.075em;
-      line-height: 0.9;
+      letter-spacing: -.075em;
     }
 
-    .tagline {
-      position: absolute;
-      top: 43px;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-      white-space: nowrap;
+    nav {
+      display: flex;
+      gap: 24px;
+      padding-top: 4px;
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: .12em;
       text-transform: uppercase;
     }
 
-    @media (max-width: 640px) {
-      .page { padding: 22px 20px; }
-      .logo { top: 22px; left: 20px; font-size: 34px; }
-      .tagline {
-        top: 68px;
-        left: 20px;
-        transform: none;
-        font-size: 10px;
+    nav a { opacity: .72; }
+    nav a:hover { opacity: 1; }
+
+    .hero {
+      flex: 1;
+      min-height: 72vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .tagline {
+      margin: 0 0 28px;
+      font-size: clamp(12px, 1.2vw, 16px);
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(28px, 5vw, 68px);
+      line-height: .98;
+      font-weight: 500;
+      letter-spacing: -.045em;
+    }
+
+    .sub {
+      max-width: 520px;
+      margin: 30px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .service {
+      min-height: 150px;
+      padding: 24px 22px 26px 0;
+      border-right: 1px solid var(--line);
+    }
+
+    .service + .service { padding-left: 22px; }
+    .service:last-child { border-right: 0; }
+
+    .number {
+      display: block;
+      margin-bottom: 28px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .14em;
+    }
+
+    .service h2 {
+      margin: 0 0 9px;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -.02em;
+    }
+
+    .service p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 22px;
+      color: var(--muted);
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 700px) {
+      .page { padding: 22px 20px 30px; }
+      nav { gap: 12px; font-size: 9px; }
+      .hero { min-height: 68vh; align-items: flex-start; text-align: left; }
+      .intro { max-width: 100%; }
+      .sub { max-width: 390px; }
+      .services { grid-template-columns: 1fr; }
+      .service,
+      .service + .service {
+        padding: 20px 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
       }
+      .service:last-child { border-bottom: 0; }
+      .number { margin-bottom: 18px; }
+      footer { flex-direction: column; gap: 8px; }
     }
   </style>
 </head>
 <body>
   <main class="page">
-    <h1 class="logo">PRYCOT.</h1>
-    <p class="tagline">RELEASE WORLDWIDE. PAY IN CRYPTO.</p>
+    <header>
+      <h1 class="logo">PRYCOT.</h1>
+      <nav aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <p class="tagline">RELEASE WORLDWIDE. PAY IN CRYPTO.</p>
+      <h2 class="intro">Independent music label &amp; digital distribution.</h2>
+      <p class="sub">We help artists release music worldwide and deliver it to the major streaming platforms.</p>
+    </section>
+
+    <section class="services" id="services">
+      <article class="service">
+        <span class="number">01 / RELEASE</span>
+        <h2>Worldwide distribution</h2>
+        <p>Digital delivery to streaming platforms for independent artists.</p>
+      </article>
+      <article class="service">
+        <span class="number">02 / PAYMENT</span>
+        <h2>Pay in crypto</h2>
+        <p>Simple payment options for artists working internationally.</p>
+      </article>
+      <article class="service">
+        <span class="number">03 / LABEL</span>
+        <h2>PRYCOT.</h2>
+        <p>An independent space for releases, artists and ideas.</p>
+      </article>
+    </section>
+
+    <footer id="contact">
+      <span>PRYCOT. — 2026</span>
+      <span>Independent music label</span>
+    </footer>
   </main>
 </body>
 </html>

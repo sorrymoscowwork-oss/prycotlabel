@@ -79,6 +79,7 @@
     nav a:hover { opacity: 1; }
 
     .hero {
+      position: relative;
       flex: 1;
       min-height: 72vh;
       display: flex;
@@ -103,6 +104,17 @@
       color: var(--muted);
       font-size: 14px;
       line-height: 1.55;
+    }
+
+    .stroller-mark {
+      position: absolute;
+      right: 3vw;
+      top: 50%;
+      width: clamp(90px, 11vw, 150px);
+      height: auto;
+      transform: translateY(-50%);
+      opacity: .9;
+      pointer-events: none;
     }
 
     .services {
@@ -154,6 +166,12 @@
       text-transform: uppercase;
     }
 
+    .stroller-mark svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     @media (max-width: 700px) {
       .page { padding: 22px 20px 30px; }
       header { align-items: flex-start; }
@@ -164,6 +182,13 @@
       .hero { min-height: 68vh; align-items: flex-start; text-align: left; }
       .intro { max-width: 100%; }
       .sub { max-width: 390px; }
+      .stroller-mark {
+        right: 0;
+        bottom: 8%;
+        top: auto;
+        width: 82px;
+        transform: none;
+      }
       .services { grid-template-columns: 1fr; }
       .service,
       .service + .service {
@@ -193,6 +218,22 @@
     <section class="hero">
       <h2 class="intro">Independent music label &amp; digital distribution.</h2>
       <p class="sub">We help artists release music worldwide and deliver it to the major streaming platforms.</p>
+      <div class="stroller-mark" aria-hidden="true">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="9" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <g fill="#f4f4f2" filter="url(#glow)">
+            <path d="M55 83a82 82 0 0 1 82-82v82z"/>
+            <path d="M56 91h126l31-52c5-8 13-12 22-12h35c10 0 18 8 18 18s-8 18-18 18h-29l-34 57a13 13 0 0 1-11 6H56z"/>
+            <circle cx="96" cy="222" r="30"/>
+            <circle cx="210" cy="222" r="30"/>
+          </g>
+        </svg>
+      </div>
     </section>
 
     <section class="services" id="services">

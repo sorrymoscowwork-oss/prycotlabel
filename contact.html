@@ -35,9 +35,9 @@ header{position:relative!important;min-height:96px!important}
       <a href="label-services.html">Label Services</a>
       <a href="contact.html">Contact</a>
     </nav></div><main class="page"><header><a class="brand" href="https://sorrymoscowwork-oss.github.io/prycotlabel/?v=20260926"><h1 class="logo">PRYCOT.</h1><p class="tagline">RELEASE WORLDWIDE. PAY IN CRYPTO.</p></a><button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button></header><section class="content"><p class="eyebrow">PRYCOT. / CONTACT</p><h2>Contact PRYCOT.</h2><p>For releases, distribution and general enquiries, contact PRYCOT. directly.</p></section></main><script>
-const menu=document.getElementById('menu'),menuButton=document.getElementById('menuButton'),closeButton=document.querySelector('.menu-close');
+const menu=document.getElementById('menu');
+const menuButton=document.getElementById('menuButton');
 const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};
-menuButton.addEventListener('click',(event)=>{event.stopPropagation();menu.classList.add('open');menuButton.setAttribute('aria-expanded','true')});
-closeButton.addEventListener('click',closeMenu);
-document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});
+menuButton.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();menu.classList.add('open');menuButton.setAttribute('aria-expanded','true')});
+document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target))closeMenu()});
 </script></body></html>

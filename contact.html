@@ -39,5 +39,5 @@ const menu=document.getElementById('menu'),menuButton=document.getElementById('m
 const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};
 menuButton.addEventListener('click',(event)=>{event.stopPropagation();menu.classList.add('open');menuButton.setAttribute('aria-expanded','true')});
 closeButton.addEventListener('click',closeMenu);
-document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target))closeMenu()});
+document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});
 </script></body></html>

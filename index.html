@@ -34,7 +34,7 @@
     .intro { max-width: 720px; margin: 0; font-size: clamp(28px, 5vw, 68px); line-height: .98; font-weight: 500; letter-spacing: -.045em; }
     .sub { max-width: 520px; margin: 30px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
     .release-button { display: inline-block; margin-top: 30px; padding: 15px 30px; border: 0; border-radius: 999px; background: #b9e8ff; color: #050505; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: default; user-select: none; transition: background-color .2s ease; }
-    .release-button:hover { background: #ffe600; }
+    .release-button:hover { background: #ffe600; }    .hero-buttons { display: flex; gap: 12px; align-items: center; justify-content: center; margin-top: 30px; }    .hero-buttons .release-button { margin-top: 0; }    .label-button { display: inline-block; padding: 15px 30px; border-radius: 999px; background: #b9e8ff; color: #050505; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; transition: background-color .2s ease; }    .label-button:hover { background: #ffe600; }
     .services { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .service { min-height: 150px; padding: 24px 22px 26px 0; border-right: 1px solid var(--line); }
     .service + .service { padding-left: 22px; }
@@ -51,7 +51,7 @@
       .hero { min-height: 68vh; align-items: flex-start; text-align: left; }
       .intro { max-width: 100%; }
       .sub { max-width: 390px; }
-      .release-button { margin-top: 26px; padding: 14px 24px; }
+      .hero-buttons { margin-top: 26px; flex-wrap: wrap; justify-content: flex-start; }      .release-button { margin-top: 0; padding: 14px 24px; }      .label-button { padding: 14px 24px; }
       .services { grid-template-columns: 1fr; }
       .service, .service + .service { padding: 20px 0; border-right: 0; border-bottom: 1px solid var(--line); }
       .service:last-child { border-bottom: 0; }
@@ -84,7 +84,7 @@
     <section class="hero">
       <h2 class="intro">Independent music label &amp; digital distribution.</h2>
       <p class="sub">We help artists release music worldwide and deliver it to the major streaming platforms.</p>
-      <span class="release-button">Release Your Music</span>
+      <div class="hero-buttons"><span class="release-button">Release Your Music</span><a class="label-button" href="label-services.html">Label Services</a></div>
     </section>
     <section class="services">
       <article class="service"><span class="number">01 / RELEASE</span><h2>Worldwide distribution</h2><p>Digital delivery to streaming platforms for independent artists.</p></article>

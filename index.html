@@ -23,11 +23,11 @@
     .top-nav { position: absolute; top: 31px; left: 0; right: 0; display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; z-index: 1; }
     .top-nav a { color: var(--fg); font-size: 10px; line-height: 1; letter-spacing: .12em; font-weight: 500; text-transform: uppercase; text-align: center; transition: opacity .2s ease; }
     .top-nav a:hover { opacity: .6; }
-    .menu-button { position: absolute; top: 28px; right: 0; border: 0; background: none; color: var(--fg); padding: 4px 0; cursor: pointer; font: inherit; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 9px; z-index: 3; }
-    .menu-button span { display: block; width: 22px; height: 8px; position: relative; }
-    .menu-button span::before, .menu-button span::after { content: ""; position: absolute; left: 0; width: 22px; height: 1px; background: var(--fg); }
-    .menu-button span::before { top: 1px; }
-    .menu-button span::after { top: 7px; }
+    .menu-button { position: absolute; top: 28px; right: 0; width: 28px; height: 22px; border: 0; background: none; color: var(--fg); padding: 0; cursor: pointer; z-index: 3; }
+    .menu-button span, .menu-button span::before, .menu-button span::after { position: absolute; left: 0; width: 28px; height: 1px; background: var(--fg); content: ""; }
+    .menu-button span { top: 10px; }
+    .menu-button span::before { top: -7px; left: 0; }
+    .menu-button span::after { top: 7px; left: 0; }
     .menu { position: fixed; inset: 0 0 0 auto; z-index: 10; display: none; width: min(33.333vw, 520px); background: rgba(10,10,10,.72); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border-left: 1px solid rgba(244,244,242,.16); padding: 30px 34px 42px; }
     .menu.open { display: flex; flex-direction: column; }
     .menu-header { display: flex; justify-content: flex-end; }
@@ -90,6 +90,7 @@
         <h1 class="logo">PRYCOT.</h1>
         <p class="tagline">RELEASE WORLDWIDE. PAY IN CRYPTO.</p>
       </a>
+      <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
     </header>
     <section class="hero">
       <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://www.pexels.com/download/video/7612019/" type="video/mp4"></video><div class="hero-video-overlay" aria-hidden="true"></div>

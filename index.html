@@ -16,16 +16,14 @@
     body { margin: 0; background: var(--bg); color: var(--fg); font-family: Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
     .page { min-height: 100vh; padding: 30px 34px 42px; display: flex; flex-direction: column; position: relative; }
-    header { display: block; position: relative; }
-    .brand { display: flex; flex-direction: column; align-items: flex-start; }
+    header { position: relative; min-height: 96px; }
+    .brand { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; align-items: flex-start; z-index: 2; }
     .logo { margin: 0; font-size: clamp(34px, 4.5vw, 62px); line-height: .82; font-weight: 800; font-style: italic; letter-spacing: -.075em; }
-    .tagline { width: 100%; margin: 8px 0 0; font-size: 9px; line-height: 1; font-weight: 500; letter-spacing: .11em; text-transform: uppercase; text-align: center; white-space: nowrap; }
-    .menu-button { display: inline-flex; }
-    .menu { display: contents; }
-    .menu-header, .menu-close { display: none; }
-    .menu-links { position: absolute; top: 68px; left: 34px; right: 34px; transform: translateY(-50%); display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; text-align: center; white-space: nowrap; }
-    .menu-links a { font-size: 10px; line-height: 1; letter-spacing: .12em; font-weight: 500; text-transform: uppercase; }
-    .menu-links a:hover { opacity: .6; }
+    .tagline { width: 100%; margin: 8px 0 0; font-size: 9px; line-height: 1; font-weight: 500; letter-spacing: .11em; text-transform: uppercase; text-align: left; white-space: nowrap; }
+    .top-nav { position: absolute; top: 31px; left: 0; right: 0; display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; z-index: 1; }
+    .top-nav a { color: var(--fg); font-size: 10px; line-height: 1; letter-spacing: .12em; font-weight: 500; text-transform: uppercase; text-align: center; transition: opacity .2s ease; }
+    .top-nav a:hover { opacity: .6; }
+    .menu-button, .menu { display: none; }
     .hero { flex: 1; min-height: 72vh; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; position: relative; overflow: hidden; padding-top: 11vh; }
     .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:grayscale(1) contrast(1.05) brightness(.42); opacity:.34; pointer-events:none; }
     .hero-video-overlay { position:absolute; inset:0; z-index:0; background:rgba(10,10,10,.28); pointer-events:none; }
@@ -55,26 +53,15 @@
       .service:last-child { border-bottom: 0; }
       .number { margin-bottom: 18px; }
       footer { flex-direction: column; gap: 8px; }
-      header { display: block; }
-      .brand { align-items: flex-start; }
-      .desktop-nav { display: none; }
-      .menu-button { display: inline-flex; }
-      .menu-links { position: static; transform: none; width: 100%; display: flex; flex-wrap: wrap; gap: 10px 18px; white-space: normal; }
-      .menu-links a { font-size: 9px; }
+      header { min-height: 78px; }
+      .brand { top: 0; left: 0; }
+      .top-nav { position: static; margin-top: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+      .top-nav a { font-size: 8px; }
+      .menu-button, .menu { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="menu" id="menu">
-    <div class="menu-header"><button class="menu-close" type="button" aria-label="Close menu">Close <span>×</span></button></div>
-    <nav class="menu-links" aria-label="Site navigation">
-      <a href="about.html">About PRYCOT.</a>
-      <a href="terms.html">Release Terms</a>
-      <a href="prices.html">Prices</a>
-      <a href="label-services.html">Label Services</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
   <main class="page">
     <header>
       <a class="brand" href="https://sorrymoscowwork-oss.github.io/prycotlabel/?v=20260926" aria-label="PRYCOT.">

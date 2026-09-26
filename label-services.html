@@ -16,7 +16,7 @@ header{position:relative;display:flex;justify-content:space-between;align-items:
 .tagline{width:100%;margin:8px 0 0;font-size:9px;line-height:1;font-weight:500;letter-spacing:.11em;text-transform:uppercase;text-align:left;white-space:nowrap}
 .menu-button,.menu-close{border:0;background:none;color:var(--fg);padding:0;cursor:pointer;font:inherit}
 .menu-button span{display:block;width:28px;height:1px;background:var(--fg);position:absolute;left:0;top:10px}
-.menu-button span:before,.menu-button span:after{content:"";position:absolute;left:0;width:28px;height:1px;background:var(--fg)}.menu-button span:before{top:-7px}.menu-button span:after{top:7px}
+.menu-button span:before,.menu-button span:before{top:-7px}
 .menu{position:fixed;inset:0 0 0 auto;z-index:10;display:none;width:min(33.333vw,520px);background:rgba(10,10,10,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-left:1px solid rgba(244,244,242,.16);padding:30px 34px 42px}
 .menu.open{display:flex;flex-direction:column}
 .menu-header{display:flex;justify-content:flex-end}
@@ -36,7 +36,7 @@ h2{max-width:780px;margin:0 0 30px;font-size:clamp(38px,6vw,78px);line-height:.9
 .price{margin-top:18px!important;color:var(--fg)!important;font-size:12px!important;letter-spacing:.02em}.order-button{display:inline-block;margin-top:18px;padding:9px 18px;border-radius:999px;background:#b9e8ff;color:#0a0a0a;font-size:10px;line-height:1;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s ease,color .2s ease}.order-button:hover{background:#ffe600;color:#0a0a0a}
 footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
 @media(max-width:700px){.page{padding:22px 20px 30px}.logo{font-size:42px}
-.menu-button{top:20px;right:0}.tagline{width:auto;font-size:8px;letter-spacing:.08em}.menu{inset:0;width:100%;padding:22px 20px 30px;background:rgba(10,10,10,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-left:0}.menu-links{align-items:flex-start;text-align:left}.content{margin-top:12vh}.service{grid-template-columns:1fr;gap:12px}footer{flex-direction:column;gap:8px}}
+.menu-button{position:absolute;top:28px;right:0;width:28px;height:22px;border:0;background:none;color:var(--fg);padding:0;cursor:pointer;z-index:3}.tagline{width:auto;font-size:8px;letter-spacing:.08em}.menu{inset:0;width:100%;padding:22px 20px 30px;background:rgba(10,10,10,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-left:0}.menu-links{align-items:flex-start;text-align:left}.content{margin-top:12vh}.service{grid-template-columns:1fr;gap:12px}footer{flex-direction:column;gap:8px}}
 </style>
 </head>
 <body>
@@ -68,11 +68,10 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;paddi
 <footer><span>PRYCOT. — 2026</span><span>Independent music label</span></footer>
 </main>
 <script>
-const menu=document.getElementById('menu'),button=document.getElementById('menuButton'),close=document.querySelector('.menu-close');
-const closeMenu=()=>{menu.classList.remove('open');button.setAttribute('aria-expanded','false')};
-button.addEventListener('click',(event)=>{event.stopPropagation();menu.classList.add('open');button.setAttribute('aria-expanded','true')});
-close.addEventListener('click',closeMenu);
+const menu=document.getElementById('menu'),menuButton=document.getElementById('menuButton'),closeButton=document.querySelector('.menu-close');
+const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};
+menuButton.addEventListener('click',(event)=>{event.stopPropagation();menu.classList.add('open');menuButton.setAttribute('aria-expanded','true')});
+closeButton.addEventListener('click',closeMenu);
 document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target))closeMenu()});
-</script>
-</body>
+</script></body>
 </html>

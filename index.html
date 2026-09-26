@@ -88,10 +88,14 @@
     }
     .menu {
       position: fixed;
-      inset: 0;
+      inset: 0 0 0 auto;
       z-index: 10;
       display: none;
-      background: rgba(10,10,10,.98);
+      width: min(33.333vw, 520px);
+      background: rgba(10,10,10,.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-left: 1px solid var(--line);
       padding: 30px 34px 42px;
     }
     .menu.open { display: flex; flex-direction: column; }

@@ -46,7 +46,16 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;paddi
 .menu-button span{top:10px!important}.menu-button span:before{top:-7px!important}.menu-button span:after{top:7px!important}
 @media(max-width:700px){.brand{top:22px!important;left:20px!important}.menu-button{top:20px!important;right:20px!important}}
 </style>
-</head>
+
+    <style id="global-header-position">
+      .brand{position:fixed!important;top:30px!important;left:34px!important;z-index:20!important}
+      .menu-button{position:fixed!important;top:28px!important;right:34px!important;z-index:21!important}
+      @media(max-width:700px){
+        .brand{top:22px!important;left:20px!important}
+        .menu-button{top:20px!important;right:20px!important}
+      }
+    </style>
+  </head>
 <body>
 <div class="menu" id="menu"><div class="menu-header"></div>
 <nav class="menu-links" aria-label="Site navigation">

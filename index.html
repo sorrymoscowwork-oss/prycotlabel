@@ -56,7 +56,10 @@
       .number { margin-bottom: 18px; }
       footer { flex-direction: column; gap: 8px; }
       header { display: flex; flex-direction: column; align-items: center; gap: 16px; }
-      .brand { align-items: center; }
+      header { display: flex; align-items: flex-start; justify-content: space-between; }
+      .brand { align-items: flex-start; }
+      .desktop-nav { display: none; }
+      .menu-button { display: inline-flex; }
       .menu-links { width: 100%; display: flex; flex-wrap: wrap; gap: 10px 18px; white-space: normal; }
       .menu-links a { font-size: 9px; }
     }
@@ -79,6 +82,13 @@
         <h1 class="logo">PRYCOT.</h1>
         <p class="tagline">RELEASE WORLDWIDE. PAY IN CRYPTO.</p>
       </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="about.html">About PRYCOT.</a>
+        <a href="terms.html">Release Terms</a>
+        <a href="prices.html">Prices</a>
+        <a href="label-services.html">Label Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
       <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false">Menu <span></span></button>
     </header>
     <section class="hero">

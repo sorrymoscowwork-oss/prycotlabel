@@ -211,11 +211,10 @@
   </main>
 
   <script>
-const menu=document.getElementById('menu'),button=document.getElementById('menuButton'),close=document.querySelector('.menu-close');
-const closeMenu=()=>{menu.classList.remove('open');button.setAttribute('aria-expanded','false')};
-button.addEventListener('click',(event)=>{event.stopPropagation();menu.classList.add('open');button.setAttribute('aria-expanded','true')});
-close.addEventListener('click',closeMenu);
+const menu=document.getElementById('menu'),menuButton=document.getElementById('menuButton'),closeButton=document.querySelector('.menu-close');
+const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};
+menuButton.addEventListener('click',(event)=>{event.stopPropagation();menu.classList.add('open');menuButton.setAttribute('aria-expanded','true')});
+closeButton.addEventListener('click',closeMenu);
 document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target))closeMenu()});
-</script>
-</body>
+</script></body>
 </html>

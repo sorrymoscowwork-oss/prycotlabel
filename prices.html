@@ -84,6 +84,9 @@ header{position:relative!important;min-height:96px!important}
 .tagline{position:fixed!important;top:88px!important;left:42px!important;margin:0!important;display:flex!important;flex-direction:column!important;gap:0!important;width:auto!important;font-size:9px!important;line-height:1.18!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;z-index:20!important}
 .tagline a{display:block!important;font:inherit!important;color:inherit!important;text-decoration:none!important}
 @media(max-width:700px){.tagline{top:62px!important;left:28px!important;font-size:8px!important;letter-spacing:.08em!important}}
+</style><style id="active-menu-item">
+.menu-links a.active-page{color:#b9e8ff!important}
+.menu-links a:hover{color:#ffe600!important;opacity:1!important}
 </style></head>
 <body>
 <div class="menu" id="menu">
@@ -92,7 +95,7 @@ header{position:relative!important;min-height:96px!important}
 <a href="about.html">About PRYCOT.</a>
 <a href="terms.html">Release Terms</a>
       <a href="how-to-release.html">How to Release</a>
-<a href="prices.html">Prices</a>
+<a class="active-page" href="prices.html">Prices</a>
 <a href="label-services.html">Label Services</a>
 <a href="contact.html">Contact</a>
 </nav>
@@ -132,5 +135,11 @@ const menuButton=document.getElementById('menuButton');
 const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};
 menuButton.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();menu.classList.add('open');menuButton.setAttribute('aria-expanded','true')});
 document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target))closeMenu()});
+</script><script id="active-menu-script">
+document.querySelectorAll('.menu-links a').forEach(link=>{
+  const current=location.pathname.split('/').pop()||'index.html';
+  const target=link.getAttribute('href').split('/').pop()||'index.html';
+  if((current==='index.html'&&target==='index.html')||current===target) link.classList.add('active-page');
+});
 </script></body>
 </html>

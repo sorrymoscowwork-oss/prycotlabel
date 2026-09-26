@@ -23,7 +23,18 @@
     .top-nav { position: absolute; top: 31px; left: 0; right: 0; display: grid; grid-template-columns: repeat(5, 1fr); align-items: center; z-index: 1; }
     .top-nav a { color: var(--fg); font-size: 10px; line-height: 1; letter-spacing: .12em; font-weight: 500; text-transform: uppercase; text-align: center; transition: opacity .2s ease; }
     .top-nav a:hover { opacity: .6; }
-    .menu-button, .menu { display: none; }
+    .menu-button { position: absolute; top: 28px; right: 0; border: 0; background: none; color: var(--fg); padding: 4px 0; cursor: pointer; font: inherit; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; display: inline-flex; align-items: center; gap: 9px; z-index: 3; }
+    .menu-button span { display: block; width: 22px; height: 8px; position: relative; }
+    .menu-button span::before, .menu-button span::after { content: ""; position: absolute; left: 0; width: 22px; height: 1px; background: var(--fg); }
+    .menu-button span::before { top: 1px; }
+    .menu-button span::after { top: 7px; }
+    .menu { position: fixed; inset: 0 0 0 auto; z-index: 10; display: none; width: min(33.333vw, 520px); background: rgba(10,10,10,.72); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border-left: 1px solid rgba(244,244,242,.16); padding: 30px 34px 42px; }
+    .menu.open { display: flex; flex-direction: column; }
+    .menu-header { display: flex; justify-content: flex-end; }
+    .menu-close { border: 0; background: none; color: var(--fg); padding: 4px 0; cursor: pointer; font: inherit; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .menu-links { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 18px; text-align: center; }
+    .menu-links a { font-size: clamp(28px, 4vw, 54px); line-height: 1; letter-spacing: -.04em; font-weight: 500; }
+    .menu-links a:hover { opacity: .6; }
     .hero { flex: 1; min-height: 72vh; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; text-align: center; position: relative; overflow: hidden; padding-top: 11vh; }
     .hero-video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:grayscale(1) contrast(1.05) brightness(.42); opacity:.34; pointer-events:none; }
     .hero-video-overlay { position:absolute; inset:0; z-index:0; background:rgba(10,10,10,.28); pointer-events:none; }
@@ -57,11 +68,22 @@
       .brand { top: 0; left: 0; }
       .top-nav { position: static; margin-top: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
       .top-nav a { font-size: 8px; }
-      .menu-button, .menu { display: none; }
+      .menu-button { top: 20px; right: 0; }
+      .menu { width: 100%; padding: 22px 20px 30px; }
+      .menu-links { align-items: flex-start; text-align: left; }
     }
   </style>
 </head>
 <body>
+  <div class="menu" id="menu">
+    <div class="menu-header"><button class="menu-close" type="button" aria-label="Close menu">Close ×</button></div>
+    <nav class="menu-links" aria-label="Menu">
+      <a href="terms.html">Release Terms</a>
+      <a href="prices.html">Prices</a>
+      <a href="label-services.html">Label Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
   <main class="page">
     <header>
       <a class="brand" href="https://sorrymoscowwork-oss.github.io/prycotlabel/?v=20260926" aria-label="PRYCOT.">
@@ -82,5 +104,12 @@
     </section>
     <footer><span>PRYCOT. — 2026</span><span>Independent music label</span></footer>
   </main>
+  <script>
+    const menu = document.getElementById('menu');
+    const menuButton = document.getElementById('menuButton');
+    const closeButton = document.querySelector('.menu-close');
+    menuButton.addEventListener('click', () => { menu.classList.add('open'); menuButton.setAttribute('aria-expanded', 'true'); });
+    closeButton.addEventListener('click', () => { menu.classList.remove('open'); menuButton.setAttribute('aria-expanded', 'false'); });
+  </script>
 </body>
 </html>

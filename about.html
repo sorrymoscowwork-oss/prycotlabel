@@ -103,7 +103,7 @@ const openMenu=()=>{menu.classList.add('open');button.setAttribute('aria-expande
 const closeMenu=()=>{menu.classList.remove('open');button.setAttribute('aria-expanded','false')};
 button.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();openMenu()});
 close.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();closeMenu()});
-document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target))closeMenu()});
+document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});
 </script>
 </body>
 </html>

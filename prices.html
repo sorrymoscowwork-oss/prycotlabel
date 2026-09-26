@@ -25,9 +25,22 @@ header{display:flex;justify-content:space-between;align-items:flex-start;gap:24p
 .menu-links a:hover{opacity:.65}
 .content{max-width:920px;margin:14vh auto 0}
 .eyebrow{margin:0 0 22px;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-h2{max-width:780px;margin:0;font-size:clamp(38px,6vw,78px);line-height:.96;font-weight:500;letter-spacing:-.05em}
+h2{max-width:780px;margin:0 0 54px;font-size:clamp(38px,6vw,78px);line-height:.96;font-weight:500;letter-spacing:-.05em}
+.price-table{width:100%;border-collapse:collapse}
+.price-table th,.price-table td{padding:18px 14px;border-top:1px solid var(--line);text-align:left;vertical-align:middle}
+.price-table th{color:var(--muted);font-size:9px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.price-table td{font-size:15px}
+.price-table .type{font-size:18px;font-weight:500;letter-spacing:-.02em}
+.price-table .tracks{color:var(--muted)}
+.price-table .price{text-align:right;font-size:22px;font-weight:500;white-space:nowrap}
+.crypto-note{margin:28px 0 0;color:var(--muted);font-size:11px;line-height:1.6}
+.royalty{margin-top:64px;padding:28px 0;border-top:1px solid var(--fg);border-bottom:1px solid var(--line)}
+.royalty-label{margin:0 0 10px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.royalty-main{margin:0;font-size:clamp(25px,3vw,38px);line-height:1.05;letter-spacing:-.035em;font-weight:500}
+.royalty-main strong{font-weight:700}
+.royalty-sub{margin:12px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
 footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
-@media(max-width:700px){.page{padding:22px 20px 30px}.logo{font-size:42px}.tagline{width:auto;font-size:8px;letter-spacing:.08em}.menu{inset:0;width:100%;padding:22px 20px 30px;background:rgba(10,10,10,.98);backdrop-filter:none;-webkit-backdrop-filter:none;border-left:0}.menu-links{align-items:flex-start;text-align:left}.content{margin-top:12vh}footer{flex-direction:column;gap:8px}}
+@media(max-width:700px){.page{padding:22px 20px 30px}.logo{font-size:42px}.tagline{width:auto;font-size:8px;letter-spacing:.08em}.menu{inset:0;width:100%;padding:22px 20px 30px;background:rgba(10,10,10,.98);backdrop-filter:none;-webkit-backdrop-filter:none;border-left:0}.menu-links{align-items:flex-start;text-align:left}.content{margin-top:12vh}.price-table th,.price-table td{padding:15px 8px}.price-table th:first-child,.price-table td:first-child{padding-left:0}.price-table th:last-child,.price-table td:last-child{padding-right:0}.price-table .type{font-size:15px}.price-table .price{font-size:18px}footer{flex-direction:column;gap:8px}}
 </style>
 </head>
 <body>
@@ -48,6 +61,23 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;paddi
 <section class="content">
 <p class="eyebrow">PRYCOT. / PRICES</p>
 <h2>Prices.</h2>
+<table class="price-table">
+<thead>
+<tr><th>Release</th><th>Tracks</th><th>Price</th></tr>
+</thead>
+<tbody>
+<tr><td class="type">Single</td><td class="tracks">1 track</td><td class="price">$30</td></tr>
+<tr><td class="type">Maxi Single</td><td class="tracks">2 tracks</td><td class="price">$40</td></tr>
+<tr><td class="type">EP</td><td class="tracks">6 tracks</td><td class="price">$80</td></tr>
+<tr><td class="type">Album</td><td class="tracks">12–20 tracks</td><td class="price">$110</td></tr>
+</tbody>
+</table>
+<p class="crypto-note">Payment is made in cryptocurrency before distribution begins. All prices include digital distribution to available streaming platforms according to the PRYCOT. Release Terms.</p>
+<div class="royalty">
+<p class="royalty-label">Main rule</p>
+<p class="royalty-main"><strong>90% of royalties stay with the artist.</strong> No additional commissions.</p>
+<p class="royalty-sub">PRYCOT. retains 10% of royalties from actual platform revenue. Royalty payments are made in cryptocurrency once every 3 months.</p>
+</div>
 </section>
 <footer><span>PRYCOT. — 2026</span><span>Independent music label</span></footer>
 </main>

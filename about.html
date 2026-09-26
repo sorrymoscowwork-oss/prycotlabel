@@ -70,7 +70,11 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;paddi
   <link rel="manifest" href="/site.webmanifest">
   <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#f4f4f2" media="(prefers-color-scheme: light)">
-<style id="tagline-right-update">.brand{display:flex!important;align-items:center!important;gap:28px!important}.tagline{margin:0!important;white-space:nowrap!important}@media(max-width:700px){.brand{display:block!important}.tagline{margin-top:6px!important;white-space:normal!important}}</style></head>
+<style id="tagline-right-update">
+.tagline{position:fixed!important;top:88px!important;left:34px!important;margin:0!important;display:flex!important;flex-direction:column!important;gap:0!important;width:auto!important;font-size:9px!important;line-height:1!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;z-index:20!important}
+.tagline a{display:block!important;font:inherit!important;color:inherit!important;text-decoration:none!important}
+@media(max-width:700px){.tagline{top:62px!important;left:20px!important;font-size:8px!important;letter-spacing:.08em!important}}
+</style></head>
 <body>
 <div class="menu" id="menu">
 <div class="menu-header"></div>
@@ -85,7 +89,7 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;paddi
 </div>
 <main class="page">
 <header>
-<a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1><p class="tagline">RELEASE WORLDWIDE. PAY IN CRYPTO. ROYALTIES IN CRYPTO.</p></a>
+<a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><p class="tagline"><a href="/">RELEASE WORLDWIDE.</a><a href="/">PAY IN CRYPTO.</a><a href="/">ROYALTIES IN CRYPTO.</a></p>
 <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 </header>
 <section class="content">

@@ -89,11 +89,10 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;paddi
 <footer><span>PRYCOT. — 2026</span><span>Independent music label</span></footer>
 </main>
 <script>
-const menu=document.getElementById('menu'),button=document.getElementById('menuButton'),close=document.querySelector('.menu-close');
-const openMenu=()=>{menu.classList.add('open');button.setAttribute('aria-expanded','true')};
-const closeMenu=()=>{menu.classList.remove('open');button.setAttribute('aria-expanded','false')};
-button.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();openMenu()});
-close.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();closeMenu()});
-document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});
+const menu=document.getElementById('menu');
+const menuButton=document.getElementById('menuButton');
+const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};
+menuButton.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();menu.classList.add('open');menuButton.setAttribute('aria-expanded','true')});
+document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target))closeMenu()});
 </script>
 </body></html>

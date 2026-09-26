@@ -28,7 +28,7 @@
     .menu-button span { top: 10px; }
     .menu-button span::before { top: -7px; left: 0; }
     .menu-button span::after { top: 7px; left: 0; }
-    .menu { position: fixed; inset: 0 0 0 auto; z-index: 10; display: none; width: min(33.333vw, 520px); background: rgba(10,10,10,.72); backdrop-filter: blur(28px); -webkit-backdrop-filter: blur(28px); border-left: 1px solid rgba(244,244,242,.16); padding: 30px 34px 42px; }
+    .menu { position: fixed; inset: 0 0 0 auto; z-index: 10; display: none; width: min(33.333vw, 520px); background: rgba(10,10,10,.22); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-left: 1px solid rgba(244,244,242,.16); padding: 30px 34px 42px; }
     .menu.open { display: flex; flex-direction: column; }
     .menu-header { display: flex; justify-content: flex-end; }
     .menu-close { border: 0; background: none; color: var(--fg); padding: 4px 0; cursor: pointer; font: inherit; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
@@ -69,7 +69,7 @@
       .top-nav { position: static; margin-top: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
       .top-nav a { font-size: 8px; }
       .menu-button { top: 20px; right: 0; }
-      .menu { width: 100%; padding: 22px 20px 30px; }
+      .menu { width: 100%; background: rgba(10,10,10,.22); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 22px 20px 30px; }
       .menu-links { align-items: flex-start; text-align: left; }
     }
   </style>

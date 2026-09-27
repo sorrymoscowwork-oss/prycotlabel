@@ -282,7 +282,6 @@ async function loadProfile(user){
  document.getElementById("profileName").value=data.displayName||user.displayName||"";
  document.getElementById("profileBio").value=data.bio||"";
  document.getElementById("profileTelegram").value=data.telegram||"";
- document.getElementById("profileAvatar").value=data.avatarUrl||user.photoURL||"";
  renderAvatar(data.avatarUrl||user.photoURL,name);
 }
 

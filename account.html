@@ -40,7 +40,39 @@ header{position:relative!important;min-height:96px!important}
 </style><style id="active-menu-item">
 .menu-links a.active-page{color:#A0522D!important;font-style:italic!important}
 .menu-links a:hover{color:#FF7F50!important;opacity:1!important}
-</style><style id="account-menu-color">.menu-links a.account-menu-item{color:#A0522D!important}.menu-links a.account-menu-item:hover{color:#FF7F50!important}</style></head><body><div class="menu" id="menu"><div class="menu-header"></div><nav class="menu-links">
+</style><style id="account-menu-color">.menu-links a.account-menu-item{color:#A0522D!important}.menu-links a.account-menu-item:hover{color:#FF7F50!important}</style><style id="account-interface">
+.account-content{max-width:1080px!important;margin:14vh auto 0!important}
+.account-intro{max-width:620px!important}
+.account-auth{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:64px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.auth-panel{padding:28px 28px 32px 0}
+.auth-panel+ .auth-panel{padding-left:28px;border-left:1px solid var(--line)}
+.panel-label{margin:0 0 24px!important;color:var(--muted)!important;font-size:10px!important;letter-spacing:.14em!important;text-transform:uppercase}
+.auth-panel h3{margin:0 0 28px;font-size:26px;font-weight:500;letter-spacing:-.03em}
+.auth-panel label{display:block;margin:0 0 16px;color:var(--muted);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.auth-panel input{display:block;width:100%;margin-top:7px;padding:12px 0;border:0;border-bottom:1px solid var(--line);outline:0;background:transparent;color:var(--fg);font:inherit;font-size:14px}
+.auth-panel input:focus{border-bottom-color:#A0522D}
+.auth-panel button{margin-top:12px;padding:9px 18px;border:0;border-radius:999px;background:#A0522D;color:#fff;font-size:10px;line-height:1;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:background .2s ease,color .2s ease}
+.auth-panel button:hover{background:#FF7F50;color:#000}
+.switch{margin:20px 0 0!important;font-size:11px!important}
+.switch a{color:#A0522D}
+.switch a:hover{color:#FF7F50}
+.account-preview{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+.account-preview>div{padding:24px 22px 26px 0;border-right:1px solid var(--line)}
+.account-preview>div+div{padding-left:22px}
+.account-preview>div:last-child{border-right:0}
+.account-preview span{display:block;margin-bottom:20px;color:var(--muted);font-size:10px;letter-spacing:.14em}
+.account-preview strong{display:block;margin-bottom:8px;font-size:13px;font-weight:500;letter-spacing:.04em}
+.account-preview p{margin:0!important;font-size:12px!important}
+@media(max-width:700px){
+.account-content{margin-top:12vh!important}
+.account-auth{grid-template-columns:1fr;margin-top:42px}
+.auth-panel{padding:24px 0!important}
+.auth-panel+.auth-panel{border-left:0;border-top:1px solid var(--line)}
+.account-preview{grid-template-columns:1fr}
+.account-preview>div,.account-preview>div+div{padding:20px 0;border-right:0;border-bottom:1px solid var(--line)}
+.account-preview>div:last-child{border-bottom:0}
+}
+</style></head><body><div class="menu" id="menu"><div class="menu-header"></div><nav class="menu-links">
       <a href="/">Home</a>
       <a class="account-menu-item" href="account.html">Account</a>
       <a href="about.html">About PRYCOT.</a>
@@ -49,7 +81,38 @@ header{position:relative!important;min-height:96px!important}
       <a href="prices.html">Prices</a>
       <a href="label-services.html">Label Services</a>
     </nav></div><main class="page"><header><a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><p class="tagline"><a href="/">RELEASE WORLDWIDE.</a><a href="/">PAY IN CRYPTO.</a><a href="/">ROYALTIES IN CRYPTO.</a></p><button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
-</header><section class="content"><p class="eyebrow">PRYCOT. / ACCOUNT</p><h2>Your PRYCOT. account.</h2><p>Your personal space for releases, articles and your artist profile.</p></section></main><script>
+</header><section class="content account-content">
+<p class="eyebrow">PRYCOT. / ACCOUNT</p>
+<h2>Your PRYCOT. account.</h2>
+<p class="account-intro">A personal space for your releases, writing and artist profile.</p>
+
+<div class="account-auth">
+  <div class="auth-panel">
+    <p class="panel-label">ACCOUNT</p>
+    <h3>Log in</h3>
+    <label>Email<input type="email" placeholder="your@email.com"></label>
+    <label>Password<input type="password" placeholder="Password"></label>
+    <button type="button">LOG IN</button>
+    <p class="switch">Don't have an account? <a href="#register">Create one</a></p>
+  </div>
+
+  <div class="auth-panel" id="register">
+    <p class="panel-label">NEW USER</p>
+    <h3>Create account</h3>
+    <label>Username<input type="text" placeholder="username"></label>
+    <label>Email<input type="email" placeholder="your@email.com"></label>
+    <label>Password<input type="password" placeholder="Password"></label>
+    <label>Confirm password<input type="password" placeholder="Password"></label>
+    <button type="button">CREATE ACCOUNT</button>
+  </div>
+</div>
+
+<div class="account-preview">
+  <div><span>01</span><strong>PROFILE</strong><p>Your public artist profile.</p></div>
+  <div><span>02</span><strong>MY ARTICLES</strong><p>Write and publish your own articles.</p></div>
+  <div><span>03</span><strong>MY RELEASES</strong><p>Manage your releases and their status.</p></div>
+</div>
+</section></main><script>
 const menu=document.getElementById('menu');
 const menuButton=document.getElementById('menuButton');
 const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};

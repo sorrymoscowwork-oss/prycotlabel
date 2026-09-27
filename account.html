@@ -297,8 +297,7 @@ document.getElementById("profileForm").addEventListener("submit",async e=>{
  const data={
   displayName:document.getElementById("profileName").value.trim(),
   bio:document.getElementById("profileBio").value.trim(),
-  telegram:document.getElementById("profileTelegram").value.trim(),
-  avatarUrl:document.getElementById("profileAvatar").value.trim()
+  telegram:document.getElementById("profileTelegram").value.trim()
  };
  try{
   await saveProfile(user,data,true);

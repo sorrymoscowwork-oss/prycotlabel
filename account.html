@@ -4,19 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PRYCOT. — Account</title>
-<meta name="description" content="Submit a release request to PRYCOT.">
+<meta name="description" content="PRYCOT. artist account and release requests.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="mask-icon" href="/favicon.svg" color="#303438">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="manifest" href="/site.webmanifest">
 <meta name="theme-color" content="#0a0a0a">
 <style>
-:root{--bg:#0a0a0a;--fg:#f4f4f2;--muted:#9b9b98;--line:#292929;--accent:#A0522D;--accent-hover:#FF7F50}
+:root{--bg:#0a0a0a;--fg:#f4f4f2;--muted:#9b9b98;--line:#292929;--accent:#A0522D;--accent-hover:#FF7F50;--error:#d97878}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit}
 .page{min-height:100vh;padding:30px 34px 42px}
-.brand{position:fixed;top:30px;left:34px;z-index:20;display:flex;flex-direction:column;align-items:flex-start}
+.brand{position:fixed;top:30px;left:34px;z-index:20}
 .logo{margin:0;font-size:clamp(34px,4.5vw,62px);line-height:.82;font-weight:800;font-style:italic;letter-spacing:-.075em}
 .tagline{position:fixed;top:88px;left:42px;margin:0;font-size:9px;line-height:1.18;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);z-index:20}
 .menu-button{position:fixed;top:28px;right:34px;width:28px;height:22px;border:0;background:none;padding:0;cursor:pointer;z-index:21}
@@ -24,32 +25,55 @@ a{color:inherit;text-decoration:none}
 .menu-button span{top:10px}.menu-button span:before{top:-7px}.menu-button span:after{top:7px}
 .menu{position:fixed;inset:0 0 0 auto;z-index:10;display:none;width:min(33.333vw,520px);background:rgba(10,10,10,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-left:1px solid rgba(244,244,242,.16);padding:30px 34px 42px}
 .menu.open{display:flex;flex-direction:column}
-.menu-links{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:18px;text-align:left}
+.menu-links{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:18px}
 .menu-links a{font-size:18px;line-height:1.1;letter-spacing:-.02em;font-weight:500}
 .menu-links a:hover{color:var(--accent-hover)}
 .menu-links .active{color:var(--accent);font-style:italic}
-.content{max-width:920px;margin:19vh auto 0}
+.content{max-width:980px;margin:18vh auto 0}
 .eyebrow{margin:0 0 22px;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-h1{max-width:780px;margin:0;font-size:clamp(42px,6vw,78px);line-height:.96;font-weight:500;letter-spacing:-.05em}
-.intro{max-width:650px;margin:28px 0 52px;color:var(--muted);font-size:14px;line-height:1.65}
-.form{border-top:1px solid var(--line)}
-.field{padding:24px 0;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:clamp(42px,6vw,78px);line-height:.96;font-weight:500;letter-spacing:-.05em}
+.intro{max-width:650px;margin:26px 0 42px;color:var(--muted);font-size:14px;line-height:1.65}
+.auth-wrap{max-width:560px;border-top:1px solid var(--line)}
+.auth-tabs{display:flex;border-bottom:1px solid var(--line)}
+.tab{flex:1;border:0;background:transparent;color:var(--muted);padding:18px 0;text-align:left;font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.tab.active{color:var(--fg)}
+.auth-panel{padding-top:24px}
+.field{padding:18px 0;border-bottom:1px solid var(--line)}
 label{display:block;margin-bottom:10px;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
-input,select,textarea{width:100%;border:0;border-bottom:1px solid #3a3a3a;border-radius:0;background:transparent;color:var(--fg);padding:10px 0;font:inherit;font-size:15px;outline:none}
+input,select,textarea{width:100%;border:0;border-bottom:1px solid #3a3a3a;border-radius:0;background:transparent;color:var(--fg);padding:10px 0;font-size:15px;outline:none}
 input:focus,select:focus,textarea:focus{border-color:var(--fg)}
-select{appearance:none;-webkit-appearance:none;cursor:pointer}
-select option{background:#0a0a0a;color:#f4f4f2}
 textarea{min-height:110px;resize:vertical}
+.actions{display:flex;align-items:center;gap:14px;padding-top:24px;flex-wrap:wrap}
+.primary,.secondary{border:0;border-radius:999px;padding:9px 18px;font-size:10px;line-height:1;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.primary{background:var(--accent);color:#fff}.primary:hover{background:var(--accent-hover);color:#000}
+.secondary{background:transparent;color:var(--fg);border:1px solid #3a3a3a}.secondary:hover{border-color:var(--fg)}
+.google{width:100%;margin-top:18px;border:1px solid #3a3a3a;border-radius:999px;background:transparent;color:var(--fg);padding:12px 18px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.google:hover{border-color:var(--fg)}
+.status{min-height:20px;margin:18px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
+.status.error{color:var(--error)}
+.hidden{display:none!important}
+.cabinet-head{display:flex;justify-content:space-between;gap:30px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:30px}
+.user-summary{display:flex;align-items:center;gap:18px}
+.avatar{width:64px;height:64px;border-radius:50%;overflow:hidden;background:#242424;display:grid;place-items:center;font-size:20px;font-weight:500}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.user-name{font-size:22px;letter-spacing:-.03em}.user-email{margin-top:6px;color:var(--muted);font-size:11px}
+.cabinet-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:34px}
+.panel{border-top:1px solid var(--line);padding-top:22px}
+.panel h2{margin:0 0 20px;font-size:18px;font-weight:500;letter-spacing:-.02em}
+.profile-fields .field:first-child{padding-top:0}
+.release-panel{display:flex;flex-direction:column;min-height:100%}
+.release-copy{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 22px}
+.release-list{margin-top:26px}
+.request-item{border-top:1px solid var(--line);padding:16px 0}
+.request-title{font-size:13px}.request-meta{margin-top:6px;color:var(--muted);font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.badge{display:inline-block;margin-left:8px;padding:4px 8px;border-radius:999px;background:#252525;color:var(--muted);font-size:9px}
+.form-section{border-top:1px solid var(--line);margin-top:34px;padding-top:28px}
+.form-section h2{margin:0 0 20px;font-size:20px;font-weight:500}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
-.submit-row{padding-top:28px}
-.submit{border:0;border-radius:999px;background:var(--accent);color:#fff;padding:9px 18px;font-size:10px;line-height:1;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
-.submit:hover{background:var(--accent-hover);color:#000}
-.note{margin:18px 0 0;color:var(--muted);font-size:11px;line-height:1.55}
-.success{display:none;margin-top:30px;padding:20px 0;border-top:1px solid var(--line);color:var(--fg);font-size:13px;line-height:1.6}
-.success strong{font-weight:500}
+.success{margin-top:20px;padding:18px 0;border-top:1px solid var(--line);font-size:12px;line-height:1.6}
 footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
-@media(max-width:700px){
-.page{padding:22px 20px 30px}.brand{top:22px;left:20px}.logo{font-size:42px}.tagline{top:62px;left:28px;font-size:8px}.menu-button{top:20px;right:20px}.menu{width:82vw;padding:22px 20px 30px}.content{margin-top:18vh}.grid{grid-template-columns:1fr;gap:0}footer{flex-direction:column;gap:8px}
+@media(max-width:760px){
+.page{padding:22px 20px 30px}.brand{top:22px;left:20px}.logo{font-size:42px}.tagline{top:62px;left:28px;font-size:8px}.menu-button{top:20px;right:20px}.menu{width:82vw;padding:22px 20px 30px}.content{margin-top:18vh}.cabinet-head{flex-direction:column}.cabinet-grid,.grid{grid-template-columns:1fr;gap:0}footer{flex-direction:column;gap:8px}
 }
 </style>
 </head>
@@ -73,54 +97,295 @@ footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;paddi
 </div>
 
 <main class="content">
+<section id="authView">
 <p class="eyebrow">PRYCOT. / ACCOUNT</p>
-<h1>Submit a release request.</h1>
-<p class="intro">Fill in the basic information about your release. After submitting the request, PRYCOT. will contact you via Telegram to continue the release process.</p>
+<h1>Your account.</h1>
+<p class="intro">Create an account or sign in to manage your profile and submit release requests.</p>
 
-<form class="form" id="releaseForm">
-<div class="field"><label for="artist">Artist / Name</label><input id="artist" name="artist" required autocomplete="name"></div>
-<div class="grid">
-<div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
-<div class="field"><label for="telegram">Telegram</label><input id="telegram" name="telegram" placeholder="@username" required></div>
+<div class="auth-wrap">
+<div class="auth-tabs">
+<button class="tab active" id="loginTab" type="button">Sign In</button>
+<button class="tab" id="registerTab" type="button">Register</button>
 </div>
-<div class="grid">
-<div class="field"><label for="type">Release Type</label><select id="type" name="type" required><option value="">Select type</option><option>Single</option><option>Maxi Single</option><option>EP</option><option>Album</option></select></div>
-<div class="field"><label for="tracks">Number of Tracks</label><input id="tracks" name="tracks" type="number" min="1" max="20" required></div>
+
+<div class="auth-panel">
+<form id="authForm">
+<div class="field"><label for="authEmail">Email</label><input id="authEmail" type="email" required autocomplete="email"></div>
+<div class="field"><label for="authPassword">Password</label><input id="authPassword" type="password" required minlength="6" autocomplete="current-password"></div>
+<div class="actions">
+<button class="primary" id="authSubmit" type="submit">Sign In</button>
+<button class="secondary hidden" id="resetPassword" type="button">Reset Password</button>
 </div>
-<div class="field"><label for="title">Release Title</label><input id="title" name="title" required></div>
-<div class="field"><label for="message">Message / Comment</label><textarea id="message" name="message" placeholder="Anything PRYCOT. should know about the release."></textarea></div>
-<div class="submit-row"><button class="submit" type="submit">Submit Request</button><p class="note">Music files and artwork are handled separately via Telegram.</p></div>
 </form>
+<button class="google" id="googleButton" type="button">Continue with Google</button>
+<div class="status" id="authStatus"></div>
+</div>
+</div>
+</section>
 
-<div class="success" id="success"><strong>REQUEST RECEIVED.</strong><br>PRYCOT. will contact you via Telegram.</div>
+<section id="cabinetView" class="hidden">
+<div class="cabinet-head">
+<div class="user-summary">
+<div class="avatar" id="avatarBox"></div>
+<div><div class="user-name" id="cabinetName">Artist</div><div class="user-email" id="cabinetEmail"></div></div>
+</div>
+<button class="secondary" id="logoutButton" type="button">Log Out</button>
+</div>
+
+<div class="cabinet-grid">
+<div class="panel profile-fields">
+<h2>Profile</h2>
+<form id="profileForm">
+<div class="field"><label for="profileName">Artist / Name</label><input id="profileName" required></div>
+<div class="field"><label for="profileBio">Bio</label><textarea id="profileBio" placeholder="Short artist description."></textarea></div>
+<div class="field"><label for="profileTelegram">Telegram</label><input id="profileTelegram" placeholder="@username"></div>
+<div class="field"><label for="profileAvatar">Avatar URL</label><input id="profileAvatar" type="url" placeholder="https://..."></div>
+<div class="actions"><button class="primary" type="submit">Save Profile</button></div>
+<div class="status" id="profileStatus"></div>
+</form>
+</div>
+
+<div class="panel release-panel">
+<h2>Release Requests</h2>
+<p class="release-copy">Submit a new release request. PRYCOT. will review the information and contact you to continue the release process.</p>
+<button class="primary" id="newReleaseButton" type="button">New Release Request</button>
+<div class="release-list" id="requestList"><div class="status">No requests yet.</div></div>
+</div>
+</div>
+
+<div class="form-section hidden" id="releaseSection">
+<h2>New Release Request</h2>
+<form id="releaseForm">
+<div class="grid">
+<div class="field"><label for="releaseArtist">Artist / Name</label><input id="releaseArtist" required></div>
+<div class="field"><label for="releaseEmail">Email</label><input id="releaseEmail" type="email" required></div>
+</div>
+<div class="grid">
+<div class="field"><label for="releaseTelegram">Telegram</label><input id="releaseTelegram" placeholder="@username" required></div>
+<div class="field"><label for="releaseType">Release Type</label><select id="releaseType" required><option value="">Select type</option><option>Single</option><option>Maxi Single</option><option>EP</option><option>Album</option></select></div>
+</div>
+<div class="grid">
+<div class="field"><label for="releaseTracks">Number of Tracks</label><input id="releaseTracks" type="number" min="1" max="50" required></div>
+<div class="field"><label for="releaseTitle">Release Title</label><input id="releaseTitle" required></div>
+</div>
+<div class="field"><label for="releaseMessage">Message / Comment</label><textarea id="releaseMessage" placeholder="Anything PRYCOT. should know about the release."></textarea></div>
+<div class="actions"><button class="primary" type="submit">Submit Request</button><button class="secondary" id="cancelRelease" type="button">Cancel</button></div>
+<div class="status" id="releaseStatus"></div>
+</form>
+</div>
+</section>
 </main>
 
 <footer><span>PRYCOT. / ACCOUNT</span><span>© 2026 PRYCOT.</span></footer>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
 <script>
-const menu=document.getElementById('menu');
-const button=document.getElementById('menuButton');
-button.addEventListener('click',()=>menu.classList.toggle('open'));
-document.addEventListener('click',e=>{
- if(menu.classList.contains('open') && !menu.contains(e.target) && !button.contains(e.target)) menu.classList.remove('open');
+const firebaseConfig={
+ apiKey:"AIzaSyCrU93d-F-WUX4GbuoPSFgdf9bOgSbQlBY",
+ authDomain:"prycot-fe79e.firebaseapp.com",
+ projectId:"prycot-fe79e",
+ storageBucket:"prycot-fe79e.firebasestorage.app",
+ messagingSenderId:"566283099923",
+ appId:"1:566283099923:web:b42c4eea5ca42e4144c4e6"
+};
+firebase.initializeApp(firebaseConfig);
+const auth=firebase.auth();
+const db=firebase.firestore();
+
+const menu=document.getElementById("menu");
+const menuButton=document.getElementById("menuButton");
+menuButton.addEventListener("click",()=>menu.classList.toggle("open"));
+document.addEventListener("click",e=>{
+ if(menu.classList.contains("open")&&!menu.contains(e.target)&&!menuButton.contains(e.target))menu.classList.remove("open");
 });
-document.getElementById('releaseForm').addEventListener('submit',e=>{
- e.preventDefault();
- const f=new FormData(e.target);
- const subject=encodeURIComponent('PRYCOT. Release Request — '+f.get('artist')+' — '+f.get('title'));
- const body=encodeURIComponent(
- 'Artist / Name: '+f.get('artist')+'\n'+
- 'Email: '+f.get('email')+'\n'+
- 'Telegram: '+f.get('telegram')+'\n'+
- 'Release Type: '+f.get('type')+'\n'+
- 'Number of Tracks: '+f.get('tracks')+'\n'+
- 'Release Title: '+f.get('title')+'\n'+
- 'Message / Comment: '+(f.get('message')||'—')
- );
- window.location.href='mailto:info@prycot.com?subject='+subject+'&body='+body;
- document.getElementById('success').style.display='block';
+
+const authView=document.getElementById("authView");
+const cabinetView=document.getElementById("cabinetView");
+const authForm=document.getElementById("authForm");
+const authSubmit=document.getElementById("authSubmit");
+const resetPassword=document.getElementById("resetPassword");
+const loginTab=document.getElementById("loginTab");
+const registerTab=document.getElementById("registerTab");
+const authStatus=document.getElementById("authStatus");
+let registerMode=false;
+
+function setStatus(el,text,error=false){el.textContent=text;el.classList.toggle("error",error)}
+function initials(name){return (name||"A").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"A"}
+
+function showAuth(){authView.classList.remove("hidden");cabinetView.classList.add("hidden")}
+function showCabinet(){authView.classList.add("hidden");cabinetView.classList.remove("hidden")}
+
+loginTab.onclick=()=>{
+ registerMode=false;loginTab.classList.add("active");registerTab.classList.remove("active");
+ authSubmit.textContent="Sign In";resetPassword.classList.remove("hidden");setStatus(authStatus,"");
+ document.getElementById("authPassword").autocomplete="current-password";
+};
+registerTab.onclick=()=>{
+ registerMode=true;registerTab.classList.add("active");loginTab.classList.remove("active");
+ authSubmit.textContent="Create Account";resetPassword.classList.add("hidden");setStatus(authStatus,"");
+ document.getElementById("authPassword").autocomplete="new-password";
+};
+
+authForm.addEventListener("submit",async e=>{
+ e.preventDefault();setStatus(authStatus,"");
+ const email=document.getElementById("authEmail").value.trim();
+ const password=document.getElementById("authPassword").value;
+ try{
+  if(registerMode){
+   const cred=await auth.createUserWithEmailAndPassword(email,password);
+   await cred.user.sendEmailVerification();
+   await saveProfile(cred.user,{displayName:"",bio:"",telegram:"",avatarUrl:""});
+   setStatus(authStatus,"Account created. Check your email to verify your address.");
+  }else{
+   await auth.signInWithEmailAndPassword(email,password);
+  }
+ }catch(err){setStatus(authStatus,friendlyError(err),true)}
 });
+
+resetPassword.addEventListener("click",async()=>{
+ const email=document.getElementById("authEmail").value.trim();
+ if(!email){setStatus(authStatus,"Enter your email first.",true);return}
+ try{await auth.sendPasswordResetEmail(email);setStatus(authStatus,"Password reset email sent.")}catch(err){setStatus(authStatus,friendlyError(err),true)}
+});
+
+document.getElementById("googleButton").addEventListener("click",async()=>{
+ setStatus(authStatus,"");
+ try{
+  const provider=new firebase.auth.GoogleAuthProvider();
+  const result=await auth.signInWithPopup(provider);
+  await saveProfile(result.user,{
+   displayName:result.user.displayName||"",
+   bio:"",
+   telegram:"",
+   avatarUrl:result.user.photoURL||""
+  },true);
+ }catch(err){setStatus(authStatus,friendlyError(err),true)}
+});
+
+async function saveProfile(user,data,merge=true){
+ const ref=db.collection("users").doc(user.uid);
+ const existing=await ref.get();
+ const payload={
+  email:user.email||"",
+  displayName:data.displayName||"",
+  bio:data.bio||"",
+  telegram:data.telegram||"",
+  avatarUrl:data.avatarUrl||"",
+  updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+ };
+ if(!existing.exists||!merge)payload.createdAt=firebase.firestore.FieldValue.serverTimestamp();
+ await ref.set(payload,{merge:true});
+}
+
+async function loadProfile(user){
+ const snap=await db.collection("users").doc(user.uid).get();
+ const data=snap.exists?snap.data():{};
+ const name=data.displayName||user.displayName||"Artist";
+ document.getElementById("cabinetName").textContent=name;
+ document.getElementById("cabinetEmail").textContent=user.email||"";
+ document.getElementById("profileName").value=data.displayName||user.displayName||"";
+ document.getElementById("profileBio").value=data.bio||"";
+ document.getElementById("profileTelegram").value=data.telegram||"";
+ document.getElementById("profileAvatar").value=data.avatarUrl||user.photoURL||"";
+ document.getElementById("releaseArtist").value=data.displayName||user.displayName||"";
+ document.getElementById("releaseEmail").value=user.email||"";
+ renderAvatar(data.avatarUrl||user.photoURL,name);
+ await loadRequests(user);
+}
+
+function renderAvatar(url,name){
+ const box=document.getElementById("avatarBox");
+ box.innerHTML="";
+ if(url){
+  const img=document.createElement("img");img.src=url;img.alt="";img.onerror=()=>{box.textContent=initials(name)};box.appendChild(img);
+ }else box.textContent=initials(name);
+}
+
+document.getElementById("profileForm").addEventListener("submit",async e=>{
+ e.preventDefault();const user=auth.currentUser;if(!user)return;
+ const data={
+  displayName:document.getElementById("profileName").value.trim(),
+  bio:document.getElementById("profileBio").value.trim(),
+  telegram:document.getElementById("profileTelegram").value.trim(),
+  avatarUrl:document.getElementById("profileAvatar").value.trim()
+ };
+ try{
+  await saveProfile(user,data,true);
+  document.getElementById("cabinetName").textContent=data.displayName||"Artist";
+  renderAvatar(data.avatarUrl,data.displayName||"Artist");
+  document.getElementById("releaseArtist").value=data.displayName||"";
+  setStatus(document.getElementById("profileStatus"),"Profile saved.");
+ }catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true)}
+});
+
+document.getElementById("newReleaseButton").onclick=()=>{
+ document.getElementById("releaseSection").classList.remove("hidden");
+ document.getElementById("releaseSection").scrollIntoView({behavior:"smooth",block:"start"});
+};
+document.getElementById("cancelRelease").onclick=()=>document.getElementById("releaseSection").classList.add("hidden");
+
+document.getElementById("releaseForm").addEventListener("submit",async e=>{
+ e.preventDefault();const user=auth.currentUser;if(!user)return;
+ const status=document.getElementById("releaseStatus");setStatus(status,"Sending...");
+ try{
+  await db.collection("releaseRequests").add({
+   uid:user.uid,
+   artist:document.getElementById("releaseArtist").value.trim(),
+   email:document.getElementById("releaseEmail").value.trim(),
+   telegram:document.getElementById("releaseTelegram").value.trim(),
+   type:document.getElementById("releaseType").value,
+   tracks:Number(document.getElementById("releaseTracks").value),
+   title:document.getElementById("releaseTitle").value.trim(),
+   message:document.getElementById("releaseMessage").value.trim(),
+   status:"new",
+   createdAt:firebase.firestore.FieldValue.serverTimestamp()
+  });
+  e.target.reset();
+  document.getElementById("releaseArtist").value=document.getElementById("profileName").value.trim();
+  document.getElementById("releaseEmail").value=user.email||"";
+  setStatus(status,"REQUEST RECEIVED. PRYCOT. will review it and contact you.");
+  await loadRequests(user);
+ }catch(err){setStatus(status,friendlyError(err),true)}
+});
+
+async function loadRequests(user){
+ const list=document.getElementById("requestList");
+ try{
+  const snap=await db.collection("releaseRequests").where("uid","==",user.uid).get();
+  if(snap.empty){list.innerHTML='<div class="status">No requests yet.</div>';return}
+  const items=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0));
+  list.innerHTML=items.map(r=>{
+   const date=r.createdAt?.toDate?r.createdAt.toDate().toLocaleDateString("en-GB"):"—";
+   return '<div class="request-item"><div class="request-title">'+escapeHtml(r.title||"Untitled")+'<span class="badge">'+escapeHtml(r.status||"new")+'</span></div><div class="request-meta">'+escapeHtml(r.type||"")+' · '+escapeHtml(String(r.tracks||""))+' tracks · '+date+'</div></div>';
+  }).join("");
+ }catch(err){list.innerHTML='<div class="status error">'+escapeHtml(friendlyError(err))+'</div>'}
+}
+
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
+function friendlyError(err){
+ const code=err?.code||"";
+ const map={
+  "auth/invalid-credential":"Incorrect email or password.",
+  "auth/email-already-in-use":"An account with this email already exists.",
+  "auth/weak-password":"Password must contain at least 6 characters.",
+  "auth/invalid-email":"Enter a valid email address.",
+  "auth/popup-closed-by-user":"Google sign-in was cancelled.",
+  "auth/popup-blocked":"Your browser blocked the Google sign-in window.",
+  "auth/operation-not-allowed":"This sign-in method is not enabled in Firebase."
+ };
+ return map[code]||err?.message||"Something went wrong.";
+}
+
+auth.onAuthStateChanged(async user=>{
+ if(!user){showAuth();return}
+ showCabinet();
+ try{await loadProfile(user)}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true)}
+});
+
+document.getElementById("logoutButton").onclick=()=>auth.signOut();
 </script>
 </body>
 </html>

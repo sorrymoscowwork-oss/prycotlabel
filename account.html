@@ -122,15 +122,17 @@ textarea{min-height:110px;resize:vertical}
 <button class="secondary" id="logoutButton" type="button">Log Out</button>
 </div>
 
-<div class="cabinet-grid" style="grid-template-columns:1fr">
-<div class="panel profile-fields" style="max-width:560px">
-<h2>Profile</h2>
+<div class="cabinet-grid profile-grid">
+<div class="panel">
 <form id="profileForm">
-<div class="field"><label for="profileName">Artist / Name</label><input id="profileName" required></div>
-<div class="field"><label for="profileBio">Bio</label><textarea id="profileBio" placeholder="Short artist description."></textarea></div>
+<div class="field"><label for="profileName">Profile</label><input id="profileName" required></div>
 <div class="field"><label for="profileTelegram">Telegram</label><input id="profileTelegram" placeholder="@username"></div>
+</div>
+<div class="panel">
+<div class="field"><label for="profileBio">Bio</label><textarea id="profileBio" placeholder="Short artist description."></textarea></div>
 <div class="field"><label for="profileAvatar">Avatar URL</label><input id="profileAvatar" type="url" placeholder="https://..."></div>
-<div class="actions"><button class="primary" type="submit">Save Profile</button></div>
+</div>
+<div class="profile-actions"><button class="primary" type="submit">Save Profile</button></div>
 <div class="status" id="profileStatus"></div>
 </form>
 </div>
@@ -305,3 +307,4 @@ document.getElementById("logoutButton").onclick=()=>auth.signOut();
 </script>
 </body>
 </html>
+<style>.profile-grid{align-items:start}.profile-grid form{display:contents}.profile-actions{grid-column:1/-1;padding-top:0}.profile-grid .status{grid-column:1/-1}</style>

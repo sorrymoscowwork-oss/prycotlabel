@@ -48,7 +48,7 @@ document.getElementById("avatar").textContent=initials(d.displayName||username);
 if(d.telegram){
 const t=d.telegram.startsWith("@")?d.telegram.slice(1):d.telegram;
 document.getElementById("telegram").href="https://t.me/"+encodeURIComponent(t);
-document.getElementById("telegram").textContent=d.telegram;
+document.getElementById("telegram").textContent="Telegram: "+d.telegram;
 }else document.getElementById("telegram").style.display="none";
 document.getElementById("profile").style.display="block";
 }catch(e){document.getElementById("notFound").style.display="block"}

@@ -98,7 +98,7 @@ auth.onAuthStateChanged(async user=>{
  try{
   await checkAdmin(user);
   loading.classList.add("hidden");view.classList.remove("hidden");await loadRequests();
- }catch(e){loading.textContent="Access denied.";setStatus("This account is not an admin.",true)}
+ }catch(e){loading.textContent="Access denied.";setStatus((e.code||"ERROR")+": "+(e.message||"This account is not an admin."),true)}
 });
 document.getElementById("refresh").onclick=loadRequests;
 document.getElementById("logout").onclick=()=>auth.signOut();

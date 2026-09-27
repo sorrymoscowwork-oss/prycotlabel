@@ -76,7 +76,7 @@ textarea{min-height:110px;resize:vertical}
 .profile-field label{display:block;margin:0 0 8px;color:var(--muted);font-size:9px;letter-spacing:.12em;text-transform:uppercase}
 .profile-field input,.profile-field textarea{width:100%;border:1px solid #303030;border-radius:8px;background:#0b0b0b;color:var(--fg);padding:11px 12px;font-size:14px;outline:none}
 .profile-field input:focus,.profile-field textarea:focus{border-color:#555}
-.profile-field textarea{min-height:88px;resize:vertical}
+.profile-field textarea{height:44px;min-height:44px;resize:none}
 .profile-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px}
 .profile-footer .status{margin:0;min-height:0}.public-profile{margin-top:18px;font-size:10px;color:var(--muted)}.public-profile a:hover{color:var(--fg)}
 @media(max-width:760px){
@@ -357,7 +357,7 @@ document.getElementById("logoutButton").onclick=()=>auth.signOut();
 </html>
 <style>.profile-grid{align-items:start;max-width:760px}.profile-grid form{display:contents}.profile-actions{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding-top:2px}</style>
 <style>
-.bio-field textarea{min-height:92px}
+.bio-field textarea{height:44px;min-height:44px;resize:none}
 @media(max-width:760px){
 }
 </style>

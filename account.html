@@ -149,7 +149,7 @@ textarea{min-height:110px;resize:vertical}
 <div class="profile-fields">
 <div class="profile-field">
 <label for="profileName">Username</label>
-<input id="profileName" required>
+<input id="profileName" required readonly>
 </div>
 <div class="profile-field">
 <label for="profileTelegram">Telegram</label>
@@ -237,7 +237,7 @@ authForm.addEventListener("submit",async e=>{
    if(existingUsername.exists){setStatus(authStatus,"This username is already taken.",true);return}
    const cred=await auth.createUserWithEmailAndPassword(email,password);
    await cred.user.sendEmailVerification();
-   await saveProfile(cred.user,{displayName:username,bio:"",telegram:"",avatarUrl:""});
+   await saveProfile(cred.user,{displayName:username,username,bio:"",telegram:"",avatarUrl:""});
    await db.collection("usernames").doc(username).set({uid:cred.user.uid});
    setStatus(authStatus,"Account created. Check your email to verify your address.");
   }else{
@@ -272,6 +272,7 @@ async function saveProfile(user,data,merge=true){
  const payload={
   email:user.email||"",
   displayName:data.displayName||"",
+  ...(data.username?{username:data.username}:{}),
   bio:data.bio||"",
   telegram:data.telegram||"",
   updatedAt:firebase.firestore.FieldValue.serverTimestamp()
@@ -282,15 +283,17 @@ async function saveProfile(user,data,merge=true){
 
 async function loadProfile(user){
  const snap=await db.collection("users").doc(user.uid).get();
- const data=snap.exists?snap.data():{};
- const name=data.displayName||user.displayName||"Artist";
+ let data=snap.exists?snap.data():{};
+ const username=(data.username||data.displayName||user.displayName||"").toLowerCase().replace(/[^a-z0-9_]/g,"");
+ if(!data.username&&username){data.username=username;await saveProfile(user,{username},true);await db.collection("usernames").doc(username).set({uid:user.uid},{merge:true});}
+ const name=data.displayName||username||"Artist";
  document.getElementById("cabinetName").textContent=name;
  document.getElementById("cabinetEmail").textContent=user.email||"";
- document.getElementById("profileName").value=data.displayName||user.displayName||"";
+ document.getElementById("profileName").value=username;
  document.getElementById("profileBio").value=data.bio||"";
  document.getElementById("profileTelegram").value=data.telegram||"";
- const publicUsername=(data.displayName||user.displayName||"").toLowerCase().replace(/[^a-z0-9_]/g,"");
- document.getElementById("publicProfileLink").innerHTML=publicUsername?`<a href="artist.html?u=${encodeURIComponent(publicUsername)}" target="_blank">Public profile: prycot.com/artist.html?u=${publicUsername}</a>`:"";
+ const publicUsername=username;
+ document.getElementById("publicProfileLink").innerHTML=publicUsername?`<a href="/artist.${encodeURIComponent(publicUsername)}" target="_blank">Public profile: prycot.com/artist.${publicUsername}</a>`:"";
  renderAvatar("",name);
 }
 
@@ -311,7 +314,8 @@ document.getElementById("profileForm").addEventListener("submit",async e=>{
  };
  try{
   await saveProfile(user,data,true);
-  const username=data.displayName.toLowerCase().replace(/[^a-z0-9_]/g,"");
+  const profileSnap=await db.collection("users").doc(user.uid).get();
+  const username=(profileSnap.data()?.username||data.displayName).toLowerCase().replace(/[^a-z0-9_]/g,"");
   if(username) await db.collection("publicProfiles").doc(username).set({uid:user.uid,username,displayName:data.displayName,bio:data.bio,telegram:data.telegram,public:true,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
   document.getElementById("cabinetName").textContent=data.displayName||"Artist";
   renderAvatar("",data.displayName||"Artist");

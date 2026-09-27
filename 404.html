@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PRYCOT. — Artist</title>
+<title>PRYCOT.</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
 :root{--bg:#0a0a0a;--fg:#f4f4f2;--muted:#9b9b98;--line:#292929;--accent:#A0522D}
@@ -35,6 +35,7 @@ firebase.initializeApp({apiKey:"AIzaSyCrU93d-F-WUX4GbuoPSFgdf9bOgSbQlBY",authDom
 const db=firebase.firestore();
 const match=location.pathname.match(/^\/artist\.([a-z0-9_]{3,20})\/?$/i);
 const username=match?match[1].toLowerCase():"";
+document.title=username||"PRYCOT.";
 function initials(name){return(name||"A").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"A"}
 async function load(){
 if(!username){document.getElementById("notFound").style.display="block";return}

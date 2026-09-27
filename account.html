@@ -58,7 +58,7 @@ textarea{min-height:110px;resize:vertical}
 .avatar img{width:100%;height:100%;object-fit:cover}
 .user-name{font-size:22px;letter-spacing:-.03em}.user-email{margin-top:6px;color:var(--muted);font-size:11px}
 .cabinet-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:34px}
-.panel{border-top:1px solid var(--line);padding-top:22px}
+.panel{padding-top:22px}
 .panel h2{margin:0 0 20px;font-size:18px;font-weight:500;letter-spacing:-.02em}
 .profile-fields .field:first-child{padding-top:0}
 .request-title{font-size:13px}footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
@@ -307,4 +307,4 @@ document.getElementById("logoutButton").onclick=()=>auth.signOut();
 </script>
 </body>
 </html>
-<style>.profile-grid{align-items:start}.profile-grid form{display:contents}.profile-actions{grid-column:1/-1;padding-top:0}.profile-grid .status{grid-column:1/-1}</style>
+<style>.profile-grid{align-items:start;grid-template-columns:1fr 1fr;gap:42px}.profile-grid form{display:contents}.profile-actions{grid-column:1/-1;padding-top:0}.profile-grid .status{grid-column:1/-1}</style>

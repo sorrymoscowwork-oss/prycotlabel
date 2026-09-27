@@ -77,7 +77,7 @@ textarea{min-height:110px;resize:vertical}
 .profile-field input:focus,.profile-field textarea:focus{border-color:#555}
 .profile-field textarea{min-height:88px;resize:vertical}
 .profile-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px}
-.profile-footer .status{margin:0;min-height:0}
+.profile-footer .status{margin:0;min-height:0}.public-profile{margin-top:18px;font-size:10px;color:var(--muted)}.public-profile a:hover{color:var(--fg)}
 @media(max-width:760px){
 .page{padding:22px 20px 30px}.brand{top:22px;left:20px}.logo{font-size:42px}.tagline{top:62px;left:28px;font-size:8px}.menu-button{top:20px;right:20px}.menu{width:82vw;padding:22px 20px 30px}.content{margin-top:18vh}.account-shell{max-width:none}.account-top{margin-bottom:20px}.profile-card{padding:20px;border-radius:12px}.profile-fields{grid-template-columns:1fr}.profile-field-wide{grid-column:auto}.profile-footer{align-items:flex-start;flex-direction:column-reverse}
 }
@@ -116,6 +116,7 @@ textarea{min-height:110px;resize:vertical}
 
 <div class="auth-panel">
 <form id="authForm">
+<div class="field" id="registerUsernameField" class="hidden"><label for="authUsername">Username</label><input id="authUsername" autocomplete="username" placeholder="yourname"></div>
 <div class="field"><label for="authEmail">Email</label><input id="authEmail" type="email" required autocomplete="email"></div>
 <div class="field"><label for="authPassword">Password</label><input id="authPassword" type="password" required minlength="6" autocomplete="current-password"></div>
 <div class="actions">
@@ -164,6 +165,7 @@ textarea{min-height:110px;resize:vertical}
 <button class="primary" type="submit">Save Profile</button>
 </div>
 </form>
+<div class="public-profile" id="publicProfileLink"></div>
 </div>
 </div>
 </section>
@@ -204,6 +206,7 @@ const loginTab=document.getElementById("loginTab");
 const registerTab=document.getElementById("registerTab");
 const authStatus=document.getElementById("authStatus");
 let registerMode=false;
+document.getElementById("registerUsernameField").classList.add("hidden");
 
 function setStatus(el,text,error=false){el.textContent=text;el.classList.toggle("error",error)}
 function initials(name){return (name||"A").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"A"}
@@ -213,12 +216,12 @@ function showCabinet(){authView.classList.add("hidden");cabinetView.classList.re
 
 loginTab.onclick=()=>{
  registerMode=false;loginTab.classList.add("active");registerTab.classList.remove("active");
- authSubmit.textContent="Sign In";resetPassword.classList.remove("hidden");setStatus(authStatus,"");
+ authSubmit.textContent="Sign In";resetPassword.classList.remove("hidden");document.getElementById("registerUsernameField").classList.add("hidden");setStatus(authStatus,"");
  document.getElementById("authPassword").autocomplete="current-password";
 };
 registerTab.onclick=()=>{
  registerMode=true;registerTab.classList.add("active");loginTab.classList.remove("active");
- authSubmit.textContent="Create Account";resetPassword.classList.add("hidden");setStatus(authStatus,"");
+ authSubmit.textContent="Create Account";resetPassword.classList.add("hidden");document.getElementById("registerUsernameField").classList.remove("hidden");setStatus(authStatus,"");
  document.getElementById("authPassword").autocomplete="new-password";
 };
 
@@ -226,11 +229,16 @@ authForm.addEventListener("submit",async e=>{
  e.preventDefault();setStatus(authStatus,"");
  const email=document.getElementById("authEmail").value.trim();
  const password=document.getElementById("authPassword").value;
+ const username=document.getElementById("authUsername").value.trim().toLowerCase();
  try{
   if(registerMode){
+   if(!/^[a-z0-9_]{3,20}$/.test(username)){setStatus(authStatus,"Username: 3–20 characters, letters, numbers and underscore only.",true);return}
+   const existingUsername=await db.collection("usernames").doc(username).get();
+   if(existingUsername.exists){setStatus(authStatus,"This username is already taken.",true);return}
    const cred=await auth.createUserWithEmailAndPassword(email,password);
    await cred.user.sendEmailVerification();
-   await saveProfile(cred.user,{displayName:"",bio:"",telegram:"",avatarUrl:""});
+   await saveProfile(cred.user,{displayName:username,bio:"",telegram:"",avatarUrl:""});
+   await db.collection("usernames").doc(username).set({uid:cred.user.uid});
    setStatus(authStatus,"Account created. Check your email to verify your address.");
   }else{
    await auth.signInWithEmailAndPassword(email,password);
@@ -281,6 +289,8 @@ async function loadProfile(user){
  document.getElementById("profileName").value=data.displayName||user.displayName||"";
  document.getElementById("profileBio").value=data.bio||"";
  document.getElementById("profileTelegram").value=data.telegram||"";
+ const publicUsername=(data.displayName||user.displayName||"").toLowerCase().replace(/[^a-z0-9_]/g,"");
+ document.getElementById("publicProfileLink").innerHTML=publicUsername?`<a href="artist.html?u=${encodeURIComponent(publicUsername)}" target="_blank">Public profile: prycot.com/artist.html?u=${publicUsername}</a>`:"";
  renderAvatar("",name);
 }
 
@@ -301,6 +311,8 @@ document.getElementById("profileForm").addEventListener("submit",async e=>{
  };
  try{
   await saveProfile(user,data,true);
+  const username=data.displayName.toLowerCase().replace(/[^a-z0-9_]/g,"");
+  if(username) await db.collection("publicProfiles").doc(username).set({uid:user.uid,username,displayName:data.displayName,bio:data.bio,telegram:data.telegram,public:true,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
   document.getElementById("cabinetName").textContent=data.displayName||"Artist";
   renderAvatar("",data.displayName||"Artist");
   const saveButton=e.submitter;

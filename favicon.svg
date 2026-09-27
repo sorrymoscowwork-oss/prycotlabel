@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PRYCOT. favicon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PRYCOT. icon">
 <style>
-path{fill:#303438}
-@media (prefers-color-scheme:dark){path{fill:#fff}}
+circle{fill:#303438}
+@media (prefers-color-scheme:dark){circle{fill:#fff}}
 </style>
-<path d="M 109,104 L 94,120 L 72,154 L 61,186 L 59,203 L 49,206 L 42,215 L 44,230 L 51,236 L 61,239 L 66,262 L 72,277 L 83,295 L 105,319 L 118,329 L 107,354 L 86,360 L 78,365 L 71,372 L 61,390 L 59,399 L 60,417 L 65,430 L 72,439 L 83,448 L 95,453 L 118,454 L 142,443 L 150,433 L 159,412 L 159,398 L 154,382 L 136,363 L 150,336 L 360,336 L 374,362 L 362,372 L 352,388 L 350,411 L 352,421 L 358,433 L 372,447 L 385,453 L 396,455 L 412,454 L 434,443 L 444,432 L 450,417 L 450,392 L 444,379 L 430,364 L 422,359 L 404,355 L 401,352 L 390,330 L 406,319 L 428,295 L 439,277 L 445,262 L 450,239 L 460,236 L 469,226 L 468,212 L 462,206 L 452,203 L 233,203 L 231,201 L 231,61 L 228,57 L 207,57 L 177,64 L 135,84 Z"/>
+<circle cx="256" cy="256" r="192"/>
 </svg>

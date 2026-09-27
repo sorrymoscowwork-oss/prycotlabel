@@ -87,7 +87,23 @@ header{position:relative!important;min-height:96px!important}
 </style><style id="active-menu-item">
 .menu-links a.active-page{color:#A0522D!important;font-style:italic!important}
 .menu-links a:hover{color:#FF7F50!important;opacity:1!important}
-</style><style id="account-menu-color">.menu-links a.account-menu-item{color:#A0522D!important}.menu-links a.account-menu-item:hover{color:#FF7F50!important}</style><style id="uniform-tagline-color">.tagline,.tagline a{color:#9b9b98!important}</style></head>
+</style><style id="account-menu-color">.menu-links a.account-menu-item{color:#A0522D!important}.menu-links a.account-menu-item:hover{color:#FF7F50!important}</style><style id="uniform-tagline-color">.tagline,.tagline a{color:#9b9b98!important}</style><style id="payment-methods">
+.payment-methods{margin-top:56px;padding-top:28px;border-top:1px solid var(--line)}
+.payment-methods-head{margin-bottom:24px}
+.payment-methods-label{margin:0 0 9px;color:var(--muted);font-size:9px;letter-spacing:.14em;text-transform:uppercase}
+.payment-methods-title{margin:0;font-size:clamp(24px,3vw,38px);line-height:1.05;font-weight:500;letter-spacing:-.035em}
+.payment-methods-sub{margin:9px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
+.coin-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.coin-card{min-height:142px;padding:20px 12px 16px;border:1px solid var(--line);border-radius:16px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.coin-icon{width:48px;height:48px;margin-bottom:11px;border-radius:50%;display:grid;place-items:center;font-size:22px;font-weight:700}
+.coin-icon.usdt{background:#26a17b;color:#fff}.coin-icon.usdc{background:#2775ca;color:#fff}.coin-icon.btc{background:#f7931a;color:#fff}.coin-icon.eth{background:#8d91a8;color:#fff}
+.coin-icon.ton{background:#229ed9;color:#fff;font-size:18px}.coin-icon.trc{background:#e92b2b;color:#fff;font-size:18px}.coin-icon.arb{background:#1b1f23;color:#9fa7b0;font-size:17px}
+.coin-name{font-size:14px;font-weight:500}.coin-network{margin-top:5px;color:var(--muted);font-size:10px;line-height:1.2}
+.payment-rates{display:grid;grid-template-columns:1fr 1fr;margin-top:8px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.rate-card{padding:20px 22px}.rate-card+.rate-card{border-left:1px solid var(--line)}
+.rate-label{margin:0 0 9px;font-size:12px;font-weight:500}.rate-text{margin:0;color:var(--muted);font-size:11px;line-height:1.55}.rate-text strong{color:var(--fg);font-weight:500}
+@media(max-width:700px){.coin-grid{grid-template-columns:repeat(2,1fr)}.coin-card:last-child{grid-column:1/-1}.payment-rates{grid-template-columns:1fr}.rate-card+.rate-card{border-left:0;border-top:1px solid var(--line)}}
+</style></head>
 <body>
 <div class="menu" id="menu">
 <div class="menu-header"></div>
@@ -128,7 +144,24 @@ header{position:relative!important;min-height:96px!important}
 <p class="royalty-main"><strong>90% of royalties stay with the artist.</strong><br>No additional commissions.</p>
 <p class="royalty-sub">PRYCOT. retains 10% of royalties from actual platform revenue. Royalty payments are made in cryptocurrency once every 3 months.</p>
 </div>
-<div class="release-button-wrap"><span class="release-button">Release Your Music</span></div>
+<div class="payment-methods">
+<div class="payment-methods-head">
+<p class="payment-methods-label">Payment methods</p>
+<h3 class="payment-methods-title">Pay in cryptocurrency.</h3>
+<p class="payment-methods-sub">We accept the following networks and cryptocurrencies for payment.</p>
+</div>
+<div class="coin-grid">
+<div class="coin-card"><div class="coin-icon usdt">₮</div><div class="coin-name">USDT</div><div class="coin-network">TON Network</div></div>
+<div class="coin-card"><div class="coin-icon trc">△</div><div class="coin-name">USDT</div><div class="coin-network">TRC20 Network</div></div>
+<div class="coin-card"><div class="coin-icon usdc">$</div><div class="coin-name">USDC</div><div class="coin-network">Arbitrum Network</div></div>
+<div class="coin-card"><div class="coin-icon btc">₿</div><div class="coin-name">Bitcoin</div><div class="coin-network">BTC</div></div>
+<div class="coin-card"><div class="coin-icon eth">◆</div><div class="coin-name">Ethereum</div><div class="coin-network">ETH</div></div>
+</div>
+<div class="payment-rates">
+<div class="rate-card"><p class="rate-label">Stablecoins</p><p class="rate-text">USDT (TON, TRC20) and USDC (Arbitrum) are accepted at their nominal value of <strong>$1 USD per token.</strong></p></div>
+<div class="rate-card"><p class="rate-label">Other cryptocurrencies</p><p class="rate-text">Bitcoin, Ethereum and other supported coins are accepted at the <strong>current market rate at the time of payment.</strong></p></div>
+</div>
+</div><div class="release-button-wrap"><span class="release-button">Release Your Music</span></div>
 </section>
 <footer><span>PRYCOT. — 2026</span><span>Independent music label</span></footer>
 </main>

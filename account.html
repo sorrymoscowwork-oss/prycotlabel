@@ -168,7 +168,22 @@ header{position:relative;display:flex;justify-content:space-between;align-items:
 <script>
 const SUPABASE_URL = 'https://tmkfbqusgoujpldxjew.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_HRmcp6OckIsP2EVYXqoeeQ_NyGF17TV';
-const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+let supabaseClient = null;
+
+function showConnectionError(error){
+  console.error('Supabase connection error:', error);
+  setMessage('Connection to PRYCOT. account service failed. Please try again later.', true);
+}
+
+if(!window.supabase){
+  showConnectionError(new Error('Supabase library did not load.'));
+}else{
+  try{
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  }catch(error){
+    showConnectionError(error);
+  }
+}
 
 const menu = document.getElementById('menu');
 const menuButton = document.getElementById('menuButton');
@@ -230,6 +245,7 @@ async function renderSession(session){
 }
 
 document.getElementById('loginForm').addEventListener('submit', async (event)=>{
+  if(!supabaseClient){ event.preventDefault(); showConnectionError(new Error('Supabase unavailable')); return; }
   event.preventDefault();
   setMessage('');
 
@@ -256,6 +272,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event)=>{
 });
 
 document.getElementById('registerForm').addEventListener('submit', async (event)=>{
+  if(!supabaseClient){ event.preventDefault(); showConnectionError(new Error('Supabase unavailable')); return; }
   event.preventDefault();
   setMessage('');
 
@@ -302,12 +319,14 @@ document.getElementById('registerForm').addEventListener('submit', async (event)
 });
 
 document.getElementById('logoutButton').addEventListener('click', async ()=>{
+  if(!supabaseClient){ showConnectionError(new Error('Supabase unavailable')); return; }
   await supabaseClient.auth.signOut();
   setMessage('You have been logged out.');
   await renderSession(null);
 });
 
 document.getElementById('resetPassword').addEventListener('click', async (event)=>{
+  if(!supabaseClient){ event.preventDefault(); showConnectionError(new Error('Supabase unavailable')); return; }
   event.preventDefault();
 
   const email = document.getElementById('loginEmail').value.trim();
@@ -329,11 +348,11 @@ document.getElementById('resetPassword').addEventListener('click', async (event)
   setMessage('Password reset email sent.');
 });
 
-supabaseClient.auth.getSession().then(({data})=>{
+if(supabaseClient) supabaseClient.auth.getSession().then(({data})=>{
   renderSession(data.session);
 });
 
-supabaseClient.auth.onAuthStateChange((_event, session)=>{
+if(supabaseClient) supabaseClient.auth.onAuthStateChange((_event, session)=>{
   renderSession(session);
 });
 </script>

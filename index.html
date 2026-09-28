@@ -91,21 +91,30 @@
 </style><style id="active-menu-item">
 .menu-links a.active-page{color:#A0522D!important;font-style:italic!important}
 .menu-links a:hover{color:#FF7F50!important;opacity:1!important}
-</style><style id="account-menu-color">.menu-links a.account-menu-item{color:#A0522D!important}.menu-links a.account-menu-item:hover{color:#FF7F50!important}</style><style id="uniform-tagline-color">.tagline,.tagline a{color:#9b9b98!important}</style><style id="blog-side-menu-color">.menu-links a.blog-menu-item,.menu-links a.side-projects-menu-item{color:#A0522D!important}.menu-links a.blog-menu-item:hover,.menu-links a.side-projects-menu-item:hover{color:#FF7F50!important}</style><style id="home-button-style">.site-button,.release-cta a,.release-button,.label-services-cta a,.primary,.save-btn{display:inline-block;padding:15px 30px;border:0;border-radius:999px;background:#A0522D;color:#fff;font-size:11px;font-weight:400;line-height:1;letter-spacing:.12em;text-transform:uppercase;cursor:pointer!important;transition:background-color .2s ease}.site-button:hover,.release-cta a:hover,.release-button:hover,.label-services-cta a:hover,.primary:hover,.save-btn:hover{background:#FF7F50;color:#000}</style></head>
+</style><style id="uniform-tagline-color">.tagline,.tagline a{color:#9b9b98!important}</style><style id="home-button-style">.site-button,.release-cta a,.release-button,.label-services-cta a,.primary,.save-btn{display:inline-block;padding:15px 30px;border:0;border-radius:999px;background:#A0522D;color:#fff;font-size:11px;font-weight:400;line-height:1;letter-spacing:.12em;text-transform:uppercase;cursor:pointer!important;transition:background-color .2s ease}.site-button:hover,.release-cta a:hover,.release-button:hover,.label-services-cta a:hover,.primary:hover,.save-btn:hover{background:#FF7F50;color:#000}</style><style id="canonical-menu-style">
+.menu-links{align-items:flex-start!important;text-align:left!important;gap:18px!important}
+.menu-links a{font-size:18px!important;line-height:1.1!important;letter-spacing:-.02em!important;font-weight:500!important;color:#f4f4f2!important;font-style:normal!important}
+.menu-links a:nth-child(1),.menu-links a:nth-child(2),.menu-links a:nth-child(10),.menu-links a:nth-child(11){color:#A0522D!important}
+.menu-links a:hover{color:#FF7F50!important;opacity:1!important}
+.menu-links a.active-page{font-style:italic!important}
+@media(max-width:700px){.menu-links a{font-size:18px!important}}
+</style></head>
 <body>
   <div class="menu" id="menu">
     <div class="menu-header"></div>
-    <nav class="menu-links" aria-label="Menu">
-      <a href="/">Home</a>
-      <a class="account-menu-item" href="account.html">Account</a>
-      <a href="about.html">About PRYCOT.</a>
-      <a href="terms.html">Release Terms</a>
-      <a href="how-to-release.html">How to Release</a>
+    <nav class="menu-links" aria-label="Site navigation">
+<a href="/">Home</a>
+<a href="account.html">Account</a>
+<a href="about.html">About PRYCOT.</a>
+<a href="terms.html">Release Terms</a>
+<a href="how-to-release.html">How to Release</a>
 <a href="telegram-bot.html">Telegram Bot Guide</a>
-      <a href="prices.html">Prices</a>
-      <a href="label-services.html">Label Services</a>
-      <a href="contact.html">Contact</a><a class="blog-menu-item" href="blog.html">Blog</a><a class="side-projects-menu-item" href="side-projects.html">Side Projects</a>
-    </nav>
+<a href="prices.html">Prices</a>
+<a href="label-services.html">Label Services</a>
+<a href="contact.html">Contact</a>
+<a href="blog.html">Blog</a>
+<a href="side-projects.html">Side Projects</a>
+</nav>
   </div>
   <main class="page">
     <header>
@@ -133,11 +142,11 @@ const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria
 menuButton.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();menu.classList.add('open');menuButton.setAttribute('aria-expanded','true')});
 document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target))closeMenu()});
 </script>
-<script id="active-menu-script">
+<script id="canonical-menu-script">
 document.querySelectorAll('.menu-links a').forEach(link=>{
-  const current=location.pathname.split('/').pop()||'index.html';
-  const target=link.getAttribute('href').split('/').pop()||'index.html';
-  if((current==='index.html'&&target==='index.html')||current===target) link.classList.add('active-page');
+ const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+ const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();
+ if((current==='index.html'&&target==='index.html')||current===target) link.classList.add('active-page');
 });
 </script></body>
 </html>

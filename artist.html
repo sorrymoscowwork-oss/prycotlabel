@@ -28,7 +28,64 @@ footer{margin-top:100px;padding-top:22px;border-top:1px solid var(--line);color:
 .menu-button span,.menu-button span:before,.menu-button span:after{position:absolute;left:0;width:28px;height:1px;background:#f4f4f2;content:""}
 .menu-button span{top:10px}.menu-button span:before{top:-7px}.menu-button span:after{top:7px}
 @media(max-width:700px){.menu{inset:0;width:100%;padding:22px 20px 30px}.menu-button{top:20px;right:20px}}
-</style><style id="active-menu-brown">.menu-links a.active-page{color:#A0522D!important;font-style:italic!important}.menu-links a.active-page:hover{color:#FF7F50!important}</style></head>
+</style><style id="active-menu-brown">.menu-links a.active-page{color:#A0522D!important;font-style:italic!important}.menu-links a.active-page:hover{color:#FF7F50!important}</style><style id="desktop-two-column-menu">
+.menu-links{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  column-gap:42px!important;
+  align-items:center!important;
+  justify-content:initial!important;
+  text-align:left!important;
+}
+.menu-column{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:center!important;
+  gap:18px!important;
+}
+.menu-links a{
+  font-size:18px!important;
+  line-height:1.1!important;
+  letter-spacing:-.02em!important;
+  font-weight:500!important;
+  color:#f4f4f2!important;
+  font-style:normal!important;
+}
+.menu-left a:nth-child(1),
+.menu-left a:nth-child(2),
+.menu-right a{
+  color:#A0522D!important;
+}
+.menu-links a:hover{
+  color:#FF7F50!important;
+  opacity:1!important;
+}
+.menu-links a.active-page{
+  color:#A0522D!important;
+  font-style:italic!important;
+}
+.menu-links a.active-page:hover{color:#FF7F50!important}
+@media(max-width:700px){
+  .menu-links{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    gap:0!important;
+    text-align:left!important;
+  }
+  .menu-column{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:flex-start!important;
+    gap:18px!important;
+  }
+  .menu-right{margin-top:18px!important}
+  .menu-links a{font-size:18px!important}
+}
+</style></head>
 <body>
 <div class="page">
 <a class="brand" href="/" aria-label="PRYCOT."><div class="logo">PRYCOT.</div></a>
@@ -70,18 +127,22 @@ document.getElementById("profile").classList.remove("hidden");
 load();
 </script>
 <div class="menu" id="menu"><nav class="menu-links" aria-label="Site navigation">
+<div class="menu-column menu-left">
 <a href="/">Home</a>
 <a href="account.html">Account</a>
 <a href="about.html">About PRYCOT.</a>
-<a href="white-paper.html">White Paper</a>
 <a href="terms.html">Release Terms</a>
 <a href="how-to-release.html">How to Release</a>
 <a href="telegram-bot.html">Telegram Bot Guide</a>
 <a href="prices.html">Prices</a>
 <a href="label-services.html">Label Services</a>
 <a href="contact.html">Contact</a>
+</div>
+<div class="menu-column menu-right">
 <a href="blog.html">Blog</a>
 <a href="side-projects.html">Side Projects</a>
+<a href="white-paper.html">White Paper</a>
+</div>
 </nav></div><button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button><script id="canonical-menu-behavior">
 const menu=document.getElementById('menu'),menuButton=document.getElementById('menuButton');
 if(menu&&menuButton){

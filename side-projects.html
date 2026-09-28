@@ -76,6 +76,10 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <style id="mobile-hide-eyebrow">
 @media(max-width:700px){.eyebrow{display:none!important}}
 </style>
+<style id="mobile-eyebrow-style">
+.mobile-eyebrow{display:none}
+@media(max-width:700px){.desktop-eyebrow{display:none}.mobile-eyebrow{display:inline}}
+</style>
 </head>
 <body>
 <div class="menu" id="menu"><nav class="menu-links" aria-label="Site navigation">
@@ -103,7 +107,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 </header>
 <section class="content">
-<p class="eyebrow">PRYCOT. / SIDE PROJECTS</p>
+<p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / SIDE PROJECTS</span><span class="mobile-eyebrow">SIDE PROJECTS</span></p>
 <h2><span style="color:#A0522D">Ideas</span> beyond the <span style="color:#FF7F50">label</span>.</h2>
 <p class="intro">Independent ideas, experiments and creative projects developed alongside PRYCOT.</p>
 <div class="projects"><article class="empty"><span class="number">COMING SOON</span><h3>New projects are on the way.</h3><p>This space will be used for independent projects, collaborations and experiments developed by PRYCOT.</p></article></div>

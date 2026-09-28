@@ -161,5 +161,11 @@ const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria
 menuButton.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',menu.classList.contains('open'))});
 document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&e.target!==menuButton)closeMenu()});
 </script>
-</body>
+<script id="canonical-menu-script">
+document.querySelectorAll('.menu-links a').forEach(link=>{
+ const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+ const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();
+ if((current==='index.html'&&target==='index.html')||current===target) link.classList.add('active-page');
+});
+</script></body>
 </html>

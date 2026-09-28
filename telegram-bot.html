@@ -91,6 +91,10 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <style id="mobile-hide-eyebrow">
 @media(max-width:700px){.eyebrow{display:none!important}}
 </style>
+<style id="mobile-eyebrow-style">
+.mobile-eyebrow{display:none}
+@media(max-width:700px){.desktop-eyebrow{display:none}.mobile-eyebrow{display:inline}}
+</style>
 </head>
 <body>
 <div class="menu" id="menu">
@@ -120,7 +124,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <button class="menu-button" id="menuButton" type="button" aria-label="Open menu"><span></span></button>
 
 <main class="content">
-<p class="eyebrow">PRYCOT. / TELEGRAM BOT GUIDE</p>
+<p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / TELEGRAM BOT GUIDE</span><span class="mobile-eyebrow">TELEGRAM BOT GUIDE</span></p>
 <h1>Submit your release correctly. <span style="color:#A0522D">Every detail matters.</span></h1>
 <p class="intro">PRYCOT. uses an official Telegram bot to collect release information and prepare your submission for distribution. Follow the steps carefully and enter every detail exactly as it should appear in your release.</p>
 

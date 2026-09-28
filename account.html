@@ -243,7 +243,18 @@ button:not(.menu-button):hover,.primary:hover,.secondary:hover,.google:hover,.sa
  min-width:50vw!important;
  transform:none!important;
 }
-}</style></head>
+}</style><style id="scroll-logo-hide-style">
+.brand{
+  transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;
+  will-change:opacity,filter,transform;
+}
+.brand.logo-hidden{
+  opacity:0!important;
+  filter:blur(10px)!important;
+  transform:translateY(-4px)!important;
+  pointer-events:none!important;
+}
+</style></head>
 <body>
 <div class="page">
 <a class="brand" href="/" aria-label="PRYCOT."><div class="logo">PRYCOT.</div></a>
@@ -545,7 +556,25 @@ if(releaseAgreement&&submitReleaseButton){
   });
 }
 </script>
-</body>
+<script id="scroll-logo-hide-behavior">
+(function(){
+  const brand=document.querySelector('.brand');
+  if(!brand)return;
+  let ticking=false;
+  function updateLogo(){
+    const hidden=window.scrollY>80;
+    brand.classList.toggle('logo-hidden',hidden);
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){
+      window.requestAnimationFrame(updateLogo);
+      ticking=true;
+    }
+  },{passive:true});
+  updateLogo();
+})();
+</script></body>
 </html>
 <style>.profile-grid{align-items:start;max-width:760px}.profile-grid form{display:contents}.profile-actions{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding-top:2px}</style>
 <style>

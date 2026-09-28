@@ -169,6 +169,10 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <style id="mobile-hide-eyebrow">
 @media(max-width:700px){.eyebrow{display:none!important}}
 </style>
+<style id="mobile-eyebrow-style">
+.mobile-eyebrow{display:none}
+@media(max-width:700px){.desktop-eyebrow{display:none}.mobile-eyebrow{display:inline}}
+</style>
 </head>
 <body>
 <div class="menu" id="menu"><div class="menu-header"></div>
@@ -197,7 +201,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 
 </header>
 <section class="content">
-<p class="eyebrow">PRYCOT. / HOW TO RELEASE</p>
+<p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / HOW TO RELEASE</span><span class="mobile-eyebrow">HOW TO RELEASE</span></p>
 <h2><span style="color:#FF7F50">Release your music</span>. <span style="color:#A0522D">Worldwide</span>. In a few simple steps.</h2>
 <p class="intro">The PRYCOT. release process is handled through your account and the official PRYCOT. Telegram release bot. Prepare your release first, then submit the request through the bot.</p>
 <div class="steps">

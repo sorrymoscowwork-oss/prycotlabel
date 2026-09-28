@@ -235,6 +235,10 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <style id="mobile-hide-eyebrow">
 @media(max-width:700px){.eyebrow{display:none!important}}
 </style>
+<style id="mobile-eyebrow-style">
+.mobile-eyebrow{display:none}
+@media(max-width:700px){.desktop-eyebrow{display:none}.mobile-eyebrow{display:inline}}
+</style>
 </head>
 <body>
 <div class="menu" id="menu">
@@ -266,7 +270,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 
 </header>
 <section class="content">
-<p class="eyebrow">PRYCOT. / ABOUT</p>
+<p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / ABOUT</span><span class="mobile-eyebrow">ABOUT</span></p>
 <h2>Independent music distribution <span style="color:#A0522D">built around crypto</span>, human communication and <span style="color:#FF7F50">independent infrastructure</span>.</h2>
 <p class="intro">PRYCOT. is a new kind of music distributor built for artists who want to work independently from traditional banking systems.</p>
 <div class="about">

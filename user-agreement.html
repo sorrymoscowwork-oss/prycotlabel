@@ -75,7 +75,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
   .about-block h3{font-size:18px;line-height:1.2}
   .about-block p{font-size:13px;line-height:1.65}
 }
-</style></head>
+</style><style id="mobile-logo-scroll-final">@media (max-width:700px){.brand{transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform}.brand.logo-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}}</style></head>
 <body>
 <div class="menu" id="menu">
 <nav class="menu-links" aria-label="Site navigation">
@@ -320,5 +320,5 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  if((current==='index.html'&&target==='index.html')||current===target)link.classList.add('active-page');
 });
 </script>
-</body>
+<script id="mobile-logo-scroll-final-js">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function updateLogo(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');ticking=false;return}brand.classList.toggle('logo-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(updateLogo);ticking=true}},{passive:true});window.addEventListener('resize',updateLogo);updateLogo()})();</script></body>
 </html>

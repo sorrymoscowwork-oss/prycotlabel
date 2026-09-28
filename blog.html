@@ -126,4 +126,4 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  const href=link.getAttribute('href')||'';
  if(href.endsWith('blog.html')) link.classList.add('active-page');
 });
-</script><script id="scroll-logo-hide-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function updateLogo(){const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(updateLogo);ticking=true}},{passive:true});updateLogo()})();</script></body></html>
+</script><script id="scroll-logo-hide-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function updateLogo(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(updateLogo);ticking=true}},{passive:true});updateLogo()})();</script></body></html>

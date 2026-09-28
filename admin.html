@@ -157,7 +157,18 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
  min-width:50vw!important;
  transform:none!important;
 }
-}</style></head>
+}</style><style id="scroll-logo-hide-style">
+.brand{
+  transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;
+  will-change:opacity,filter,transform;
+}
+.brand.logo-hidden{
+  opacity:0!important;
+  filter:blur(10px)!important;
+  transform:translateY(-4px)!important;
+  pointer-events:none!important;
+}
+</style></head>
 <body>
 <div class="page">
 <header class="top">
@@ -276,5 +287,23 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();
  if((current==='index.html'&&target==='index.html')||current===target) link.classList.add('active-page');
 });
+</script><script id="scroll-logo-hide-behavior">
+(function(){
+  const brand=document.querySelector('.brand');
+  if(!brand)return;
+  let ticking=false;
+  function updateLogo(){
+    const hidden=window.scrollY>80;
+    brand.classList.toggle('logo-hidden',hidden);
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){
+      window.requestAnimationFrame(updateLogo);
+      ticking=true;
+    }
+  },{passive:true});
+  updateLogo();
+})();
 </script></body>
 </html>

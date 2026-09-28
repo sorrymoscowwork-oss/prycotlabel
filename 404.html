@@ -101,20 +101,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 }
 }</style><style id="scroll-logo-hide-style">
 @media(max-width:700px){.brand{transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform}.brand.logo-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}}
-</style><style id="mobile-logo-scroll-final">
-@media (max-width:700px){
-  .brand{
-    transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;
-    will-change:opacity,filter,transform;
-  }
-  .brand.logo-hidden{
-    opacity:0!important;
-    filter:blur(10px)!important;
-    transform:translateY(-4px)!important;
-    pointer-events:none!important;
-  }
-}
-</style></head>
+</style><style id="mobile-logo-tagline-scroll-final">@media (max-width:700px){.brand,.tagline{transition:opacity .56s ease,filter .56s ease,transform .56s ease!important;will-change:opacity,filter,transform}.mobile-brand-hidden .brand,.mobile-brand-hidden .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}}</style></head>
 <body>
 <div class="page">
 <a class="brand" href="/" aria-label="PRYCOT."><div class="logo">PRYCOT.</div></a>
@@ -200,28 +187,5 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
   },{passive:true});
   updateLogo();
 })();
-</script><script id="mobile-logo-scroll-final-js">
-(function(){
-  const brand=document.querySelector('.brand');
-  if(!brand)return;
-  let ticking=false;
-  function updateLogo(){
-    if(window.innerWidth>700){
-      brand.classList.remove('logo-hidden');
-      ticking=false;
-      return;
-    }
-    brand.classList.toggle('logo-hidden',window.scrollY>80);
-    ticking=false;
-  }
-  window.addEventListener('scroll',function(){
-    if(!ticking){
-      window.requestAnimationFrame(updateLogo);
-      ticking=true;
-    }
-  },{passive:true});
-  window.addEventListener('resize',updateLogo);
-  updateLogo();
-})();
-</script></body>
+</script><script id="mobile-logo-tagline-scroll-final-js">(function(){const brand=document.querySelector('.brand'),tagline=document.querySelector('.tagline');if(!brand||!tagline)return;const page=document.querySelector('.page')||document.body;let ticking=false;function update(){if(innerWidth>700){page.classList.remove('mobile-brand-hidden');ticking=false;return}page.classList.toggle('mobile-brand-hidden',scrollY>80);ticking=false}addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();</script></body>
 </html>

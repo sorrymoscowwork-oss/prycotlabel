@@ -144,6 +144,10 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <style id="mobile-hide-eyebrow">
 @media(max-width:700px){.eyebrow{display:none!important}}
 </style>
+<style id="mobile-eyebrow-style">
+.mobile-eyebrow{display:none}
+@media(max-width:700px){.desktop-eyebrow{display:none}.mobile-eyebrow{display:inline}}
+</style>
 </head>
 <body>
 <div class="menu" id="menu">
@@ -174,7 +178,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 </header>
 <section class="content">
-<p class="eyebrow">PRYCOT. / CONTACT</p>
+<p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / CONTACT</span><span class="mobile-eyebrow">CONTACT</span></p>
 <div class="contact-block">
 <p class="contact-label">General inquiries</p>
 <a class="email" href="mailto:info@prycot.com">info@prycot.com</a>

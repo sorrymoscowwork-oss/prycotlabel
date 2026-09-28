@@ -179,6 +179,38 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 .tagline{position:fixed!important;top:88px!important;left:42px!important;margin:0!important;display:flex!important;flex-direction:column!important;gap:0!important;width:auto!important;font-size:9px!important;line-height:1.18!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;z-index:20!important}
 .tagline a{display:block!important;font:inherit!important;color:inherit!important;text-decoration:none!important}
 @media(max-width:700px){.brand{top:22px!important;left:20px!important}.logo{font-size:42px!important}.tagline{top:62px!important;left:28px!important;font-size:8px!important;letter-spacing:.08em!important}}
+</style><style id="mobile-hero-height-final">
+@media(max-width:700px){
+  .hero{
+    min-height:34vh!important;
+    height:34vh!important;
+    padding-top:0!important;
+    justify-content:center!important;
+    align-items:flex-end!important;
+    text-align:right!important;
+  }
+  .hero .intro{
+    width:100%!important;
+    max-width:100%!important;
+    text-align:right!important;
+    margin:0 0 14px!important;
+  }
+  .hero .sub{
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    text-align:right!important;
+  }
+  .hero .sub span{
+    display:block!important;
+    white-space:nowrap!important;
+  }
+  .hero-buttons{
+    width:100%!important;
+    justify-content:flex-end!important;
+    margin-top:20px!important;
+  }
+}
 </style></head>
 <body>
   <div class="menu" id="menu">
@@ -212,7 +244,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
     <section class="hero">
       <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://www.pexels.com/download/video/7612019/" type="video/mp4"></video><div class="hero-video-overlay" aria-hidden="true"></div>
       <h2 class="intro">Independent music label &amp; digital distribution.</h2>
-      <p class="sub">Release worldwide. Pay in crypto. Get your royalties in crypto.</p>
+      <p class="sub"><span>Release worldwide.</span><span>Pay in crypto.</span><span>Get your royalties in crypto.</span></p>
       <div class="hero-buttons"><a class="release-button" href="/account.html">Release Your Music</a><a class="label-button" href="label-services.html">Label Services</a></div>
     </section>
     <section class="services">

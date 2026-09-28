@@ -173,7 +173,20 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 .menu-left a:last-child{margin-bottom:36px!important}
 .menu-right{margin-top:0!important;padding-top:0!important;border-top:1px solid rgba(244,244,242,.28)!important}
 .menu-right a:first-child{margin-top:36px!important}
-}</style><style id="mobile-menu-position-absolute-final">@media(max-width:700px){.menu{position:fixed!important;top:0!important;right:0!important;bottom:0!important;left:auto!important;inset:0 0 0 auto!important;width:50vw!important;max-width:50vw!important;min-width:50vw!important;transform:none!important}}</style><style id="scroll-logo-hide-style">.brand{transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform}.brand.logo-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}</style></head>
+}</style><style id="mobile-menu-position-absolute-final">@media(max-width:700px){.menu{position:fixed!important;top:0!important;right:0!important;bottom:0!important;left:auto!important;inset:0 0 0 auto!important;width:50vw!important;max-width:50vw!important;min-width:50vw!important;transform:none!important}}</style><style id="scroll-logo-hide-style">.brand{transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform}.brand.logo-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}</style><style id="mobile-logo-scroll-final">
+@media (max-width:700px){
+  .brand{
+    transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;
+    will-change:opacity,filter,transform;
+  }
+  .brand.logo-hidden{
+    opacity:0!important;
+    filter:blur(10px)!important;
+    transform:translateY(-4px)!important;
+    pointer-events:none!important;
+  }
+}
+</style></head>
 <body>
   <div class="menu" id="menu">
     <div class="menu-header"></div>
@@ -229,5 +242,28 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();
  if((current==='index.html'&&target==='index.html')||current===target) link.classList.add('active-page');
 });
-</script><script id="scroll-logo-hide-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function updateLogo(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(updateLogo);ticking=true}},{passive:true});updateLogo()})();</script></body>
+</script><script id="scroll-logo-hide-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function updateLogo(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(updateLogo);ticking=true}},{passive:true});updateLogo()})();</script><script id="mobile-logo-scroll-final-js">
+(function(){
+  const brand=document.querySelector('.brand');
+  if(!brand)return;
+  let ticking=false;
+  function updateLogo(){
+    if(window.innerWidth>700){
+      brand.classList.remove('logo-hidden');
+      ticking=false;
+      return;
+    }
+    brand.classList.toggle('logo-hidden',window.scrollY>80);
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){
+    if(!ticking){
+      window.requestAnimationFrame(updateLogo);
+      ticking=true;
+    }
+  },{passive:true});
+  window.addEventListener('resize',updateLogo);
+  updateLogo();
+})();
+</script></body>
 </html>

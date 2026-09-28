@@ -103,4 +103,9 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();
  if((current==='index.html'&&target==='index.html')||current===target) link.classList.add('active-page');
 });
+</script><script id="force-active-menu-item">
+document.querySelectorAll('.menu-links a').forEach(link=>{
+ const href=link.getAttribute('href')||'';
+ if(href.endsWith('side-projects.html')) link.classList.add('active-page');
+});
 </script></body></html>

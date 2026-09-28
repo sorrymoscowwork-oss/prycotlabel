@@ -67,7 +67,7 @@ textarea{min-height:110px;resize:vertical}
 .user-name{font-size:18px;line-height:1.2;letter-spacing:-.025em}
 .user-email{margin-top:4px;color:var(--muted);font-size:11px}
 .profile-card{border:1px solid var(--line);border-radius:14px;background:#101010;padding:24px}
-.release-request{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#101010}.release-request-copy{font-size:12px;color:var(--fg)}.release-request-copy span{display:block;margin-top:5px;color:var(--muted);font-size:10px}.release-request .primary{flex:none}.release-request-copy .telegram-accent{display:inline!important;margin:0!important;color:var(--accent)!important;font-size:inherit}
+.release-request{margin-top:16px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#101010}.release-request-copy{font-size:12px;color:var(--fg)}.release-request-copy span{display:block;margin-top:5px;color:var(--muted);font-size:10px}.release-request .primary{flex:none}.release-request-copy .telegram-accent{display:inline!important;margin:0!important;color:var(--accent)!important;font-size:inherit}.release-agreement{display:flex!important;align-items:center;gap:8px;margin-top:9px}.release-agreement input{width:13px;height:13px;margin:0;accent-color:#FF7F50;cursor:pointer}.release-agreement label{display:inline!important;margin:0!important;color:var(--muted)!important;font-size:10px!important;letter-spacing:0!important;text-transform:none!important;cursor:pointer}.release-agreement a{color:#A0522D;text-decoration:underline}.release-request .primary.release-disabled{background:#333!important;color:#777!important;cursor:not-allowed!important;pointer-events:none!important}.release-request .primary.release-enabled{background:#A0522D!important;color:#fff!important;cursor:pointer!important;pointer-events:auto!important}
 .profile-card-head{margin-bottom:24px}
 .profile-card-title{font-size:16px;line-height:1.2;font-weight:500}
 .profile-card-subtitle{margin-top:5px;color:var(--muted);font-size:11px}
@@ -265,7 +265,7 @@ button:not(.menu-button):hover,.primary:hover,.secondary:hover,.google:hover,.sa
 <div class="public-profile" id="publicProfileLink"></div>
 </div>
 
-<div class="release-request"><div class="release-request-copy">NEW RELEASE REQUEST<span>Submit your release through <span class="telegram-accent">Telegram</span>.</span></div><a class="primary" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener">SUBMIT A RELEASE →</a></div>
+<div class="release-request"><div class="release-request-copy"><div>NEW RELEASE REQUEST</div><span>Submit your release through <span class="telegram-accent">Telegram</span>.</span><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div>
 </div>
 </section>
 </main>
@@ -461,7 +461,20 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();
  if((current==='index.html'&&target==='index.html')||current===target) link.classList.add('active-page');
 });
-</script></body>
+</script><script id="release-agreement-behavior">
+const releaseAgreement=document.getElementById("releaseAgreement");
+const submitReleaseButton=document.getElementById("submitReleaseButton");
+if(releaseAgreement&&submitReleaseButton){
+  releaseAgreement.addEventListener("change",()=>{
+    const enabled=releaseAgreement.checked;
+    submitReleaseButton.classList.toggle("release-disabled",!enabled);
+    submitReleaseButton.classList.toggle("release-enabled",enabled);
+    submitReleaseButton.setAttribute("aria-disabled",String(!enabled));
+    submitReleaseButton.tabIndex=enabled?0:-1;
+  });
+}
+</script>
+</body>
 </html>
 <style>.profile-grid{align-items:start;max-width:760px}.profile-grid form{display:contents}.profile-actions{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding-top:2px}</style>
 <style>

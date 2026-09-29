@@ -171,9 +171,9 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
     const query=input.value.trim();
     message.textContent='';
     if(/\bart\b/i.test(query)){
-      window.location.href='https://www.google.com/search?q='+encodeURIComponent(query);
+      window.open('https://www.google.com/search?q='+encodeURIComponent(query),'_blank','noopener,noreferrer');
     }else{
-      message.textContent='нет смысла ни в каком поиске, кроме поиска искусства';
+      message.textContent='There is no point in any search other than a search for art';
     }
   });
 })();

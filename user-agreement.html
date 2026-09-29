@@ -125,7 +125,7 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <style id="mobile-eyebrow-direct">
 @media(max-width:700px){.eyebrow{font-size:0!important;display:block!important}.eyebrow .desktop-eyebrow{display:none!important}.eyebrow .mobile-eyebrow{display:inline!important;font-size:10px!important;letter-spacing:.14em!important;color:var(--muted)!important}}
 </style>
-</head>
+<style id="canonical-footer-final">.site-footer{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:20px!important;margin-top:80px!important;padding-top:22px!important;border-top:1px solid var(--line)!important;color:var(--muted)!important;font-size:10px!important;line-height:1!important;letter-spacing:.1em!important;text-transform:uppercase!important}@media(max-width:700px){.site-footer{margin-top:56px!important;padding-top:18px!important;gap:12px!important;font-size:8px!important;letter-spacing:.08em!important;white-space:nowrap!important}}</style></head>
 <body>
 <div class="menu" id="menu">
 <nav class="menu-links" aria-label="Site navigation">
@@ -357,8 +357,8 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 </div></div>
 </div>
 <div style="display:flex;justify-content:center"><a class="download-doc" href="/PRYCOT_User_Agreement.docx" download="PRYCOT_User_Agreement.docx">Download User Agreement (.DOCX)</a></div></section>
-<footer><span>PRYCOT. — 2026</span><span>Independent music label</span></footer>
-</main>
+
+<footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main>
 <script>
 const menu=document.getElementById('menu'),menuButton=document.getElementById('menuButton');
 const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};

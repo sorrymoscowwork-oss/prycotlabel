@@ -219,6 +219,18 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 .site-footer{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:20px!important;margin-top:80px!important;padding-top:22px!important;border-top:1px solid var(--line)!important;color:var(--muted)!important;font-size:10px!important;line-height:1!important;letter-spacing:.1em!important;text-transform:uppercase!important}
 @media(max-width:700px){.site-footer{margin-top:56px!important;padding-top:18px!important;gap:12px!important;font-size:8px!important;letter-spacing:.08em!important;white-space:nowrap!important}}
 </style>
+
+<style id="mobile-payment-methods-single-row">
+@media(max-width:700px){
+  .coin-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:4px!important}
+  .coin-card{min-height:78px!important;padding:9px 2px 8px!important;border-radius:10px!important}
+  .coin-icon{width:28px!important;height:28px!important;margin-bottom:6px!important;font-size:14px!important}
+  .coin-icon.ton,.coin-icon.trc,.coin-icon.arb{font-size:12px!important}
+  .coin-name{font-size:9px!important;line-height:1.05!important;white-space:nowrap!important}
+  .coin-network{margin-top:3px!important;font-size:6px!important;line-height:1.05!important;white-space:nowrap!important;letter-spacing:-.02em!important}
+  .coin-card:last-child{grid-column:auto!important}
+}
+</style>
 </head>
 <body>
 <div class="menu" id="menu">

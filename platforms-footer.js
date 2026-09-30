@@ -17,9 +17,32 @@
     ['Boomplay','https://cdn.simpleicons.org/boomplay/ffffff']
   ];
 
+  function injectStyles(){
+    if(document.getElementById('platform-footer-style')) return;
+    const style=document.createElement('style');
+    style.id='platform-footer-style';
+    style.textContent=`
+      footer{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:0!important}
+      .platform-footer{width:100%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:22px 30px;margin:0 0 22px;padding:0;}
+      .platform-logo{display:flex;align-items:center;justify-content:center;width:auto;height:18px;flex:0 0 auto;opacity:.92;transition:opacity .2s ease}
+      .platform-logo:hover{opacity:1}
+      .platform-logo img{display:block;width:auto;height:16px;max-width:76px;object-fit:contain}
+      footer>.platform-footer~span{display:block}
+      footer>.platform-footer~span+span{margin-left:auto}
+      @media(max-width:700px){
+        .platform-footer{gap:16px 20px;margin-bottom:18px;padding:0 4px}
+        .platform-logo{height:16px}
+        .platform-logo img{height:14px;max-width:64px}
+        footer>.platform-footer~span+span{margin-left:0}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
   function addPlatformFooter(){
     const footer = document.querySelector('footer');
     if(!footer || footer.querySelector('.platform-footer')) return;
+    injectStyles();
 
     const block = document.createElement('div');
     block.className = 'platform-footer';

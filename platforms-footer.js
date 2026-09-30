@@ -1,20 +1,20 @@
 (function(){
   const platforms = [
-    ['Yandex Music','https://cdn.simpleicons.org/yandexmusic/ffffff'],
-    ['VK Music','https://cdn.simpleicons.org/vk/ffffff'],
-    ['Apple Music','https://cdn.simpleicons.org/applemusic/ffffff'],
-    ['Spotify','https://cdn.simpleicons.org/spotify/ffffff'],
-    ['YouTube Music','https://cdn.simpleicons.org/youtubemusic/ffffff'],
-    ['Deezer','https://cdn.simpleicons.org/deezer/ffffff'],
-    ['SoundCloud','https://cdn.simpleicons.org/soundcloud/ffffff'],
-    ['TikTok','https://cdn.simpleicons.org/tiktok/ffffff'],
-    ['Shazam','https://cdn.simpleicons.org/shazam/ffffff'],
-    ['TIDAL','https://cdn.simpleicons.org/tidal/ffffff'],
-    ['Amazon Music','https://cdn.simpleicons.org/amazonmusic/ffffff'],
-    ['MTS Music','https://cdn.simpleicons.org/mts/ffffff'],
-    ['ZVUK','https://cdn.simpleicons.org/zvuk/ffffff'],
-    ['iHeartRadio','https://cdn.simpleicons.org/iheartradio/ffffff'],
-    ['Boomplay','https://cdn.simpleicons.org/boomplay/ffffff']
+    ['Yandex Music','https://cdn.simpleicons.org/yandex/ffffff','Яндекс Музыка'],
+    ['VK Music','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/vk.svg'],
+    ['Apple Music','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/applemusic.svg'],
+    ['Spotify','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/spotify.svg'],
+    ['YouTube Music','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/youtubemusic.svg'],
+    ['Deezer','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/deezer.svg'],
+    ['SoundCloud','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/soundcloud.svg'],
+    ['TikTok','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/tiktok.svg'],
+    ['Shazam','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/shazam.svg'],
+    ['TIDAL','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/tidal.svg'],
+    ['Amazon Music','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/amazonmusic.svg'],
+    ['MTS Music','https://commons.wikimedia.org/wiki/Special:Redirect/file/Logo_%D0%9C%D0%A2%D0%A1_(2023).svg','MTS Music'],
+    ['ZVUK','https://commons.wikimedia.org/wiki/Special:Redirect/file/Zvuk_(compact_logo).svg','ЗВУК'],
+    ['iHeartRadio','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/iheartradio.svg'],
+    ['Boomplay','https://commons.wikimedia.org/wiki/Special:Redirect/file/Boomplay_Logo.svg','BOOMPLAY']
   ];
 
   function injectStyles(){
@@ -22,49 +22,135 @@
     const style=document.createElement('style');
     style.id='platform-footer-style';
     style.textContent=`
-      footer{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:0!important}
-      .platform-footer{width:100%;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:22px 30px;margin:0 0 22px;padding:0;}
-      .platform-logo{display:flex;align-items:center;justify-content:center;width:auto;height:18px;flex:0 0 auto;opacity:.92;transition:opacity .2s ease}
+      footer.site-footer{
+        display:block!important;
+        width:100%;
+        padding-top:22px!important;
+        color:var(--muted);
+        font-size:10px;
+        letter-spacing:.1em;
+        text-transform:uppercase;
+      }
+      .platform-footer{
+        width:100%;
+        max-width:760px;
+        margin:0 auto 24px;
+        display:grid;
+        grid-template-columns:repeat(15,minmax(0,1fr));
+        align-items:center;
+        justify-items:center;
+      }
+      .platform-logo{
+        width:100%;
+        height:20px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        opacity:.92;
+        transition:opacity .2s ease;
+      }
       .platform-logo:hover{opacity:1}
-      .platform-logo img{display:block;width:auto;height:16px;max-width:76px;object-fit:contain}
-      footer>.platform-footer~span{display:block}
-      footer>.platform-footer~span+span{margin-left:auto}
+      .platform-logo img{
+        display:block;
+        width:auto;
+        height:17px;
+        max-width:42px;
+        object-fit:contain;
+        filter:brightness(0) invert(1);
+      }
+      .platform-wordmark{
+        display:block;
+        color:#f4f4f2;
+        font-size:8px;
+        line-height:1;
+        font-weight:700;
+        letter-spacing:-.025em;
+        white-space:nowrap;
+        text-transform:none;
+      }
+      .footer-bottom{
+        width:100%;
+        display:grid;
+        grid-template-columns:1fr auto 1fr;
+        align-items:center;
+        min-height:18px;
+      }
+      .footer-bottom .footer-year{grid-column:2;white-space:nowrap;text-align:center}
+      .footer-bottom .footer-label{grid-column:3;justify-self:end;white-space:nowrap;text-align:right}
       @media(max-width:700px){
-        .platform-footer{gap:16px 20px;margin-bottom:18px;padding:0 4px}
-        .platform-logo{height:16px}
-        .platform-logo img{height:14px;max-width:64px}
-        footer>.platform-footer~span+span{margin-left:0}
+        footer.site-footer{padding-top:20px!important}
+        .platform-footer{
+          max-width:330px;
+          margin-bottom:18px;
+          grid-template-columns:repeat(5,minmax(0,1fr));
+          row-gap:16px;
+        }
+        .platform-logo{height:17px}
+        .platform-logo img{height:14px;max-width:34px}
+        .platform-wordmark{font-size:7px}
+        .footer-bottom{
+          display:flex;
+          flex-direction:column;
+          gap:8px;
+          text-align:center;
+        }
+        .footer-bottom .footer-year,
+        .footer-bottom .footer-label{grid-column:auto;justify-self:auto;text-align:center}
       }
     `;
     document.head.appendChild(style);
   }
 
   function addPlatformFooter(){
-    const footer = document.querySelector('footer');
+    const footer=document.querySelector('footer.site-footer, footer');
     if(!footer || footer.querySelector('.platform-footer')) return;
     injectStyles();
 
-    const block = document.createElement('div');
-    block.className = 'platform-footer';
+    const block=document.createElement('div');
+    block.className='platform-footer';
     block.setAttribute('aria-label','Digital distribution platforms');
 
-    platforms.forEach(([name,src])=>{
-      const item = document.createElement('span');
-      item.className = 'platform-logo';
+    platforms.forEach(([name,src,fallback])=>{
+      const item=document.createElement('span');
+      item.className='platform-logo';
       item.setAttribute('title',name);
       item.setAttribute('aria-label',name);
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = name;
-      img.loading = 'lazy';
-      img.decoding = 'async';
+
+      const img=document.createElement('img');
+      img.src=src;
+      img.alt=name;
+      img.loading='eager';
+      img.decoding='async';
+      img.addEventListener('error',()=>{
+        if(item.querySelector('.platform-wordmark')) return;
+        img.remove();
+        const wordmark=document.createElement('span');
+        wordmark.className='platform-wordmark';
+        wordmark.textContent=fallback||name;
+        item.appendChild(wordmark);
+      },{once:true});
       item.appendChild(img);
       block.appendChild(item);
     });
 
-    footer.insertBefore(block, footer.firstChild);
+    const children=[...footer.children].filter(el=>el!==block);
+    let bottom=footer.querySelector('.footer-bottom');
+    if(!bottom){
+      bottom=document.createElement('div');
+      bottom.className='footer-bottom';
+      children.forEach(el=>{
+        const text=el.textContent.trim();
+        if(text==='PRYCOT. — 2026') el.classList.add('footer-year');
+        if(text==='INDEPENDENT MUSIC LABEL') el.classList.add('footer-label');
+        bottom.appendChild(el);
+      });
+    }
+
+    footer.innerHTML='';
+    footer.appendChild(block);
+    footer.appendChild(bottom);
   }
 
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded',addPlatformFooter);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addPlatformFooter);
   else addPlatformFooter();
 })();

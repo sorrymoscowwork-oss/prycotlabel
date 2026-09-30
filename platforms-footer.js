@@ -22,80 +22,21 @@
     const style=document.createElement('style');
     style.id='platform-footer-style';
     style.textContent=`
-      footer.site-footer{
-        display:block!important;
-        width:100%;
-        padding-top:22px!important;
-        color:var(--muted);
-        font-size:10px;
-        letter-spacing:.1em;
-        text-transform:uppercase;
-      }
-      .platform-footer{
-        width:100%;
-        max-width:760px;
-        margin:0 auto 24px;
-        display:grid;
-        grid-template-columns:repeat(15,minmax(0,1fr));
-        align-items:center;
-        justify-items:center;
-      }
-      .platform-logo{
-        width:100%;
-        height:20px;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        opacity:.92;
-        transition:opacity .2s ease;
-      }
+      footer.site-footer{display:block!important;width:100%;padding-top:22px!important;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+      .platform-footer{width:100%;max-width:760px;margin:0 auto 24px;display:grid;grid-template-columns:repeat(15,minmax(0,1fr));align-items:center;justify-items:center}
+      .platform-logo{width:100%;height:20px;display:flex;align-items:center;justify-content:center;opacity:.92;transition:opacity .2s ease}
       .platform-logo:hover{opacity:1}
-      .platform-logo img{
-        display:block;
-        width:auto;
-        height:17px;
-        max-width:42px;
-        object-fit:contain;
-        filter:brightness(0) invert(1);
-      }
-      .platform-wordmark{
-        display:block;
-        color:#f4f4f2;
-        font-size:8px;
-        line-height:1;
-        font-weight:700;
-        letter-spacing:-.025em;
-        white-space:nowrap;
-        text-transform:none;
-      }
-      .footer-bottom{
-        width:100%;
-        display:grid;
-        grid-template-columns:1fr auto 1fr;
-        align-items:center;
-        min-height:18px;
-      }
-      .footer-bottom .footer-year{grid-column:2;white-space:nowrap;text-align:center}
-      .footer-bottom .footer-label{grid-column:3;justify-self:end;white-space:nowrap;text-align:right}
+      .platform-logo img{display:block;width:auto;height:17px;max-width:42px;object-fit:contain;filter:brightness(0) invert(1)}
+      .platform-wordmark{display:block;color:#f4f4f2;font-size:8px;line-height:1;font-weight:700;letter-spacing:-.025em;white-space:nowrap;text-transform:none}
+      .footer-bottom{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:36px;text-align:center}
+      .footer-bottom .footer-year,.footer-bottom .footer-label{white-space:nowrap;text-align:center}
       @media(max-width:700px){
         footer.site-footer{padding-top:20px!important}
-        .platform-footer{
-          max-width:330px;
-          margin-bottom:18px;
-          grid-template-columns:repeat(5,minmax(0,1fr));
-          row-gap:16px;
-        }
+        .platform-footer{max-width:330px;margin-bottom:18px;grid-template-columns:repeat(5,minmax(0,1fr));row-gap:16px}
         .platform-logo{height:17px}
         .platform-logo img{height:14px;max-width:34px}
         .platform-wordmark{font-size:7px}
-        .footer-bottom{
-          display:flex;
-          flex-direction:column;
-          gap:8px;
-          text-align:center;
-        }
-        .footer-bottom .footer-year,
-        .footer-bottom .footer-label{grid-column:auto;justify-self:auto;text-align:center}
+        .footer-bottom{gap:8px}
       }
     `;
     document.head.appendChild(style);
@@ -105,17 +46,14 @@
     const footer=document.querySelector('footer.site-footer, footer');
     if(!footer || footer.querySelector('.platform-footer')) return;
     injectStyles();
-
     const block=document.createElement('div');
     block.className='platform-footer';
     block.setAttribute('aria-label','Digital distribution platforms');
-
     platforms.forEach(([name,src,fallback])=>{
       const item=document.createElement('span');
       item.className='platform-logo';
       item.setAttribute('title',name);
       item.setAttribute('aria-label',name);
-
       if(!src){
         const wordmark=document.createElement('span');
         wordmark.className='platform-wordmark';
@@ -123,10 +61,7 @@
         item.appendChild(wordmark);
       }else{
         const img=document.createElement('img');
-        img.src=src;
-        img.alt=name;
-        img.loading='eager';
-        img.decoding='async';
+        img.src=src; img.alt=name; img.loading='eager'; img.decoding='async';
         img.addEventListener('error',()=>{
           if(item.querySelector('.platform-wordmark')) return;
           img.remove();
@@ -139,7 +74,6 @@
       }
       block.appendChild(item);
     });
-
     const children=[...footer.children].filter(el=>el!==block);
     let bottom=footer.querySelector('.footer-bottom');
     if(!bottom){
@@ -152,12 +86,9 @@
         bottom.appendChild(el);
       });
     }
-
     footer.innerHTML='';
     footer.appendChild(block);
     footer.appendChild(bottom);
   }
-
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addPlatformFooter);
-  else addPlatformFooter();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addPlatformFooter); else addPlatformFooter();
 })();

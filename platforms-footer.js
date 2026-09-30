@@ -11,7 +11,7 @@
     ['Shazam','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/shazam.svg'],
     ['TIDAL','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/tidal.svg'],
     ['Amazon Music','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/amazonmusic.svg'],
-    ['MTS Music','https://commons.wikimedia.org/wiki/Special:Redirect/file/Logo_%D0%9C%D0%A2%D0%A1_(2023).svg','MTS Music'],
+    ['MTS Music',null,'MTS'],
     ['ZVUK','https://commons.wikimedia.org/wiki/Special:Redirect/file/Zvuk_(compact_logo).svg','ЗВУК'],
     ['iHeartRadio','https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/iheartradio.svg'],
     ['Boomplay','https://commons.wikimedia.org/wiki/Special:Redirect/file/Boomplay_Logo.svg','BOOMPLAY']
@@ -116,20 +116,27 @@
       item.setAttribute('title',name);
       item.setAttribute('aria-label',name);
 
-      const img=document.createElement('img');
-      img.src=src;
-      img.alt=name;
-      img.loading='eager';
-      img.decoding='async';
-      img.addEventListener('error',()=>{
-        if(item.querySelector('.platform-wordmark')) return;
-        img.remove();
+      if(!src){
         const wordmark=document.createElement('span');
         wordmark.className='platform-wordmark';
         wordmark.textContent=fallback||name;
         item.appendChild(wordmark);
-      },{once:true});
-      item.appendChild(img);
+      }else{
+        const img=document.createElement('img');
+        img.src=src;
+        img.alt=name;
+        img.loading='eager';
+        img.decoding='async';
+        img.addEventListener('error',()=>{
+          if(item.querySelector('.platform-wordmark')) return;
+          img.remove();
+          const wordmark=document.createElement('span');
+          wordmark.className='platform-wordmark';
+          wordmark.textContent=fallback||name;
+          item.appendChild(wordmark);
+        },{once:true});
+        item.appendChild(img);
+      }
       block.appendChild(item);
     });
 

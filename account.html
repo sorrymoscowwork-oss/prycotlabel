@@ -78,7 +78,7 @@ textarea{min-height:110px;resize:vertical}
 .profile-field input:focus,.profile-field textarea:focus{border-color:#555}
 .profile-field textarea{height:44px;min-height:44px;resize:none}
 .profile-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:22px}
-.profile-footer .status{margin:0;min-height:0}.public-profile{margin-top:18px;font-size:10px;color:var(--muted)}.public-profile a:hover{color:var(--fg)}
+.profile-footer .status{margin:0;min-height:0}
 @media(max-width:760px){
 .page{padding:22px 20px 30px}.brand{top:22px;left:20px}.logo{font-size:42px}.tagline{top:62px;left:28px;font-size:8px}.menu-button{top:20px;right:20px}.menu{width:82vw;padding:22px 20px 30px}.content{margin-top:18vh}.account-shell{max-width:none}.account-top{margin-bottom:20px}.profile-card{padding:20px;border-radius:12px}.profile-fields{grid-template-columns:1fr}.profile-field-wide{grid-column:auto}.profile-footer{align-items:flex-start;flex-direction:column-reverse}
 }
@@ -269,7 +269,6 @@ button:not(.menu-button):hover,.primary:hover,.secondary:hover,.google:hover,.sa
 .mobile-eyebrow{display:none}
 @media(max-width:700px){.desktop-eyebrow{display:none}.mobile-eyebrow{display:inline}}
 </style>
-
 <style id="mobile-eyebrow-direct">
 @media(max-width:700px){
   .eyebrow{font-size:0!important;display:block!important}
@@ -277,12 +276,10 @@ button:not(.menu-button):hover,.primary:hover,.secondary:hover,.google:hover,.sa
   .eyebrow .mobile-eyebrow{display:inline!important;font-size:10px!important;letter-spacing:.14em!important}
 }
 </style>
-
 <style id="canonical-footer-final">
 .site-footer{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:20px!important;margin-top:80px!important;padding-top:22px!important;border-top:1px solid var(--line)!important;color:var(--muted)!important;font-size:10px!important;line-height:1!important;letter-spacing:.1em!important;text-transform:uppercase!important}
 @media(max-width:700px){.site-footer{margin-top:56px!important;padding-top:18px!important;gap:12px!important;font-size:8px!important;letter-spacing:.08em!important;white-space:nowrap!important}}
 </style>
-
 <style id="footer-single-line-final">
 /* Keep exactly one separator line immediately before the footer on every viewport. */
 .about-block:last-child,
@@ -382,7 +379,6 @@ button:not(.menu-button):hover,.primary:hover,.secondary:hover,.google:hover,.sa
 <button class="primary" type="submit">Save Profile</button>
 </div>
 </form>
-<div class="public-profile" id="publicProfileLink"></div>
 </div>
 
 <div class="release-request"><div class="release-request-copy"><div>NEW RELEASE REQUEST</div><span>Submit your release through <span class="telegram-accent">Telegram</span>.</span><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div>
@@ -468,7 +464,7 @@ authForm.addEventListener("submit",async e=>{
 resetPassword.addEventListener("click",async()=>{
  const email=document.getElementById("authEmail").value.trim();
  if(!email){setStatus(authStatus,"Enter your email first.",true);return}
- try{await auth.sendPasswordResetEmail(email);setStatus(authStatus,"Password reset email sent.")}catch(err){setStatus(authStatus,friendlyError(err),true)}
+ try{await auth.sendPasswordResetEmail(email);setStatus(authStatus,"Password reset email sent")}catch(err){setStatus(authStatus,friendlyError(err),true)}
 });
 
 document.getElementById("googleButton").addEventListener("click",async()=>{
@@ -511,8 +507,6 @@ async function loadProfile(user){
  document.getElementById("profileName").value=username;
  document.getElementById("profileBio").value=data.bio||"";
  document.getElementById("profileTelegram").value=data.telegram||"";
- const publicUsername=username;
- document.getElementById("publicProfileLink").innerHTML=publicUsername?`<a href="/artist.${encodeURIComponent(publicUsername)}" target="_blank">Public profile: prycot.com/artist.${publicUsername}</a>`:"";
  renderAvatar("",name);
 }
 
@@ -533,9 +527,6 @@ document.getElementById("profileForm").addEventListener("submit",async e=>{
  };
  try{
   await saveProfile(user,data,true);
-  const profileSnap=await db.collection("users").doc(user.uid).get();
-  const username=(profileSnap.data()?.username||data.displayName).toLowerCase().replace(/[^a-z0-9_]/g,"");
-  if(username) await db.collection("publicProfiles").doc(username).set({uid:user.uid,username,displayName:data.displayName,bio:data.bio,telegram:data.telegram,public:true,updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
   document.getElementById("cabinetName").textContent=data.displayName||"Artist";
   renderAvatar("",data.displayName||"Artist");
   const saveButton=e.submitter;
@@ -544,8 +535,6 @@ document.getElementById("profileForm").addEventListener("submit",async e=>{
   setTimeout(()=>saveButton.classList.remove("saved"),2000);
  }catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true)}
 });
-
-
 
 function friendlyError(err){
  const code=err?.code||"";

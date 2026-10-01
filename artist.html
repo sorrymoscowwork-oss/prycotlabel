@@ -13,6 +13,13 @@ a{color:inherit;text-decoration:none}.page{min-height:100vh;padding:30px 34px 42
 footer{margin-top:100px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between}
 @media(max-width:760px){.page{padding:22px 20px 30px}.brand{top:22px;left:20px}.content{margin-top:20vh}.name{font-size:30px}}
 </style>
+<style id="friday-public-style">
+.friday-public{margin:44px auto 0;max-width:560px;text-align:center;padding-top:22px;border-top:1px solid var(--line)}
+.friday-public-label{color:var(--muted);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
+.friday-public-text{font-size:18px;line-height:1.35;letter-spacing:-.02em;white-space:pre-wrap}
+.friday-public-date{margin-top:10px;color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+@media(max-width:760px){.friday-public{margin-top:36px}.friday-public-text{font-size:16px}}
+
 <style id="canonical-menu-style">
 .menu-links{align-items:flex-start!important;text-align:left!important;gap:18px!important}
 .menu-links a{font-size:18px!important;line-height:1.1!important;letter-spacing:-.02em!important;font-weight:500!important;color:#f4f4f2!important;font-style:normal!important}
@@ -171,6 +178,11 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <a class="telegram" id="telegram" target="_blank" rel="noopener"></a>
 </section>
 <section class="not-found hidden" id="notFound"><h1>Profile not found.</h1><p>This artist profile is not available.</p></section>
+<section class="friday-public hidden" id="fridayPublic">
+<div class="friday-public-label">FRIDAY POST</div>
+<div class="friday-public-text" id="fridayPublicText"></div>
+<div class="friday-public-date" id="fridayPublicDate"></div>
+</section>
 <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main>
 
 </div>
@@ -181,6 +193,15 @@ firebase.initializeApp({apiKey:"AIzaSyCrU93d-F-WUX4GbuoPSFgdf9bOgSbQlBY",authDom
 const db=firebase.firestore();
 const username=(new URLSearchParams(location.search).get("u")||"").toLowerCase();
 function initials(name){return(name||"A").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"A"}
+
+async function loadFridayPublic(username){
+  const snap=await db.collection("fridayPosts").where("username","==",username).orderBy("date","desc").limit(1).get();
+  if(snap.empty)return;
+  const d=snap.docs[0].data();
+  document.getElementById("fridayPublicText").textContent=d.text||"";
+  document.getElementById("fridayPublicDate").textContent=d.date||"";
+  document.getElementById("fridayPublic").classList.remove("hidden");
+}
 async function load(){
 if(!/^[a-z0-9_]{3,20}$/.test(username)){document.getElementById("notFound").classList.remove("hidden");return}
 try{
@@ -196,6 +217,7 @@ document.getElementById("telegram").href="https://t.me/"+encodeURIComponent(t);
 document.getElementById("telegram").textContent=d.telegram;
 }else document.getElementById("telegram").classList.add("hidden");
 document.getElementById("profile").classList.remove("hidden");
+await loadFridayPublic(username);
 }catch(e){document.getElementById("notFound").classList.remove("hidden")}
 }
 load();
@@ -248,5 +270,6 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
   },{passive:true});
   updateLogo();
 })();
-</script><script id="mobile-logo-tagline-scroll-final-js">(function(){const brand=document.querySelector('.brand'),tagline=document.querySelector('.tagline');if(!brand||!tagline)return;const page=document.querySelector('.page')||document.body;let ticking=false;function update(){if(innerWidth>700){page.classList.remove('mobile-brand-hidden');ticking=false;return}page.classList.toggle('mobile-brand-hidden',scrollY>80);ticking=false}addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();</script><script id="mobile-burger-controller-v2">(function(){const btn=document.getElementById('menuButton'),menu=document.getElementById('menu');if(!btn||!menu)return;document.addEventListener('click',function(e){if(window.innerWidth>700)return;if(btn.contains(e.target)){e.preventDefault();e.stopImmediatePropagation();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open'));return}if(menu.classList.contains('open')&&!menu.contains(e.target)){e.preventDefault();e.stopImmediatePropagation();menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}},true)})();</script></body>
+</script><script id="mobile-logo-tagline-scroll-final-js">(function(){const brand=document.querySelector('.brand'),tagline=document.querySelector('.tagline');if(!brand||!tagline)return;const page=document.querySelector('.page')||document.body;let ticking=false;function update(){if(innerWidth>700){page.classList.remove('mobile-brand-hidden');ticking=false;return}page.classList.toggle('mobile-brand-hidden',scrollY>80);ticking=false}addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();</script><script id="mobile-burger-controller-v2">(function(){const btn=document.getElementById('menuButton'),menu=document.getElementById('menu');if(!btn||!menu)return;document.addEventListener('click',function(e){if(window.innerWidth>700)return;if(btn.contains(e.target)){e.preventDefault();e.stopImmediatePropagation();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open'));return}if(menu.classList.contains('open')&&!menu.contains(e.target)){e.preventDefault();e.stopImmediatePropagation();menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}},true)})();</script><script src="/platforms-footer.js"></script>
+</body>
 </html>

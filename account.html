@@ -83,16 +83,6 @@ textarea{min-height:110px;resize:vertical}
 .page{padding:22px 20px 30px}.brand{top:22px;left:20px}.logo{font-size:42px}.tagline{top:62px;left:28px;font-size:8px}.menu-button{top:20px;right:20px}.menu{width:82vw;padding:22px 20px 30px}.content{margin-top:18vh}.account-shell{max-width:none}.account-top{margin-bottom:20px}.profile-card{padding:20px;border-radius:12px}.profile-fields{grid-template-columns:1fr}.profile-field-wide{grid-column:auto}.profile-footer{align-items:flex-start;flex-direction:column-reverse}
 }
 </style>
-<style id="friday-post-style">
-.friday-post-card{margin-top:16px;border:1px solid var(--line);border-radius:14px;background:#101010;padding:24px}
-.friday-post-head{margin-bottom:18px}
-.friday-post-card textarea{width:100%;height:90px;min-height:90px;resize:none;border:1px solid #303030;border-radius:8px;background:#0b0b0b;color:var(--fg);padding:12px;font-size:14px;line-height:1.45;outline:none}
-.friday-post-card textarea:focus{border-color:#555}
-.friday-post-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px}
-.friday-post-meta{display:flex;flex-direction:column;gap:5px;color:var(--muted);font-size:10px;line-height:1.2}
-#fridayPostStatus{min-height:12px}
-@media(max-width:760px){.friday-post-card{padding:20px;border-radius:12px}.friday-post-footer{align-items:flex-start;flex-direction:column}.friday-post-footer .primary{align-self:flex-start}}
-</style>
 <style id="blog-side-menu-color">.menu-links a.blog-menu-item,.menu-links a.side-projects-menu-item{color:#A0522D!important}.menu-links a.blog-menu-item:hover,.menu-links a.side-projects-menu-item:hover{color:#FF7F50!important}</style><style id="home-button-style">.site-button,.release-cta a,.release-button,.label-services-cta a,.primary,.save-btn{display:inline-block;padding:15px 30px;border:0;border-radius:999px;background:#A0522D;color:#fff;font-size:11px;font-weight:400;line-height:1;letter-spacing:.12em;text-transform:uppercase;cursor:pointer!important;transition:background-color .2s ease}.site-button:hover,.release-cta a:hover,.release-button:hover,.label-services-cta a:hover,.primary:hover,.save-btn:hover{background:#FF7F50;color:#000}</style><style id="canonical-menu-style">
 .menu-links{align-items:flex-start!important;text-align:left!important;gap:18px!important}
 .menu-links a{font-size:18px!important;line-height:1.1!important;letter-spacing:-.02em!important;font-weight:500!important;color:#f4f4f2!important;font-style:normal!important}
@@ -395,19 +385,6 @@ button:not(.menu-button):hover,.primary:hover,.secondary:hover,.google:hover,.sa
 <div class="public-profile" id="publicProfileLink"></div>
 </div>
 
-<div class="friday-post-card" id="fridayPostCard">
-<div class="friday-post-head">
-<div><div class="profile-card-title">FRIDAY POST</div><div class="profile-card-subtitle">One text post every Friday. Maximum 80 characters.</div></div>
-</div>
-<form id="fridayPostForm">
-<textarea id="fridayPostText" maxlength="80" placeholder="Write something for your public profile..." aria-label="Friday Post"></textarea>
-<div class="friday-post-footer">
-<div class="friday-post-meta"><span id="fridayPostCount">0 / 80</span><span id="fridayPostStatus"></span></div>
-<button class="primary" id="fridayPostButton" type="submit">PUBLISH</button>
-</div>
-</form>
-</div>
-
 <div class="release-request"><div class="release-request-copy"><div>NEW RELEASE REQUEST</div><span>Submit your release through <span class="telegram-accent">Telegram</span>.</span><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div>
 </div>
 </section>
@@ -570,73 +547,6 @@ document.getElementById("profileForm").addEventListener("submit",async e=>{
 
 
 
-
-const fridayPostForm=document.getElementById("fridayPostForm");
-const fridayPostText=document.getElementById("fridayPostText");
-const fridayPostButton=document.getElementById("fridayPostButton");
-const fridayPostStatus=document.getElementById("fridayPostStatus");
-const fridayPostCount=document.getElementById("fridayPostCount");
-function fridayDateKey(d=new Date()){
-  const y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,"0"),day=String(d.getDate()).padStart(2,"0");
-  return `${y}-${m}-${day}`;
-}
-function updateFridayCounter(){if(fridayPostCount)fridayPostCount.textContent=`${(fridayPostText?.value||"").length} / 80`}
-function isFriday(d=new Date()){return d.getDay()===5}
-function setFridayPostState(message="",disabled=false){
-  if(fridayPostStatus)fridayPostStatus.textContent=message;
-  if(fridayPostButton)fridayPostButton.disabled=disabled;
-  if(fridayPostText)fridayPostText.disabled=disabled;
-}
-async function loadFridayPost(user){
-  if(!fridayPostForm)return;
-  fridayPostText.addEventListener("input",updateFridayCounter);
-  updateFridayCounter();
-  const snap=await db.collection("users").doc(user.uid).get();
-  const d=snap.exists?snap.data():{};
-  const username=(d.username||d.displayName||"").toLowerCase().replace(/[^a-z0-9_]/g,"");
-  if(!username){setFridayPostState("Set your username first.",true);return}
-  const today=new Date();
-  const key=fridayDateKey(today);
-  const postRef=db.collection("fridayPosts").doc(`${username}_${key}`);
-  const existing=await postRef.get();
-  if(!isFriday(today)){
-    setFridayPostState("Publishing is available on Fridays only.",true);
-    return;
-  }
-  if(existing.exists){
-    fridayPostText.value=existing.data().text||"";
-    updateFridayCounter();
-    setFridayPostState("Published for this Friday.",true);
-    return;
-  }
-  setFridayPostState("",false);
-}
-if(fridayPostForm){
-  fridayPostForm.addEventListener("submit",async e=>{
-    e.preventDefault();
-    const user=auth.currentUser;if(!user)return;
-    const text=fridayPostText.value.trim();
-    const now=new Date();
-    if(!isFriday(now)){setFridayPostState("Publishing is available on Fridays only.",true);return}
-    if(!text){setFridayPostState("Write a post first.",false);return}
-    if([...text].length>80){setFridayPostState("Maximum 80 characters.",false);return}
-    const profile=await db.collection("users").doc(user.uid).get();
-    const data=profile.exists?profile.data():{};
-    const username=(data.username||data.displayName||"").toLowerCase().replace(/[^a-z0-9_]/g,"");
-    if(!username){setFridayPostState("Set your username first.",true);return}
-    const key=fridayDateKey(now);
-    const ref=db.collection("fridayPosts").doc(`${username}_${key}`);
-    try{
-      fridayPostButton.disabled=true;
-      await ref.create({uid:user.uid,username,text,date:key,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
-      setFridayPostState("Published for this Friday.",true);
-    }catch(err){
-      if(err.code==="already-exists")setFridayPostState("A Friday post has already been published.",true);
-      else setFridayPostState(friendlyError(err),false);
-    }
-  });
-}
-
 function friendlyError(err){
  const code=err?.code||"";
  const map={
@@ -654,7 +564,7 @@ function friendlyError(err){
 auth.onAuthStateChanged(async user=>{
  if(!user){showAuth();return}
  showCabinet();
- try{await loadProfile(user);await loadFridayPost(user)}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true)}
+ try{await loadProfile(user)}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true)}
 });
 
 document.getElementById("logoutButton").onclick=()=>auth.signOut();

@@ -189,9 +189,9 @@ authForm.addEventListener("submit",async e=>{
  try{
   if(registerMode){
    if(!/^[a-z0-9_]{3,20}$/.test(username)){setStatus(authStatus,"Username: 3–20 characters, letters, numbers and underscore only.",true);return}
-   const existingUsername=await db.collection("usernames").doc(username).get();
-   if(existingUsername.exists){setStatus(authStatus,"This username is already taken.",true);return}
    const cred=await auth.createUserWithEmailAndPassword(email,password);
+   const existingUsername=await db.collection("usernames").doc(username).get();
+   if(existingUsername.exists){await cred.user.delete();setStatus(authStatus,"This username is already taken.",true);return}
    await cred.user.sendEmailVerification();
    await saveProfile(cred.user,{displayName:username,username,bio:"",telegram:""});
    await db.collection("usernames").doc(username).set({uid:cred.user.uid});

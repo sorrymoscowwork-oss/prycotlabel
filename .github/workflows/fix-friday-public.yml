@@ -1,0 +1,34 @@
+name: Fix Friday Public Profile
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: ${{ !startsWith(github.event.head_commit.message, 'Fix Friday public profile') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix artist page
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          p=Path('artist.html')
+          s=p.read_text()
+          s=s.replace('@media(max-width:760px){.friday-public{margin-top:36px}.friday-public-text{font-size:16px}}\n\n<style id="canonical-menu-style">','@media(max-width:760px){.friday-public{margin-top:36px}.friday-public-text{font-size:16px}}\n</style>\n<style id="canonical-menu-style">')
+          s=s.replace('db.collection("fridayPosts").where("username","==",username).orderBy("date","desc").limit(1).get()','db.collection("fridayPosts").where("username","==",username).limit(100).get()')
+          s=s.replace('if(snap.empty)return;\n            const d=snap.docs[0].data();','if(snap.empty)return;\n            const docs=snap.docs.slice().sort((a,b)=>(b.data().date||"").localeCompare(a.data().date||""));\n            const d=docs[0].data();')
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add artist.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Fix Friday public profile"
+          git push

@@ -90,5 +90,22 @@
     footer.appendChild(block);
     footer.appendChild(bottom);
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',addPlatformFooter); else addPlatformFooter();
+
+  function addDashboardGuideToMenu(){
+    const menus=document.querySelectorAll('.menu-left');
+    menus.forEach(menu=>{
+      if(menu.querySelector('a[href="dashboard-guide.html"]')) return;
+      const account=menu.querySelector('a[href="account.html"]');
+      if(!account) return;
+      const link=document.createElement('a');
+      link.href='dashboard-guide.html';
+      link.textContent='Dashboard Guide';
+      account.insertAdjacentElement('afterend',link);
+      const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();
+      if(current==='dashboard-guide.html') link.classList.add('active-page');
+    });
+  }
+
+  function init(){addDashboardGuideToMenu();addPlatformFooter()}
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();

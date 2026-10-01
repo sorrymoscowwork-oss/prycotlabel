@@ -19,7 +19,7 @@ footer{margin-top:100px;padding-top:22px;border-top:1px solid var(--line);color:
 .friday-public-text{font-size:18px;line-height:1.35;letter-spacing:-.02em;white-space:pre-wrap}
 .friday-public-date{margin-top:10px;color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
 @media(max-width:760px){.friday-public{margin-top:36px}.friday-public-text{font-size:16px}}
-
+</style>
 <style id="canonical-menu-style">
 .menu-links{align-items:flex-start!important;text-align:left!important;gap:18px!important}
 .menu-links a{font-size:18px!important;line-height:1.1!important;letter-spacing:-.02em!important;font-weight:500!important;color:#f4f4f2!important;font-style:normal!important}
@@ -195,7 +195,7 @@ const username=(new URLSearchParams(location.search).get("u")||"").toLowerCase()
 function initials(name){return(name||"A").trim().split(/\s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"A"}
 
 async function loadFridayPublic(username){
-  const snap=await db.collection("fridayPosts").where("username","==",username).orderBy("date","desc").limit(1).get();
+  const snap=await db.collection("fridayPosts").where("username","==",username).limit(100).get();
   if(snap.empty)return;
   const d=snap.docs[0].data();
   document.getElementById("fridayPublicText").textContent=d.text||"";

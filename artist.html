@@ -218,6 +218,7 @@ document.getElementById("telegram").textContent=d.telegram;
 }else document.getElementById("telegram").classList.add("hidden");
 document.getElementById("profile").classList.remove("hidden");
 await loadFridayPublic(username);
+await loadFridayPublic(username);
 }catch(e){document.getElementById("notFound").classList.remove("hidden")}
 }
 load();

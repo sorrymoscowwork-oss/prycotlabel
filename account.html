@@ -145,8 +145,7 @@ textarea{min-height:110px;resize:vertical}
 <div class="card-head"><div class="card-title">PROFILE</div></div>
 <form id="profileForm">
 <div class="profile-fields">
-<div class="profile-field"><label for="profileName">Username</label><input id="profileName" required readonly></div>
-<div class="profile-field"><label for="profileTelegram">Telegram</label><input id="profileTelegram" placeholder="@username"></div>
+<div class="profile-field profile-field-wide"><label for="profileName">Telegram Name</label><input id="profileName" required readonly></div>
 <div class="profile-field profile-field-wide"><label for="profileBio">Bio</label><textarea id="profileBio" placeholder="Short artist description."></textarea></div>
 </div>
 <div class="profile-footer"><div class="status" id="profileStatus"></div><button class="primary" type="submit">Save Profile</button></div>
@@ -193,30 +192,51 @@ authForm.addEventListener("submit",async e=>{
    const existingUsername=await db.collection("usernames").doc(username).get();
    if(existingUsername.exists){await cred.user.delete();setStatus(authStatus,"This username is already taken.",true);return}
    await cred.user.sendEmailVerification();
-   await saveProfile(cred.user,{displayName:username,username,bio:"",telegram:""});
+   await saveProfile(cred.user,{bio:"",telegramName:""});
    await db.collection("usernames").doc(username).set({uid:cred.user.uid});
    setStatus(authStatus,"Account created. Check your email to verify your address.");
   }else await auth.signInWithEmailAndPassword(email,password);
  }catch(err){setStatus(authStatus,friendlyError(err),true)}
 });
 resetPassword.addEventListener("click",async()=>{const email=document.getElementById("authEmail").value.trim();if(!email){setStatus(authStatus,"Enter your email first.",true);return}try{await auth.sendPasswordResetEmail(email);setStatus(authStatus,"Password reset email sent")}catch(err){setStatus(authStatus,friendlyError(err),true)}});
-document.getElementById("googleButton").addEventListener("click",async()=>{setStatus(authStatus,"");try{const provider=new firebase.auth.GoogleAuthProvider();const result=await auth.signInWithPopup(provider);await saveProfile(result.user,{displayName:result.user.displayName||"",bio:"",telegram:""},true)}catch(err){setStatus(authStatus,friendlyError(err),true)}});
+document.getElementById("googleButton").addEventListener("click",async()=>{setStatus(authStatus,"");try{const provider=new firebase.auth.GoogleAuthProvider();const result=await auth.signInWithPopup(provider);await saveProfile(result.user,{bio:"",telegramName:""},true)}catch(err){setStatus(authStatus,friendlyError(err),true)}});
 
 async function saveProfile(user,data,merge=true){
- const ref=db.collection("users").doc(user.uid),existing=await ref.get(),payload={email:user.email||"",displayName:data.displayName||"",...(data.username?{username:data.username}:{}),bio:data.bio||"",telegram:data.telegram||"",updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
+ const ref=db.collection("users").doc(user.uid),existing=await ref.get(),payload={email:user.email||"",...(data.telegramName!==undefined?{telegramName:data.telegramName}:{}),bio:data.bio||"",updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
  if(!existing.exists||!merge)payload.createdAt=firebase.firestore.FieldValue.serverTimestamp();
  await ref.set(payload,{merge:true});
 }
 async function loadProfile(user){
- const snap=await db.collection("users").doc(user.uid).get();let data=snap.exists?snap.data():{};
- const username=(data.username||data.displayName||user.displayName||"").toLowerCase().replace(/[^a-z0-9_]/g,"");
- if(!data.username&&username){data.username=username;await saveProfile(user,{username},true);await db.collection("usernames").doc(username).set({uid:user.uid},{merge:true})}
- const name=data.displayName||username||"Artist";
- document.getElementById("cabinetName").textContent=name;document.getElementById("cabinetEmail").textContent=user.email||"";
- document.getElementById("profileName").value=username;document.getElementById("profileBio").value=data.bio||"";document.getElementById("profileTelegram").value=data.telegram||"";renderAvatar("",name);
+ const snap=await db.collection("users").doc(user.uid).get();
+ const data=snap.exists?snap.data():{};
+ const name=data.telegramName||"Artist";
+ document.getElementById("cabinetName").textContent=name;
+ document.getElementById("cabinetEmail").textContent=user.email||"";
+ document.getElementById("profileName").value=name;
+ document.getElementById("profileBio").value=data.bio||"";
+ renderAvatar("",name);
 }
 function renderAvatar(url,name){const box=document.getElementById("avatarBox");box.innerHTML="";if(url){const img=document.createElement("img");img.src=url;img.alt="";img.onerror=()=>{box.textContent=initials(name)};box.appendChild(img)}else box.textContent=initials(name)}
 
+async function getTelegramProfile(){
+ try{
+  const result=await workerRequest("/dashboard/telegram-profile");
+  return result&&result.telegramName?result.telegramName:"";
+ }catch(_){
+  return "";
+ }
+}
+async function syncTelegramName(user){
+ const telegramName=await getTelegramProfile();
+ if(!telegramName) return;
+ await db.collection("users").doc(user.uid).set({
+  telegramName,
+  updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+ },{merge:true});
+ document.getElementById("cabinetName").textContent=telegramName;
+ document.getElementById("profileName").value=telegramName;
+ renderAvatar("",telegramName);
+}
 async function workerRequest(path,options={}){
  const user=auth.currentUser;if(!user)throw new Error("Not signed in.");
  const token=await user.getIdToken();
@@ -259,8 +279,8 @@ document.getElementById("connectTelegramButton").onclick=async()=>{
 
 document.getElementById("profileForm").addEventListener("submit",async e=>{
  e.preventDefault();const user=auth.currentUser;if(!user)return;
- const data={displayName:document.getElementById("profileName").value.trim(),bio:document.getElementById("profileBio").value.trim(),telegram:document.getElementById("profileTelegram").value.trim()};
- try{await saveProfile(user,data,true);document.getElementById("cabinetName").textContent=data.displayName||"Artist";renderAvatar("",data.displayName||"Artist");const saveButton=e.submitter;saveButton.classList.add("saved");setStatus(document.getElementById("profileStatus"),"Profile saved.");setTimeout(()=>saveButton.classList.remove("saved"),2000)}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true)}
+ const data={bio:document.getElementById("profileBio").value.trim()};
+ try{await saveProfile(user,data,true);const saveButton=e.submitter;saveButton.classList.add("saved");setStatus(document.getElementById("profileStatus"),"Profile saved.");setTimeout(()=>saveButton.classList.remove("saved"),2000)}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true)}
 });
 
 function friendlyError(err){const code=err?.code||"";const map={"auth/invalid-credential":"Incorrect email or password.","auth/email-already-in-use":"An account with this email already exists.","auth/weak-password":"Password must contain at least 6 characters.","auth/invalid-email":"Enter a valid email address.","auth/popup-closed-by-user":"Google sign-in was cancelled.","auth/popup-blocked":"Your browser blocked the Google sign-in window.","auth/operation-not-allowed":"This sign-in method is not enabled in Firebase."};return map[code]||err?.message||"Something went wrong."}
@@ -268,7 +288,7 @@ function friendlyError(err){const code=err?.code||"";const map={"auth/invalid-cr
 auth.onAuthStateChanged(async user=>{
  if(!user){showAuth();return}
  showCabinet();
- try{await loadProfile(user);await loadDashboard()}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true);setStatus(document.getElementById("dashboardStatus"),friendlyError(err),true)}
+ try{await loadProfile(user);await syncTelegramName(user);await loadDashboard()}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true);setStatus(document.getElementById("dashboardStatus"),friendlyError(err),true)}
 });
 
 document.getElementById("logoutButton").onclick=()=>auth.signOut();

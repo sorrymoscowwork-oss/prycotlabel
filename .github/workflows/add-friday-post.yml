@@ -124,7 +124,7 @@ jobs:
               }
             });
           }
-          
+
           '''
           if 'async function loadFridayPost(user)' not in s:
               if js_marker not in s:
@@ -156,6 +156,7 @@ jobs:
           .friday-public-text{font-size:18px;line-height:1.35;letter-spacing:-.02em;white-space:pre-wrap}
           .friday-public-date{margin-top:10px;color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
           @media(max-width:760px){.friday-public{margin-top:36px}.friday-public-text{font-size:16px}}
+          </style>
           '''
           if 'id="friday-public-style"' not in a:
               if css_marker2 not in a: raise SystemExit('Artist CSS marker not found')
@@ -189,3 +190,5 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Apply Friday post feature"
           git push
+
+# Triggered after creation by the next push.

@@ -146,8 +146,8 @@ textarea{min-height:110px;resize:vertical}
 <form id="profileForm">
 <div class="profile-fields">
 <div class="profile-field profile-field-wide"><label for="profileName">Telegram Name</label><input id="profileName" required readonly></div>
-
-<div class="profile-footer"><div class="status" id="profileStatus"></div><button class="primary" type="submit">Save Profile</button></div>
+</div>
+</form>
 
 <div class="release-request"><div class="release-request-copy"><div>NEW RELEASE REQUEST</div><span>Submit your release through <span class="telegram-accent">Telegram</span>.</span><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div>
 </div>
@@ -210,7 +210,6 @@ async function loadProfile(user){
  document.getElementById("cabinetName").textContent=name;
  document.getElementById("cabinetEmail").textContent=user.email||"";
  document.getElementById("profileName").value=name;
- document.getElementById("profileBio").value=data.bio||"";
  renderAvatar("",name);
 }
 function renderAvatar(url,name){const box=document.getElementById("avatarBox");box.innerHTML="";if(url){const img=document.createElement("img");img.src=url;img.alt="";img.onerror=()=>{box.textContent=initials(name)};box.appendChild(img)}else box.textContent=initials(name)}
@@ -273,12 +272,6 @@ document.getElementById("connectTelegramButton").onclick=async()=>{
   if(result.telegramUrl){window.open(result.telegramUrl,"_blank","noopener");setStatus(statusEl,"Open the PRYCOT bot link in Telegram to connect your account.");setTimeout(()=>loadDashboard(),2500)}else throw new Error("Telegram connection link was not created.");
  }catch(err){setStatus(statusEl,err.message,true)}finally{button.disabled=false}
 };
-
-document.getElementById("profileForm").addEventListener("submit",async e=>{
- e.preventDefault();const user=auth.currentUser;if(!user)return;
- const data={bio:document.getElementById("profileBio").value.trim()};
- try{await saveProfile(user,data,true);const saveButton=e.submitter;saveButton.classList.add("saved");setStatus(document.getElementById("profileStatus"),"Profile saved.");setTimeout(()=>saveButton.classList.remove("saved"),2000)}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true)}
-});
 
 function friendlyError(err){const code=err?.code||"";const map={"auth/invalid-credential":"Incorrect email or password.","auth/email-already-in-use":"An account with this email already exists.","auth/weak-password":"Password must contain at least 6 characters.","auth/invalid-email":"Enter a valid email address.","auth/popup-closed-by-user":"Google sign-in was cancelled.","auth/popup-blocked":"Your browser blocked the Google sign-in window.","auth/operation-not-allowed":"This sign-in method is not enabled in Firebase."};return map[code]||err?.message||"Something went wrong."}
 

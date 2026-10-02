@@ -1,0 +1,160 @@
+name: Apply Telegram account auth
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/apply-telegram-auth.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-account:
+    if: github.event.head_commit.message == 'Add Telegram auth installer'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Patch account page
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('account.html')
+          text = path.read_text()
+
+          auth_section = '''<section id="authView">
+          <p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / ACCOUNT</span><span class="mobile-eyebrow">ACCOUNT</span></p>
+          <h1>Your account.</h1>
+          <p class="intro">Sign in with Telegram to manage your profile and submit release requests.</p>
+          <div class="auth-wrap">
+          <div class="telegram-auth-panel">
+          <div id="telegramLoginWidget"></div>
+          <div class="status" id="authStatus"></div>
+          </div>
+          </div>
+          </section>'''
+
+          text, count = re.subn(r'<section id="authView">.*?</section>', auth_section, text, count=1, flags=re.S)
+          if count != 1:
+              raise SystemExit('authView section not found')
+
+          new_script = r'''<script>
+          const firebaseConfig={apiKey:"AIzaSyCrU93d-F-WUX4GbuoPSFgdf9bOgSbQlBY",authDomain:"prycot-fe79e.firebaseapp.com",projectId:"prycot-fe79e",storageBucket:"prycot-fe79e.firebasestorage.app",messagingSenderId:"566283099923",appId:"1:566283099923:web:b42c4eea5ca42e4144c4e6"};
+          firebase.initializeApp(firebaseConfig);
+          const auth=firebase.auth();
+          const db=firebase.firestore();
+          const WORKER_BASE="https://misty-rain-65f3prycot-release-bot.sorrymoscowwork.workers.dev";
+          let manualLogout=false;
+          let telegramProfile=null;
+
+          const menu=document.getElementById("menu"),menuButton=document.getElementById("menuButton");
+          menuButton.addEventListener("click",()=>menu.classList.toggle("open"));
+          document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&!menuButton.contains(e.target))menu.classList.remove("open")});
+
+          const authView=document.getElementById("authView"),cabinetView=document.getElementById("cabinetView"),authStatus=document.getElementById("authStatus");
+          function setStatus(el,text,error=false){if(!el)return;el.textContent=text||"";el.classList.toggle("error",!!error)}
+          function showAuth(){authView.classList.remove("hidden");cabinetView.classList.add("hidden")}
+          function showCabinet(){authView.classList.add("hidden");cabinetView.classList.remove("hidden")}
+          function renderAvatar(url,name){const box=document.getElementById("avatarBox");if(!box)return;box.innerHTML="";if(url){const img=document.createElement("img");img.src=url;img.alt="";img.onerror=()=>{box.textContent=(name||"A").slice(0,1).toUpperCase()};box.appendChild(img)}else box.textContent=(name||"A").slice(0,1).toUpperCase()}
+
+          async function ensureAnonymousSession(){
+            if(auth.currentUser)return auth.currentUser;
+            await auth.signInAnonymously();
+            return auth.currentUser;
+          }
+
+          async function workerRequest(path,options={}){
+            const user=auth.currentUser;
+            if(!user)throw new Error("Not signed in.");
+            const token=await user.getIdToken();
+            const headers={...(options.headers||{}),"Authorization":"Bearer "+token};
+            const res=await fetch(WORKER_BASE+path,{...options,headers});
+            let body={};try{body=await res.json()}catch(_){ }
+            if(!res.ok)throw new Error(body.error||"Dashboard request failed.");
+            return body;
+          }
+
+          async function loadTelegramStatus(){
+            const state=await workerRequest("/dashboard/status");
+            if(!state.telegramConnected){showAuth();return false}
+            telegramProfile=state;
+            const displayName=state.telegramUsername?"@"+state.telegramUsername:(state.telegramName||"Telegram user");
+            document.getElementById("cabinetName").textContent=displayName;
+            document.getElementById("cabinetEmail").textContent="Telegram";
+            document.getElementById("profileName").value=displayName;
+            renderAvatar("",displayName);
+            showCabinet();
+            return true;
+          }
+
+          async function loadDashboard(){
+            const statusEl=document.getElementById("dashboardStatus"),list=document.getElementById("releaseList"),empty=document.getElementById("releaseEmpty"),summary=document.getElementById("releaseSummary");
+            const connectLine=document.querySelector(".connect-line");
+            if(connectLine)connectLine.classList.add("hidden");
+            try{
+              const data=await workerRequest("/dashboard/releases");
+              const releases=Array.isArray(data.releases)?data.releases:[];
+              summary.textContent=releases.length+" RELEASE"+(releases.length===1?"":"S");
+              list.innerHTML="";
+              if(!releases.length){const e=document.createElement("div");e.className="empty-releases";e.textContent="No releases yet.";list.appendChild(e);return}
+              releases.forEach(r=>{
+                const row=document.createElement("div");row.className="release-row";
+                row.innerHTML="<div class=\"release-main\"><div class=\"release-artist\"></div><div class=\"release-title\"></div></div><div class=\"release-meta\"></div><div class=\"release-status\"></div>";
+                row.querySelector(".release-artist").textContent=r.artist_name||"";
+                row.querySelector(".release-title").textContent=r.release_title||"Untitled";
+                row.querySelector(".release-meta").textContent=(r.release_type||"")+(r.release_date?" · "+r.release_date:"");
+                row.querySelector(".release-status").textContent=r.status||"IN REVIEW";
+                list.appendChild(row);
+              });
+            }catch(err){setStatus(statusEl,err.message,true)}
+          }
+
+          window.onTelegramAuth=async function(user){
+            try{
+              setStatus(authStatus,"Signing in with Telegram...");
+              await ensureAnonymousSession();
+              const result=await workerRequest("/auth/telegram",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({telegram:user})});
+              telegramProfile=result;
+              const displayName=result.telegramUsername?"@"+result.telegramUsername:(result.telegramName||"Telegram user");
+              document.getElementById("cabinetName").textContent=displayName;
+              document.getElementById("cabinetEmail").textContent="Telegram";
+              document.getElementById("profileName").value=displayName;
+              renderAvatar(result.photoUrl||user.photo_url||"",displayName);
+              showCabinet();
+              await loadDashboard();
+              setStatus(authStatus,"");
+            }catch(err){setStatus(authStatus,err.message||"Telegram login failed.",true)}
+          };
+
+          document.getElementById("logoutButton").onclick=async()=>{manualLogout=true;telegramProfile=null;await auth.signOut();showAuth();setStatus(authStatus,"")};
+
+          auth.onAuthStateChanged(async user=>{
+            if(!user){showAuth();if(!manualLogout){try{await ensureAnonymousSession()}catch(err){setStatus(authStatus,"Telegram login is temporarily unavailable.",true)}}return}
+            try{
+              const connected=await loadTelegramStatus();
+              if(connected)await loadDashboard();
+            }catch(err){showAuth();setStatus(authStatus,"Telegram login is temporarily unavailable.",true)}
+          });
+
+          ensureAnonymousSession().catch(()=>{});
+          </script>
+          <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="prycot_relese_bot" data-size="large" data-userpic="false" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>'''
+
+          text, count = re.subn(r'<script>\s*const firebaseConfig=.*?</script>\s*<script>\s*document\.querySelectorAll\(\'\.menu-links a\'\)', new_script + r'''\n<script>\ndocument.querySelectorAll('.menu-links a')''', text, count=1, flags=re.S)
+          if count != 1:
+              raise SystemExit('Firebase script block not found')
+
+          path.write_text(text)
+          PY
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add account.html .github/workflows/apply-telegram-auth.yml
+          git commit -m 'Switch account login to Telegram'
+          git rm .github/workflows/apply-telegram-auth.yml
+          git commit -m 'Remove Telegram auth installer'
+          git push

@@ -60,39 +60,37 @@ h1{margin:0;font-size:clamp(42px,6vw,78px);line-height:.96;font-weight:500;lette
 .release-main{min-width:0}.release-artist{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}.release-title{font-size:15px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.release-meta{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.release-status{text-align:right;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg)}
 .empty-releases{padding:18px 0;color:var(--muted);font-size:11px;line-height:1.5}
 .connect-line{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px}.connect-status{color:var(--muted);font-size:10px;line-height:1.5}.connect-status.ok{color:var(--ok)}
+.site-footer{display:flex;justify-content:space-between;gap:20px;margin-top:80px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.primary,.secondary{border:0;border-radius:7px;padding:11px 15px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.primary{background:var(--accent);color:#fff}
+.primary:hover{background:var(--accent-hover)}
+.secondary{background:#1b1b1b;color:var(--fg);border:1px solid #303030}
+.secondary:hover{border-color:#555}
+.primary:disabled{opacity:.55;cursor:wait}
+.mobile-eyebrow{display:none}
 @media(max-width:760px){
-.page{padding:22px 20px 30px}.brand{top:22px;left:20px}.logo{font-size:42px}.tagline{top:62px;left:28px;font-size:8px}.menu-button{top:20px;right:20px}.menu{width:82vw;padding:22px 20px 30px}.content{margin-top:18vh}.account-shell{max-width:none}.account-top{margin-bottom:20px}.profile-card,.dashboard-card{padding:20px;border-radius:12px}.profile-fields{grid-template-columns:1fr}.profile-field-wide{grid-column:auto}.profile-footer{align-items:flex-start;flex-direction:column-reverse}.release-request{align-items:flex-start;flex-direction:column}.release-request .primary{width:auto}.release-row{grid-template-columns:1fr;gap:7px}.release-status{text-align:left}.connect-line{align-items:flex-start;flex-direction:column}}
-</style>
-<style id="canonical-menu-style">
-.menu-links{align-items:flex-start!important;text-align:left!important;gap:18px!important}
-.menu-links a{font-size:18px!important;line-height:1.1!important;letter-spacing:-.02em!important;font-weight:500!important;color:#f4f4f2!important;font-style:normal!important}
-.menu-links a:hover{color:#FF7F50!important;opacity:1!important}.menu-links a.active-page{color:#A0522D!important;font-style:italic!important}
-@media(max-width:700px){.menu-links a{font-size:18px!important}}
-</style>
-<style id="desktop-two-column-menu">
-.menu-links{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;column-gap:42px!important;align-items:center!important;justify-content:initial!important;text-align:left!important}
-.menu-column{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:18px!important}
-@media(max-width:700px){.menu-links{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:0!important}.menu-column{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:0!important}.menu-column a{display:block!important;width:100%!important;margin:0 0 18px 0!important;padding:0!important;font-size:13px!important;line-height:1.05!important;white-space:nowrap!important}.menu-right{margin-top:0!important;padding-top:36px!important;border-top:1px solid rgba(244,244,242,.28)!important}.menu-right a:first-child{margin-top:0!important}.menu{position:fixed!important;top:0!important;right:0!important;bottom:0!important;left:auto!important;inset:0 0 0 auto!important;width:50vw!important;max-width:50vw!important;min-width:50vw!important;transform:none!important}}
-.brand{position:fixed!important;top:30px!important;left:34px!important;z-index:20!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important}.logo{margin:0!important;font-size:clamp(34px,4.5vw,62px)!important;line-height:.82!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important}.tagline{position:fixed!important;top:88px!important;left:42px!important;margin:0!important;display:flex!important;flex-direction:column!important;gap:0!important;width:auto!important;font-size:9px!important;line-height:1.18!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;z-index:20!important}.tagline a{display:block!important;font:inherit!important;color:inherit!important;text-decoration:none!important}
-@media(max-width:700px){.brand{top:22px!important;left:20px!important}.logo{font-size:42px!important}.tagline{top:62px!important;left:28px!important;font-size:8px!important;letter-spacing:.08em!important}}
-.content{margin-top:calc(14vh + 24px)!important;position:relative!important;top:32px!important}@media(max-width:700px){.content{margin-top:calc(12vh + 28px)!important;top:38px!important}}
-.site-footer{display:flex!important;justify-content:space-between!important;align-items:center!important;gap:20px!important;margin-top:80px!important;padding-top:22px!important;border-top:1px solid var(--line)!important;color:var(--muted)!important;font-size:10px!important;line-height:1!important;letter-spacing:.1em!important;text-transform:uppercase!important}@media(max-width:700px){.site-footer{margin-top:56px!important;padding-top:18px!important;gap:12px!important;font-size:8px!important;white-space:nowrap!important}}
+.page{padding:22px 20px 30px}.brand{top:22px;left:20px}.logo{font-size:42px}.tagline{top:62px;left:28px;font-size:8px}.menu-button{top:20px;right:20px}.menu{width:82vw;padding:22px 20px 30px}.content{margin-top:18vh}.account-shell{max-width:none}.account-top{margin-bottom:20px}.profile-card,.dashboard-card{padding:20px;border-radius:12px}.profile-fields{grid-template-columns:1fr}.profile-field-wide{grid-column:auto}.profile-footer{align-items:flex-start;flex-direction:column-reverse}.release-request{align-items:flex-start;flex-direction:column}.release-request .primary{width:auto}.release-row{grid-template-columns:1fr;gap:7px}.release-status{text-align:left}.connect-line{align-items:flex-start;flex-direction:column}.site-footer{margin-top:55px;flex-direction:column;gap:7px}}
+.mobile-brand-hidden .brand,.mobile-brand-hidden .tagline{opacity:0;filter:blur(8px);pointer-events:none}
+.brand,.tagline{transition:opacity .45s ease,filter .45s ease}
 </style>
 </head>
 <body>
 <div class="page">
-<a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a>
-<p class="tagline"><a href="/">RELEASE WORLDWIDE.</a><a href="/">PAY IN CRYPTO.</a><a href="/">ROYALTIES IN CRYPTO.</a></p>
-<button class="menu-button" id="menuButton" aria-label="Open menu"><span></span></button>
-<div class="menu" id="menu"><nav class="menu-links" aria-label="Site navigation">
+<header class="brand">
+<a href="index.html" class="logo">PRYCOT.</a>
+</header>
+<p class="tagline">RELEASE WORLDWIDE. PAY IN CRYPTO.</p>
+<button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
+<nav class="menu" id="menu">
+<div class="menu-links">
 <div class="menu-column menu-left">
-<a href="/">Home</a><a href="account.html">Account</a><a href="about.html">About PRYCOT.</a><a href="terms.html">Release Terms</a><a href="how-to-release.html">How to Release</a><a href="telegram-bot.html">Telegram Bot Guide</a><a href="prices.html">Prices</a><a href="label-services.html">Label Services</a><a href="contact.html">Contact</a>
+<a href="about.html">About PRYCOT.</a><a href="terms.html">Release Terms</a><a href="how-to-release.html">How to Release</a><a href="telegram-bot.html">Telegram Bot Guide</a><a href="prices.html">Prices</a><a href="label-services.html">Label Services</a><a href="contact.html">Contact</a>
 </div>
 <div class="menu-column menu-right">
 <a href="blog.html">Blog</a><a href="side-projects.html">Side Projects</a><a href="white-paper.html">White Paper</a><a href="user-agreement.html">User Agreement</a>
 </div>
-</nav></div>
-
+</div>
+</nav>
 <main class="content">
 <section id="authView">
 <p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / ACCOUNT</span><span class="mobile-eyebrow">ACCOUNT</span></p>
@@ -100,19 +98,17 @@ h1{margin:0;font-size:clamp(42px,6vw,78px);line-height:.96;font-weight:500;lette
 <p class="intro">Sign in with Telegram to manage your profile and submit release requests.</p>
 <div class="auth-wrap">
 <div class="auth-panel">
-<button id="telegramLoginButton" class="telegram-login-button" type="button">Log in with Telegram</button>
+<button id="telegramLoginButton" class="primary telegram-login-button" type="button">Log in with Telegram</button>
 <div class="status" id="authStatus"></div>
 </div>
 </div>
 </section>
-
 <section id="cabinetView" class="hidden">
 <div class="account-shell">
 <div class="account-top">
 <div class="user-summary"><div class="avatar" id="avatarBox"></div><div><div class="user-name" id="cabinetName">Artist</div><div class="user-email" id="cabinetEmail"></div></div></div>
 <button class="secondary" id="logoutButton" type="button">Log Out</button>
 </div>
-
 <div class="dashboard-card" id="dashboardCard">
 <div class="card-head"><div class="card-title">DASHBOARD</div><div class="card-subtitle">Your PRYCOT release activity.</div></div>
 <div class="releases-head"><div class="release-summary" id="releaseSummary">0 RELEASES</div><button class="secondary hidden" id="refreshReleases" type="button">Refresh</button></div>
@@ -120,7 +116,6 @@ h1{margin:0;font-size:clamp(42px,6vw,78px);line-height:.96;font-weight:500;lette
 <div class="connect-line"><div class="connect-status" id="connectStatus">Telegram not connected.</div><button class="primary" id="connectTelegramButton" type="button">CONNECT TELEGRAM</button></div>
 <div class="status" id="dashboardStatus"></div>
 </div>
-
 <div class="profile-card">
 <div class="card-head"><div class="card-title">PROFILE</div></div>
 <form id="profileForm">
@@ -128,132 +123,667 @@ h1{margin:0;font-size:clamp(42px,6vw,78px);line-height:.96;font-weight:500;lette
 <div class="profile-field profile-field-wide"><label for="profileName">Telegram Name</label><input id="profileName" required readonly></div>
 </div>
 </form>
-
 <div class="release-request"><div class="release-request-copy"><div>NEW RELEASE REQUEST</div><span>Submit your release through <span class="telegram-accent">Telegram</span>.</span><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div>
 </div>
 </section>
-<footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main>
+<footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer>
+</main>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
+
 <script>
 const firebaseConfig={apiKey:"AIzaSyCrU93d-F-WUX4GbuoPSFgdf9bOgSbQlBY",authDomain:"prycot-fe79e.firebaseapp.com",projectId:"prycot-fe79e",storageBucket:"prycot-fe79e.firebasestorage.app",messagingSenderId:"566283099923",appId:"1:566283099923:web:b42c4eea5ca42e4144c4e6"};
+
 firebase.initializeApp(firebaseConfig);
+
 const auth=firebase.auth();
 const db=firebase.firestore();
+
 const WORKER_BASE="https://misty-rain-65f3prycot-release-bot.sorrymoscowwork.workers.dev";
+
 let manualLogout=false;
 let telegramProfile=null;
+let telegramLoginInProgress=false;
+let telegramPollTimer=null;
 
-const menu=document.getElementById("menu"),menuButton=document.getElementById("menuButton");
-menuButton.addEventListener("click",()=>menu.classList.toggle("open"));
-document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&!menuButton.contains(e.target))menu.classList.remove("open")});
+const menu=document.getElementById("menu");
+const menuButton=document.getElementById("menuButton");
 
-const authView=document.getElementById("authView"),cabinetView=document.getElementById("cabinetView"),authStatus=document.getElementById("authStatus");
-function setStatus(el,text,error=false){if(!el)return;el.textContent=text||"";el.classList.toggle("error",!!error)}
-function showAuth(){authView.classList.remove("hidden");cabinetView.classList.add("hidden")}
-function showCabinet(){authView.classList.add("hidden");cabinetView.classList.remove("hidden")}
-function renderAvatar(url,name){const box=document.getElementById("avatarBox");if(!box)return;box.innerHTML="";if(url){const img=document.createElement("img");img.src=url;img.alt="";img.onerror=()=>{box.textContent=(name||"A").slice(0,1).toUpperCase()};box.appendChild(img)}else box.textContent=(name||"A").slice(0,1).toUpperCase()}
+menuButton.addEventListener("click",()=>{
+menu.classList.toggle("open");
+menuButton.setAttribute("aria-expanded",menu.classList.contains("open"));
+});
 
-
-async function startTelegramLogin(){
-  try{
-    setStatus(authStatus,"Opening Telegram...");
-    const popup=window.open("https://oauth.telegram.org/auth?bot_id=8723984850&origin="+encodeURIComponent(location.origin)+"&return_to="+encodeURIComponent(location.href),"telegramLogin","width=520,height=700");
-    if(!popup)throw new Error("Please allow popups for PRYCOT.");
-  }catch(err){setStatus(authStatus,err.message||"Telegram login failed.",true)}
+document.addEventListener("click",e=>{
+if(menu.classList.contains("open")&&!menu.contains(e.target)&&!menuButton.contains(e.target)){
+menu.classList.remove("open");
+menuButton.setAttribute("aria-expanded","false");
 }
-document.getElementById("telegramLoginButton").addEventListener("click",startTelegramLogin);
+});
+
+const authView=document.getElementById("authView");
+const cabinetView=document.getElementById("cabinetView");
+const authStatus=document.getElementById("authStatus");
+
+function setStatus(el,text,error=false){
+if(!el)return;
+el.textContent=text||"";
+el.classList.toggle("error",!!error);
+}
+
+function showAuth(){
+authView.classList.remove("hidden");
+cabinetView.classList.add("hidden");
+}
+
+function showCabinet(){
+authView.classList.add("hidden");
+cabinetView.classList.remove("hidden");
+}
+
+function renderAvatar(url,name){
+const box=document.getElementById("avatarBox");
+if(!box)return;
+
+box.innerHTML="";
+
+if(url){
+const img=document.createElement("img");
+img.src=url;
+img.alt="";
+img.onerror=()=>{
+box.textContent=(name||"A").slice(0,1).toUpperCase();
+};
+box.appendChild(img);
+}else{
+box.textContent=(name||"A").slice(0,1).toUpperCase();
+}
+}
 
 async function ensureAnonymousSession(){
-  if(auth.currentUser)return auth.currentUser;
-  await auth.signInAnonymously();
-  return auth.currentUser;
+if(auth.currentUser)return auth.currentUser;
+await auth.signInAnonymously();
+return auth.currentUser;
 }
 
 async function workerRequest(path,options={}){
-  const user=auth.currentUser;
-  if(!user)throw new Error("Not signed in.");
-  const token=await user.getIdToken();
-  const headers={...(options.headers||{}),"Authorization":"Bearer "+token};
-  const res=await fetch(WORKER_BASE+path,{...options,headers});
-  let body={};try{body=await res.json()}catch(_){ }
-  if(!res.ok)throw new Error(body.error||"Dashboard request failed.");
-  return body;
+const user=auth.currentUser;
+
+if(!user)throw new Error("Not signed in.");
+
+const token=await user.getIdToken();
+
+const headers={
+...(options.headers||{}),
+"Authorization":"Bearer "+token
+};
+
+const res=await fetch(
+WORKER_BASE+path,
+{...options,headers}
+);
+
+let body={};
+
+try{
+body=await res.json();
+}catch(_){}
+
+if(!res.ok){
+throw new Error(body.error||"Dashboard request failed.");
 }
 
+return body;
+}
+
+
+/*
+Telegram login now uses the existing PRYCOT
+dashboard connection flow.
+
+The website asks the Worker for a temporary
+connection URL. The URL opens the PRYCOT bot.
+The user confirms the connection in Telegram.
+The page then polls dashboard/status and opens
+the cabinet automatically.
+*/
+
+async function startTelegramLogin(){
+
+if(telegramLoginInProgress)return;
+
+telegramLoginInProgress=true;
+
+const button=
+document.getElementById("telegramLoginButton");
+
+let telegramWindow=null;
+
+try{
+
+button.disabled=true;
+
+setStatus(
+authStatus,
+"Opening Telegram..."
+);
+
+await ensureAnonymousSession();
+
+const result=
+await workerRequest(
+"/dashboard/connect",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+}
+}
+);
+
+if(!result.telegramUrl){
+throw new Error(
+"Telegram connection link could not be created."
+);
+}
+
+telegramWindow=
+window.open(
+"about:blank",
+"prycotTelegram",
+"width=520,height=700"
+);
+
+if(telegramWindow&&!telegramWindow.closed){
+
+telegramWindow.location.href=
+result.telegramUrl;
+
+}else{
+
+window.location.href=
+result.telegramUrl;
+
+return;
+
+}
+
+setStatus(
+authStatus,
+"Confirm the connection in Telegram..."
+);
+
+clearInterval(telegramPollTimer);
+
+telegramPollTimer=
+setInterval(
+async()=>{
+
+try{
+
+const state=
+await workerRequest(
+"/dashboard/status"
+);
+
+if(!state.telegramConnected)
+return;
+
+clearInterval(telegramPollTimer);
+telegramPollTimer=null;
+
+if(
+telegramWindow &&
+!telegramWindow.closed
+){
+telegramWindow.close();
+}
+
+setStatus(
+authStatus,
+"Telegram connected."
+);
+
+const connected=
+await loadTelegramStatus();
+
+if(connected){
+await loadDashboard();
+}
+
+setStatus(
+authStatus,
+""
+);
+
+}catch(_){}
+
+},
+1500
+);
+
+}catch(err){
+
+if(
+telegramWindow &&
+!telegramWindow.closed
+){
+telegramWindow.close();
+}
+
+setStatus(
+authStatus,
+err.message||
+"Telegram login failed.",
+true
+);
+
+}finally{
+
+button.disabled=false;
+telegramLoginInProgress=false;
+
+}
+
+}
+
+document.getElementById(
+"telegramLoginButton"
+).addEventListener(
+"click",
+startTelegramLogin
+);
+
 async function loadTelegramStatus(){
-  const state=await workerRequest("/dashboard/status");
-  if(!state.telegramConnected){showAuth();return false}
-  telegramProfile=state;
-  const displayName=state.telegramUsername?"@"+state.telegramUsername:(state.telegramName||"Telegram user");
-  document.getElementById("cabinetName").textContent=displayName;
-  document.getElementById("cabinetEmail").textContent="Telegram";
-  document.getElementById("profileName").value=displayName;
-  renderAvatar("",displayName);
-  showCabinet();
-  return true;
+
+const state=
+await workerRequest(
+"/dashboard/status"
+);
+
+if(!state.telegramConnected){
+
+showAuth();
+
+return false;
+
+}
+
+telegramProfile=state;
+
+const displayName=
+state.telegramUsername
+?"@"+state.telegramUsername
+:(state.telegramName||"Telegram user");
+
+document.getElementById(
+"cabinetName"
+).textContent=displayName;
+
+document.getElementById(
+"cabinetEmail"
+).textContent="Telegram";
+
+document.getElementById(
+"profileName"
+).value=displayName;
+
+renderAvatar(
+"",
+displayName
+);
+
+showCabinet();
+
+return true;
 }
 
 async function loadDashboard(){
-  const statusEl=document.getElementById("dashboardStatus"),list=document.getElementById("releaseList"),summary=document.getElementById("releaseSummary");
-  const connectLine=document.querySelector(".connect-line");
-  if(connectLine)connectLine.classList.add("hidden");
-  try{
-    const data=await workerRequest("/dashboard/releases");
-    const releases=Array.isArray(data.releases)?data.releases:[];
-    summary.textContent=releases.length+" RELEASE"+(releases.length===1?"":"S");
-    list.innerHTML="";
-    if(!releases.length){const e=document.createElement("div");e.className="empty-releases";e.textContent="No releases yet.";list.appendChild(e);return}
-    releases.forEach(r=>{
-      const row=document.createElement("div");row.className="release-row";
-      row.innerHTML="<div class=\"release-main\"><div class=\"release-artist\"></div><div class=\"release-title\"></div></div><div class=\"release-meta\"></div><div class=\"release-status\"></div>";
-      row.querySelector(".release-artist").textContent=r.artist_name||"";
-      row.querySelector(".release-title").textContent=r.release_title||"Untitled";
-      row.querySelector(".release-meta").textContent=(r.release_type||"")+(r.release_date?" · "+r.release_date:"");
-      row.querySelector(".release-status").textContent=r.status||"IN REVIEW";
-      list.appendChild(row);
-    });
-  }catch(err){setStatus(statusEl,err.message,true)}
+
+const statusEl=
+document.getElementById(
+"dashboardStatus"
+);
+
+const list=
+document.getElementById(
+"releaseList"
+);
+
+const summary=
+document.getElementById(
+"releaseSummary"
+);
+
+const connectLine=
+document.querySelector(
+".connect-line"
+);
+
+if(connectLine)
+connectLine.classList.add("hidden");
+
+try{
+
+const data=
+await workerRequest(
+"/dashboard/releases"
+);
+
+const releases=
+Array.isArray(data.releases)
+?data.releases
+:[];
+
+summary.textContent=
+releases.length+
+" RELEASE"+
+(releases.length===1?"":"S");
+
+list.innerHTML="";
+
+if(!releases.length){
+
+const e=
+document.createElement("div");
+
+e.className=
+"empty-releases";
+
+e.textContent=
+"No releases yet.";
+
+list.appendChild(e);
+
+return;
+
 }
 
-async function onTelegramAuth(telegramUser){
-  try{
-    setStatus(authStatus,"Signing in with Telegram...");
-    await ensureAnonymousSession();
-    const result=await workerRequest("/auth/telegram",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({telegram:telegramUser})});
-    if(!result.authenticated)throw new Error("Telegram authentication failed.");
-    const connected=await loadTelegramStatus();
-    if(connected)await loadDashboard();
-    setStatus(authStatus,"");
-  }catch(err){
-    setStatus(authStatus,err.message||"Telegram login failed.",true);
-  }
-}
-window.onTelegramAuth=onTelegramAuth;
+releases.forEach(r=>{
 
-document.getElementById("logoutButton").onclick=async()=>{manualLogout=true;telegramProfile=null;await auth.signOut();showAuth();setStatus(authStatus,"")};
+const row=
+document.createElement("div");
 
-auth.onAuthStateChanged(async user=>{
-  if(!user){showAuth();if(!manualLogout){try{await ensureAnonymousSession()}catch(err){setStatus(authStatus,"Telegram login is temporarily unavailable.",true)}}return}
-  try{
-    const connected=await loadTelegramStatus();
-    if(connected)await loadDashboard();
-  }catch(err){showAuth();setStatus(authStatus,"Telegram login is temporarily unavailable.",true)}
+row.className=
+"release-row";
+
+row.innerHTML=
+"<div class=\"release-main\"><div class=\"release-artist\"></div><div class=\"release-title\"></div></div><div class=\"release-meta\"></div><div class=\"release-status\"></div>";
+
+row.querySelector(
+".release-artist"
+).textContent=
+r.artist_name||"";
+
+row.querySelector(
+".release-title"
+).textContent=
+r.release_title||"Untitled";
+
+row.querySelector(
+".release-meta"
+).textContent=
+(r.release_type||"")+
+(r.release_date
+?" · "+r.release_date
+:"");
+
+row.querySelector(
+".release-status"
+).textContent=
+r.status||"IN REVIEW";
+
+list.appendChild(row);
+
 });
 
+}catch(err){
+
+setStatus(
+statusEl,
+err.message,
+true
+);
+
+}
+
+}
+  document.getElementById(
+"connectTelegramButton"
+).addEventListener(
+"click",
+startTelegramLogin
+);
+
+document.getElementById(
+"logoutButton"
+).onclick=
+async()=>{
+
+manualLogout=true;
+
+telegramProfile=null;
+
+clearInterval(
+telegramPollTimer
+);
+
+telegramPollTimer=null;
+
+await auth.signOut();
+
+showAuth();
+
+setStatus(
+authStatus,
+""
+);
+
+};
+
+
+auth.onAuthStateChanged(
+async user=>{
+
+if(!user){
+
+showAuth();
+
+if(!manualLogout){
+
+try{
+
+await ensureAnonymousSession();
+
+}catch(err){
+
+setStatus(
+authStatus,
+"Telegram login is temporarily unavailable.",
+true
+);
+
+}
+
+}
+
+return;
+
+}
+
+try{
+
+const connected=
+await loadTelegramStatus();
+
+if(connected){
+
+await loadDashboard();
+
+}
+
+}catch(err){
+
+showAuth();
+
+setStatus(
+authStatus,
+"Telegram login is temporarily unavailable.",
+true
+);
+
+}
+
+});
+
+
 ensureAnonymousSession().catch(()=>{});
+
+
+const releaseAgreement=
+document.getElementById(
+"releaseAgreement"
+);
+
+const submitReleaseButton=
+document.getElementById(
+"submitReleaseButton"
+);
+
+if(
+releaseAgreement &&
+submitReleaseButton
+){
+
+releaseAgreement.addEventListener(
+"change",
+()=>{
+
+const enabled=
+releaseAgreement.checked;
+
+submitReleaseButton.classList.toggle(
+"release-disabled",
+!enabled
+);
+
+submitReleaseButton.classList.toggle(
+"release-enabled",
+enabled
+);
+
+submitReleaseButton.setAttribute(
+"aria-disabled",
+String(!enabled)
+);
+
+submitReleaseButton.tabIndex=
+enabled?0:-1;
+
+}
+);
+
+}
+
+
+/* active menu item */
+
+document
+.querySelectorAll(
+".menu-links a"
+)
+.forEach(link=>{
+
+const current=
+(
+location.pathname
+.split("/")
+.pop()||
+"index.html"
+).toLowerCase();
+
+const target=
+(
+link
+.getAttribute("href")
+.split("/")
+.pop()||
+"index.html"
+).toLowerCase();
+
+if(
+(current==="index.html"&&target==="index.html")||
+current===target
+){
+
+link.classList.add(
+"active-page"
+);
+
+}
+
+});
+
+
+/*
+Mobile brand blur/hide.
+The same behavior is used on the
+main mobile site pages.
+*/
+
+(function(){
+
+const page=
+document.querySelector(".page");
+
+if(!page)return;
+
+let ticking=false;
+
+function update(){
+
+page.classList.toggle(
+"mobile-brand-hidden",
+innerWidth<=700&&scrollY>80
+);
+
+ticking=false;
+
+}
+
+addEventListener(
+"scroll",
+()=>{
+
+if(!ticking){
+
+requestAnimationFrame(
+update
+);
+
+ticking=true;
+
+}
+
+},
+{passive:true}
+);
+
+addEventListener(
+"resize",
+update
+);
+
+update();
+
+})();
+
 </script>
 
-<script>
-document.querySelectorAll('.menu-links a').forEach(link=>{const current=(location.pathname.split('/').pop()||'index.html').toLowerCase(),target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();if((current==='index.html'&&target==='index.html')||current===target)link.classList.add('active-page')});
-(function(){const btn=document.getElementById('menuButton'),menu=document.getElementById('menu');if(!btn||!menu)return;btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open'))});document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}})})();
-const releaseAgreement=document.getElementById("releaseAgreement"),submitReleaseButton=document.getElementById("submitReleaseButton");
-if(releaseAgreement&&submitReleaseButton)releaseAgreement.addEventListener("change",()=>{const enabled=releaseAgreement.checked;submitReleaseButton.classList.toggle("release-disabled",!enabled);submitReleaseButton.classList.toggle("release-enabled",enabled);submitReleaseButton.setAttribute("aria-disabled",String(!enabled));submitReleaseButton.tabIndex=enabled?0:-1});
-(function(){const page=document.querySelector('.page');if(!page)return;let ticking=false;function update(){page.classList.toggle('mobile-brand-hidden',innerWidth<=700&&scrollY>80);ticking=false}addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();
-</script>
 <script src="/platforms-footer.js"></script>
+
 </body>
 </html>

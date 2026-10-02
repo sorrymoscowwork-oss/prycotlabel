@@ -35,7 +35,7 @@ h1{margin:0;font-size:clamp(42px,6vw,78px);line-height:.96;font-weight:500;lette
 .intro{max-width:650px;margin:26px 0 42px;color:var(--muted);font-size:14px;line-height:1.65}
 .auth-wrap{max-width:560px;border-top:1px solid var(--line)}
 .auth-panel{padding-top:24px}
-.telegram-login-widget{min-height:46px;display:flex;align-items:center}
+.telegram-login-widget{display:none}
 .status{min-height:20px;margin:18px 0 0;color:var(--muted);font-size:11px;line-height:1.5}.status.error{color:var(--error)}
 .hidden{display:none!important}
 .account-shell{max-width:760px;margin:0 auto}
@@ -100,7 +100,7 @@ h1{margin:0;font-size:clamp(42px,6vw,78px);line-height:.96;font-weight:500;lette
 <p class="intro">Sign in with Telegram to manage your profile and submit release requests.</p>
 <div class="auth-wrap">
 <div class="auth-panel">
-<div id="telegramLoginWidget" class="telegram-login-widget"></div>
+<button id="telegramLoginButton" class="telegram-login-button" type="button">Log in with Telegram</button>
 <div class="status" id="authStatus"></div>
 </div>
 </div>
@@ -156,6 +156,16 @@ function setStatus(el,text,error=false){if(!el)return;el.textContent=text||"";el
 function showAuth(){authView.classList.remove("hidden");cabinetView.classList.add("hidden")}
 function showCabinet(){authView.classList.add("hidden");cabinetView.classList.remove("hidden")}
 function renderAvatar(url,name){const box=document.getElementById("avatarBox");if(!box)return;box.innerHTML="";if(url){const img=document.createElement("img");img.src=url;img.alt="";img.onerror=()=>{box.textContent=(name||"A").slice(0,1).toUpperCase()};box.appendChild(img)}else box.textContent=(name||"A").slice(0,1).toUpperCase()}
+
+
+async function startTelegramLogin(){
+  try{
+    setStatus(authStatus,"Opening Telegram...");
+    const popup=window.open("https://oauth.telegram.org/auth?bot_id=0&origin="+encodeURIComponent(location.origin)+"&return_to="+encodeURIComponent(location.href),"telegramLogin","width=520,height=700");
+    if(!popup)throw new Error("Please allow popups for PRYCOT.");
+  }catch(err){setStatus(authStatus,err.message||"Telegram login failed.",true)}
+}
+document.getElementById("telegramLoginButton").addEventListener("click",startTelegramLogin);
 
 async function ensureAnonymousSession(){
   if(auth.currentUser)return auth.currentUser;
@@ -236,7 +246,7 @@ auth.onAuthStateChanged(async user=>{
 
 ensureAnonymousSession().catch(()=>{});
 </script>
-<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="prycot_relese_bot" data-size="large" data-userpic="false" data-request-access="write" data-lang="en" data-onauth="onTelegramAuth(user)"></script>
+
 <script>
 document.querySelectorAll('.menu-links a').forEach(link=>{const current=(location.pathname.split('/').pop()||'index.html').toLowerCase(),target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();if((current==='index.html'&&target==='index.html')||current===target)link.classList.add('active-page')});
 (function(){const btn=document.getElementById('menuButton'),menu=document.getElementById('menu');if(!btn||!menu)return;btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open'))});document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}})})();

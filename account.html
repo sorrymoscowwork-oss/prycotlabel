@@ -161,7 +161,7 @@ function renderAvatar(url,name){const box=document.getElementById("avatarBox");i
 async function startTelegramLogin(){
   try{
     setStatus(authStatus,"Opening Telegram...");
-    const popup=window.open("https://oauth.telegram.org/auth?bot_id=0&origin="+encodeURIComponent(location.origin)+"&return_to="+encodeURIComponent(location.href),"telegramLogin","width=520,height=700");
+    const popup=window.open("https://oauth.telegram.org/auth?bot_id=8723984850&origin="+encodeURIComponent(location.origin)+"&return_to="+encodeURIComponent(location.href),"telegramLogin","width=520,height=700");
     if(!popup)throw new Error("Please allow popups for PRYCOT.");
   }catch(err){setStatus(authStatus,err.message||"Telegram login failed.",true)}
 }

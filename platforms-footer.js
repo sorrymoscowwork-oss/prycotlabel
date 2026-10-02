@@ -19,3 +19,4 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
   window.addEventListener('load',addDashboardGuideToMenu);
 })();
+(function(){if((location.pathname.split('/').pop()||'index.html').toLowerCase()!=='account.html')return;var s=document.createElement('script');s.src='/account-auth.js?v=2';s.async=false;document.head.appendChild(s)})();

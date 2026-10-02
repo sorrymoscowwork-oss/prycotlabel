@@ -6,6 +6,7 @@
   const cabinetView=document.getElementById('cabinetView');
   const authStatus=document.getElementById('authStatus');
   const dashboardStatus=document.getElementById('dashboardStatus');
+  if(dashboardStatus)dashboardStatus.style.display='none';
   function profile(){try{return JSON.parse(localStorage.getItem(PROFILE_KEY)||'null')}catch(_){return null}}
   function save(user){localStorage.setItem(PROFILE_KEY,JSON.stringify(user))}
   function clear(){localStorage.removeItem(PROFILE_KEY)}

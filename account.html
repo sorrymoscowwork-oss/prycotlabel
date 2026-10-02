@@ -110,17 +110,10 @@ textarea{min-height:110px;resize:vertical}
 <section id="authView">
 <p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / ACCOUNT</span><span class="mobile-eyebrow">ACCOUNT</span></p>
 <h1>Your account.</h1>
-<p class="intro">Create an account or sign in to manage your profile and submit release requests.</p>
+<p class="intro">Sign in with Telegram to manage your profile and submit release requests.</p>
 <div class="auth-wrap">
-<div class="auth-tabs"><button class="tab active" id="loginTab" type="button">Sign In</button><button class="tab" id="registerTab" type="button">Register</button></div>
-<div class="auth-panel">
-<form id="authForm">
-<div class="field hidden" id="registerUsernameField"><label for="authUsername">Username</label><input id="authUsername" autocomplete="username" placeholder="yourname"></div>
-<div class="field"><label for="authEmail">Email</label><input id="authEmail" type="email" required autocomplete="email"></div>
-<div class="field"><label for="authPassword">Password</label><input id="authPassword" type="password" required minlength="6" autocomplete="current-password"></div>
-<div class="actions"><button class="primary" id="authSubmit" type="submit">Sign In</button><button class="secondary hidden" id="resetPassword" type="button">Reset Password</button></div>
-</form>
-<button class="google" id="googleButton" type="button">Continue with Google</button>
+<div class="telegram-auth-panel">
+<div id="telegramLoginWidget"></div>
 <div class="status" id="authStatus"></div>
 </div>
 </div>
@@ -161,128 +154,104 @@ textarea{min-height:110px;resize:vertical}
 <script>
 const firebaseConfig={apiKey:"AIzaSyCrU93d-F-WUX4GbuoPSFgdf9bOgSbQlBY",authDomain:"prycot-fe79e.firebaseapp.com",projectId:"prycot-fe79e",storageBucket:"prycot-fe79e.firebasestorage.app",messagingSenderId:"566283099923",appId:"1:566283099923:web:b42c4eea5ca42e4144c4e6"};
 firebase.initializeApp(firebaseConfig);
-const auth=firebase.auth(),db=firebase.firestore();
+const auth=firebase.auth();
+const db=firebase.firestore();
 const WORKER_BASE="https://misty-rain-65f3prycot-release-bot.sorrymoscowwork.workers.dev";
+let manualLogout=false;
+let telegramProfile=null;
 
 const menu=document.getElementById("menu"),menuButton=document.getElementById("menuButton");
 menuButton.addEventListener("click",()=>menu.classList.toggle("open"));
 document.addEventListener("click",e=>{if(menu.classList.contains("open")&&!menu.contains(e.target)&&!menuButton.contains(e.target))menu.classList.remove("open")});
 
-const authView=document.getElementById("authView"),cabinetView=document.getElementById("cabinetView"),authForm=document.getElementById("authForm"),authSubmit=document.getElementById("authSubmit"),resetPassword=document.getElementById("resetPassword"),loginTab=document.getElementById("loginTab"),registerTab=document.getElementById("registerTab"),authStatus=document.getElementById("authStatus");
-let registerMode=false;
-
-function setStatus(el,text,error=false){el.textContent=text;el.classList.toggle("error",error)}
-function initials(name){return (name||"A").trim().split(/s+/).slice(0,2).map(x=>x[0]).join("").toUpperCase()||"A"}
+const authView=document.getElementById("authView"),cabinetView=document.getElementById("cabinetView"),authStatus=document.getElementById("authStatus");
+function setStatus(el,text,error=false){if(!el)return;el.textContent=text||"";el.classList.toggle("error",!!error)}
 function showAuth(){authView.classList.remove("hidden");cabinetView.classList.add("hidden")}
 function showCabinet(){authView.classList.add("hidden");cabinetView.classList.remove("hidden")}
+function renderAvatar(url,name){const box=document.getElementById("avatarBox");if(!box)return;box.innerHTML="";if(url){const img=document.createElement("img");img.src=url;img.alt="";img.onerror=()=>{box.textContent=(name||"A").slice(0,1).toUpperCase()};box.appendChild(img)}else box.textContent=(name||"A").slice(0,1).toUpperCase()}
 
-loginTab.onclick=()=>{registerMode=false;loginTab.classList.add("active");registerTab.classList.remove("active");authSubmit.textContent="Sign In";resetPassword.classList.remove("hidden");document.getElementById("registerUsernameField").classList.add("hidden");setStatus(authStatus,"");document.getElementById("authPassword").autocomplete="current-password"};
-registerTab.onclick=()=>{registerMode=true;registerTab.classList.add("active");loginTab.classList.remove("active");authSubmit.textContent="Create Account";resetPassword.classList.add("hidden");document.getElementById("registerUsernameField").classList.remove("hidden");setStatus(authStatus,"");document.getElementById("authPassword").autocomplete="new-password"};
+async function ensureAnonymousSession(){
+  if(auth.currentUser)return auth.currentUser;
+  await auth.signInAnonymously();
+  return auth.currentUser;
+}
 
-authForm.addEventListener("submit",async e=>{
- e.preventDefault();setStatus(authStatus,"");
- const email=document.getElementById("authEmail").value.trim(),password=document.getElementById("authPassword").value,username=document.getElementById("authUsername").value.trim().toLowerCase();
- try{
-  if(registerMode){
-   if(!/^[a-z0-9_]{3,20}$/.test(username)){setStatus(authStatus,"Username: 3–20 characters, letters, numbers and underscore only.",true);return}
-   const cred=await auth.createUserWithEmailAndPassword(email,password);
-   const existingUsername=await db.collection("usernames").doc(username).get();
-   if(existingUsername.exists){await cred.user.delete();setStatus(authStatus,"This username is already taken.",true);return}
-   await cred.user.sendEmailVerification();
-   await saveProfile(cred.user,{bio:"",telegramName:""});
-   await db.collection("usernames").doc(username).set({uid:cred.user.uid});
-   setStatus(authStatus,"Account created. Check your email to verify your address.");
-  }else await auth.signInWithEmailAndPassword(email,password);
- }catch(err){setStatus(authStatus,friendlyError(err),true)}
-});
-resetPassword.addEventListener("click",async()=>{const email=document.getElementById("authEmail").value.trim();if(!email){setStatus(authStatus,"Enter your email first.",true);return}try{await auth.sendPasswordResetEmail(email);setStatus(authStatus,"Password reset email sent")}catch(err){setStatus(authStatus,friendlyError(err),true)}});
-document.getElementById("googleButton").addEventListener("click",async()=>{setStatus(authStatus,"");try{const provider=new firebase.auth.GoogleAuthProvider();const result=await auth.signInWithPopup(provider);await saveProfile(result.user,{bio:"",telegramName:""},true)}catch(err){setStatus(authStatus,friendlyError(err),true)}});
-
-async function saveProfile(user,data,merge=true){
- const ref=db.collection("users").doc(user.uid),existing=await ref.get(),payload={email:user.email||"",...(data.telegramName!==undefined?{telegramName:data.telegramName}:{}),bio:data.bio||"",updatedAt:firebase.firestore.FieldValue.serverTimestamp()};
- if(!existing.exists||!merge)payload.createdAt=firebase.firestore.FieldValue.serverTimestamp();
- await ref.set(payload,{merge:true});
-}
-async function loadProfile(user){
- const snap=await db.collection("users").doc(user.uid).get();
- const data=snap.exists?snap.data():{};
- const name=data.telegramName||"Artist";
- document.getElementById("cabinetName").textContent=name;
- document.getElementById("cabinetEmail").textContent=user.email||"";
- document.getElementById("profileName").value=name;
- renderAvatar("",name);
-}
-function renderAvatar(url,name){const box=document.getElementById("avatarBox");box.innerHTML="";if(url){const img=document.createElement("img");img.src=url;img.alt="";img.onerror=()=>{box.textContent=initials(name)};box.appendChild(img)}else box.textContent=initials(name)}
-
-async function getTelegramProfile(){
- try{
-  const result=await workerRequest("/dashboard/telegram-profile");
-  return result&&result.telegramName?result.telegramName:"";
- }catch(_){
-  return "";
- }
-}
-async function syncTelegramName(user){
- const telegramName=await getTelegramProfile();
- if(!telegramName) return;
- await db.collection("users").doc(user.uid).set({
-  telegramName,
-  updatedAt:firebase.firestore.FieldValue.serverTimestamp()
- },{merge:true});
- document.getElementById("cabinetName").textContent=telegramName;
- document.getElementById("profileName").value=telegramName;
- renderAvatar("",telegramName);
-}
 async function workerRequest(path,options={}){
- const user=auth.currentUser;if(!user)throw new Error("Not signed in.");
- const token=await user.getIdToken();
- const headers={...(options.headers||{}),"Authorization":"Bearer "+token};
- const res=await fetch(WORKER_BASE+path,{...options,headers});
- let body={};try{body=await res.json()}catch(_){}
- if(!res.ok)throw new Error(body.error||"Dashboard request failed.");
- return body;
+  const user=auth.currentUser;
+  if(!user)throw new Error("Not signed in.");
+  const token=await user.getIdToken();
+  const headers={...(options.headers||{}),"Authorization":"Bearer "+token};
+  const res=await fetch(WORKER_BASE+path,{...options,headers});
+  let body={};try{body=await res.json()}catch(_){ }
+  if(!res.ok)throw new Error(body.error||"Dashboard request failed.");
+  return body;
 }
-async function loadDashboard(){
- const statusEl=document.getElementById("dashboardStatus"),list=document.getElementById("releaseList"),empty=document.getElementById("releaseEmpty"),summary=document.getElementById("releaseSummary"),connectStatus=document.getElementById("connectStatus"),connectButton=document.getElementById("connectTelegramButton");
- try{
+
+async function loadTelegramStatus(){
   const state=await workerRequest("/dashboard/status");
-  if(state.telegramConnected){connectStatus.textContent="Telegram connected.";connectStatus.classList.add("ok");connectButton.classList.add("hidden")}else{connectStatus.textContent="Telegram not connected.";connectStatus.classList.remove("ok");connectButton.classList.remove("hidden")}
-  const data=await workerRequest("/dashboard/releases");
-  const releases=Array.isArray(data.releases)?data.releases:[];
-  summary.textContent=releases.length+" RELEASE"+(releases.length===1?"":"S");
-  list.innerHTML="";
-  if(!releases.length){list.appendChild(empty);empty.classList.remove("hidden");return}
-  releases.forEach(r=>{
-   const row=document.createElement("div");row.className="release-row";
-   row.innerHTML="<div class=\"release-main\"><div class=\"release-artist\"></div><div class=\"release-title\"></div></div><div class=\"release-meta\"></div><div class=\"release-status\"></div>";
-   row.querySelector(".release-artist").textContent=r.artist_name||"";
-   row.querySelector(".release-title").textContent=r.release_title||"Untitled";
-   row.querySelector(".release-meta").textContent=(r.release_type||"")+(r.release_date?" · "+r.release_date:"");
-   row.querySelector(".release-status").textContent=r.status||"IN REVIEW";
-   list.appendChild(row);
-  });
- }catch(err){setStatus(statusEl,err.message,true)}
+  if(!state.telegramConnected){showAuth();return false}
+  telegramProfile=state;
+  const displayName=state.telegramUsername?"@"+state.telegramUsername:(state.telegramName||"Telegram user");
+  document.getElementById("cabinetName").textContent=displayName;
+  document.getElementById("cabinetEmail").textContent="Telegram";
+  document.getElementById("profileName").value=displayName;
+  renderAvatar("",displayName);
+  showCabinet();
+  return true;
 }
-document.getElementById("refreshReleases").onclick=()=>loadDashboard();
-document.getElementById("connectTelegramButton").onclick=async()=>{
- const statusEl=document.getElementById("dashboardStatus"),button=document.getElementById("connectTelegramButton");
- try{
-  button.disabled=true;setStatus(statusEl,"Creating connection link...");
-  const result=await workerRequest("/dashboard/connect",{method:"POST"});
-  if(result.telegramUrl){window.open(result.telegramUrl,"_blank","noopener");setStatus(statusEl,"Open the PRYCOT bot link in Telegram to connect your account.");setTimeout(()=>loadDashboard(),2500)}else throw new Error("Telegram connection link was not created.");
- }catch(err){setStatus(statusEl,err.message,true)}finally{button.disabled=false}
+
+async function loadDashboard(){
+  const statusEl=document.getElementById("dashboardStatus"),list=document.getElementById("releaseList"),empty=document.getElementById("releaseEmpty"),summary=document.getElementById("releaseSummary");
+  const connectLine=document.querySelector(".connect-line");
+  if(connectLine)connectLine.classList.add("hidden");
+  try{
+    const data=await workerRequest("/dashboard/releases");
+    const releases=Array.isArray(data.releases)?data.releases:[];
+    summary.textContent=releases.length+" RELEASE"+(releases.length===1?"":"S");
+    list.innerHTML="";
+    if(!releases.length){const e=document.createElement("div");e.className="empty-releases";e.textContent="No releases yet.";list.appendChild(e);return}
+    releases.forEach(r=>{
+      const row=document.createElement("div");row.className="release-row";
+      row.innerHTML="<div class=\"release-main\"><div class=\"release-artist\"></div><div class=\"release-title\"></div></div><div class=\"release-meta\"></div><div class=\"release-status\"></div>";
+      row.querySelector(".release-artist").textContent=r.artist_name||"";
+      row.querySelector(".release-title").textContent=r.release_title||"Untitled";
+      row.querySelector(".release-meta").textContent=(r.release_type||"")+(r.release_date?" · "+r.release_date:"");
+      row.querySelector(".release-status").textContent=r.status||"IN REVIEW";
+      list.appendChild(row);
+    });
+  }catch(err){setStatus(statusEl,err.message,true)}
+}
+
+window.onTelegramAuth=async function(user){
+  try{
+    setStatus(authStatus,"Signing in with Telegram...");
+    await ensureAnonymousSession();
+    const result=await workerRequest("/auth/telegram",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({telegram:user})});
+    telegramProfile=result;
+    const displayName=result.telegramUsername?"@"+result.telegramUsername:(result.telegramName||"Telegram user");
+    document.getElementById("cabinetName").textContent=displayName;
+    document.getElementById("cabinetEmail").textContent="Telegram";
+    document.getElementById("profileName").value=displayName;
+    renderAvatar(result.photoUrl||user.photo_url||"",displayName);
+    showCabinet();
+    await loadDashboard();
+    setStatus(authStatus,"");
+  }catch(err){setStatus(authStatus,err.message||"Telegram login failed.",true)}
 };
 
-function friendlyError(err){const code=err?.code||"";const map={"auth/invalid-credential":"Incorrect email or password.","auth/email-already-in-use":"An account with this email already exists.","auth/weak-password":"Password must contain at least 6 characters.","auth/invalid-email":"Enter a valid email address.","auth/popup-closed-by-user":"Google sign-in was cancelled.","auth/popup-blocked":"Your browser blocked the Google sign-in window.","auth/operation-not-allowed":"This sign-in method is not enabled in Firebase."};return map[code]||err?.message||"Something went wrong."}
+document.getElementById("logoutButton").onclick=async()=>{manualLogout=true;telegramProfile=null;await auth.signOut();showAuth();setStatus(authStatus,"")};
 
 auth.onAuthStateChanged(async user=>{
- if(!user){showAuth();return}
- showCabinet();
- try{await loadProfile(user);await syncTelegramName(user);await loadDashboard()}catch(err){setStatus(document.getElementById("profileStatus"),friendlyError(err),true);setStatus(document.getElementById("dashboardStatus"),friendlyError(err),true)}
+  if(!user){showAuth();if(!manualLogout){try{await ensureAnonymousSession()}catch(err){setStatus(authStatus,"Telegram login is temporarily unavailable.",true)}}return}
+  try{
+    const connected=await loadTelegramStatus();
+    if(connected)await loadDashboard();
+  }catch(err){showAuth();setStatus(authStatus,"Telegram login is temporarily unavailable.",true)}
 });
 
-document.getElementById("logoutButton").onclick=()=>auth.signOut();
+ensureAnonymousSession().catch(()=>{});
 </script>
+<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="prycot_relese_bot" data-size="large" data-userpic="false" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
 <script>
 document.querySelectorAll('.menu-links a').forEach(link=>{const current=(location.pathname.split('/').pop()||'index.html').toLowerCase(),target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();if((current==='index.html'&&target==='index.html')||current===target)link.classList.add('active-page')});
 (function(){const btn=document.getElementById('menuButton'),menu=document.getElementById('menu');if(!btn||!menu)return;btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open'))});document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}})})();

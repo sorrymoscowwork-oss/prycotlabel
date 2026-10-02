@@ -251,7 +251,26 @@ auth.onAuthStateChanged(async user=>{
 
 ensureAnonymousSession().catch(()=>{});
 </script>
-<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="prycot_relese_bot" data-size="large" data-userpic="false" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+<script>
+(function(){
+  function mountTelegramWidget(){
+    const container=document.getElementById("telegramLoginWidget");
+    if(!container || container.dataset.mounted)return;
+    container.dataset.mounted="1";
+    const script=document.createElement("script");
+    script.src="https://telegram.org/js/telegram-widget.js?22";
+    script.async=true;
+    script.setAttribute("data-telegram-login","prycot_relese_bot");
+    script.setAttribute("data-size","large");
+    script.setAttribute("data-userpic","false");
+    script.setAttribute("data-onauth","onTelegramAuth(user)");
+    script.setAttribute("data-request-access","write");
+    container.appendChild(script);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mountTelegramWidget);
+  else mountTelegramWidget();
+})();
+</script>
 <script>
 document.querySelectorAll('.menu-links a').forEach(link=>{const current=(location.pathname.split('/').pop()||'index.html').toLowerCase(),target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();if((current==='index.html'&&target==='index.html')||current===target)link.classList.add('active-page')});
 (function(){const btn=document.getElementById('menuButton'),menu=document.getElementById('menu');if(!btn||!menu)return;btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open'))});document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!btn.contains(e.target)){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}})})();

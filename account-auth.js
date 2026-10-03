@@ -22,4 +22,46 @@
   document.getElementById('logoutButton')?.addEventListener('click',()=>{clear();showAuth();status(authStatus,'')});
   const oldAgreement=document.getElementById('releaseAgreement');if(oldAgreement)oldAgreement.addEventListener('change',e=>{const b=document.getElementById('submitReleaseButton');if(!b)return;const on=e.target.checked;b.classList.toggle('release-disabled',!on);b.classList.toggle('release-enabled',on);b.setAttribute('aria-disabled',String(!on));b.tabIndex=on?0:-1});
   if(profile())window.restoreSession();
+
+  // Keep the account menu identical to the homepage menu.
+  (async function syncHomepageMenu(){
+    try{
+      const response=await fetch('index.html',{cache:'no-store'});
+      if(!response.ok)return;
+      const html=await response.text();
+      const doc=new DOMParser().parseFromString(html,'text/html');
+      const sourceMenu=doc.querySelector('nav.menu');
+      const targetMenu=document.getElementById('menu');
+      if(!sourceMenu||!targetMenu)return;
+      targetMenu.innerHTML=sourceMenu.innerHTML;
+
+      // Apply the homepage menu CSS after the account page CSS so the appearance is identical.
+      const menuStyles=[...doc.querySelectorAll('style')]
+        .map(s=>s.textContent||'')
+        .filter(css=>css.includes('.menu'))
+        .join('\n');
+      if(menuStyles){
+        const style=document.createElement('style');
+        style.id='homepage-menu-sync-style';
+        style.textContent=menuStyles;
+        document.head.appendChild(style);
+      }
+
+      const button=document.getElementById('menuButton');
+      const menu=document.getElementById('menu');
+      if(button&&menu){
+        button.onclick=function(e){e.stopPropagation();menu.classList.toggle('open')};
+        menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+        const close=menu.querySelector('.menu-close');
+        if(close)close.addEventListener('click',()=>menu.classList.remove('open'));
+        document.addEventListener('click',e=>{
+          if(menu.classList.contains('open')&&!menu.contains(e.target)&&!button.contains(e.target))menu.classList.remove('open');
+        });
+      }
+
+      // Mark Account as the current page without changing the homepage menu structure.
+      const accountLink=targetMenu.querySelector('a[href="account.html"]');
+      if(accountLink)accountLink.classList.add('active-page');
+    }catch(_){/* Keep the existing account menu if homepage sync is unavailable. */}
+  })();
 })();

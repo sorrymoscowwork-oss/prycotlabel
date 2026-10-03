@@ -61,6 +61,11 @@
       footer { flex-direction:column; gap:8px; }
       .release-cta a { width:auto; }
     }
+    /* Match the canonical home-page menu colors: first two left-column items are brown; all other inactive items are white. */
+    .menu-left a:nth-child(1), .menu-left a:nth-child(2) { color:#A0522D!important; }
+    .menu-left a:nth-child(n+3) { color:#f4f4f2!important; }
+    .menu-right a { color:#f4f4f2!important; }
+    .menu-links a.active-page { color:#A0522D!important; font-style:italic!important; }
   </style>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="mask-icon" href="/favicon.svg" color="#303438">

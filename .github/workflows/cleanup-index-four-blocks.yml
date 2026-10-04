@@ -22,6 +22,7 @@ jobs:
           expected_blobs = {
               "account.html": "4a4e67309e7628fef70d8dfff3534a79ab074c07",
               "account-auth.js": "d7f51b12e1f46dcf197b63e077ca2f2bce36925b",
+              "dashboard-guide.html": "b86a39301904bdd0b5161a737737409835413781",
           }
 
           for filename, expected_blob in expected_blobs.items():
@@ -41,6 +42,9 @@ jobs:
                   b"p=document.getElementById('profileName')",
                   b"if(p)p.value=label;",
                   b"const oldAgreement=document.getElementById('releaseAgreement');if(oldAgreement)oldAgreement.addEventListener('change',e=>{const b=document.getElementById('submitReleaseButton');if(!b)return;const on=e.target.checked;b.classList.toggle('release-disabled',!on);b.classList.toggle('release-enabled',on);b.setAttribute('aria-disabled',String(!on));b.tabIndex=on?0:-1});",
+              ],
+              "dashboard-guide.html": [
+                  b"(function(){const page=document.querySelector('.page');if(!page)return;let ticking=false;function update(){page.classList.toggle('mobile-brand-hidden',innerWidth<=700&&scrollY>80);ticking=false}addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();",
               ],
           }
 
@@ -68,23 +72,23 @@ jobs:
           from pathlib import Path
           import subprocess
 
-          for filename in ["account.html", "account-auth.js"]:
+          for filename in ["account.html", "account-auth.js", "dashboard-guide.html"]:
               actual = Path(filename).read_bytes()
               expected = Path(f"/tmp/{filename}.expected").read_bytes()
               if actual != expected:
                   raise SystemExit(f"ABORT: {filename} differs from the exact expected result.")
 
           changed = subprocess.check_output(["git", "diff", "--name-only"], text=True).splitlines()
-          if changed != ["account-auth.js", "account.html"]:
+          if changed != ["account-auth.js", "account.html", "dashboard-guide.html"]:
               raise SystemExit(f"ABORT: unexpected changed files: {changed}")
 
-          print("Verified: only account.html and account-auth.js contain the exact approved changes.")
+          print("Verified: only account.html, account-auth.js and dashboard-guide.html contain the exact approved changes.")
 
       - name: Commit only after all checks pass
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add account.html account-auth.js
-          git commit -m "Clean obsolete account code"
+          git add account.html account-auth.js dashboard-guide.html
+          git commit -m "Clean obsolete dashboard guide code"
           git push

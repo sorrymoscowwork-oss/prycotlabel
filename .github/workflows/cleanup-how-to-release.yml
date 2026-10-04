@@ -1,0 +1,87 @@
+name: Safe PRYCOT cleanup — How to Release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remove only the approved How to Release fragments
+        shell: python
+        run: |
+          from pathlib import Path
+          import subprocess
+
+          filename = "how-to-release.html"
+          expected_parent = "d06228ab3f26eff148f7ab914c8435bd7d512b55"
+          actual_parent = subprocess.check_output(
+              ["git", "rev-parse", "HEAD^"], text=True
+          ).strip()
+          if actual_parent != expected_parent:
+              raise SystemExit(
+                  f"ABORT: {filename} is not at the approved source version. "
+                  f"Expected parent {expected_parent}, found {actual_parent}. Nothing will be committed."
+              )
+
+          path = Path(filename)
+          original = path.read_bytes()
+
+          old_brand = b'<a class="brand" id="brand" href="index.html" aria-label="PRYCOT.">'
+          new_brand = b'<a class="brand" href="index.html" aria-label="PRYCOT.">'
+          if original.count(old_brand) != 1:
+              raise SystemExit(
+                  "ABORT: approved brand id fragment did not match exactly once. Nothing will be committed."
+              )
+
+          result = original.replace(old_brand, new_brand, 1)
+
+          old_script = b"const brand=document.getElementById('brand'),page=document.querySelector('.page');if(!brand||!page)return;"
+          new_script = b"const page=document.querySelector('.page');if(!page)return;"
+          if result.count(old_script) != 1:
+              raise SystemExit(
+                  "ABORT: approved brand JavaScript fragment did not match exactly once. Nothing will be committed."
+              )
+
+          result = result.replace(old_script, new_script, 1)
+
+          if result == original:
+              raise SystemExit(f"ABORT: {filename} was not changed. Nothing will be committed.")
+
+          Path(f"/tmp/{filename}.expected").write_bytes(result)
+          path.write_bytes(result)
+
+          print("Verified: approved source version and both approved fragments matched exactly once.")
+
+      - name: Verify exact expected result
+        shell: python
+        run: |
+          from pathlib import Path
+          import subprocess
+
+          filename = "how-to-release.html"
+          actual = Path(filename).read_bytes()
+          expected = Path(f"/tmp/{filename}.expected").read_bytes()
+          if actual != expected:
+              raise SystemExit(f"ABORT: {filename} differs from the exact expected result.")
+
+          changed = subprocess.check_output(["git", "diff", "--name-only"], text=True).splitlines()
+          if changed != [filename]:
+              raise SystemExit(f"ABORT: unexpected changed files: {changed}")
+
+          print("Verified: only how-to-release.html contains the exact approved cleanup.")
+
+      - name: Commit only after all checks pass
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add how-to-release.html
+          git commit -m "Clean obsolete How to Release code"
+          git push

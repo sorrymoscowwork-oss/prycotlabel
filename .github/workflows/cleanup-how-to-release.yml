@@ -15,7 +15,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Remove only the approved How to Release fragments
+      - name: Remove only the approved How to Release fragment
         shell: python
         run: |
           from pathlib import Path
@@ -36,23 +36,15 @@ jobs:
                   f"It must exactly match {approved_source_commit}. Nothing will be committed."
               )
 
-          clean_brand = b'<a class="brand" href="/" aria-label="PRYCOT.">'
-          old_brand = b'<a class="brand" id="brand" href="index.html" aria-label="PRYCOT.">'
-          if original.count(clean_brand) != 1 or original.count(old_brand) != 0:
-              raise SystemExit(
-                  "ABORT: brand block is not in the approved already-clean state. Nothing will be committed."
-              )
-
-          result = original
-
           old_script = b"const brand=document.getElementById('brand'),page=document.querySelector('.page');if(!brand||!page)return;"
           new_script = b"const page=document.querySelector('.page');if(!page)return;"
-          if result.count(old_script) != 1:
+
+          if original.count(old_script) != 1:
               raise SystemExit(
-                  "ABORT: approved brand JavaScript fragment did not match exactly once. Nothing will be committed."
+                  "ABORT: approved obsolete brand JavaScript fragment did not match exactly once. Nothing will be committed."
               )
 
-          result = result.replace(old_script, new_script, 1)
+          result = original.replace(old_script, new_script, 1)
 
           if result == original:
               raise SystemExit(f"ABORT: {filename} was not changed. Nothing will be committed.")
@@ -60,7 +52,7 @@ jobs:
           Path(f"/tmp/{filename}.expected").write_bytes(result)
           path.write_bytes(result)
 
-          print("Verified: approved source version, clean brand state, and approved JavaScript fragment.")
+          print("Verified: approved source version and exactly one approved obsolete JavaScript fragment.")
 
       - name: Verify exact expected result
         shell: python

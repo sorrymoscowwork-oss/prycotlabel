@@ -13,16 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Remove only the approved About page blocks
+      - name: Remove only the approved Terms page block
         shell: python
         run: |
           from pathlib import Path
-          import hashlib
-          import re
           import subprocess
 
-          filename = "about.html"
-          expected_blob = "1d8e99e0e48983d76e9bdeda6659a263b206033e"
+          filename = "terms.html"
+          expected_blob = "12950f1a0cd2175eeffde990013d5e25c8beed05"
           actual_blob = subprocess.check_output(["git", "hash-object", filename], text=True).strip()
           if actual_blob != expected_blob:
               raise SystemExit(
@@ -30,35 +28,22 @@ jobs:
                   f"Expected {expected_blob}, found {actual_blob}. Nothing will be committed."
               )
 
-          approved_ids = [
-              "global-header-position",
-              "uniform-menu-style",
-              "active-menu-item",
-              "home-button-style",
-              "active-menu-brown",
-              "mobile-menu-spacing-divider-final",
-              "mobile-menu-divider-spacing-final",
-              "scroll-logo-hide-style",
-              "mobile-burger-close-final",
-              "mobile-hide-eyebrow",
-          ]
-
           path = Path(filename)
           original = path.read_bytes()
-          result = original
 
-          for style_id in approved_ids:
-              pattern = re.compile(
-                  rb'<style id="' + re.escape(style_id.encode()) + rb'">.*?</style>',
-                  re.DOTALL,
-              )
-              matches = pattern.findall(result)
-              if len(matches) != 1:
-                  raise SystemExit(
-                      f"ABORT: {filename}, approved block {style_id!r} matched "
-                      f"{len(matches)} times. Nothing will be committed."
-                  )
-              result = pattern.sub(b"", result, count=1)
+          old_brand = b'<a class="brand" id="brand" href="index.html" aria-label="PRYCOT.">'
+          new_brand = b'<a class="brand" href="index.html" aria-label="PRYCOT.">'
+          if original.count(old_brand) != 1:
+              raise SystemExit("ABORT: approved brand id fragment did not match exactly once.")
+
+          result = original.replace(old_brand, new_brand, 1)
+
+          old_script = b"const brand=document.getElementById('brand'),page=document.querySelector('.page');if(!brand||!page)return;"
+          new_script = b"const page=document.querySelector('.page');if(!page)return;"
+          if result.count(old_script) != 1:
+              raise SystemExit("ABORT: approved JavaScript fragment did not match exactly once.")
+
+          result = result.replace(old_script, new_script, 1)
 
           if result == original:
               raise SystemExit(f"ABORT: {filename} was not changed.")
@@ -66,7 +51,7 @@ jobs:
           Path(f"/tmp/{filename}.expected").write_bytes(result)
           path.write_bytes(result)
 
-          print("Verified: exact approved source version and all 10 approved blocks matched exactly once.")
+          print("Verified: exact approved source version and both approved fragments matched exactly once.")
 
       - name: Verify exact expected result
         shell: python
@@ -74,7 +59,7 @@ jobs:
           from pathlib import Path
           import subprocess
 
-          filename = "about.html"
+          filename = "terms.html"
           actual = Path(filename).read_bytes()
           expected = Path(f"/tmp/{filename}.expected").read_bytes()
           if actual != expected:
@@ -84,13 +69,13 @@ jobs:
           if changed != [filename]:
               raise SystemExit(f"ABORT: unexpected changed files: {changed}")
 
-          print("Verified: only about.html contains the exact approved cleanup.")
+          print("Verified: only terms.html contains the exact approved cleanup.")
 
       - name: Commit only after all checks pass
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add about.html
-          git commit -m "Clean obsolete About page code"
+          git add terms.html
+          git commit -m "Clean obsolete Terms page code"
           git push

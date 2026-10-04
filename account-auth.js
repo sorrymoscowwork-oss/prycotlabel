@@ -64,4 +64,24 @@
       if(accountLink)accountLink.classList.add('active-page');
     }catch(_){/* Keep the existing account menu if homepage sync is unavailable. */}
   })();
+
+  // Mobile-only account logo scroll behavior; does not affect desktop or other pages.
+  (function mobileLogoScroll(){
+    if(!window.matchMedia('(max-width:700px)').matches)return;
+    const brand=document.querySelector('.brand');
+    if(!brand)return;
+    brand.style.transition='filter .56s ease, opacity .56s ease, transform .56s ease';
+    let ticking=false;
+    function update(){
+      const hidden=window.scrollY>80;
+      brand.style.filter=hidden?'blur(16px)':'blur(0)';
+      brand.style.opacity=hidden?'0':'1';
+      brand.style.transform=hidden?'translateY(-8px)':'translateY(0)';
+      ticking=false;
+    }
+    window.addEventListener('scroll',function(){
+      if(!ticking){window.requestAnimationFrame(update);ticking=true;}
+    },{passive:true});
+    update();
+  })();
 })();

@@ -36,15 +36,14 @@ jobs:
                   f"It must exactly match {approved_source_commit}. Nothing will be committed."
               )
 
-          old_script = b"const brand=document.getElementById('brand'),page=document.querySelector('.page');if(!brand||!page)return;"
-          new_script = b"const page=document.querySelector('.page');if(!page)return;"
+          old_script = b'''<script id="scroll-logo-hide-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function updateLogo(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(updateLogo);ticking=true}},{passive:true});updateLogo()})();</script>'''
 
           if original.count(old_script) != 1:
               raise SystemExit(
                   "ABORT: approved obsolete brand JavaScript fragment did not match exactly once. Nothing will be committed."
               )
 
-          result = original.replace(old_script, new_script, 1)
+          result = original.replace(old_script, b"", 1)
 
           if result == original:
               raise SystemExit(f"ABORT: {filename} was not changed. Nothing will be committed.")

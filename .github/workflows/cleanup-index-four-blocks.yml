@@ -32,27 +32,15 @@ jobs:
                       f"Expected {expected_blob}, found {actual_blob}. Nothing will be committed."
                   )
 
-          targets = {
+          removals = {
               "account.html": [
                   b'<div class="menu-header"></div>',
                   b'.menu-header{display:flex;justify-content:flex-end}',
               ],
               "account-auth.js": [
-                  b',p=document.getElementById("profileName");',
-                  b'if(p)p.value=label;',
-                  b'const oldAgreement=document.getElementById("releaseAgreement");if(oldAgreement)oldAgreement.addEventListener("change",e=>{const b=document.getElementById("submitReleaseButton");if(!b)return;const on=e.target.checked;b.classList.toggle("release-disabled",!on);b.classList.toggle("release-enabled",on);b.setAttribute("aria-disabled",String(!on));b.tabIndex=on?0:-1});',
-              ],
-          }
-
-          removals = {
-              "account.html": [
-                  targets["account.html"][0],
-                  targets["account.html"][1],
-              ],
-              "account-auth.js": [
-                  targets["account-auth.js"][0],
-                  targets["account-auth.js"][1],
-                  targets["account-auth.js"][2],
+                  b",p=document.getElementById('profileName');",
+                  b"if(p)p.value=label;",
+                  b"const oldAgreement=document.getElementById('releaseAgreement');if(oldAgreement)oldAgreement.addEventListener('change',e=>{const b=document.getElementById('submitReleaseButton');if(!b)return;const on=e.target.checked;b.classList.toggle('release-disabled',!on);b.classList.toggle('release-enabled',on);b.setAttribute('aria-disabled',String(!on));b.tabIndex=on?0:-1});",
               ],
           }
 

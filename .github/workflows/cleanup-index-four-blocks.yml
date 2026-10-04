@@ -38,7 +38,7 @@ jobs:
                   b'.menu-header{display:flex;justify-content:flex-end}',
               ],
               "account-auth.js": [
-                  b",p=document.getElementById('profileName');",
+                  b"p=document.getElementById('profileName')",
                   b"if(p)p.value=label;",
                   b"const oldAgreement=document.getElementById('releaseAgreement');if(oldAgreement)oldAgreement.addEventListener('change',e=>{const b=document.getElementById('submitReleaseButton');if(!b)return;const on=e.target.checked;b.classList.toggle('release-disabled',!on);b.classList.toggle('release-enabled',on);b.setAttribute('aria-disabled',String(!on));b.tabIndex=on?0:-1});",
               ],
@@ -53,7 +53,10 @@ jobs:
                       raise SystemExit(
                           f"ABORT: {filename}, approved fragment matched {matches} times: {part!r}. Nothing will be committed."
                       )
-                  result = result.replace(part, b"", 1)
+                  if filename == "account-auth.js" and part.startswith(b"p=document.getElementById"):
+                      result = result.replace(b",p=document.getElementById('profileName')", b"", 1)
+                  else:
+                      result = result.replace(part, b"", 1)
               Path(f"/tmp/{filename}.expected").write_bytes(result)
               path.write_bytes(result)
 

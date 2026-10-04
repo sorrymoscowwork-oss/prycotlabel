@@ -36,22 +36,42 @@ jobs:
                   f"It must exactly match {approved_source_commit}. Nothing will be committed."
               )
 
-          old_script = b'''<script id="scroll-logo-hide-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function updateLogo(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(updateLogo);ticking=true}},{passive:true});updateLogo()})();</script>'''
+          start_marker = b'<script id="scroll-logo-hide-behavior">'
+          end_marker = b'</script>'
 
-          if original.count(old_script) != 1:
+          if original.count(start_marker) != 1:
               raise SystemExit(
-                  "ABORT: approved obsolete brand JavaScript fragment did not match exactly once. Nothing will be committed."
+                  "ABORT: approved obsolete brand JavaScript start marker did not match exactly once. Nothing will be committed."
               )
 
-          result = original.replace(old_script, b"", 1)
+          start = original.find(start_marker)
+          end = original.find(end_marker, start)
+          if end == -1:
+              raise SystemExit(
+                  "ABORT: approved obsolete brand JavaScript closing marker was not found. Nothing will be committed."
+              )
+          end += len(end_marker)
+
+          fragment = original[start:end]
+          if not fragment.startswith(start_marker) or not fragment.endswith(end_marker):
+              raise SystemExit(
+                  "ABORT: approved obsolete brand JavaScript fragment boundaries are invalid. Nothing will be committed."
+              )
+
+          result = original[:start] + original[end:]
 
           if result == original:
               raise SystemExit(f"ABORT: {filename} was not changed. Nothing will be committed.")
 
+          if result.count(start_marker) != 0:
+              raise SystemExit(
+                  "ABORT: obsolete brand JavaScript marker still exists after cleanup. Nothing will be committed."
+              )
+
           Path(f"/tmp/{filename}.expected").write_bytes(result)
           path.write_bytes(result)
 
-          print("Verified: approved source version and exactly one approved obsolete JavaScript fragment.")
+          print("Verified: approved source version and exactly one approved obsolete JavaScript block removed.")
 
       - name: Verify exact expected result
         shell: python

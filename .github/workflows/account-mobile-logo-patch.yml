@@ -1,0 +1,46 @@
+name: PRYCOT account mobile logo patch
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event.head_commit.message == 'Temporary account mobile logo patch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add only mobile logo scroll behavior
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('account.html')
+          text = path.read_text(encoding='utf-8')
+
+          marker = '</body>'
+          addition = '''<script>\n(function(){\n  if(!window.matchMedia('(max-width:700px)').matches)return;\n  const brand=document.querySelector('.brand');\n  if(!brand)return;\n  brand.style.transition='filter .56s ease, opacity .56s ease, transform .56s ease';\n  let ticking=false;\n  function update(){\n    const hidden=window.scrollY>80;\n    brand.style.filter=hidden?'blur(16px)':'blur(0)';\n    brand.style.opacity=hidden?'0':'1';\n    brand.style.transform=hidden?'translateY(-8px)':'translateY(0)';\n    ticking=false;\n  }\n  window.addEventListener('scroll',function(){\n    if(!ticking){window.requestAnimationFrame(update);ticking=true;}\n  },{passive:true});\n  update();\n})();\n</script>\n'''
+
+          if text.count(marker) != 1:
+              raise SystemExit('Safety stop: expected exactly one </body> marker.')
+          if "PRYCOT account mobile logo patch" in text or "window.scrollY>80" in text:
+              raise SystemExit('Safety stop: mobile logo scroll patch appears to already exist.')
+
+          text = text.replace(marker, addition + marker, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Verify and commit only account.html
+        run: |
+          git diff --check
+          git diff -- account.html
+          git add account.html
+          git rm .github/workflows/account-mobile-logo-patch.yml
+          git diff --cached --check
+          git diff --cached -- account.html
+          git commit -m 'Fix mobile account logo scroll behavior'
+          git push

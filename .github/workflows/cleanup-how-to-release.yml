@@ -10,8 +10,10 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout full history
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Remove only the approved How to Release fragments
         shell: python
@@ -20,18 +22,19 @@ jobs:
           import subprocess
 
           filename = "how-to-release.html"
-          expected_parent = "d06228ab3f26eff148f7ab914c8435bd7d512b55"
-          actual_parent = subprocess.check_output(
-              ["git", "rev-parse", "HEAD^"], text=True
-          ).strip()
-          if actual_parent != expected_parent:
-              raise SystemExit(
-                  f"ABORT: {filename} is not at the approved source version. "
-                  f"Expected parent {expected_parent}, found {actual_parent}. Nothing will be committed."
-              )
+          approved_source_commit = "d06228ab3f26eff148f7ab914c8435bd7d512b55"
 
           path = Path(filename)
           original = path.read_bytes()
+
+          approved_source = subprocess.check_output(
+              ["git", "show", f"{approved_source_commit}:{filename}"]
+          )
+          if original != approved_source:
+              raise SystemExit(
+                  f"ABORT: {filename} is not the approved source version. "
+                  f"It must exactly match {approved_source_commit}. Nothing will be committed."
+              )
 
           old_brand = b'<a class="brand" id="brand" href="index.html" aria-label="PRYCOT.">'
           new_brand = b'<a class="brand" href="index.html" aria-label="PRYCOT.">'

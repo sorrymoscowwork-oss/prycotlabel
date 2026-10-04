@@ -20,40 +20,49 @@ jobs:
           import re
 
           path = Path("index.html")
-          text = path.read_text(encoding="utf-8")
-          original = text
+          original = path.read_bytes()
+          text = original.decode("utf-8")
 
           patterns = [
-              r'<style>\s*\.brand\{position:fixed!important;top:30px!important;left:34px!important;z-index:9!important\}\s*@media\(max-width:700px\)\{\.brand\{top:22px!important;left:20px!important\}\}\s*</style>',
-              r'<style id="uniform-menu-style">.*?</style>',
-              r'<style id="active-menu-item">.*?</style>',
-              r'<style id="home-button-style">.*?</style>',
+              rb'<style>\s*\.brand\{position:fixed!important;top:30px!important;left:34px!important;z-index:9!important\}\s*@media\(max-width:700px\)\{\.brand\{top:22px!important;left:20px!important\}\}\s*</style>',
+              rb'<style id="uniform-menu-style">.*?</style>',
+              rb'<style id="active-menu-item">.*?</style>',
+              rb'<style id="home-button-style">.*?</style>',
           ]
 
+          result = original
           for i, pattern in enumerate(patterns, 1):
-              matches = re.findall(pattern, text, flags=re.S)
+              matches = re.findall(pattern, result, flags=re.S)
               if len(matches) != 1:
                   raise SystemExit(f"ABORT: approved block {i} matched {len(matches)} times; nothing will be committed.")
-              text = re.sub(pattern, "", text, count=1, flags=re.S)
+              result = re.sub(pattern, b"", result, count=1, flags=re.S)
 
-          if text == original:
+          if result == original:
               raise SystemExit("ABORT: no change produced.")
 
-          path.write_text(text, encoding="utf-8")
-          print("Verified: exactly four approved blocks removed.")
+          Path("/tmp/index.expected").write_bytes(result)
+          path.write_bytes(result)
+          print("Verified: exactly four approved blocks removed from the original byte content.")
 
-      - name: Verify diff is limited to the approved blocks
-        shell: bash
+      - name: Verify result is exactly the expected four-block removal
+        shell: python
         run: |
-          git diff -- index.html
-          if [ "$(git diff --name-only)" != "index.html" ]; then
-            echo "ABORT: unexpected files changed."
-            exit 1
-          fi
-          if git diff --unified=0 -- index.html | grep -E '^\+[^+]' >/dev/null; then
-            echo "ABORT: unexpected added content detected."
-            exit 1
-          fi
+          from pathlib import Path
+          import subprocess
+
+          expected = Path("/tmp/index.expected").read_bytes()
+          actual = Path("index.html").read_bytes()
+
+          if actual != expected:
+              raise SystemExit("ABORT: index.html differs from the exact expected result.")
+
+          changed = subprocess.check_output(
+              ["git", "diff", "--name-only"], text=True
+          ).splitlines()
+          if changed != ["index.html"]:
+              raise SystemExit(f"ABORT: unexpected changed files: {changed}")
+
+          print("Verified: index.html is byte-for-byte identical to the expected four-block removal, and it is the only changed file.")
 
       - name: Commit only after all checks pass
         shell: bash

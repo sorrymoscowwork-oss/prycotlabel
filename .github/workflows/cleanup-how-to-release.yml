@@ -1,7 +1,24 @@
-name: Safe PRYCOT cleanup — How to Release
+name: Safe PRYCOT cleanup — approved block
 
 on:
   workflow_dispatch:
+    inputs:
+      filename:
+        description: "Approved HTML file"
+        required: true
+        default: "how-to-release.html"
+      approved_source_commit:
+        description: "Exact approved source commit for the HTML file"
+        required: true
+        default: "d06228ab3f26eff148f7ab914c8435bd7d512b55"
+      start_marker:
+        description: "Exact unique start marker of the approved block"
+        required: true
+        default: "<script id=\"scroll-logo-hide-behavior\">"
+      commit_message:
+        description: "Commit message"
+        required: true
+        default: "Clean obsolete approved code"
 
 permissions:
   contents: write
@@ -15,14 +32,21 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Remove only the approved How to Release fragment
+      - name: Remove only the approved block
         shell: python
+        env:
+          TARGET_FILE: ${{ inputs.filename }}
+          APPROVED_SOURCE_COMMIT: ${{ inputs.approved_source_commit }}
+          START_MARKER: ${{ inputs.start_marker }}
         run: |
           from pathlib import Path
+          import os
           import subprocess
 
-          filename = "how-to-release.html"
-          approved_source_commit = "d06228ab3f26eff148f7ab914c8435bd7d512b55"
+          filename = os.environ["TARGET_FILE"]
+          approved_source_commit = os.environ["APPROVED_SOURCE_COMMIT"]
+          start_marker = os.environ["START_MARKER"].encode("utf-8")
+          end_marker = b"</script>"
 
           path = Path(filename)
           original = path.read_bytes()
@@ -36,27 +60,18 @@ jobs:
                   f"It must exactly match {approved_source_commit}. Nothing will be committed."
               )
 
-          start_marker = b'<script id="scroll-logo-hide-behavior">'
-          end_marker = b'</script>'
-
           if original.count(start_marker) != 1:
               raise SystemExit(
-                  "ABORT: approved obsolete brand JavaScript start marker did not match exactly once. Nothing will be committed."
+                  "ABORT: approved start marker did not match exactly once. Nothing will be committed."
               )
 
           start = original.find(start_marker)
           end = original.find(end_marker, start)
           if end == -1:
               raise SystemExit(
-                  "ABORT: approved obsolete brand JavaScript closing marker was not found. Nothing will be committed."
+                  "ABORT: approved block closing marker was not found. Nothing will be committed."
               )
           end += len(end_marker)
-
-          fragment = original[start:end]
-          if not fragment.startswith(start_marker) or not fragment.endswith(end_marker):
-              raise SystemExit(
-                  "ABORT: approved obsolete brand JavaScript fragment boundaries are invalid. Nothing will be committed."
-              )
 
           result = original[:start] + original[end:]
 
@@ -65,21 +80,23 @@ jobs:
 
           if result.count(start_marker) != 0:
               raise SystemExit(
-                  "ABORT: obsolete brand JavaScript marker still exists after cleanup. Nothing will be committed."
+                  "ABORT: approved block marker still exists after cleanup. Nothing will be committed."
               )
 
           Path(f"/tmp/{filename}.expected").write_bytes(result)
           path.write_bytes(result)
-
-          print("Verified: approved source version and exactly one approved obsolete JavaScript block removed.")
+          print("Verified: exact approved source and exactly one approved block removed.")
 
       - name: Verify exact expected result
         shell: python
+        env:
+          TARGET_FILE: ${{ inputs.filename }}
         run: |
           from pathlib import Path
+          import os
           import subprocess
 
-          filename = "how-to-release.html"
+          filename = os.environ["TARGET_FILE"]
           actual = Path(filename).read_bytes()
           expected = Path(f"/tmp/{filename}.expected").read_bytes()
           if actual != expected:
@@ -89,13 +106,15 @@ jobs:
           if changed != [filename]:
               raise SystemExit(f"ABORT: unexpected changed files: {changed}")
 
-          print("Verified: only how-to-release.html contains the exact approved cleanup.")
+          print(f"Verified: only {filename} contains the exact approved cleanup.")
 
       - name: Commit only after all checks pass
         shell: bash
+        env:
+          COMMIT_MESSAGE: ${{ inputs.commit_message }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add how-to-release.html
-          git commit -m "Clean obsolete How to Release code"
+          git add "${{ inputs.filename }}"
+          git commit -m "$COMMIT_MESSAGE"
           git push

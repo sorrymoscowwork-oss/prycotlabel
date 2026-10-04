@@ -1,0 +1,66 @@
+name: Clean index four legacy blocks
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remove only the four approved legacy blocks
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+          original = text
+
+          patterns = [
+              r'<style>\s*\.brand\{position:fixed!important;top:30px!important;left:34px!important;z-index:9!important\}\s*@media\(max-width:700px\)\{\.brand\{top:22px!important;left:20px!important\}\}\s*</style>',
+              r'<style id="uniform-menu-style">.*?</style>',
+              r'<style id="active-menu-item">.*?</style>',
+              r'<style id="home-button-style">.*?</style>',
+          ]
+
+          for i, pattern in enumerate(patterns, 1):
+              matches = re.findall(pattern, text, flags=re.S)
+              if len(matches) != 1:
+                  raise SystemExit(f"ABORT: approved block {i} matched {len(matches)} times; nothing will be committed.")
+              text = re.sub(pattern, "", text, count=1, flags=re.S)
+
+          if text == original:
+              raise SystemExit("ABORT: no change produced.")
+
+          path.write_text(text, encoding="utf-8")
+          print("Verified: exactly four approved blocks removed.")
+
+      - name: Verify diff is limited to the approved blocks
+        shell: bash
+        run: |
+          git diff --check
+          git diff -- index.html
+          if [ "$(git diff --name-only)" != "index.html" ]; then
+            echo "ABORT: unexpected files changed."
+            exit 1
+          fi
+          if git diff --numstat -- index.html | awk '{print ($1 < 1 || $1 > 4 || $2 < 1 || $2 > 20) ? 1 : 0}' | grep -q 1; then
+            echo "ABORT: diff size is outside the expected small range."
+            exit 1
+          fi
+
+      - name: Commit only after all checks pass
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Clean four obsolete index CSS blocks"
+          git push

@@ -21,29 +21,40 @@ jobs:
 
           targets = {
               "account.html": [
-                  rb'<div class="menu-header"></div>',
-                  rb'\.menu-header\{display:flex;justify-content:flex-end\}',
+                  [rb'<div class="menu-header"></div>'],
+                  [rb'\.menu-header\{display:flex;justify-content:flex-end\}'],
               ],
               "account-auth.js": [
-                  rb'const p=document\.getElementById\("profileName"\);if\(p\)p\.value=label;',
-                  rb'const oldAgreement=document\.getElementById\("releaseAgreement"\);if\(oldAgreement\)oldAgreement\.addEventListener\("change",e=>\{const b=document\.getElementById\("submitReleaseButton"\);if\(!b\)return;const on=e\.target\.checked;b\.classList\.toggle\("release-disabled",!on\);b\.classList\.toggle\("release-enabled",on\);b\.setAttribute\("aria-disabled",String\(!on\)\);b\.tabIndex=on\?0:-1\}\);',
+                  [
+                      rb',p=document\.getElementById\("profileName"\);',
+                      rb'if\(p\)p\.value=label;',
+                  ],
+                  [
+                      rb'const oldAgreement=document\.getElementById\("releaseAgreement"\);if\(oldAgreement\)oldAgreement\.addEventListener\("change",e=>\{const b=document\.getElementById\("submitReleaseButton"\);if\(!b\)return;const on=e\.target\.checked;b\.classList\.toggle\("release-disabled",!on\);b\.classList\.toggle\("release-enabled",on\);b\.setAttribute\("aria-disabled",String\(!on\)\);b\.tabIndex=on\?0:-1\}\);',
+                  ],
               ],
           }
 
-          for filename, patterns in targets.items():
+          for filename, blocks in targets.items():
               path = Path(filename)
               original = path.read_bytes()
               result = original
-              for i, pattern in enumerate(patterns, 1):
-                  matches = re.findall(pattern, result, flags=re.S)
-                  if len(matches) != 1:
-                      raise SystemExit(f"ABORT: {filename}, approved block {i} matched {len(matches)} times; nothing will be committed.")
-                  result = re.sub(pattern, b"", result, count=1, flags=re.S)
+
+              for block_number, parts in enumerate(blocks, 1):
+                  for part in parts:
+                      matches = re.findall(part, result, flags=re.S)
+                      if len(matches) != 1:
+                          raise SystemExit(
+                              f"ABORT: {filename}, approved block {block_number} part matched {len(matches)} times; nothing will be committed."
+                          )
+                  for part in parts:
+                      result = re.sub(part, b"", result, count=1, flags=re.S)
+
               Path(f"/tmp/{filename}.expected").parent.mkdir(parents=True, exist_ok=True)
               Path(f"/tmp/{filename}.expected").write_bytes(result)
               path.write_bytes(result)
 
-          print("Verified: all four approved account cleanup blocks were matched exactly once.")
+          print("Verified: all approved account cleanup blocks were matched exactly once.")
 
       - name: Verify exact expected result
         shell: python

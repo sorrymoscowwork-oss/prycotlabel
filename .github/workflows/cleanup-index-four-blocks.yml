@@ -1,4 +1,4 @@
-name: Clean index four legacy blocks
+name: Safe PRYCOT cleanup
 
 on:
   workflow_dispatch:
@@ -13,62 +13,61 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Remove only the four approved legacy blocks
+      - name: Remove only the approved blocks
         shell: python
         run: |
           from pathlib import Path
           import re
 
-          path = Path("index.html")
-          original = path.read_bytes()
-          text = original.decode("utf-8")
+          targets = {
+              "account.html": [
+                  rb'<div class="menu-header"></div>',
+                  rb'\.menu-header\{display:flex;justify-content:flex-end\}',
+              ],
+              "account-auth.js": [
+                  rb'const p=document\.getElementById\("profileName"\);if\(p\)p\.value=label;',
+                  rb'const oldAgreement=document\.getElementById\("releaseAgreement"\);if\(oldAgreement\)oldAgreement\.addEventListener\("change",e=>\{const b=document\.getElementById\("submitReleaseButton"\);if\(!b\)return;const on=e\.target\.checked;b\.classList\.toggle\("release-disabled",!on\);b\.classList\.toggle\("release-enabled",on\);b\.setAttribute\("aria-disabled",String\(!on\)\);b\.tabIndex=on\?0:-1\}\);',
+              ],
+          }
 
-          patterns = [
-              rb'<style>\s*\.brand\{position:fixed!important;top:30px!important;left:34px!important;z-index:9!important\}\s*@media\(max-width:700px\)\{\.brand\{top:22px!important;left:20px!important\}\}\s*</style>',
-              rb'<style id="uniform-menu-style">.*?</style>',
-              rb'<style id="active-menu-item">.*?</style>',
-              rb'<style id="home-button-style">.*?</style>',
-          ]
+          for filename, patterns in targets.items():
+              path = Path(filename)
+              original = path.read_bytes()
+              result = original
+              for i, pattern in enumerate(patterns, 1):
+                  matches = re.findall(pattern, result, flags=re.S)
+                  if len(matches) != 1:
+                      raise SystemExit(f"ABORT: {filename}, approved block {i} matched {len(matches)} times; nothing will be committed.")
+                  result = re.sub(pattern, b"", result, count=1, flags=re.S)
+              Path(f"/tmp/{filename}.expected").parent.mkdir(parents=True, exist_ok=True)
+              Path(f"/tmp/{filename}.expected").write_bytes(result)
+              path.write_bytes(result)
 
-          result = original
-          for i, pattern in enumerate(patterns, 1):
-              matches = re.findall(pattern, result, flags=re.S)
-              if len(matches) != 1:
-                  raise SystemExit(f"ABORT: approved block {i} matched {len(matches)} times; nothing will be committed.")
-              result = re.sub(pattern, b"", result, count=1, flags=re.S)
+          print("Verified: all four approved account cleanup blocks were matched exactly once.")
 
-          if result == original:
-              raise SystemExit("ABORT: no change produced.")
-
-          Path("/tmp/index.expected").write_bytes(result)
-          path.write_bytes(result)
-          print("Verified: exactly four approved blocks removed from the original byte content.")
-
-      - name: Verify result is exactly the expected four-block removal
+      - name: Verify exact expected result
         shell: python
         run: |
           from pathlib import Path
           import subprocess
 
-          expected = Path("/tmp/index.expected").read_bytes()
-          actual = Path("index.html").read_bytes()
+          for filename in ["account.html", "account-auth.js"]:
+              actual = Path(filename).read_bytes()
+              expected = Path(f"/tmp/{filename}.expected").read_bytes()
+              if actual != expected:
+                  raise SystemExit(f"ABORT: {filename} differs from the exact expected result.")
 
-          if actual != expected:
-              raise SystemExit("ABORT: index.html differs from the exact expected result.")
-
-          changed = subprocess.check_output(
-              ["git", "diff", "--name-only"], text=True
-          ).splitlines()
-          if changed != ["index.html"]:
+          changed = subprocess.check_output(["git", "diff", "--name-only"], text=True).splitlines()
+          if changed != ["account-auth.js", "account.html"]:
               raise SystemExit(f"ABORT: unexpected changed files: {changed}")
 
-          print("Verified: index.html is byte-for-byte identical to the expected four-block removal, and it is the only changed file.")
+          print("Verified: only account.html and account-auth.js contain the exact approved changes.")
 
       - name: Commit only after all checks pass
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Clean four obsolete index CSS blocks"
+          git add account.html account-auth.js
+          git commit -m "Clean obsolete account code"
           git push

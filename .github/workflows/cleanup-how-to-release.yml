@@ -36,14 +36,14 @@ jobs:
                   f"It must exactly match {approved_source_commit}. Nothing will be committed."
               )
 
+          clean_brand = b'<a class="brand" href="/" aria-label="PRYCOT.">'
           old_brand = b'<a class="brand" id="brand" href="index.html" aria-label="PRYCOT.">'
-          new_brand = b'<a class="brand" href="index.html" aria-label="PRYCOT.">'
-          if original.count(old_brand) != 1:
+          if original.count(clean_brand) != 1 or original.count(old_brand) != 0:
               raise SystemExit(
-                  "ABORT: approved brand id fragment did not match exactly once. Nothing will be committed."
+                  "ABORT: brand block is not in the approved already-clean state. Nothing will be committed."
               )
 
-          result = original.replace(old_brand, new_brand, 1)
+          result = original
 
           old_script = b"const brand=document.getElementById('brand'),page=document.querySelector('.page');if(!brand||!page)return;"
           new_script = b"const page=document.querySelector('.page');if(!page)return;"
@@ -60,7 +60,7 @@ jobs:
           Path(f"/tmp/{filename}.expected").write_bytes(result)
           path.write_bytes(result)
 
-          print("Verified: approved source version and both approved fragments matched exactly once.")
+          print("Verified: approved source version, clean brand state, and approved JavaScript fragment.")
 
       - name: Verify exact expected result
         shell: python

@@ -13,58 +13,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Remove only the approved blocks
+      - name: Remove only the approved dashboard guide block
         shell: python
         run: |
           from pathlib import Path
           import subprocess
 
-          expected_blobs = {
-              "account.html": "4a4e67309e7628fef70d8dfff3534a79ab074c07",
-              "account-auth.js": "d7f51b12e1f46dcf197b63e077ca2f2bce36925b",
-              "dashboard-guide.html": "b86a39301904bdd0b5161a737737409835413781",
-          }
+          filename = "dashboard-guide.html"
+          expected_blob = "b86a39301904bdd0b5161a737737409835413781"
+          actual_blob = subprocess.check_output(["git", "hash-object", filename], text=True).strip()
+          if actual_blob != expected_blob:
+              raise SystemExit(
+                  f"ABORT: {filename} is not the approved source version. "
+                  f"Expected {expected_blob}, found {actual_blob}. Nothing will be committed."
+              )
 
-          for filename, expected_blob in expected_blobs.items():
-              actual_blob = subprocess.check_output(["git", "hash-object", filename], text=True).strip()
-              if actual_blob != expected_blob:
-                  raise SystemExit(
-                      f"ABORT: {filename} is not the approved source version. "
-                      f"Expected {expected_blob}, found {actual_blob}. Nothing will be committed."
-                  )
+          part = b"(function(){const page=document.querySelector('.page');if(!page)return;let ticking=false;function update(){page.classList.toggle('mobile-brand-hidden',innerWidth<=700&&scrollY>80);ticking=false}addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();"
 
-          removals = {
-              "account.html": [
-                  b'<div class="menu-header"></div>',
-                  b'.menu-header{display:flex;justify-content:flex-end}',
-              ],
-              "account-auth.js": [
-                  b"p=document.getElementById('profileName')",
-                  b"if(p)p.value=label;",
-                  b"const oldAgreement=document.getElementById('releaseAgreement');if(oldAgreement)oldAgreement.addEventListener('change',e=>{const b=document.getElementById('submitReleaseButton');if(!b)return;const on=e.target.checked;b.classList.toggle('release-disabled',!on);b.classList.toggle('release-enabled',on);b.setAttribute('aria-disabled',String(!on));b.tabIndex=on?0:-1});",
-              ],
-              "dashboard-guide.html": [
-                  b"(function(){const page=document.querySelector('.page');if(!page)return;let ticking=false;function update(){page.classList.toggle('mobile-brand-hidden',innerWidth<=700&&scrollY>80);ticking=false}addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();",
-              ],
-          }
+          path = Path(filename)
+          result = path.read_bytes()
+          matches = result.count(part)
+          if matches != 1:
+              raise SystemExit(
+                  f"ABORT: {filename}, approved fragment matched {matches} times: {part!r}. Nothing will be committed."
+              )
 
-          for filename, parts in removals.items():
-              path = Path(filename)
-              result = path.read_bytes()
-              for part in parts:
-                  matches = result.count(part)
-                  if matches != 1:
-                      raise SystemExit(
-                          f"ABORT: {filename}, approved fragment matched {matches} times: {part!r}. Nothing will be committed."
-                      )
-                  if filename == "account-auth.js" and part.startswith(b"p=document.getElementById"):
-                      result = result.replace(b",p=document.getElementById('profileName')", b"", 1)
-                  else:
-                      result = result.replace(part, b"", 1)
-              Path(f"/tmp/{filename}.expected").write_bytes(result)
-              path.write_bytes(result)
+          result = result.replace(part, b"", 1)
+          Path(f"/tmp/{filename}.expected").write_bytes(result)
+          path.write_bytes(result)
 
-          print("Verified: exact approved source versions and exact approved fragments matched once.")
+          print("Verified: exact approved source version and exact approved fragment matched once.")
 
       - name: Verify exact expected result
         shell: python
@@ -72,23 +50,23 @@ jobs:
           from pathlib import Path
           import subprocess
 
-          for filename in ["account.html", "account-auth.js", "dashboard-guide.html"]:
-              actual = Path(filename).read_bytes()
-              expected = Path(f"/tmp/{filename}.expected").read_bytes()
-              if actual != expected:
-                  raise SystemExit(f"ABORT: {filename} differs from the exact expected result.")
+          filename = "dashboard-guide.html"
+          actual = Path(filename).read_bytes()
+          expected = Path(f"/tmp/{filename}.expected").read_bytes()
+          if actual != expected:
+              raise SystemExit(f"ABORT: {filename} differs from the exact expected result.")
 
           changed = subprocess.check_output(["git", "diff", "--name-only"], text=True).splitlines()
-          if changed != ["account-auth.js", "account.html", "dashboard-guide.html"]:
+          if changed != [filename]:
               raise SystemExit(f"ABORT: unexpected changed files: {changed}")
 
-          print("Verified: only account.html, account-auth.js and dashboard-guide.html contain the exact approved changes.")
+          print("Verified: only dashboard-guide.html contains the exact approved change.")
 
       - name: Commit only after all checks pass
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add account.html account-auth.js dashboard-guide.html
+          git add dashboard-guide.html
           git commit -m "Clean obsolete dashboard guide code"
           git push

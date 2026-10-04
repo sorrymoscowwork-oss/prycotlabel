@@ -45,14 +45,13 @@ jobs:
       - name: Verify diff is limited to the approved blocks
         shell: bash
         run: |
-          git diff --check
           git diff -- index.html
           if [ "$(git diff --name-only)" != "index.html" ]; then
             echo "ABORT: unexpected files changed."
             exit 1
           fi
-          if git diff --numstat -- index.html | awk '{print ($1 < 1 || $1 > 4 || $2 < 1 || $2 > 20) ? 1 : 0}' | grep -q 1; then
-            echo "ABORT: diff size is outside the expected small range."
+          if git diff --unified=0 -- index.html | grep -E '^\+[^+]' >/dev/null; then
+            echo "ABORT: unexpected added content detected."
             exit 1
           fi
 

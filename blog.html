@@ -29,6 +29,12 @@ header{position:relative;min-height:0}
 h2{max-width:780px;margin:0;font-size:clamp(48px,7vw,88px);line-height:.94;font-weight:500;letter-spacing:-.055em}
 .intro{max-width:650px;margin:30px 0 70px;color:var(--muted);font-size:15px;line-height:1.6}
 .posts{border-top:1px solid var(--line)}
+.post-card{display:block;padding:44px 0 48px;border-bottom:1px solid var(--line)}
+.post-number{display:block;margin-bottom:16px;color:var(--muted);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.post-card h3{margin:0 0 14px;max-width:760px;font-size:30px;line-height:1.05;font-weight:500;letter-spacing:-.035em}
+.post-card .post-excerpt{max-width:680px;margin:0;color:var(--muted);font-size:13px;line-height:1.65}
+.post-card:hover h3{color:#FF7F50}
+@media(max-width:700px){.post-card{padding:34px 0 38px}.post-card h3{font-size:24px}.post-card .post-excerpt{font-size:12px}}
 .empty{padding:70px 0;border-bottom:1px solid var(--line)}
 .empty-number{display:block;margin-bottom:18px;color:var(--muted);font-size:10px;letter-spacing:.14em}
 .empty h3{margin:0 0 12px;font-size:24px;font-weight:500;letter-spacing:-.03em}
@@ -131,7 +137,11 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <h2><span style="color:#A0522D">Ideas</span>, music &amp; the <span style="color:#FF7F50">industry</span>.</h2>
 <p class="intro">The PRYCOT. corporate blog. Articles about music distribution, independent artists, releases, promotion, technology and the changing music industry.</p>
 <div class="posts">
-<article class="empty"><span class="empty-number">COMING SOON</span><h3>The first article is on its way.</h3><p>New PRYCOT. articles will appear here soon.</p></article>
+<a class="post-card" href="blog-prycot-is-not-just-distribution.html">
+<span class="post-number">05.10.2026 / PRYCOT.</span>
+<h3>PRYCOT. — Not Just Distribution</h3>
+<p class="post-excerpt">PRYCOT. began with a simple idea: make it easier for independent musicians to bring their work into the world. But somewhere along the way, it became clear that distribution was only one part of what we wanted to build.</p>
+</a>
 </div>
 </section>
 

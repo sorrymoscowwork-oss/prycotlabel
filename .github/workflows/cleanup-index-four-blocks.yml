@@ -17,44 +17,59 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
+          import subprocess
+
+          expected_blobs = {
+              "account.html": "4a4e67309e7628fef70d8dfff3534a79ab074c07",
+              "account-auth.js": "d7f51b12e1f46dcf197b63e077ca2f2bce36925b",
+          }
+
+          for filename, expected_blob in expected_blobs.items():
+              actual_blob = subprocess.check_output(["git", "hash-object", filename], text=True).strip()
+              if actual_blob != expected_blob:
+                  raise SystemExit(
+                      f"ABORT: {filename} is not the approved source version. "
+                      f"Expected {expected_blob}, found {actual_blob}. Nothing will be committed."
+                  )
 
           targets = {
               "account.html": [
-                  [b'<div class="menu-header"></div>'],
-                  [b'.menu-header{display:flex;justify-content:flex-end}'],
+                  b'<div class="menu-header"></div>',
+                  b'.menu-header{display:flex;justify-content:flex-end}',
               ],
               "account-auth.js": [
-                  [
-                      b',p=document.getElementById("profileName");',
-                      b'if(p)p.value=label;',
-                  ],
-                  [
-                      b'const oldAgreement=document.getElementById("releaseAgreement");if(oldAgreement)oldAgreement.addEventListener("change",e=>{const b=document.getElementById("submitReleaseButton");if(!b)return;const on=e.target.checked;b.classList.toggle("release-disabled",!on);b.classList.toggle("release-enabled",on);b.setAttribute("aria-disabled",String(!on));b.tabIndex=on?0:-1});',
-                  ],
+                  b',p=document.getElementById("profileName");',
+                  b'if(p)p.value=label;',
+                  b'const oldAgreement=document.getElementById("releaseAgreement");if(oldAgreement)oldAgreement.addEventListener("change",e=>{const b=document.getElementById("submitReleaseButton");if(!b)return;const on=e.target.checked;b.classList.toggle("release-disabled",!on);b.classList.toggle("release-enabled",on);b.setAttribute("aria-disabled",String(!on));b.tabIndex=on?0:-1});',
               ],
           }
 
-          for filename, blocks in targets.items():
+          removals = {
+              "account.html": [
+                  targets["account.html"][0],
+                  targets["account.html"][1],
+              ],
+              "account-auth.js": [
+                  targets["account-auth.js"][0],
+                  targets["account-auth.js"][1],
+                  targets["account-auth.js"][2],
+              ],
+          }
+
+          for filename, parts in removals.items():
               path = Path(filename)
-              original = path.read_bytes()
-              result = original
-
-              for block_number, parts in enumerate(blocks, 1):
-                  for part in parts:
-                      matches = result.count(part)
-                      if matches != 1:
-                          raise SystemExit(
-                              f"ABORT: {filename}, approved block {block_number} part matched {matches} times; nothing will be committed."
-                          )
-                  for part in parts:
-                      result = result.replace(part, b"", 1)
-
-              expected_path = Path(f"/tmp/{filename}.expected")
-              expected_path.parent.mkdir(parents=True, exist_ok=True)
-              expected_path.write_bytes(result)
+              result = path.read_bytes()
+              for part in parts:
+                  matches = result.count(part)
+                  if matches != 1:
+                      raise SystemExit(
+                          f"ABORT: {filename}, approved fragment matched {matches} times: {part!r}. Nothing will be committed."
+                      )
+                  result = result.replace(part, b"", 1)
+              Path(f"/tmp/{filename}.expected").write_bytes(result)
               path.write_bytes(result)
 
-          print("Verified: all approved account cleanup blocks were matched exactly once.")
+          print("Verified: exact approved source versions and exact approved fragments matched once.")
 
       - name: Verify exact expected result
         shell: python

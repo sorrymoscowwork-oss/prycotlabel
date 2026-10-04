@@ -66,25 +66,26 @@
   })();
 
   // Mobile-only account logo and tagline scroll behavior; does not affect desktop or other pages.
-  (function mobileBrandScroll(){
+  (function mobileLogoScroll(){
     if(!window.matchMedia('(max-width:700px)').matches)return;
     const brand=document.querySelector('.brand');
     const tagline=document.querySelector('.tagline');
-    if(!brand)return;
+    if(!brand||!tagline)return;
     const transition='filter .56s ease, opacity .56s ease, transform .56s ease';
     brand.style.transition=transition;
-    if(tagline)tagline.style.transition=transition;
+    tagline.style.transition=transition;
     let ticking=false;
     function update(){
       const hidden=window.scrollY>80;
-      brand.style.filter=hidden?'blur(16px)':'blur(0)';
-      brand.style.opacity=hidden?'0':'1';
-      brand.style.transform=hidden?'translateY(-8px)':'translateY(0)';
-      if(tagline){
-        tagline.style.filter=hidden?'blur(16px)':'blur(0)';
-        tagline.style.opacity=hidden?'0':'1';
-        tagline.style.transform=hidden?'translateY(-8px)':'translateY(0)';
-      }
+      const filter=hidden?'blur(16px)':'blur(0)';
+      const opacity=hidden?'0':'1';
+      const transform=hidden?'translateY(-8px)':'translateY(0)';
+      brand.style.filter=filter;
+      brand.style.opacity=opacity;
+      brand.style.transform=transform;
+      tagline.style.filter=filter;
+      tagline.style.opacity=opacity;
+      tagline.style.transform=transform;
       ticking=false;
     }
     window.addEventListener('scroll',function(){

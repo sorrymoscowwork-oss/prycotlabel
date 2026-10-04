@@ -20,77 +20,29 @@
   window.restoreSession=async function(){const u=profile();if(!u){showAuth();return}try{display(u);showCabinet();if(typeof window.loadDashboard==='function')await window.loadDashboard()}catch(err){showAuth();status(authStatus,err.message||'Load failed.',true)}};
   window.loadDashboard=async function(){try{const data=await window.workerRequest('/dashboard/releases');const releases=Array.isArray(data.releases)?data.releases:[];const summary=document.getElementById('releaseSummary'),list=document.getElementById('releaseList');if(summary)summary.textContent=releases.length+' RELEASE'+(releases.length===1?'':'S');if(!list)return;list.innerHTML='';if(!releases.length){const e=document.createElement('div');e.className='empty-releases';e.textContent='No releases yet.';list.appendChild(e);return}releases.forEach(r=>{const row=document.createElement('div');row.className='release-row';row.innerHTML='<div class="release-main"><div class="release-artist"></div><div class="release-title"></div></div><div class="release-meta"></div><div class="release-status"></div>';row.querySelector('.release-artist').textContent=r.artist_name||'';row.querySelector('.release-title').textContent=r.release_title||'Untitled';row.querySelector('.release-meta').textContent=(r.release_type||'')+(r.release_date?' · '+r.release_date:'');row.querySelector('.release-status').textContent=r.status||'IN REVIEW';list.appendChild(row)})}catch(err){status(dashboardStatus,err.message||'Load failed.',true)}};
   document.getElementById('logoutButton')?.addEventListener('click',()=>{clear();showAuth();status(authStatus,'')});
-  
   if(profile())window.restoreSession();
-
-  // Keep the account menu identical to the homepage menu.
-  (async function syncHomepageMenu(){
-    try{
-      const response=await fetch('index.html',{cache:'no-store'});
-      if(!response.ok)return;
-      const html=await response.text();
-      const doc=new DOMParser().parseFromString(html,'text/html');
-      const sourceMenu=doc.querySelector('nav.menu');
-      const targetMenu=document.getElementById('menu');
-      if(!sourceMenu||!targetMenu)return;
-      targetMenu.innerHTML=sourceMenu.innerHTML;
-
-      // Apply the homepage menu CSS after the account page CSS so the appearance is identical.
-      const menuStyles=[...doc.querySelectorAll('style')]
-        .map(s=>s.textContent||'')
-        .filter(css=>css.includes('.menu'))
-        .join('\n');
-      if(menuStyles){
-        const style=document.createElement('style');
-        style.id='homepage-menu-sync-style';
-        style.textContent=menuStyles;
-        document.head.appendChild(style);
-      }
-
-      const button=document.getElementById('menuButton');
-      const menu=document.getElementById('menu');
-      if(button&&menu){
-        button.onclick=function(e){e.stopPropagation();menu.classList.toggle('open')};
-        menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
-        const close=menu.querySelector('.menu-close');
-        if(close)close.addEventListener('click',()=>menu.classList.remove('open'));
-        document.addEventListener('click',e=>{
-          if(menu.classList.contains('open')&&!menu.contains(e.target)&&!button.contains(e.target))menu.classList.remove('open');
-        });
-      }
-
-      // Mark Account as the current page without changing the homepage menu structure.
-      const accountLink=targetMenu.querySelector('a[href="account.html"]');
-      if(accountLink)accountLink.classList.add('active-page');
-    }catch(_){/* Keep the existing account menu if homepage sync is unavailable. */}
-  })();
-
-  // Mobile-only account logo and tagline scroll behavior; does not affect desktop or other pages.
+  (async function syncHomepageMenu(){try{const response=await fetch('index.html',{cache:'no-store'});if(!response.ok)return;const html=await response.text();const doc=new DOMParser().parseFromString(html,'text/html');const sourceMenu=doc.querySelector('nav.menu');const targetMenu=document.getElementById('menu');if(!sourceMenu||!targetMenu)return;targetMenu.innerHTML=sourceMenu.innerHTML;const menuStyles=[...doc.querySelectorAll('style')].map(s=>s.textContent||'').filter(css=>css.includes('.menu')).join('\n');if(menuStyles){const style=document.createElement('style');style.id='homepage-menu-sync-style';style.textContent=menuStyles;document.head.appendChild(style)}const button=document.getElementById('menuButton');const menu=document.getElementById('menu');if(button&&menu){button.onclick=function(e){e.stopPropagation();menu.classList.toggle('open')};menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));const close=menu.querySelector('.menu-close');if(close)close.addEventListener('click',()=>menu.classList.remove('open'));document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!button.contains(e.target))menu.classList.remove('open')})}const accountLink=targetMenu.querySelector('a[href="account.html"]');if(accountLink)accountLink.classList.add('active-page')}catch(_){}})();
   (function mobileLogoScroll(){
     if(!window.matchMedia('(max-width:700px)').matches)return;
     const brand=document.querySelector('.brand');
     const tagline=document.querySelector('.tagline');
     if(!brand||!tagline)return;
     const transition='filter .56s ease, opacity .56s ease, transform .56s ease';
-    brand.style.transition=transition;
-    tagline.style.transition=transition;
-    let ticking=false;
     function update(){
       const hidden=window.scrollY>80;
       const filter=hidden?'blur(16px)':'blur(0)';
       const opacity=hidden?'0':'1';
       const transform=hidden?'translateY(-8px)':'translateY(0)';
-      brand.style.filter=filter;
-      brand.style.opacity=opacity;
-      brand.style.transform=transform;
-      tagline.style.filter=filter;
-      tagline.style.opacity=opacity;
-      tagline.style.transform=transform;
-      ticking=false;
+      [brand,tagline].forEach(el=>{
+        el.style.setProperty('transition',transition,'important');
+        el.style.setProperty('filter',filter,'important');
+        el.style.setProperty('opacity',opacity,'important');
+        el.style.setProperty('transform',transform,'important');
+        el.style.setProperty('pointer-events',hidden?'none':'auto','important');
+      });
     }
-    window.addEventListener('scroll',function(){
-      if(!ticking){window.requestAnimationFrame(update);ticking=true;}
-    },{passive:true});
+    window.addEventListener('scroll',update,{passive:true});
+    window.addEventListener('resize',update,{passive:true});
     update();
   })();
 })();

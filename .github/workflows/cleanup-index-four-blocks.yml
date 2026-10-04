@@ -13,14 +13,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Remove only the approved dashboard guide block
+      - name: Remove only the approved About page blocks
         shell: python
         run: |
           from pathlib import Path
+          import hashlib
+          import re
           import subprocess
 
-          filename = "dashboard-guide.html"
-          expected_blob = "b86a39301904bdd0b5161a737737409835413781"
+          filename = "about.html"
+          expected_blob = "1d8e99e0e48983d76e9bdeda6659a263b206033e"
           actual_blob = subprocess.check_output(["git", "hash-object", filename], text=True).strip()
           if actual_blob != expected_blob:
               raise SystemExit(
@@ -28,21 +30,43 @@ jobs:
                   f"Expected {expected_blob}, found {actual_blob}. Nothing will be committed."
               )
 
-          part = b"(function(){const page=document.querySelector('.page');if(!page)return;let ticking=false;function update(){page.classList.toggle('mobile-brand-hidden',innerWidth<=700&&scrollY>80);ticking=false}addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();"
+          approved_ids = [
+              "global-header-position",
+              "uniform-menu-style",
+              "active-menu-item",
+              "home-button-style",
+              "active-menu-brown",
+              "mobile-menu-spacing-divider-final",
+              "mobile-menu-divider-spacing-final",
+              "scroll-logo-hide-style",
+              "mobile-burger-close-final",
+              "mobile-hide-eyebrow",
+          ]
 
           path = Path(filename)
-          result = path.read_bytes()
-          matches = result.count(part)
-          if matches != 1:
-              raise SystemExit(
-                  f"ABORT: {filename}, approved fragment matched {matches} times: {part!r}. Nothing will be committed."
-              )
+          original = path.read_bytes()
+          result = original
 
-          result = result.replace(part, b"", 1)
+          for style_id in approved_ids:
+              pattern = re.compile(
+                  rb'<style id="' + re.escape(style_id.encode()) + rb'">.*?</style>',
+                  re.DOTALL,
+              )
+              matches = pattern.findall(result)
+              if len(matches) != 1:
+                  raise SystemExit(
+                      f"ABORT: {filename}, approved block {style_id!r} matched "
+                      f"{len(matches)} times. Nothing will be committed."
+                  )
+              result = pattern.sub(b"", result, count=1)
+
+          if result == original:
+              raise SystemExit(f"ABORT: {filename} was not changed.")
+
           Path(f"/tmp/{filename}.expected").write_bytes(result)
           path.write_bytes(result)
 
-          print("Verified: exact approved source version and exact approved fragment matched once.")
+          print("Verified: exact approved source version and all 10 approved blocks matched exactly once.")
 
       - name: Verify exact expected result
         shell: python
@@ -50,7 +74,7 @@ jobs:
           from pathlib import Path
           import subprocess
 
-          filename = "dashboard-guide.html"
+          filename = "about.html"
           actual = Path(filename).read_bytes()
           expected = Path(f"/tmp/{filename}.expected").read_bytes()
           if actual != expected:
@@ -60,13 +84,13 @@ jobs:
           if changed != [filename]:
               raise SystemExit(f"ABORT: unexpected changed files: {changed}")
 
-          print("Verified: only dashboard-guide.html contains the exact approved change.")
+          print("Verified: only about.html contains the exact approved cleanup.")
 
       - name: Commit only after all checks pass
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dashboard-guide.html
-          git commit -m "Clean obsolete dashboard guide code"
+          git add about.html
+          git commit -m "Clean obsolete About page code"
           git push

@@ -1,0 +1,47 @@
+name: PRYCOT one-time White Paper mobile logo fix
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event.head_commit.message == 'Temporary White Paper mobile logo patch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add only mobile logo scroll behavior
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('white-paper.html')
+          text = path.read_text(encoding='utf-8')
+
+          marker = '</body>'
+          script = '''<script>(function(){const brand=document.querySelector('.brand');const page=document.querySelector('.page');if(!brand||!page)return;let ticking=false;function update(){if(window.innerWidth>700){page.classList.remove('mobile-brand-hidden');ticking=false;return}page.classList.toggle('mobile-brand-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>'''
+          css = '''<style id="mobile-brand-scroll-fix">@media(max-width:700px){.mobile-brand-hidden .brand,.mobile-brand-hidden .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}}</style>'''
+
+          if 'id="mobile-brand-scroll-fix"' in text or 'mobile-brand-hidden' in text:
+              raise SystemExit('Safety stop: mobile brand scroll behavior already exists.')
+          if marker not in text:
+              raise SystemExit('Safety stop: closing body tag not found.')
+
+          text = text.replace(marker, css + script + marker, 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit only White Paper and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add white-paper.html
+          git rm .github/workflows/prycot-white-paper-mobile-logo.yml
+          git diff --cached --check
+          git diff --cached -- white-paper.html
+          git commit -m 'Fix White Paper mobile logo scroll behavior'
+          git push

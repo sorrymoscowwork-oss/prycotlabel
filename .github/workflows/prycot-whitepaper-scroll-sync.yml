@@ -1,0 +1,66 @@
+name: PRYCOT White Paper mobile scroll sync
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.event.head_commit.message == 'Temporary PRYCOT White Paper scroll sync'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add only the About mobile logo scroll behavior
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          source = Path('about.html').read_text(encoding='utf-8')
+          target_path = Path('white-paper.html')
+          target = target_path.read_text(encoding='utf-8')
+
+          def get_style(text, ident):
+              m = re.search(rf'<style[^>]*id=["\']{re.escape(ident)}["\'][^>]*>.*?</style>', text, re.S)
+              if not m:
+                  raise SystemExit(f'Safety stop: source style {ident} not found.')
+              return m.group(0)
+
+          style_ids = ['scroll-logo-hide-style', 'mobile-logo-tagline-scroll-final']
+          if any(re.search(rf'<style[^>]*id=["\']{re.escape(i)}["\']', target) for i in style_ids):
+              raise SystemExit('Safety stop: White Paper already contains one of the scroll styles.')
+
+          styles = '\n'.join(get_style(source, i) for i in style_ids)
+          target = target.replace('</head>', styles + '\n</head>', 1)
+
+          script_id = 'mobile-logo-tagline-scroll-final-js'
+          m = re.search(rf'<script[^>]*id=["\']{re.escape(script_id)}["\'][^>]*>.*?</script>', source, re.S)
+          if not m:
+              raise SystemExit('Safety stop: source scroll script not found.')
+          if re.search(rf'<script[^>]*id=["\']{re.escape(script_id)}["\']', target):
+              raise SystemExit('Safety stop: White Paper already contains the scroll script.')
+
+          target = target.replace('</body>', m.group(0) + '\n</body>', 1)
+          target_path.write_text(target, encoding='utf-8')
+          PY
+
+      - name: Verify only the requested scroll components changed
+        run: |
+          git diff --check
+          git diff -- white-paper.html
+          test "$(git diff --numstat -- white-paper.html | awk '{print $1+$2}')" -gt 0
+
+      - name: Commit and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add white-paper.html
+          git rm .github/workflows/prycot-whitepaper-scroll-sync.yml
+          git diff --cached --check
+          git diff --cached -- white-paper.html
+          git commit -m 'Match White Paper mobile logo scroll behavior'
+          git push

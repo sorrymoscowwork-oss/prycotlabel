@@ -1,0 +1,65 @@
+name: PRYCOT White Paper mobile scroll sync
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    if: github.event.head_commit.message == 'Temporary PRYCOT White Paper scroll sync'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Copy only the mobile logo scroll behavior from About
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          source = Path('about.html').read_text(encoding='utf-8')
+          target_path = Path('white-paper.html')
+          target = target_path.read_text(encoding='utf-8')
+
+          def block(text, tag, ident):
+              pattern = rf'<{tag}[^>]*id=["\']{re.escape(ident)}["\'][^>]*>.*?</{tag}>'
+              m = re.search(pattern, text, re.S)
+              if not m:
+                  raise SystemExit(f'Safety stop: {ident} not found.')
+              return m.group(0)
+
+          # These are the dedicated mobile logo scroll rules. Nothing else is touched.
+          ids = ['scroll-logo-hide-style', 'mobile-logo-tagline-scroll-final']
+
+          for ident in ids:
+              src = block(source, 'style', ident)
+              dst_pattern = rf'<style[^>]*id=["\']{re.escape(ident)}["\'][^>]*>.*?</style>'
+              matches = list(re.finditer(dst_pattern, target, re.S))
+              if len(matches) != 1:
+                  raise SystemExit(f'Safety stop: {ident} occurs {len(matches)} times in white-paper.html; expected exactly 1.')
+              target = target[:matches[0].start()] + src + target[matches[0].end():]
+
+          # Sync the scroll event handler that toggles the mobile-brand-hidden class.
+          script_pattern = r'<script[^>]*>.*?mobile-brand-hidden.*?</script>'
+          src_scripts = re.findall(script_pattern, source, re.S)
+          dst_scripts = list(re.finditer(script_pattern, target, re.S))
+          if len(src_scripts) != 1 or len(dst_scripts) != 1:
+              raise SystemExit(f'Safety stop: expected exactly one mobile-brand-hidden script in each file; source={len(src_scripts)}, target={len(dst_scripts)}.')
+
+          target = target[:dst_scripts[0].start()] + src_scripts[0] + target[dst_scripts[0].end():]
+          target_path.write_text(target, encoding='utf-8')
+          PY
+
+      - name: Commit only White Paper scroll behavior and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add white-paper.html
+          git rm .github/workflows/prycot-whitepaper-scroll-sync.yml
+          git diff --cached --check
+          git diff --cached -- white-paper.html
+          git commit -m 'Match White Paper mobile logo scroll behavior'
+          git push

@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="PRYCOT. icon">
-<style>
-circle{fill:#303438}
-@media (prefers-color-scheme:dark){circle{fill:#fff}}
-</style>
-<circle cx="256" cy="256" r="192"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="#000"/><style>@media (prefers-color-scheme: dark){circle{fill:#fff}}</style></svg>

@@ -137,6 +137,17 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main>
 
 </div>
+<script id="prycotlink-route-bridge">
+(function(){
+  const path=location.pathname.replace(/^\/+|\/+$/g,'');
+  if(!path || /^artist\.[a-z0-9_]{3,20}$/i.test(path)) return;
+  const reserved=new Set(['about.html','account.html','blog.html','contact.html','favicon.svg','how-to-release.html','index.html','label-services.html','prices.html','release-terms.html','side-projects.html','telegram-bot.html','terms.html','user-agreement.html','white-paper.html','prycotlink.html']);
+  if(reserved.has(path.toLowerCase()) || path.includes('/')) return;
+  if(/^[a-z0-9][a-z0-9-]{2,69}$/i.test(path)){
+    location.replace('/prycotlink.html?release='+encodeURIComponent(path));
+  }
+})();
+</script>
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
 <script>

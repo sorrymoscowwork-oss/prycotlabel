@@ -28,7 +28,12 @@
     .platforms{display:flex;flex-direction:column;border-bottom:1px solid var(--line)}
     .platform{display:flex;align-items:center;gap:14px;min-height:58px;border-top:1px solid var(--line);font-size:14px;letter-spacing:-.01em;transition:padding .18s ease,background .18s ease}.platform:hover{padding-left:7px}
     .platform-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex:0 0 22px}.platform-icon img{display:block;width:20px;height:20px;object-fit:contain}.platform-icon svg{display:block;width:20px;height:20px;overflow:visible}.platform-name{flex:1}.arrow{font-size:15px;color:var(--muted);transition:transform .18s ease,color .18s ease}.platform:hover .arrow{transform:translateX(4px);color:var(--fg)}
-    .bottom{width:min(100%,var(--max));margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding-top:20px;border-top:1px solid var(--line)}.qr{width:92px;height:92px;background:#fff;padding:6px;border:1px solid var(--line);object-fit:contain}.footer-copy{margin-left:auto;text-align:right;font-size:8px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.footer-copy strong{color:var(--fg);font-weight:500}
+    .videos{width:min(100%,var(--max));margin:28px auto 0;padding-top:24px;border-top:1px solid var(--line)}
+    .videos-label{margin:0 0 12px;font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+    .video-carousel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .video-card{min-width:0;overflow:hidden;border:1px solid var(--line);background:#111;border-radius:2px}
+    .video-frame{display:block;width:100%;aspect-ratio:16/9;border:0;background:#000}
+    .bottom{width:min(100%,var(--max));margin:24px auto 0;display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding-top:20px;border-top:1px solid var(--line)}.qr{width:92px;height:92px;background:#fff;padding:6px;border:1px solid var(--line);object-fit:contain}.footer-copy{margin-left:auto;text-align:right;font-size:8px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.footer-copy strong{color:var(--fg);font-weight:500}
     @media(max-width:760px){
       .release-page{padding:18px 20px 28px}.topbar{min-height:78px}.prycot{font-size:42px}.tagline{margin-top:8px;margin-left:8px;font-size:8px;letter-spacing:.08em}.upc{display:none}.content{display:block;padding:22px 0 30px}.cover-wrap{width:100%;max-width:none}.cover{box-shadow:0 14px 34px rgba(0,0,0,.35)}.release-meta{text-align:center;padding-top:25px}.eyebrow{margin-bottom:11px}h1{font-size:clamp(36px,10vw,52px)}.artist{justify-content:center;font-size:17px;margin-top:11px}.listen-label{margin-top:34px;text-align:left}
       .platforms{border:0;gap:12px;align-items:center}
@@ -39,6 +44,11 @@
       .platform-icon img,.platform-icon svg{width:21px;height:21px}
       .platform-name{flex:0 1 auto}
       .arrow{display:none}
+      .videos{margin-top:26px;padding-top:20px;overflow:hidden}
+      .video-carousel{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding-bottom:4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+      .video-carousel::-webkit-scrollbar{display:none}
+      .video-card{flex:0 0 88%;scroll-snap-align:center;border-radius:12px}
+      .video-frame{aspect-ratio:16/9}
       .bottom{align-items:center;padding-top:18px}.qr{width:78px;height:78px;background:#fff}.footer-copy{font-size:7px}
     }
     @media(min-width:761px) and (max-width:1100px){.content{grid-template-columns:minmax(280px,44vw) minmax(300px,1fr);gap:6vw}.cover-wrap{width:100%}}
@@ -67,6 +77,14 @@
           <a class="platform" href="https://music.mts.ru/artist/26323959/albums/43112572" target="_blank" rel="noopener noreferrer"><span class="platform-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#e30613"/><path fill="#fff" d="M6.1 7.15h2.65l3.25 4.05 3.25-4.05h2.65v9.7h-2.45v-6l-3.45 4.2-3.45-4.2v6H6.1z"/></svg></span><span class="platform-name">MTS Music</span><span class="arrow">↗</span></a>
           <a class="platform" href="https://zvuk.com/release/51811520" target="_blank" rel="noopener noreferrer"><span class="platform-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#8b3ffc" d="M3 12c0-1.8.55-3.05 1.45-3.05S5.9 10.2 5.9 12s.55 3.05 1.45 3.05S8.8 13.8 8.8 12s.55-4.65 1.45-4.65S11.7 10.2 11.7 12s.55 4.65 1.45 4.65S14.6 13.8 14.6 12s.55-3.05 1.45-3.05S17.5 10.2 17.5 12s.55 3.05 1.45 3.05S20.4 13.8 20.4 12s.6-2.2 1.6-2.2v4.4c-1 0-1.6-.4-1.6-2.2s-.55-3.05-1.45-3.05-1.45 1.25-1.45 3.05-.55 3.05-1.45 3.05-1.45-1.25-1.45-3.05-.55-4.65-1.45-4.65S11.7 10.2 11.7 12s-.55 4.65-1.45 4.65S8.8 13.8 8.8 12s-.55-3.05-1.45-3.05S5.9 10.2 5.9 12s-.55 3.05-1.45 3.05S3 13.8 3 12z"/></svg></span><span class="platform-name">Звук</span><span class="arrow">↗</span></a>
         </nav>
+      </div>
+    </section>
+
+    <section class="videos" aria-label="Videos">
+      <p class="videos-label">VIDEOS</p>
+      <div class="video-carousel">
+        <div class="video-card"><iframe class="video-frame" src="https://www.youtube.com/embed/VRk8tGhv3Yk" title="эскалье руж — YouTube clip 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+        <div class="video-card"><iframe class="video-frame" src="https://www.youtube.com/embed/ra2w7r3oxOM" title="эскалье руж — YouTube clip 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
       </div>
     </section>
 

@@ -54,6 +54,10 @@
     }
     @media(min-width:761px) and (max-width:1100px){.content{grid-template-columns:minmax(280px,44vw) minmax(300px,1fr);gap:6vw}.cover-wrap{width:100%}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+    @media(max-width:760px){
+      .brand{transition:opacity .56s ease,filter .56s ease,transform .56s ease;will-change:opacity,filter,transform}
+      .release-page.mobile-brand-hidden .brand{opacity:0;filter:blur(16px);transform:translateY(-4px);pointer-events:none}
+    }
   </style>
 </head>
 <body>
@@ -76,7 +80,7 @@
           <a class="platform" href="https://vk.ru/music/album/-2000523118_28523118" target="_blank" rel="noopener noreferrer"><span class="platform-icon"><img src="https://cdn.simpleicons.org/vk" alt=""></span><span class="platform-name">VK Music</span><span class="arrow">↗</span></a>
           <a class="platform" href="https://www.deezer.com/ru/album/1032112842" target="_blank" rel="noopener noreferrer"><span class="platform-icon"><img src="https://cdn.simpleicons.org/deezer" alt=""></span><span class="platform-name">Deezer</span><span class="arrow">↗</span></a>
           <a class="platform" href="https://music.mts.ru/artist/26323959/albums/43112572" target="_blank" rel="noopener noreferrer"><span class="platform-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#e30613"/><path fill="#fff" d="M6.1 7.15h2.65l3.25 4.05 3.25-4.05h2.65v9.7h-2.45v-6l-3.45 4.2-3.45-4.2v6H6.1z"/></svg></span><span class="platform-name">MTS Music</span><span class="arrow">↗</span></a>
-          <a class="platform" href="https://zvuk.com/release/51811520" target="_blank" rel="noopener noreferrer"><span class="platform-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#8b3ffc" d="M3 12c0-1.8.55-3.05 1.45-3.05S5.9 10.2 5.9 12s.55 3.05 1.45 3.05S8.8 13.8 8.8 12s.55-4.65 1.45-4.65S11.7 10.2 11.7 12s.55 4.65 1.45 4.65S14.6 13.8 14.6 12s.55-3.05 1.45-3.05S17.5 10.2 17.5 12s.55 3.05 1.45 3.05S20.4 13.8 20.4 12s.6-2.2 1.6-2.2v4.4c-1 0-1.6-.4-1.6-2.2s-.55-3.05-1.45-3.05-1.45 1.25-1.45 3.05-.55 3.05-1.45 3.05-1.45-1.25-1.45-3.05-.55-4.65-1.45-4.65S11.7 10.2 11.7 12s-.55 4.65-1.45 4.65S8.8 13.8 8.8 12s-.55-3.05-1.45-3.05S5.9 10.2 5.9 12s-.55 3.05-1.45 3.05S3 13.8 3 12z"/></svg></span><span class="platform-name">Звук</span><span class="arrow">↗</span></a>
+          <a class="platform" href="https://zvuk.com/release/51811520" target="_blank" rel="noopener noreferrer"><span class="platform-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#8b3ffc" d="M3 12c0-1.8.55-3.05 1.45-3.05S5.9 10.2 5.9 12s.55 3.05 1.45 3.05S8.8 13.8 8.8 12s.55-4.65 1.45-4.65S11.7 10.2 11.7 12s-.55 4.65 1.45 4.65S14.6 13.8 14.6 12s.55-3.05 1.45-3.05S17.5 10.2 17.5 12s.55 3.05 1.45 3.05S20.4 13.8 20.4 12s.6-2.2 1.6-2.2v4.4c-1 0-1.6-.4-1.6-2.2s-.55-3.05-1.45-3.05-1.45 1.25-1.45 3.05-.55 3.05-1.45 3.05-1.45-1.25-1.45-3.05-.55-4.65-1.45-4.65S11.7 10.2 11.7 12s-.55 4.65-1.45 4.65S8.8 13.8 8.8 12s-.55-3.05-1.45-3.05S5.9 10.2 5.9 12s-.55 3.05-1.45 3.05S3 13.8 3 12z"/></svg></span><span class="platform-name">Звук</span><span class="arrow">↗</span></a>
         </nav>
       </div>
     </section>
@@ -91,5 +95,7 @@
 
     <footer class="bottom"><img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fprycot.com%2Fescalierrouge%2F" alt="QR code for this release page" loading="lazy"><div class="footer-copy"><strong>PRYCOT.</strong><br>INDEPENDENT MUSIC LABEL<br>2026</div></footer>
   </main>
+
+  <script id="mobile-brand-scroll-behavior">(function(){const page=document.querySelector('.release-page');if(!page)return;let ticking=false;function update(){if(window.innerWidth>760){page.classList.remove('mobile-brand-hidden');ticking=false;return}page.classList.toggle('mobile-brand-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>
 </body>
 </html>

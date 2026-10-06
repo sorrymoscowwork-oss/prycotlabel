@@ -211,6 +211,41 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
     white-space:nowrap!important;
   }
 }
+
+/* Mobile release logo: give the fixed wordmark a viewport-sized containing box so Safari cannot clip the italic glyph at the right edge. */
+@media(max-width:760px){
+  .pl-live-release .release-brand{
+    left:20px!important;
+    right:auto!important;
+    top:22px!important;
+    width:calc(100vw - 20px)!important;
+    min-width:0!important;
+    max-width:none!important;
+    height:auto!important;
+    padding:0!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+    display:block!important;
+    overflow:visible!important;
+    clip: auto!important;
+    clip-path:none!important;
+    contain:none!important;
+    white-space:nowrap!important;
+  }
+  .pl-live-release .release-brand span{
+    display:inline-block!important;
+    width:auto!important;
+    min-width:0!important;
+    max-width:none!important;
+    padding:0 18px 0 0!important;
+    margin:0!important;
+    box-sizing:content-box!important;
+    overflow:visible!important;
+    clip:auto!important;
+    clip-path:none!important;
+    white-space:nowrap!important;
+  }
+}
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>

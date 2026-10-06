@@ -503,6 +503,16 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
 .release-bottom{width:min(100%,1180px);margin:24px auto 0;display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding-top:20px;border-top:1px solid #2b2b2b}.release-qr-wrap{position:relative;width:112px;height:112px;flex:0 0 112px;background:#fff;padding:5px;border:1px solid #2b2b2b;display:flex;align-items:center;justify-content:center;appearance:none;-webkit-appearance:none;color:inherit}.release-qr{display:block;width:100%;height:100%;object-fit:contain}.release-footer-copy{margin-left:auto;text-align:right;font-size:8px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:#92928d}.release-footer-copy strong{color:#f4f4f2;font-weight:500}
 .release-qr-wrap{cursor:default}.release-qr-overlay{display:none}
 @media(max-width:760px){
+  .pl-live-release .release-qr-wrap{
+    width:96px!important;height:96px!important;flex:0 0 96px!important;
+    padding:5px!important;border:1px solid #2b2b2b!important;
+    background:#fff!important;border-radius:0!important;
+    display:flex!important;align-items:center!important;justify-content:center!important;
+    cursor:pointer!important;pointer-events:auto!important;
+  }
+  .pl-live-release .release-qr-wrap .release-qr{width:100%!important;height:100%!important;display:block!important}
+}
+@media(max-width:760px){
 .release-qr-wrap{cursor:pointer}
 .release-qr-overlay{position:fixed;inset:0;z-index:2147483640;display:flex;align-items:center;justify-content:center;background:rgba(10,10,10,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease}
 .release-qr-overlay.open{opacity:1;visibility:visible;pointer-events:auto}
@@ -521,8 +531,10 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
     overlay.className='release-qr-overlay';
     overlay.innerHTML='<img src="'+qrButton.querySelector('img').src+'" alt="QR code for this release page">';
     document.body.appendChild(overlay);
-    const closeQr=()=>overlay.classList.remove('open');
-    qrButton.addEventListener('click',()=>{if(innerWidth<=760)overlay.classList.add('open')});
+    const openQr=()=>{if(window.matchMedia('(max-width:760px)').matches){overlay.classList.add('open');document.body.style.overflow='hidden'}};
+    const closeQr=()=>{overlay.classList.remove('open');document.body.style.overflow=''};
+    qrButton.addEventListener('click',openQr,{passive:true});
+    qrButton.addEventListener('pointerup',openQr,{passive:true});
     overlay.addEventListener('click',e=>{if(e.target===overlay)closeQr()});
   }
   let ticking=false;const updateBrand=()=>{if(innerWidth>760){release.classList.remove('mobile-brand-hidden')}else{release.classList.toggle('mobile-brand-hidden',scrollY>80)}ticking=false};addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(updateBrand);ticking=true}},{passive:true});addEventListener('resize',updateBrand);updateBrand()}history.replaceState({},'', '/'+r.slug)}

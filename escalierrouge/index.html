@@ -4,13 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0a0a0a">
+  <meta name="color-scheme" content="dark">
   <meta name="description" content="эскалье руж — прайват лейбл. Listen on all major streaming platforms.">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <title>эскалье руж — прайват лейбл</title>
   <style>
-    :root{--bg:#f4f4f2;--fg:#0a0a0a;--muted:#777774;--line:#d8d8d4;--max:1180px}
+    :root{--bg:#0a0a0a;--fg:#f4f4f2;--muted:#92928d;--line:#2b2b2b;--max:1180px;color-scheme:dark}
     *{box-sizing:border-box}
-    html{background:var(--bg);scroll-behavior:smooth}
+    html{background:var(--bg);scroll-behavior:smooth;color-scheme:dark}
     body{margin:0;background:var(--bg);color:var(--fg);font-family:Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:geometricPrecision}
     a{color:inherit;text-decoration:none}
     .release-page{min-height:100svh;padding:clamp(22px,3vw,42px) clamp(20px,4vw,64px) 34px;display:flex;flex-direction:column}
@@ -20,7 +21,7 @@
     .tagline{margin:8px 0 0;font-size:9px;line-height:1.18;font-weight:500;letter-spacing:.11em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
     .upc{position:absolute;right:0;top:4px;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
     .content{width:min(100%,var(--max));margin:0 auto;display:grid;grid-template-columns:minmax(320px,540px) minmax(320px,1fr);gap:clamp(52px,8vw,130px);align-items:center;flex:1;padding:clamp(20px,4vw,55px) 0}
-    .cover-wrap{width:min(100%,540px);margin:0 auto}.cover{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;box-shadow:0 18px 50px rgba(0,0,0,.12)}
+    .cover-wrap{width:min(100%,540px);margin:0 auto}.cover{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;box-shadow:0 18px 50px rgba(0,0,0,.35)}
     .release-meta{text-align:left}.eyebrow{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 15px}
     h1{margin:0;font-size:clamp(34px,5vw,70px);line-height:.92;font-weight:500;letter-spacing:-.055em}.artist{margin:15px 0 0;font-size:clamp(16px,1.8vw,22px);line-height:1.1;letter-spacing:-.025em;display:flex;align-items:center;gap:7px}.verified{width:16px;height:16px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:#1677ff;color:#fff;font-size:10px;font-weight:700;line-height:1;flex:0 0 16px}
     .listen-label{margin:42px 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
@@ -29,7 +30,6 @@
     .platform-icon{width:22px;height:22px;display:flex;align-items:center;justify-content:center;flex:0 0 22px}.platform-icon img{display:block;width:20px;height:20px;object-fit:contain}.platform-icon svg{display:block;width:20px;height:20px;overflow:visible}.platform-name{flex:1}.arrow{font-size:15px;color:var(--muted);transition:transform .18s ease,color .18s ease}.platform:hover .arrow{transform:translateX(4px);color:var(--fg)}
     .bottom{width:min(100%,var(--max));margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:30px;padding-top:20px;border-top:1px solid var(--line)}.qr{width:92px;height:92px;background:#fff;padding:6px;border:1px solid var(--line);object-fit:contain}.footer-copy{margin-left:auto;text-align:right;font-size:8px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}.footer-copy strong{color:var(--fg);font-weight:500}
     @media(max-width:760px){
-      :root{--bg:#0a0a0a;--fg:#f4f4f2;--muted:#92928d;--line:#2b2b2b;color-scheme:dark}
       .release-page{padding:18px 20px 28px}.topbar{min-height:78px}.prycot{font-size:42px}.tagline{margin-top:8px;margin-left:8px;font-size:8px;letter-spacing:.08em}.upc{display:none}.content{display:block;padding:22px 0 30px}.cover-wrap{width:100%;max-width:none}.cover{box-shadow:0 14px 34px rgba(0,0,0,.35)}.release-meta{text-align:center;padding-top:25px}.eyebrow{margin-bottom:11px}h1{font-size:clamp(36px,10vw,52px)}.artist{justify-content:center;font-size:17px;margin-top:11px}.listen-label{margin-top:34px;text-align:left}
       .platforms{border:0;gap:12px;align-items:center}
       .platform{width:min(100%,360px);min-height:58px;padding:0 22px;border:1px solid var(--line);border-radius:999px;background:transparent;justify-content:center;gap:12px;font-size:15px;box-shadow:none;transition:background .18s ease,transform .18s ease}

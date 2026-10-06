@@ -305,7 +305,7 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  function managementMarkup(v){const text=String(v??'').trim();if(!text)return '';return /^(https?:\/\/\S+)$/i.test(text)?`<a href="${escapeHtml(text)}" target="_blank" rel="noopener noreferrer">${escapeHtml(text)}</a>`:escapeHtml(text)}
  function releaseMarkup(r, preview=false){
   const vids=(r.videos||[]).map(youtubeId).filter(Boolean);
-  const qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&qzone=1&color=160-82-45&bgcolor=255-255-255&data='+encodeURIComponent(location.origin+'/'+(r.slug||makeSlug(r.title||'release')));
+  const qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&qzone=1&color=0-0-0&bgcolor=255-255-255&data='+encodeURIComponent(location.origin+'/'+(r.slug||makeSlug(r.title||'release')));
   return `<section class="pl-live-release ${preview?'pl-live-preview':''}">
     <header class="release-topbar">
       <a class="release-brand" href="https://prycot.com/" aria-label="PRYCOT."><span>PRYCOT.</span></a>

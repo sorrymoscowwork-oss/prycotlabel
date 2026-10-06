@@ -533,7 +533,7 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
 @media(prefers-reduced-motion:reduce){.pl-live-release *{scroll-behavior:auto!important;transition:none!important}}
 `;
  document.head.appendChild(s)}
- function renderRelease(r){addLiveStyles();document.documentElement.classList.remove('release-boot');const liveIntro=page.querySelector('.pl-intro');const liveForm=document.getElementById('prycotlinkForm');const livePreview=document.getElementById('previewPanel');if(liveIntro)liveIntro.remove();if(liveForm)liveForm.remove();if(livePreview)livePreview.remove();document.querySelectorAll('.pl-live-release').forEach(x=>x.remove());page.classList.add('release-host');document.querySelectorAll('.brand,.tagline,.menu-button,.menu').forEach(x=>x.remove());page.insertAdjacentHTML('beforeend',releaseMarkup(r));const release=document.querySelector('.pl-live-release');if(release){
+ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.pl-intro');const liveForm=document.getElementById('prycotlinkForm');const livePreview=document.getElementById('previewPanel');if(liveIntro)liveIntro.remove();if(liveForm)liveForm.remove();if(livePreview)livePreview.remove();document.querySelectorAll('.pl-live-release').forEach(x=>x.remove());page.classList.add('release-host');document.querySelectorAll('.brand,.tagline,.menu-button,.menu').forEach(x=>x.remove());page.insertAdjacentHTML('beforeend',releaseMarkup(r));document.documentElement.classList.remove('release-boot');const release=document.querySelector('.pl-live-release');if(release){
   const qrButton=release.querySelector('.release-qr-wrap');
   if(qrButton){
     const overlay=document.createElement('div');

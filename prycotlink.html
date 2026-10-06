@@ -150,6 +150,46 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 .pl-live-release .release-brand{position:fixed!important;left:34px!important;right:auto!important;top:30px!important;width:fit-content!important;max-width:none!important;min-width:0!important;height:auto!important;display:block!important;overflow:visible!important;white-space:nowrap!important;clip:rect(auto,auto,auto,auto)!important;clip-path:none!important;contain:none!important}
 .pl-live-release .release-brand span{display:block!important;width:fit-content!important;max-width:none!important;min-width:0!important;height:auto!important;overflow:visible!important;white-space:nowrap!important;clip:rect(auto,auto,auto,auto)!important;clip-path:none!important}
 @media(max-width:760px){.pl-live-release .release-brand{left:20px!important;top:22px!important;width:fit-content!important;max-width:none!important;overflow:visible!important}.pl-live-release .release-brand span{width:fit-content!important;max-width:none!important;overflow:visible!important}}
+
+/* Correct release wordmark geometry: do not constrain the fixed anchor to the viewport. */
+.pl-live-release .release-brand{
+  position:fixed!important;
+  left:34px!important;
+  top:30px!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:max-content!important;
+  min-width:max-content!important;
+  max-width:none!important;
+  display:block!important;
+  padding:0 18px 0 0!important;
+  margin:0!important;
+  box-sizing:content-box!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+  transform:none!important;
+}
+.pl-live-release .release-brand span{
+  display:inline-block!important;
+  width:max-content!important;
+  min-width:max-content!important;
+  max-width:none!important;
+  padding:0!important;
+  margin:0!important;
+  box-sizing:content-box!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+}
+@media(max-width:760px){
+  .pl-live-release .release-brand{
+    left:20px!important;
+    top:22px!important;
+    width:max-content!important;
+    min-width:max-content!important;
+    max-width:none!important;
+    padding-right:18px!important;
+  }
+}
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>

@@ -246,6 +246,52 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
     white-space:nowrap!important;
   }
 }
+
+/* Final mobile Safari fix: fixed-size wordmark box prevents viewport/compositing clipping while scrolling. */
+@media(max-width:760px){
+  .pl-live-release .release-brand{
+    position:fixed!important;
+    left:20px!important;
+    right:auto!important;
+    top:22px!important;
+    width:260px!important;
+    min-width:260px!important;
+    max-width:260px!important;
+    height:48px!important;
+    padding:0!important;
+    margin:0!important;
+    box-sizing:border-box!important;
+    display:block!important;
+    overflow:visible!important;
+    clip:none!important;
+    clip-path:none!important;
+    contain:none!important;
+    transform:none!important;
+    -webkit-transform:none!important;
+    filter:none!important;
+    -webkit-filter:none!important;
+    will-change:auto!important;
+    backface-visibility:visible!important;
+    -webkit-backface-visibility:visible!important;
+    transition:opacity .56s ease!important;
+  }
+  .pl-live-release .release-brand span{
+    display:block!important;
+    width:max-content!important;
+    min-width:max-content!important;
+    max-width:none!important;
+    height:auto!important;
+    padding:0!important;
+    margin:0!important;
+    box-sizing:content-box!important;
+    overflow:visible!important;
+    clip:none!important;
+    clip-path:none!important;
+    white-space:nowrap!important;
+    transform:none!important;
+    -webkit-transform:none!important;
+  }
+}
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>

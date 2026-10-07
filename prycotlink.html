@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style id="release-boot-style">html{background:#0a0a0a!important}html.release-boot body{display:none!important}html.release-boot body>*{display:none!important}html.release-boot body{overflow:hidden!important}</style>
+<style id="release-boot-style">html{background:#0a0a0a!important}html.release-boot body{display:none!important}html.release-boot body>*{display:none!important}html.release-boot body{overflow:hidden!important}html.release-leaving,html.release-leaving body{background:#0a0a0a!important}html.release-leaving body,html.release-leaving body>*{display:none!important}</style>
 <script>
 (function(){
   var root=document.documentElement;
@@ -13,6 +13,12 @@
   var slug=p.get('release')||(path&&path!=='prycotlink.html'?path:'');
   if(slug)root.classList.add('release-boot');
   else root.classList.add('form-route');
+  window.addEventListener('pagehide',function(){
+    if(root.classList.contains('release-boot')||document.querySelector('.pl-live-release'))root.classList.add('release-leaving');
+  },{capture:true});
+  window.addEventListener('pageshow',function(){
+    root.classList.remove('release-leaving');
+  },{capture:true});
 })();
 </script>
 <title>PRYCOTLINK — PRYCOT.</title>

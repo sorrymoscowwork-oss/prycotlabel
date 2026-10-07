@@ -7,7 +7,8 @@
 <script>
 (function(){
   var p=new URLSearchParams(location.search);
-  var path=location.pathname.replace(/^\\/+|\\/+$/g,'').split('/').pop()||'';
+  var parts=location.pathname.split('/').filter(Boolean);
+  var path=parts.length?parts[parts.length-1]:'';
   var slug=p.get('release')||(path&&path!=='prycotlink.html'?path:'');
   if(slug)document.documentElement.classList.add('release-boot');
 })();

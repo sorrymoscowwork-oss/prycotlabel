@@ -468,6 +468,16 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  const intro=page&&page.querySelector('.pl-intro');
  if(!page)return;
  const params=new URLSearchParams(location.search);
+ const handoffHash=(location.hash||'').replace(/^#handoff=/,'');
+ let handoffToken='';
+ if(handoffHash&&/^[a-f0-9]{64}$/i.test(decodeURIComponent(handoffHash))){
+   handoffToken=decodeURIComponent(handoffHash).toLowerCase();
+   try{sessionStorage.setItem('prycotlinkHandoff',handoffToken)}catch(_){}
+   try{history.replaceState({},document.title,location.pathname+location.search)}catch(_){}
+ }else{
+   try{handoffToken=sessionStorage.getItem('prycotlinkHandoff')||''}catch(_){}
+ }
+
  try{
    const sessionProfile=sessionStorage.getItem('prycotTelegramProfile');
    if(sessionProfile){
@@ -493,7 +503,7 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  const editSlug=params.get('edit')||'';
  const releaseSlug=params.get('release') || editSlug || (pathSlug && pathSlug!=='prycotlink.html' ? pathSlug : '');
  const telegramProfile=()=>{try{const session=JSON.parse(sessionStorage.getItem('prycotTelegramProfile')||'null');if(session&&session.id&&session.auth_date&&session.hash)return session}catch(_){}try{const local=JSON.parse(localStorage.getItem('prycotTelegramProfile')||'null');if(local)return local}catch(_){}try{const m=document.cookie.match(/(?:^|; )prycotTelegramProfile=([^;]+)/);return m?JSON.parse(decodeURIComponent(m[1])):null}catch(_){return null}};
- const authHeaders=()=>{const u=telegramProfile();return u&&u.id&&u.auth_date&&u.hash?{'X-Telegram-Auth':JSON.stringify(u)}:{}};
+ const authHeaders=()=>{if(handoffToken)return{'X-PRYCOTLINK-HANDOFF':handoffToken};const u=telegramProfile();return u&&u.id&&u.auth_date&&u.hash?{'X-Telegram-Auth':JSON.stringify(u)}:{}};
  function analyticsVisitorId(){try{let id=localStorage.getItem('prycot_analytics_visitor');if(!id){id=crypto.randomUUID();localStorage.setItem('prycot_analytics_visitor',id)}return id}catch{return crypto.randomUUID()}}
  function trackAnalytics(data){return fetch(API+'/api/analytics',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...data,visitorId:analyticsVisitorId()}),keepalive:true}).catch(()=>{})}
  function loadFormStats(){fetch(API+'/api/stats').then(r=>r.json()).then(d=>{if(!d.ok||!d.stats)return;const v=document.getElementById('formStatVisitors'),p=document.getElementById('formStatReleases');if(v)v.textContent=String(d.stats.visitors||0);if(p)p.textContent=String(d.stats.releases||0)}).catch(()=>{})}

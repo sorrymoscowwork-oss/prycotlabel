@@ -468,6 +468,13 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  const intro=page&&page.querySelector('.pl-intro');
  if(!page)return;
  const params=new URLSearchParams(location.search);
+ try{
+   const sessionProfile=sessionStorage.getItem('prycotTelegramProfile');
+   if(sessionProfile){
+     localStorage.setItem('prycotTelegramProfile',sessionProfile);
+     document.cookie='prycotTelegramProfile='+encodeURIComponent(sessionProfile)+'; Max-Age=604800; Path=/; Domain=.prycot.com; Secure; SameSite=Lax';
+   }
+ }catch(_){} 
  const pathSlug=location.pathname.replace(/^\/+|\/+$/g,'').split('/').pop()||'';
  const authHash=(location.hash||'').replace(/^#auth=/,'');
  let hashAuth=null;
@@ -485,7 +492,7 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  }
  const editSlug=params.get('edit')||'';
  const releaseSlug=params.get('release') || editSlug || (pathSlug && pathSlug!=='prycotlink.html' ? pathSlug : '');
- const telegramProfile=()=>{try{const local=JSON.parse(localStorage.getItem('prycotTelegramProfile')||'null');if(local)return local}catch(_){}try{const m=document.cookie.match(/(?:^|; )prycotTelegramProfile=([^;]+)/);return m?JSON.parse(decodeURIComponent(m[1])):null}catch(_){return null}};
+ const telegramProfile=()=>{try{const session=JSON.parse(sessionStorage.getItem('prycotTelegramProfile')||'null');if(session&&session.id&&session.auth_date&&session.hash)return session}catch(_){}try{const local=JSON.parse(localStorage.getItem('prycotTelegramProfile')||'null');if(local)return local}catch(_){}try{const m=document.cookie.match(/(?:^|; )prycotTelegramProfile=([^;]+)/);return m?JSON.parse(decodeURIComponent(m[1])):null}catch(_){return null}};
  const authHeaders=()=>{const u=telegramProfile();return u&&u.id&&u.auth_date&&u.hash?{'X-Telegram-Auth':JSON.stringify(u)}:{}};
  function analyticsVisitorId(){try{let id=localStorage.getItem('prycot_analytics_visitor');if(!id){id=crypto.randomUUID();localStorage.setItem('prycot_analytics_visitor',id)}return id}catch{return crypto.randomUUID()}}
  function trackAnalytics(data){return fetch(API+'/api/analytics',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...data,visitorId:analyticsVisitorId()}),keepalive:true}).catch(()=>{})}

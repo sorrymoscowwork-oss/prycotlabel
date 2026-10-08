@@ -31,7 +31,7 @@
     try{
       const res=await fetch(PRYCOTLINK_API+'/api/handoff',{method:'POST',headers:{'X-Telegram-Auth':JSON.stringify(u)}});
       const body=await res.json();
-      if(!res.ok||!body.ok||!body.token){if(res.status===401){clear();showAuth();status(authStatus,'Telegram session expired. Please log in again.',true);return}throw new Error(body.error||'Could not open PRYCOTLINK')}
+      if(!res.ok||!body.ok||!body.token){if(res.status===401){throw new Error('PRYCOTLINK could not verify your Telegram session (HTTP 401). Your PRYCOT account session has been kept.');}throw new Error((body.error||'Could not open PRYCOTLINK')+' (HTTP '+res.status+')')}
       const url=new URL(a.href,location.origin);
       url.hash='handoff='+encodeURIComponent(body.token);
       window.location.href=url.pathname+url.search+url.hash;

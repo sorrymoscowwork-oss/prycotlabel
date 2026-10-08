@@ -20,21 +20,29 @@
   window.onTelegramAuth=async function(user){try{status(authStatus,'Signing in...');save(user);const result=await fetch(WORKER_BASE+'/auth/telegram',{method:'POST',headers:{'Content-Type':'application/json','X-Telegram-Auth':JSON.stringify(user)},body:JSON.stringify({telegram:user})});let body={};try{body=await result.json()}catch(_){}if(!result.ok||!body.authenticated)throw new Error(body.error||'Telegram authentication failed.');display(user);showCabinet();status(authStatus,'');if(typeof window.loadDashboard==='function')await window.loadDashboard();if(typeof window.loadPrycotLinks==='function')await window.loadPrycotLinks()}catch(err){clear();showAuth();status(authStatus,err.message||'Telegram authentication failed.',true)}};
   window.restoreSession=async function(){const u=profile();if(!u){showAuth();return}try{save(u);display(u);showCabinet();if(typeof window.loadDashboard==='function')await window.loadDashboard();if(typeof window.loadPrycotLinks==='function')await window.loadPrycotLinks()}catch(err){showAuth();status(authStatus,err.message||'Load failed.',true)}};
   window.loadDashboard=async function(){try{const data=await window.workerRequest('/dashboard/releases');const releases=Array.isArray(data.releases)?data.releases:[];const summary=document.getElementById('releaseSummary'),list=document.getElementById('releaseList');if(summary)summary.textContent=releases.length+' RELEASE'+(releases.length===1?'':'S');if(!list)return;list.innerHTML='';if(!releases.length){const e=document.createElement('div');e.className='empty-releases';e.textContent='No releases yet.';list.appendChild(e);return}releases.forEach(r=>{const row=document.createElement('div');row.className='release-row';row.innerHTML='<div class="release-main"><div class="release-artist"></div><div class="release-title"></div></div><div class="release-meta"></div><div class="release-status"></div>';row.querySelector('.release-artist').textContent=r.artist_name||'';row.querySelector('.release-title').textContent=r.release_title||'Untitled';row.querySelector('.release-meta').textContent=(r.release_type||'')+(r.release_date?' · '+r.release_date:'');row.querySelector('.release-status').textContent=r.status||'IN REVIEW';list.appendChild(row)})}catch(err){status(dashboardStatus,err.message||'Load failed.',true)}};
-  function savePrycotLinkSession(){
+  const PRYCOTLINK_API='https://prycotlink-api.sorrymoscowwork.workers.dev';
+  async function openPrycotLink(a){
     const u=profile();
-    if(!u||!u.id||!u.auth_date||!u.hash)return false;
-    try{sessionStorage.setItem('prycotTelegramProfile',JSON.stringify(u));}catch(_){}
-    return true;
+    if(!u||!u.id||!u.auth_date||!u.hash){
+      alert('Please sign in with Telegram in your PRYCOT account.');
+      return;
+    }
+    try{
+      const res=await fetch(PRYCOTLINK_API+'/api/handoff',{method:'POST',headers:{'X-Telegram-Auth':JSON.stringify(u)}});
+      const body=await res.json();
+      if(!res.ok||!body.ok||!body.token)throw new Error(body.error||'Could not open PRYCOTLINK');
+      const url=new URL(a.href,location.origin);
+      url.hash='handoff='+encodeURIComponent(body.token);
+      window.location.href=url.pathname+url.search+url.hash;
+    }catch(err){
+      alert(err.message||'Could not open PRYCOTLINK');
+    }
   }
   document.addEventListener('click',e=>{
-    const a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
+    const a=e.target&&e.target.closest?e.target.closest('a.prycotlink-create'):null;
     if(!a)return;
-    const href=a.getAttribute('href')||'';
-    if(!href.includes('prycotlink.html'))return;
-    if(savePrycotLinkSession()){
-      e.preventDefault();
-      window.location.href=href;
-    }
+    e.preventDefault();
+    openPrycotLink(a);
   },true);
     window.loadPrycotLinks=async function(){try{const data=await fetch('https://prycotlink-api.sorrymoscowwork.workers.dev/api/my-releases',{headers:{'X-Telegram-Auth':JSON.stringify(profile())}}).then(async r=>{const b=await r.json();if(!r.ok)throw new Error(b.error||'Could not load PRYCOTLINK');return b});const box=document.getElementById('prycotlinkList');if(!box)return;box.innerHTML='';const links=Array.isArray(data.releases)?data.releases:[];if(!links.length){const e=document.createElement('div');e.className='empty-releases';e.textContent='No PRYCOTLINK pages yet.';box.appendChild(e);return}links.forEach(r=>{const a=document.createElement('a');a.className='prycotlink-row';a.href='https://prycot.com/'+encodeURIComponent(r.slug);a.target='_blank';a.rel='noopener';a.innerHTML='<span><strong></strong><small></small></span><b>OPEN →</b>';a.querySelector('strong').textContent=r.title||r.slug;a.querySelector('small').textContent='prycot.com/'+r.slug;box.appendChild(a)})}catch(err){const box=document.getElementById('prycotlinkList');if(box){box.innerHTML='';const e=document.createElement('div');e.className='empty-releases';e.textContent=err.message||'Could not load PRYCOTLINK pages.';box.appendChild(e)}}};
   document.getElementById('logoutButton')?.addEventListener('click',()=>{clear();showAuth();status(authStatus,'')});

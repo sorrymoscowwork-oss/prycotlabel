@@ -27,7 +27,7 @@
     return true;
   }
   document.addEventListener('click',e=>{
-    const a=e.target&&e.target.closest?a=e.target.closest('a[href]'):null;
+    const a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
     if(!a)return;
     const href=a.getAttribute('href')||'';
     if(!href.includes('prycotlink.html'))return;

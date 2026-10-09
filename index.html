@@ -205,6 +205,11 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 /* Unified pill shape for interactive buttons across desktop and mobile */
 button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.secondary,[class*="btn"],[class*="button"]:not(.menu-button),[class*="cta"]{border-radius:999px!important}.menu-button{border-radius:0!important}
 
+
+/* Homepage hero actions: one horizontal row on desktop, stacked on mobile */
+.hero-buttons{display:flex;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:center;gap:12px;margin-top:30px}
+.hero-buttons .release-button{display:inline-flex;align-items:center;justify-content:center;margin:0;min-width:160px;text-align:center}
+@media(max-width:700px){.hero-buttons{width:100%!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:12px!important;margin-top:20px!important}.hero-buttons .release-button{width:auto;min-width:190px;max-width:100%;justify-content:center;padding:14px 24px}}
 /* Put PRYCOTLINK benefit statement on a separate line on desktop and mobile */
 .prycotlink-benefit{display:block}
 </style>
@@ -243,7 +248,7 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
       <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://www.pexels.com/download/video/8135089/" type="video/mp4"></video><div class="hero-video-overlay" aria-hidden="true"></div>
       <h2 class="intro">Independent music label &amp; digital distribution.</h2>
       <p class="sub"><span>Release worldwide.</span><span>Pay in crypto.</span><span>Get your royalties in crypto.</span></p>
-      <div class="hero-buttons"><a class="release-button" href="/account.html">Release Your Music</a><a class="label-button" href="label-services.html">Label Services</a></div>
+      <div class="hero-buttons"><a class="release-button" href="/account.html">Account</a><a class="release-button" href="prycotlink-guide.html">PRYCOTLINK</a><a class="release-button" href="label-services.html">Label Service</a></div>
     </section>
     <section class="services">
       <article class="service"><span class="number">01 / RELEASE</span><h2>Worldwide distribution</h2><p>Digital delivery to streaming platforms for independent artists.</p></article>

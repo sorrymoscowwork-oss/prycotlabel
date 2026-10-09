@@ -114,7 +114,10 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 }
 @media(max-width:700px){
   .site-footer{width:auto!important;margin-left:0!important;margin-right:0!important}
-}</style>
+}
+/* Unified pill shape for interactive buttons across desktop and mobile */
+button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.secondary,[class*="btn"],[class*="button"]:not(.menu-button),[class*="cta"]{border-radius:999px!important}.menu-button{border-radius:0!important}
+</style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
 <body>

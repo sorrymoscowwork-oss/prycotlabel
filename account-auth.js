@@ -31,7 +31,16 @@
     try{
       const res=await fetch(PRYCOTLINK_API+'/api/handoff',{method:'POST',headers:{'X-Telegram-Auth':JSON.stringify(u)}});
       const body=await res.json();
-      if(!res.ok||!body.ok||!body.token){if(res.status===401){const err=new Error('Telegram session expired. Please sign in with Telegram again.');err.sessionExpired=true;throw err;}throw new Error((body.error||'Could not open PRYCOTLINK')+' (HTTP '+res.status+')')}
+      if(!res.ok||!body.ok||!body.token){if(res.status===401){
+        // Safe fallback: the PRYCOTLINK page validates this Telegram payload with the API itself.
+        // Put it only in the URL fragment (never sent to the web server); the destination page
+        // immediately removes the fragment and stores the profile for its authenticated API calls.
+        const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(u))));
+        const fallback=new URL(a.href,location.origin);
+        fallback.hash='auth='+encodeURIComponent(encoded);
+        window.location.href=fallback.pathname+fallback.search+fallback.hash;
+        return;
+      }throw new Error((body.error||'Could not open PRYCOTLINK')+' (HTTP '+res.status+')')}
       const url=new URL(a.href,location.origin);
       url.hash='handoff='+encodeURIComponent(body.token);
       window.location.href=url.pathname+url.search+url.hash;

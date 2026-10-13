@@ -36,7 +36,7 @@
       url.hash='handoff='+encodeURIComponent(body.token);
       window.location.href=url.pathname+url.search+url.hash;
     }catch(err){
-      if(err?.sessionExpired||err?.message==='Unauthorized'){clear();showAuth();status(authStatus,'Telegram session expired. Please sign in with Telegram again.',true);return}alert(err.message||'Could not open PRYCOTLINK');
+      if(err?.sessionExpired||err?.message==='Unauthorized'){status(dashboardStatus,'PRYCOTLINK authorization failed. Your account remains signed in. Please retry.',true);return}alert(err.message||'Could not open PRYCOTLINK');
     }
   }
   document.addEventListener('click',e=>{

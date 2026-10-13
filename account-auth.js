@@ -31,21 +31,12 @@
     try{
       const res=await fetch(PRYCOTLINK_API+'/api/handoff',{method:'POST',headers:{'X-Telegram-Auth':JSON.stringify(u)}});
       const body=await res.json();
-      if(!res.ok||!body.ok||!body.token){if(res.status===401){
-        // Safe fallback: the PRYCOTLINK page validates this Telegram payload with the API itself.
-        // Put it only in the URL fragment (never sent to the web server); the destination page
-        // immediately removes the fragment and stores the profile for its authenticated API calls.
-        const encoded=btoa(unescape(encodeURIComponent(JSON.stringify(u))));
-        const fallback=new URL(a.href,location.origin);
-        fallback.hash='auth='+encodeURIComponent(encoded);
-        window.location.href=fallback.pathname+fallback.search+fallback.hash;
-        return;
-      }throw new Error((body.error||'Could not open PRYCOTLINK')+' (HTTP '+res.status+')')}
+      if(!res.ok||!body.ok||!body.token){if(res.status===401){const err=new Error('Telegram session expired. Please sign in with Telegram again.');err.sessionExpired=true;throw err;}throw new Error((body.error||'Could not open PRYCOTLINK')+' (HTTP '+res.status+')')}
       const url=new URL(a.href,location.origin);
       url.hash='handoff='+encodeURIComponent(body.token);
       window.location.href=url.pathname+url.search+url.hash;
     }catch(err){
-      if(err?.sessionExpired||err?.message==='Unauthorized'){status(dashboardStatus,'PRYCOTLINK authorization failed. Your account remains signed in. Please retry.',true);return}alert(err.message||'Could not open PRYCOTLINK');
+      if(err?.sessionExpired||err?.message==='Unauthorized'){clear();showAuth();status(authStatus,'Telegram session expired. Please sign in with Telegram again.',true);return}alert(err.message||'Could not open PRYCOTLINK');
     }
   }
   document.addEventListener('click',e=>{
@@ -54,7 +45,7 @@
     e.preventDefault();
     openPrycotLink(a);
   },true);
-    window.loadPrycotLinks=async function(){const revision=authRevision;try{const data=await fetch('https://prycotlink-api.sorrymoscowwork.workers.dev/api/my-releases',{cache:'no-store',headers:{'X-Telegram-Auth':JSON.stringify(profile())}}).then(async r=>{const b=await r.json();if(revision!==authRevision)return null;if(!r.ok)throw new Error(b.error||'Could not load PRYCOTLINK');return b});if(revision!==authRevision||!data)return;const box=document.getElementById('prycotlinkList');if(!box)return;box.innerHTML='';const links=Array.isArray(data.releases)?data.releases:[];if(!links.length){const e=document.createElement('div');e.className='empty-releases';e.textContent='No PRYCOTLINK pages yet.';box.appendChild(e);return}links.forEach(r=>{const a=document.createElement('a');a.className='prycotlink-row';a.href='https://prycot.com/'+encodeURIComponent(r.slug);a.target='_blank';a.rel='noopener';a.innerHTML='<span><strong></strong><small></small></span><b>OPEN →</b>';a.querySelector('strong').textContent=r.title||r.slug;a.querySelector('small').textContent='prycot.com/'+r.slug;box.appendChild(a)})}catch(err){if(revision!==authRevision)return;const box=document.getElementById('prycotlinkList');if(box){box.innerHTML='';const e=document.createElement('div');e.className='empty-releases';e.textContent=err.message||'Could not load PRYCOTLINK pages.';box.appendChild(e)}}};
+    window.loadPrycotLinks=async function(){const revision=authRevision;try{const data=await fetch('https://prycotlink-api.sorrymoscowwork.workers.dev/api/my-releases',{headers:{'X-Telegram-Auth':JSON.stringify(profile())}}).then(async r=>{const b=await r.json();if(revision!==authRevision)return null;if(!r.ok)throw new Error(b.error||'Could not load PRYCOTLINK');return b});if(revision!==authRevision||!data)return;const box=document.getElementById('prycotlinkList');if(!box)return;box.innerHTML='';const links=Array.isArray(data.releases)?data.releases:[];if(!links.length){const e=document.createElement('div');e.className='empty-releases';e.textContent='No PRYCOTLINK pages yet.';box.appendChild(e);return}links.forEach(r=>{const a=document.createElement('a');a.className='prycotlink-row';a.href='https://prycot.com/'+encodeURIComponent(r.slug);a.target='_blank';a.rel='noopener';a.innerHTML='<span><strong></strong><small></small></span><b>OPEN →</b>';a.querySelector('strong').textContent=r.title||r.slug;a.querySelector('small').textContent='prycot.com/'+r.slug;box.appendChild(a)})}catch(err){if(revision!==authRevision)return;const box=document.getElementById('prycotlinkList');if(box){box.innerHTML='';if(err?.message==='Unauthorized'){clear();showAuth();status(authStatus,'Telegram session expired. Please sign in with Telegram again.',true);return}const e=document.createElement('div');e.className='empty-releases';e.textContent=err.message||'Could not load PRYCOTLINK pages.';box.appendChild(e)}}};
   document.getElementById('logoutButton')?.addEventListener('click',()=>{clear();showAuth();status(authStatus,'')});
   if(profile())window.restoreSession();
   (async function syncHomepageMenu(){try{const response=await fetch('index.html',{cache:'no-store'});if(!response.ok)return;const html=await response.text();const doc=new DOMParser().parseFromString(html,'text/html');const sourceMenu=doc.querySelector('nav.menu');const targetMenu=document.getElementById('menu');if(!sourceMenu||!targetMenu)return;targetMenu.innerHTML=sourceMenu.innerHTML;const menuStyles=[...doc.querySelectorAll('style')].map(s=>s.textContent||'').filter(css=>css.includes('.menu')).join('\n');if(menuStyles){const style=document.createElement('style');style.id='homepage-menu-sync-style';style.textContent=menuStyles;document.head.appendChild(style)}const button=document.getElementById('menuButton');const menu=document.getElementById('menu');if(button&&menu){button.onclick=function(e){e.stopPropagation();menu.classList.toggle('open')};menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));const close=menu.querySelector('.menu-close');if(close)close.addEventListener('click',()=>menu.classList.remove('open'));document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&!button.contains(e.target))menu.classList.remove('open')})}const accountLink=targetMenu.querySelector('a[href="account.html"]');if(accountLink)accountLink.classList.add('active-page')}catch(_){}})();

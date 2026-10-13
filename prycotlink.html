@@ -605,6 +605,19 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
 `;
  document.head.appendChild(s)}
  function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.pl-intro');const liveForm=document.getElementById('prycotlinkForm');if(liveIntro)liveIntro.remove();if(liveForm)liveForm.remove();document.querySelectorAll('.pl-live-release').forEach(x=>x.remove());page.classList.add('release-host');document.querySelectorAll('.brand,.tagline,.menu-button,.menu').forEach(x=>x.remove());page.insertAdjacentHTML('beforeend',releaseMarkup(r));document.documentElement.classList.remove('release-boot');const release=document.querySelector('.pl-live-release');if(release){
+  const editLink=release.querySelector('.release-edit');
+  if(editLink)editLink.addEventListener('click',async ev=>{
+    ev.preventDefault();
+    const user=telegramProfile();
+    if(!user||!user.id||!user.auth_date||!user.hash){alert('Please sign in with Telegram in your PRYCOT account.');return}
+    editLink.style.pointerEvents='none';
+    try{
+      const response=await fetch('https://misty-rain-65f3prycot-release-bot.sorrymoscowwork.workers.dev/dashboard/prycotlink/handoff',{method:'POST',headers:{'content-type':'application/json','X-Telegram-Auth':JSON.stringify(user)},body:JSON.stringify({slug:r.slug})});
+      const data=await response.json();
+      if(!response.ok||!data.ok||!data.token)throw new Error(data.error||'Could not verify page ownership');
+      location.href='/prycotlink.html?edit='+encodeURIComponent(r.slug)+'#handoff='+encodeURIComponent(data.token);
+    }catch(err){alert(err.message||'Could not open editor');editLink.style.pointerEvents=''}
+  });
   loadReleaseStats(r.slug,release);bindReleaseAnalytics(release,r.slug);
   const qrButton=release.querySelector('.release-qr-wrap');
   if(qrButton){

@@ -28,16 +28,10 @@
       alert('Please sign in with Telegram in your PRYCOT account.');
       return;
     }
-    try{
-      const res=await fetch(PRYCOTLINK_API+'/api/handoff',{method:'POST',headers:{'X-Telegram-Auth':JSON.stringify(u)}});
-      const body=await res.json();
-      if(!res.ok||!body.ok||!body.token){throw new Error((body.error||'Could not open PRYCOTLINK')+' (HTTP '+res.status+')')}
-      const url=new URL(a.href,location.origin);
-      url.hash='handoff='+encodeURIComponent(body.token);
-      window.location.href=url.pathname+url.search+url.hash;
-    }catch(err){
-      alert((err.message||'Could not open PRYCOTLINK')+'\nYour account session has been kept.');
-    }
+    // The account and PRYCOTLINK pages share the same origin, so the verified
+    // Telegram profile is already available to the creation page in storage.
+    // Navigate directly and avoid the broken server-side handoff endpoint.
+    window.location.href=new URL(a.href,location.origin).href;
   }
   document.addEventListener('click',e=>{
     const a=e.target&&e.target.closest?e.target.closest('a.prycotlink-create'):null;

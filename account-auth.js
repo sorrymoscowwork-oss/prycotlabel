@@ -31,12 +31,12 @@
     try{
       const res=await fetch(PRYCOTLINK_API+'/api/handoff',{method:'POST',headers:{'X-Telegram-Auth':JSON.stringify(u)}});
       const body=await res.json();
-      if(!res.ok||!body.ok||!body.token){if(res.status===401){const err=new Error('Telegram session expired. Please sign in with Telegram again.');err.sessionExpired=true;throw err;}throw new Error((body.error||'Could not open PRYCOTLINK')+' (HTTP '+res.status+')')}
+      if(!res.ok||!body.ok||!body.token){throw new Error((body.error||'Could not open PRYCOTLINK')+' (HTTP '+res.status+')')}
       const url=new URL(a.href,location.origin);
       url.hash='handoff='+encodeURIComponent(body.token);
       window.location.href=url.pathname+url.search+url.hash;
     }catch(err){
-      if(err?.sessionExpired||err?.message==='Unauthorized'){clear();showAuth();status(authStatus,'Telegram session expired. Please sign in with Telegram again.',true);return}alert(err.message||'Could not open PRYCOTLINK');
+      alert((err.message||'Could not open PRYCOTLINK')+'\nYour account session has been kept.');
     }
   }
   document.addEventListener('click',e=>{

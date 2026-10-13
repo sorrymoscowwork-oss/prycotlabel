@@ -542,7 +542,7 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
   const qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&qzone=1&color=0-0-0&bgcolor=255-255-255&data='+encodeURIComponent(location.origin+'/'+(r.slug||makeSlug(r.title||'release')));
   return `<section class="pl-live-release ${preview?'pl-live-preview':''}">
     <header class="release-topbar">
-      ${r.canEdit?`<a class="release-edit" href="/prycotlink.html?edit=${encodeURIComponent(r.slug)}">EDIT</a>`:``}
+      ${(r.canEdit||telegramProfile())?`<a class="release-edit" href="/prycotlink.html?edit=${encodeURIComponent(r.slug)}">EDIT</a>`:``}
       <a class="release-brand" href="https://prycot.com/" aria-label="PRYCOT."><span>PRYCOT.</span></a>
       <p class="release-tagline"><a href="https://prycot.com/">RELEASE WORLDWIDE.</a><a href="https://prycot.com/">PAY IN CRYPTO.</a><a href="https://prycot.com/">ROYALTIES IN CRYPTO.</a></p>
     </header>

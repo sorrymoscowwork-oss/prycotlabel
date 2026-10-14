@@ -714,7 +714,7 @@ function releaseMarkup(r, preview=false){
     Object.entries(r.streams||{}).forEach(([k,v])=>{const el=form.elements[k];if(el)el.value=v||''});
     const socials=r.socials||{};Object.entries(socials).forEach(([k,v])=>{const el=form.elements[k];if(el)el.value=v||''});
     (r.customLinks||[]).forEach((x,i)=>{const n=form.elements['customName'+(i+1)],u=form.elements['customUrl'+(i+1)];if(n)n.value=x.name||'';if(u)u.value=x.url||''});
-    const vids=r.videos||[];vids.forEach((v,i)=>{if(i===0){const el=form.elements['video'];if(el)el.value=v}else if(i<10){addVideo.click();const fields=form.querySelectorAll('input[name="video"]');fields[fields.length-1].value=v}});
+    const vids=(Array.isArray(r.videos)?r.videos:[]).filter(v=>typeof v==='string'&&v.trim()).slice(0,10);let videoInputs=[...form.querySelectorAll('input[name="video"]')];while(videoInputs.length<vids.length&&videoInputs.length<10){addVideo.click();videoInputs=[...form.querySelectorAll('input[name="video"]')]}videoInputs.forEach((input,i)=>{input.value=vids[i]||''});
     const donations=r.donations||{};[['btc','donateBtc'],['eth','donateEth'],['sol','donateSol'],['usdt','donateUsdt'],['usdc','donateUsdc']].forEach(([k,n])=>{const el=form.elements[n];if(el)el.value=donations[k]?.address||''});[['usdt','donateUsdtNetwork'],['usdc','donateUsdcNetwork']].forEach(([k,n])=>{const el=form.elements[n];if(el)el.value=donations[k]?.network||''});
     if(r.coverUrl){coverPreview.src=r.coverUrl;coverPreview.hidden=false;coverLabel.textContent='CURRENT COVER'}
     createButton.textContent='SAVE CHANGES';

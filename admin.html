@@ -36,8 +36,10 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 </div>
 <script>
 const WORKER_BASE="https://misty-rain-65f3prycot-release-bot.sorrymoscowwork.workers.dev";
-const loginView=document.getElementById("loginView"),adminView=document.getElementById("adminView"),passwordInput=document.getElementById("password"),loginButton=document.getElementById("login"),loginStatus=document.getElementById("loginStatus"),status=document.getElementById("status"),list=document.getElementById("releases"),count=document.getElementById("count"),logout=document.getElementById("logout");
+const loginView=document.getElementById("loginView"),adminView=document.getElementById("adminView"),passwordInput=document.getElementById("password"),loginButton=document.getElementById("login"),loginStatus=document.getElementById("loginStatus"),status=document.getElementById("status"),list=document.getElementById("releases"),linksList=document.getElementById("prycotlinks"),count=document.getElementById("count"),logout=document.getElementById("logout"),tabBot=document.getElementById("tabBot"),tabLinks=document.getElementById("tabLinks");
+let activeTab="bot";
 let adminPassword=sessionStorage.getItem("prycot_admin_password")||"";
+function switchTab(tab){activeTab=tab;const isBot=tab==="bot";tabBot.classList.toggle("active",isBot);tabLinks.classList.toggle("active",!isBot);tabBot.setAttribute("aria-selected",String(isBot));tabLinks.setAttribute("aria-selected",String(!isBot));list.classList.toggle("hidden",!isBot);linksList.classList.toggle("hidden",isBot);if(adminPassword){if(isBot)load();else loadPrycotlinks()}}
 function setStatus(el,text,error=false){el.textContent=text;el.classList.toggle("error",error)}
 function esc(v){return String(v??"").replace(/[&<>\"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]))}
 function dateValue(v){if(!v)return "—";const d=new Date(Number(v)*1000);return Number.isNaN(d.getTime())?String(v):d.toLocaleString("en-GB")}

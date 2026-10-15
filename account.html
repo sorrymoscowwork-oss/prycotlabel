@@ -204,6 +204,10 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
  .brand,.brand .tagline{transition:opacity .56s ease,filter .56s ease,transform .56s ease!important;will-change:opacity,filter,transform!important}
  .page.mobile-brand-hidden .brand,.page.mobile-brand-hidden .brand .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
 }
+
+/* Lower the complete signed-in account layout by 2 cm, keeping the fixed brand in place. */
+#cabinetView .account-shell{margin-top:75px!important}
+@media(max-width:700px){#cabinetView .account-shell{margin-top:75px!important}}
 </style>
 </head>
 <body>

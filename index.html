@@ -219,6 +219,9 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 .header-slogan{position:fixed!important;top:30px!important;left:260px!important;z-index:20!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;margin:0!important;padding:0!important;color:var(--muted,#9b9b98)!important;font:500 14px/1.55 Helvetica,Arial,sans-serif!important;letter-spacing:0!important;text-transform:none!important;text-align:left!important;white-space:nowrap!important}
 .header-slogan span{display:block!important;margin:0!important;padding:0!important}
 @media(max-width:700px){.header-slogan{top:76px!important;left:20px!important;font-size:12px!important;line-height:1.35!important}}
+
+/* Restore original homepage slogan placement in the hero. */
+.header-slogan{display:none!important}
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -248,13 +251,14 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
   <main class="page">
     <header>
       <a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a>
-      <p class="header-slogan"><span>Release worldwide.</span><span>Pay in crypto.</span><span>Get your royalties in crypto.</span></p>
+      
       <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 
 </header>
     <section class="hero">
       <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://www.pexels.com/download/video/8135089/" type="video/mp4"></video><div class="hero-video-overlay" aria-hidden="true"></div>
       <h2 class="intro">Independent music label &amp; digital distribution.</h2>
+      <p class="sub"><span>Release worldwide.</span><span>Pay in crypto.</span><span>Get your royalties in crypto.</span></p>
       
       <div class="hero-buttons"><a class="release-button" href="/account.html">Account</a><a class="release-button" href="prycotlink-guide.html">PRYCOTLINK</a><a class="release-button" href="label-services.html">Label Service</a></div>
     </section>

@@ -16,6 +16,46 @@
 
 /* Unified pill shape for interactive buttons across desktop and mobile */
 button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.secondary,[class*="btn"],[class*="button"]:not(.menu-button),[class*="cta"]{border-radius:999px!important}.menu-button{border-radius:0!important}
+
+/* Account dashboard layout refresh; preserves existing account and API behavior. */
+.dashboard-card,.prycotlink-card{padding:24px!important}
+.dashboard-heading,.prycotlink-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:22px}
+.dashboard-heading .card-heading-box,.prycotlink-heading .card-heading-box{flex:1;min-width:0;margin:0!important;width:auto!important;padding:18px 20px;border:1px solid var(--line);border-radius:14px;background:#101010}
+.dashboard-heading-actions,.prycotlink-heading-actions{display:flex;align-items:center;justify-content:flex-end;gap:18px;flex:0 0 auto}
+.dashboard-heading-actions .release-agreement{margin:0!important;white-space:nowrap}
+.dashboard-heading-actions .release-agreement label{font-size:11px!important}
+.dashboard-heading-actions .primary,.prycotlink-heading-actions .primary{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:13px 20px;white-space:nowrap}
+.releases-head{margin:0 0 10px!important}
+.release-summary{font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.release-list{border:0!important;display:flex;flex-direction:column;gap:0}
+.release-table-head,.release-row{display:grid;grid-template-columns:minmax(0,2fr) minmax(90px,.7fr) minmax(115px,.9fr) minmax(110px,.85fr);align-items:center;column-gap:18px}
+.release-table-head{padding:0 16px 12px;color:var(--muted);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.release-row{padding:17px 16px;border-top:1px solid var(--line);border-bottom:0!important;min-width:0}
+.release-main{min-width:0}
+.release-title{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+.release-artist{margin-top:5px;font-size:10px;color:var(--muted);text-transform:none;overflow-wrap:anywhere}
+.release-meta{font-size:11px;color:var(--muted);text-transform:none;overflow-wrap:anywhere}
+.release-status{justify-self:start;text-align:left;font-size:10px;letter-spacing:.02em;text-transform:none;white-space:normal;overflow-wrap:anywhere}
+.release-status:before{content:"";display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;background:#858585;vertical-align:middle}
+.release-status.status-live:before{background:#54c783}
+.release-status.status-pending:before{background:#ff7f50}
+.release-status.status-error:before{background:#d97878}
+.empty-releases{padding:20px 16px!important;color:var(--muted);font-size:12px}
+.prycotlink-heading-actions .release-summary{white-space:nowrap}
+.prycotlink-list{gap:0!important;border:0!important}
+.prycotlink-entry{display:grid!important;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:14px 16px;border-top:1px solid var(--line);border-bottom:0!important}
+.prycotlink-entry .prycotlink-row{padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;display:flex;align-items:center;justify-content:space-between;gap:18px;min-width:0}
+.prycotlink-entry .prycotlink-row>span{min-width:0}
+.prycotlink-entry .prycotlink-row strong{font-size:14px;overflow-wrap:anywhere}
+.prycotlink-entry .prycotlink-row small{font-size:10px;overflow-wrap:anywhere}
+.prycotlink-entry .prycotlink-row b{flex:0 0 auto}
+.prycotlink-open,.prycotlink-analytics{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:999px;padding:11px 15px;color:var(--fg);font-size:9px;letter-spacing:.08em;white-space:nowrap}
+.prycotlink-open:hover,.prycotlink-analytics:hover{border-color:var(--accent);color:var(--accent-hover)}
+.prycotlink-create{margin:0!important}
+.donate-prompt{margin-top:18px}
+@media(max-width:900px){.dashboard-heading,.prycotlink-heading{align-items:stretch;flex-direction:column;gap:14px}.dashboard-heading-actions,.prycotlink-heading-actions{justify-content:space-between;flex-wrap:wrap}.dashboard-heading-actions .release-agreement{white-space:normal}}
+@media(max-width:650px){.dashboard-card,.prycotlink-card{padding:16px!important}.dashboard-heading,.prycotlink-heading{margin-bottom:18px}.dashboard-heading-actions{align-items:flex-start;flex-direction:column;gap:14px}.dashboard-heading-actions .primary,.prycotlink-heading-actions .primary{width:100%}.prycotlink-heading-actions{align-items:stretch;flex-direction:column;gap:12px}.release-table-head{display:none}.release-row{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:16px 10px}.release-main{grid-column:1 / -1}.release-row .release-meta{font-size:11px}.release-row .release-status{justify-self:end;text-align:right}.prycotlink-entry{grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:14px 8px}.prycotlink-entry .prycotlink-row{grid-column:1 / -1}.prycotlink-open,.prycotlink-analytics{min-height:38px;padding:10px 12px;font-size:8px}.prycotlink-entry .prycotlink-analytics{grid-column:2}.prycotlink-entry .prycotlink-open{grid-column:1}}
+
 </style>
 </head>
 <body>
@@ -23,8 +63,8 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 <div class="page"><header class="brand"><a href="index.html"><h1 class="logo">PRYCOT.</h1></a></header><div class="tagline"><span>RELEASE WORLDWIDE.</span><span>PAY IN CRYPTO.</span><span>ROYALTIES IN CRYPTO.</span></div><button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 <main class="content"><section id="authView"><p class="eyebrow">PRYCOT. / ACCOUNT</p><h1>Your account.</h1><p class="intro">Sign in with Telegram to manage your profile and submit release requests.</p><div class="auth-wrap"><div class="auth-panel"><div class="telegram-widget"><script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="prycot_account_bot" data-size="large" data-userpic="false" data-radius="7" data-lang="en" data-onauth="onTelegramAuth(user)"></script></div><div class="status" id="authStatus"></div></div></div></section>
 <section id="cabinetView" class="hidden"><div class="account-shell"><div class="account-top"><div class="user-summary"><div class="avatar" id="avatarBox"></div><div><div class="user-name" id="cabinetName">Artist</div><div class="user-email" id="cabinetEmail">Telegram</div></div></div><button class="secondary" id="logoutButton" type="button">Log Out</button></div>
-<div class="dashboard-card"><div class="card-head dashboard-card-head"><div class="card-heading-box"><div class="card-title">DASHBOARD</div><div class="card-subtitle">Your PRYCOT release activity.</div></div></div><div class="releases-head"><div class="release-summary" id="releaseSummary">0 RELEASES</div></div><div class="release-list" id="releaseList"><div class="empty-releases">No releases yet.</div></div><div class="status" id="dashboardStatus"></div><div class="release-request"><div class="release-request-copy"><div>NEW RELEASE REQUEST</div><span>Submit your release through <span style="display:inline!important;margin:0!important;color:#A0522D!important;font-size:inherit">Telegram</span>.</span><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div></div></div>
-<div class="prycotlink-card profile-card"><div class="card-head"><div class="card-title">PRYCOTLINK</div><div class="card-subtitle">Your public release pages.</div></div><div class="prycotlink-list" id="prycotlinkList"><div class="empty-releases">No PRYCOTLINK pages yet.</div></div><a class="primary prycotlink-create" href="prycotlink.html?create=1">CREATE PRYCOTLINK →</a><div class="donate-prompt"><p><strong>PRYCOTLINK is free.</strong> Create unlimited pages and use every feature without restrictions. If it has been useful to you, consider supporting the project.</p><a href="donate.html?return=account">SUPPORT PRYCOTLINK →</a></div></div></div></section>
+<div class="dashboard-card"><div class="dashboard-heading"><div class="card-heading-box"><div class="card-title">DASHBOARD</div><div class="card-subtitle">Your PRYCOT release activity.</div></div><div class="dashboard-heading-actions"><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div></div><div class="releases-head"><div class="release-summary" id="releaseSummary">0 RELEASES</div></div><div class="release-list" id="releaseList"><div class="empty-releases">No releases yet.</div></div><div class="status" id="dashboardStatus"></div></div>
+<div class="prycotlink-card profile-card"><div class="prycotlink-heading"><div class="card-heading-box"><div class="card-title">PRYCOTLINK</div><div class="card-subtitle">Your public release pages.</div></div><div class="prycotlink-heading-actions"><div class="release-summary" id="prycotlinkSummary">0 PAGES</div><a class="primary prycotlink-create" href="prycotlink.html?create=1">CREATE PRYCOTLINK →</a></div></div><div class="prycotlink-list" id="prycotlinkList"><div class="empty-releases">No PRYCOTLINK pages yet.</div></div><div class="donate-prompt"><p><strong>PRYCOTLINK is free.</strong> Create unlimited pages and use every feature without restrictions. If it has been useful to you, consider supporting the project.</p><a href="donate.html?return=account">SUPPORT PRYCOTLINK →</a></div></div></div></section>
 <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main></div>
 <script src="account-auth.js?v=20261014-analytics-1"></script><script>
 const menu=document.getElementById('menu'),menuButton=document.getElementById('menuButton');const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};menuButton.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',menu.classList.contains('open'))});document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});document.querySelectorAll('.menu-links a').forEach(link=>{const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();if((current==='index.html'&&target==='index.html')||current===target)link.classList.add('active-page')});

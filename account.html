@@ -223,6 +223,10 @@ body:has(#cabinetView:not(.hidden)) .brand .tagline{display:flex!important}
  .brand,.brand .tagline{transition:opacity .56s ease,filter .56s ease,transform .56s ease!important;will-change:opacity,filter,transform!important}
  .mobile-brand-hidden .brand,.mobile-brand-hidden .brand .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
 }
+
+/* Keep account content clear of the fixed PRYCOT masthead, as on the other pages. */
+.account-shell>.dashboard-card{margin-top:58px!important}
+@media(max-width:700px){.account-shell>.dashboard-card{margin-top:48px!important}}
 </style>
 </head>
 <body>

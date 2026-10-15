@@ -277,6 +277,44 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
   .site-footer{width:100%!important;margin-top:36px!important;padding-top:18px!important;gap:8px!important;align-items:flex-start!important;font-size:9px!important}
 }
 
+
+/* Mobile layout based on the actual DOM nodes rendered by account-auth.js. */
+@media(max-width:700px){
+  #releaseList .release-row{
+    display:grid!important;
+    grid-template-columns:48px minmax(0,1fr)!important;
+    grid-auto-flow:row!important;
+    gap:8px 12px!important;
+    align-items:center!important;
+    padding:12px!important;
+  }
+  #releaseList .release-row>.release-cover,
+  #releaseList .release-row>.release-cover-fallback{grid-column:1!important;grid-row:1 / span 2!important;width:48px!important;height:48px!important;min-width:48px!important;max-width:48px!important}
+  #releaseList .release-row>.release-card-copy{grid-column:2!important;grid-row:1 / span 2!important;min-width:0!important}
+  #releaseList .release-row>.release-meta{grid-column:1 / -1!important;grid-row:auto!important;min-width:0!important;padding-left:0!important;font-size:11px!important;line-height:1.4!important}
+  #releaseList .release-row>.release-status{grid-column:1 / -1!important;grid-row:auto!important;justify-self:start!important;text-align:left!important;min-width:0!important;font-size:11px!important}
+  #releaseList .release-row>.release-details-button{grid-column:1 / -1!important;grid-row:auto!important;width:100%!important;min-width:0!important;min-height:40px!important;margin:0!important}
+  #releaseList .release-row>.release-detail-panel{grid-column:1 / -1!important;grid-row:auto!important;min-width:0!important;overflow-wrap:anywhere!important}
+  #prycotlinkList .prycotlink-entry{
+    display:grid!important;
+    grid-template-columns:48px minmax(0,1fr)!important;
+    grid-auto-flow:row!important;
+    align-items:center!important;
+    gap:8px 12px!important;
+    padding:12px!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  #prycotlinkList .prycotlink-entry>.prycotlink-cover,
+  #prycotlinkList .prycotlink-entry>.prycotlink-cover-fallback{grid-column:1!important;grid-row:1 / span 2!important;width:48px!important;height:48px!important;min-width:48px!important;max-width:48px!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-info{grid-column:2!important;grid-row:1!important;min-width:0!important;width:100%!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-url{grid-column:2!important;grid-row:2!important;min-width:0!important;width:100%!important;margin:0!important;overflow-wrap:anywhere!important;word-break:break-word!important;font-size:10px!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-date{grid-column:1 / -1!important;grid-row:auto!important;min-width:0!important;font-size:10px!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-status{grid-column:1 / -1!important;grid-row:auto!important;min-width:0!important;font-size:10px!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-actions{grid-column:1 / -1!important;grid-row:auto!important;display:flex!important;width:100%!important;min-width:0!important;gap:8px!important;margin-top:2px!important}
+  #prycotlinkList .prycotlink-actions>a{flex:1 1 0!important;width:auto!important;min-width:0!important;min-height:40px!important;padding:10px 6px!important;font-size:9px!important;white-space:normal!important;text-align:center!important}
+}
+
 </style>
 </head>
 <body>
@@ -287,7 +325,7 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
 <div class="dashboard-card"><div class="dashboard-heading"><div class="card-heading-box"><div class="card-title">RELEASES</div><div class="card-subtitle">Your PRYCOT release activity.</div></div><div class="dashboard-heading-actions"><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div></div><div class="releases-head"></div><div class="release-list" id="releaseList"><div class="empty-releases">No releases yet.</div></div><div class="status" id="dashboardStatus"></div></div>
 <div class="prycotlink-card profile-card"><div class="prycotlink-heading"><div class="card-heading-box"><div class="card-title">PRYCOTLINK</div><div class="card-subtitle">Your public release pages.</div></div><div class="prycotlink-heading-actions"><div class="release-summary" id="prycotlinkSummary">0 PAGES</div><a class="primary prycotlink-create" href="prycotlink.html?create=1">CREATE PRYCOTLINK →</a></div></div><div class="prycotlink-list" id="prycotlinkList"><div class="empty-releases">No PRYCOTLINK pages yet.</div></div></div></div></section>
 <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main></div>
-<script src="account-auth.js?v=20261015-brand-fix-1"></script><script>
+<script src="account-auth.js?v=20261015-mobile-layout-2"></script><script>
 const menu=document.getElementById('menu'),menuButton=document.getElementById('menuButton');const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};menuButton.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',menu.classList.contains('open'))});document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});document.querySelectorAll('.menu-links a').forEach(link=>{const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();if((current==='index.html'&&target==='index.html')||current===target)link.classList.add('active-page')});
 const agreement=document.getElementById('releaseAgreement');agreement?.addEventListener('change',e=>{const b=document.getElementById('submitReleaseButton');if(!b)return;const on=e.target.checked;b.classList.toggle('release-disabled',!on);b.classList.toggle('release-enabled',on);b.setAttribute('aria-disabled',String(!on));b.tabIndex=on?0:-1});
 </script><script id="account-brand-scroll-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function update(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');document.querySelector('.page')?.classList.remove('mobile-brand-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);document.querySelector('.page')?.classList.toggle('mobile-brand-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script></body></html>

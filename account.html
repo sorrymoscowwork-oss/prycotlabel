@@ -387,6 +387,20 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
  .brand{flex-direction:column!important;align-items:flex-start!important;gap:7px!important;width:max-content!important;max-width:calc(100vw - 40px)!important}
  .brand .account-label{display:block!important;margin:0!important;padding:0!important;font-size:22px!important;line-height:.95!important;white-space:nowrap!important;max-width:none!important;overflow:visible!important}
 }
+
+/* APPROVED HEADER BASELINE — keep the logo/title geometry unchanged unless explicitly requested.
+   The Account hamburger must remain visible while signed in, on desktop and mobile. */
+@media(min-width:701px){
+  .brand{display:flex!important;flex-direction:row!important;align-items:baseline!important;gap:16px!important}
+  .brand .logo{font-size:clamp(34px,4.5vw,62px)!important}
+  .brand .account-label{display:block!important;white-space:nowrap!important}
+}
+@media(max-width:700px){
+  .brand{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:7px!important}
+  .brand .logo{font-size:42px!important}
+  .brand .account-label{display:block!important;font-size:22px!important;line-height:.95!important;white-space:normal!important}
+}
+body:has(#cabinetView:not(.hidden)) .menu-button{display:block!important;visibility:visible!important;opacity:1!important}
 </style>
 </head>
 <body>

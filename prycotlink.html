@@ -336,6 +336,30 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
   .pl-live-release .release-social-site{display:inline-block!important;font:500 9px/1 Helvetica,Arial,sans-serif!important;letter-spacing:.08em!important;color:#f4f4f2!important;white-space:nowrap!important}
   .pl-live-release .release-social[aria-label="Website"] .release-social-globe{display:none!important}
 }
+
+/* Approved shared header layout: desktop title beside logo, mobile title beneath it. */
+.prycotlink-header .header-brand{
+  position:fixed!important;top:30px!important;left:34px!important;right:82px!important;z-index:20!important;
+  display:flex!important;flex-direction:row!important;align-items:baseline!important;justify-content:flex-start!important;
+  gap:16px!important;width:auto!important;max-width:none!important;overflow:visible!important;flex-wrap:nowrap!important;
+}
+.prycotlink-header .brand-logo{display:block!important;flex:0 0 auto!important;width:max-content!important;margin:0!important;padding:0!important}
+.prycotlink-header .header-brand .logo{display:block!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;font-size:clamp(34px,4.5vw,62px)!important;line-height:.82!important;white-space:nowrap!important;overflow:visible!important}
+.prycotlink-header .page-label{
+  display:block!important;flex:0 1 auto!important;min-width:0!important;margin:0!important;padding:0!important;
+  font-family:Helvetica,Arial,sans-serif!important;font-size:clamp(18px,2.2vw,30px)!important;line-height:1!important;
+  font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important;text-transform:uppercase!important;
+  white-space:nowrap!important;color:var(--fg,#f4f4f2)!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;
+}
+.prycotlink-header .tagline{display:none!important}
+@media(min-width:701px){.prycotlink-header .header-brand.header-hidden .page-label{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}}
+@media(max-width:700px){
+  .prycotlink-header .header-brand{top:22px!important;left:20px!important;right:20px!important;width:auto!important;max-width:none!important;flex-direction:column!important;align-items:flex-start!important;gap:7px!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important}
+  .prycotlink-header .header-brand .logo{font-size:42px!important}
+  .prycotlink-header .page-label{font-size:22px!important;line-height:.95!important;white-space:normal!important;overflow-wrap:anywhere!important}
+  .prycotlink-header .header-brand.header-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
+  .prycotlink-header .menu-button{top:20px!important;right:20px!important}
+}
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style id="wallet-layout-v2">
@@ -376,15 +400,14 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 </div>
 </nav>
 </div>
-<header>
-  <a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a>
-  <p class="tagline"><a class="active-page" href="/">RELEASE WORLDWIDE.</a><a href="/">PAY IN CRYPTO.</a><a href="/">ROYALTIES IN CRYPTO.</a></p>
+<header class="prycotlink-header">
+  <div class="brand header-brand"><a class="brand-logo" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><span class="page-label">CREATE RELEASE PAGE</span></div>
+  <p class="tagline" aria-hidden="true"><a href="/">RELEASE WORLDWIDE.</a><a href="/">PAY IN CRYPTO.</a><a href="/">ROYALTIES IN CRYPTO.</a></p>
   <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 </header>
 <main class="page prycotlink-page">
 <section class="pl-intro">
   <p class="pl-kicker">PRYCOTLINK</p>
-  <h2>Create your <span class="pl-orange-heading">release page.</span></h2>
   <p class="pl-lead">Create your release page for free with videos, social media and artist information.</p>
 </section>
 <form id="prycotlinkForm" class="pl-form" novalidate>
@@ -750,5 +773,5 @@ function releaseMarkup(r, preview=false){
   }).catch(err=>{alert(err.message||'Could not load PRYCOTLINK');window.location.href='/account.html'});
  } else document.documentElement.classList.add('boot-ready');
 })();
-</script></body>
+</script><script id="prycotlink-header-scroll-behavior">(function(){const brand=document.querySelector('.prycotlink-header .header-brand');if(!brand)return;let ticking=false;function update(){brand.classList.toggle('header-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script></body>
 </html>

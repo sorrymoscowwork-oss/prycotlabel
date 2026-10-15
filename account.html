@@ -208,6 +208,21 @@ body:has(#cabinetView:not(.hidden)) .brand .tagline{display:flex!important}
 .brand .tagline span{display:block!important;margin:0!important;padding:0!important;font:inherit!important;color:inherit!important}
 @media(max-width:700px){.brand{top:0!important;left:0!important}.logo{font-size:42px!important}.brand .tagline{width:auto!important;margin-top:8px!important;font-size:8px!important;letter-spacing:.08em!important;line-height:1!important}}
 
+
+/* Canonical PRYCOT brand positioning and scroll behavior, matched to index.html. */
+.brand{position:fixed!important;top:30px!important;left:34px!important;z-index:20!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;width:max-content!important;max-width:none!important;overflow:visible!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform!important}
+.brand>a{display:block!important;width:max-content!important;max-width:none!important;overflow:visible!important}
+.logo{display:inline-block!important;margin:0!important;padding:0 .18em 0 0!important;font-family:Helvetica,Arial,sans-serif!important;font-size:clamp(34px,4.5vw,62px)!important;line-height:.82!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important;white-space:nowrap!important;overflow:visible!important}
+.brand .tagline{position:fixed!important;top:88px!important;left:42px!important;display:flex!important;flex-direction:column!important;gap:0!important;width:auto!important;margin:0!important;padding:0!important;font-family:Helvetica,Arial,sans-serif!important;font-size:9px!important;line-height:1.18!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;color:var(--muted)!important;z-index:20!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform!important}
+.brand .tagline span{display:block!important;margin:0!important;padding:0!important;font:inherit!important;color:inherit!important}
+.brand.logo-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
+@media(max-width:700px){
+ .brand{top:22px!important;left:20px!important}
+ .logo{font-size:42px!important}
+ .brand .tagline{top:62px!important;left:28px!important;font-size:8px!important;letter-spacing:.08em!important;line-height:1.18!important}
+ .brand,.brand .tagline{transition:opacity .56s ease,filter .56s ease,transform .56s ease!important;will-change:opacity,filter,transform!important}
+ .mobile-brand-hidden .brand,.mobile-brand-hidden .brand .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
+}
 </style>
 </head>
 <body>
@@ -221,4 +236,4 @@ body:has(#cabinetView:not(.hidden)) .brand .tagline{display:flex!important}
 <script src="account-auth.js?v=20261015-brand-fix-1"></script><script>
 const menu=document.getElementById('menu'),menuButton=document.getElementById('menuButton');const closeMenu=()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false')};menuButton.addEventListener('click',(event)=>{event.preventDefault();event.stopPropagation();menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',menu.classList.contains('open'))});document.addEventListener('click',(event)=>{if(menu.classList.contains('open')&&!menu.contains(event.target)&&!menuButton.contains(event.target))closeMenu()});document.querySelectorAll('.menu-links a').forEach(link=>{const current=(location.pathname.split('/').pop()||'index.html').toLowerCase();const target=(link.getAttribute('href').split('/').pop()||'index.html').toLowerCase();if((current==='index.html'&&target==='index.html')||current===target)link.classList.add('active-page')});
 const agreement=document.getElementById('releaseAgreement');agreement?.addEventListener('change',e=>{const b=document.getElementById('submitReleaseButton');if(!b)return;const on=e.target.checked;b.classList.toggle('release-disabled',!on);b.classList.toggle('release-enabled',on);b.setAttribute('aria-disabled',String(!on));b.tabIndex=on?0:-1});
-</script></body></html>
+</script><script id="account-brand-scroll-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function update(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');document.querySelector('.page')?.classList.remove('mobile-brand-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);document.querySelector('.page')?.classList.toggle('mobile-brand-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script></body></html>

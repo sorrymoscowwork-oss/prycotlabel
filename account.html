@@ -189,44 +189,21 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 .account-top .user-summary{margin-right:0!important}
 .account-top #logoutButton{min-width:104px!important}
 body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
-body:has(#cabinetView:not(.hidden)) .brand .tagline{display:flex!important}
-.release-section-title{margin:0 0 12px!important;font-size:18px!important;font-weight:500!important;letter-spacing:-.02em!important}
 
-
-/* Remove divider above PRYCOTLINK column labels. */
-.prycotlink-list{border-top:0!important}
-.prycotlink-table-head{border-top:0!important}
-.prycotlink-entry .prycotlink-url{font-size:12px!important;color:var(--muted)!important;overflow-wrap:anywhere!important}
-@media(max-width:700px){.prycotlink-entry .prycotlink-url{grid-column:2!important}}
-
-/* Account brand: match the canonical PRYCOT header used across the site. */
-.page{position:relative!important}
-.brand{position:absolute!important;top:0!important;left:0!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;width:max-content!important;max-width:none!important;z-index:20!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important}
+/* PRYCOT header: mirror index.html positioning and typography exactly. */
+.brand{position:fixed!important;top:30px!important;left:34px!important;z-index:20!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;width:max-content!important;max-width:none!important;overflow:visible!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important}
 .brand>a{display:block!important;width:max-content!important;max-width:none!important;overflow:visible!important}
-.logo{display:inline-block!important;margin:0!important;padding:0 .18em 0 0!important;font-family:Helvetica,Arial,sans-serif!important;font-size:clamp(34px,4.5vw,62px)!important;line-height:.82!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important;white-space:nowrap!important;overflow:visible!important}
-.brand .tagline{position:static!important;top:auto!important;left:auto!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;width:100%!important;margin:8px 0 0!important;padding:0!important;font-family:Helvetica,Arial,sans-serif!important;font-size:9px!important;line-height:1!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;color:var(--muted)!important;z-index:auto!important}
-.brand .tagline span{display:block!important;margin:0!important;padding:0!important;font:inherit!important;color:inherit!important}
-@media(max-width:700px){.brand{top:0!important;left:0!important}.logo{font-size:42px!important}.brand .tagline{width:auto!important;margin-top:8px!important;font-size:8px!important;letter-spacing:.08em!important;line-height:1!important}}
-
-
-/* Canonical PRYCOT brand positioning and scroll behavior, matched to index.html. */
-.brand{position:fixed!important;top:30px!important;left:34px!important;z-index:20!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;width:max-content!important;max-width:none!important;overflow:visible!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform!important}
-.brand>a{display:block!important;width:max-content!important;max-width:none!important;overflow:visible!important}
-.logo{display:inline-block!important;margin:0!important;padding:0 .18em 0 0!important;font-family:Helvetica,Arial,sans-serif!important;font-size:clamp(34px,4.5vw,62px)!important;line-height:.82!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important;white-space:nowrap!important;overflow:visible!important}
-.brand .tagline{position:fixed!important;top:88px!important;left:42px!important;display:flex!important;flex-direction:column!important;gap:0!important;width:auto!important;margin:0!important;padding:0!important;font-family:Helvetica,Arial,sans-serif!important;font-size:9px!important;line-height:1.18!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;color:var(--muted)!important;z-index:20!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform!important}
+.brand .logo{display:inline-block!important;margin:0!important;padding:0 .18em 0 0!important;font-family:Helvetica,Arial,sans-serif!important;font-size:clamp(34px,4.5vw,62px)!important;line-height:.82!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important;white-space:nowrap!important;overflow:visible!important}
+.brand .tagline{position:fixed!important;top:88px!important;left:42px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;width:auto!important;margin:0!important;padding:0!important;font-family:Helvetica,Arial,sans-serif!important;font-size:9px!important;line-height:1.18!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;color:#9b9b98!important;z-index:20!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important}
 .brand .tagline span{display:block!important;margin:0!important;padding:0!important;font:inherit!important;color:inherit!important}
 .brand.logo-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
 @media(max-width:700px){
  .brand{top:22px!important;left:20px!important}
- .logo{font-size:42px!important}
+ .brand .logo{font-size:42px!important}
  .brand .tagline{top:62px!important;left:28px!important;font-size:8px!important;letter-spacing:.08em!important;line-height:1.18!important}
  .brand,.brand .tagline{transition:opacity .56s ease,filter .56s ease,transform .56s ease!important;will-change:opacity,filter,transform!important}
- .mobile-brand-hidden .brand,.mobile-brand-hidden .brand .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
+ .page.mobile-brand-hidden .brand,.page.mobile-brand-hidden .brand .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
 }
-
-/* Keep account content clear of the fixed PRYCOT masthead, as on the other pages. */
-.account-shell>.dashboard-card{margin-top:58px!important}
-@media(max-width:700px){.account-shell>.dashboard-card{margin-top:48px!important}}
 </style>
 </head>
 <body>

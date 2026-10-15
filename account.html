@@ -278,6 +278,30 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
 }
 
 
+
+/* Mobile dashboard labels and homepage-matched tagline positioning. */
+.tagline{position:fixed!important;top:88px!important;left:42px!important;margin:0!important;padding:0!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:0!important;width:auto!important;font-family:Helvetica,Arial,sans-serif!important;font-size:9px!important;line-height:1.18!important;font-weight:500!important;letter-spacing:.11em!important;text-transform:uppercase!important;text-align:left!important;white-space:nowrap!important;color:#9b9b98!important;z-index:20!important}
+.tagline span{display:block!important;margin:0!important;padding:0!important;font:inherit!important;color:inherit!important}
+@media(max-width:700px){.tagline{top:62px!important;left:28px!important;font-size:8px!important;line-height:1.18!important;letter-spacing:.08em!important}}
+@media(max-width:700px){
+  .page.mobile-brand-hidden .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
+  #releaseList .release-row>.release-meta{position:relative!important;padding-top:13px!important}
+  #releaseList .release-row>.release-meta::before{position:absolute!important;top:0!important;left:0!important;color:#9b9b98!important;font-size:8px!important;line-height:1!important;letter-spacing:.1em!important;text-transform:uppercase!important}
+  #releaseList .release-row>.release-meta:nth-child(3)::before{content:"TYPE"}
+  #releaseList .release-row>.release-meta:nth-child(4)::before{content:"SUBMITTED"}
+  #releaseList .release-row>.release-meta:nth-child(5)::before{content:"RELEASE DATE"}
+  #releaseList .release-row>.release-status{position:relative!important;padding-top:13px!important}
+  #releaseList .release-row>.release-status::before{content:"STATUS";position:absolute!important;top:0!important;left:0!important;color:#9b9b98!important;font-size:8px!important;line-height:1!important;letter-spacing:.1em!important;text-transform:uppercase!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-url,
+  #prycotlinkList .prycotlink-entry>.prycotlink-date,
+  #prycotlinkList .prycotlink-entry>.prycotlink-status{position:relative!important;padding-top:13px!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-url::before,
+  #prycotlinkList .prycotlink-entry>.prycotlink-date::before,
+  #prycotlinkList .prycotlink-entry>.prycotlink-status::before{position:absolute!important;top:0!important;left:0!important;color:#9b9b98!important;font-size:8px!important;line-height:1!important;letter-spacing:.1em!important;text-transform:uppercase!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-url::before{content:"URL"}
+  #prycotlinkList .prycotlink-entry>.prycotlink-date::before{content:"CREATED"}
+  #prycotlinkList .prycotlink-entry>.prycotlink-status::before{content:"STATUS"}
+}
 /* Mobile layout based on the actual DOM nodes rendered by account-auth.js. */
 @media(max-width:700px){
   #releaseList .release-row{
@@ -319,7 +343,7 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
 </head>
 <body>
 <div class="menu" id="menu"><nav class="menu-links" aria-label="Site navigation"><div class="menu-column menu-left"><a href="/">Home</a><a href="account.html">Account</a><a href="dashboard-guide.html">Dashboard Guide</a><a href="about.html">About PRYCOT.</a><a href="terms.html">Release Terms</a><a href="how-to-release.html">How to Release</a><a href="telegram-bot.html">Telegram Bot Guide</a><a href="prices.html">Prices</a><a href="label-services.html">Label Services</a><a href="contact.html">Contact</a></div><div class="menu-column menu-right"><a href="blog.html">Blog</a><a href="side-projects.html">Side Projects</a><a href="white-paper.html">White Paper</a><a href="user-agreement.html">User Agreement</a><div style="margin-top:0;padding-top:18px;border-top:1px solid rgba(244,244,242,.28);width:100%;"><a href="prycotlink-guide.html">PRYCOTLINK Guide</a></div></div></nav></div>
-<div class="page"><header class="brand"><a href="index.html"><h1 class="logo">PRYCOT.</h1></a><div class="tagline"><span>RELEASE WORLDWIDE.</span><span>PAY IN CRYPTO.</span><span>ROYALTIES IN CRYPTO.</span></div></header><button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
+<div class="page"><header class="brand"><a href="index.html"><h1 class="logo">PRYCOT.</h1></a></header><div class="tagline"><span>RELEASE WORLDWIDE.</span><span>PAY IN CRYPTO.</span><span>ROYALTIES IN CRYPTO.</span></div><button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 <main class="content"><section id="authView"><p class="eyebrow">PRYCOT. / ACCOUNT</p><h1>Your account.</h1><p class="intro">Sign in with Telegram to manage your profile and submit release requests.</p><div class="auth-wrap"><div class="auth-panel"><div class="telegram-widget"><script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="prycot_account_bot" data-size="large" data-userpic="false" data-radius="7" data-lang="en" data-onauth="onTelegramAuth(user)"></script></div><div class="status" id="authStatus"></div></div></div></section>
 <section id="cabinetView" class="hidden"><div class="account-shell"><div class="account-top"><div class="user-summary"><div class="avatar" id="avatarBox"></div><div><div class="user-name" id="cabinetName">Artist</div><div class="user-email" id="cabinetEmail">Telegram</div></div></div><button class="secondary" id="logoutButton" type="button">Log Out</button></div>
 <div class="dashboard-card"><div class="dashboard-heading"><div class="card-heading-box"><div class="card-title">RELEASES</div><div class="card-subtitle">Your PRYCOT release activity.</div></div><div class="dashboard-heading-actions"><div class="release-agreement"><input id="releaseAgreement" type="checkbox"><label for="releaseAgreement">I agree to the <a href="user-agreement.html" target="_blank" rel="noopener">User Agreement</a>.</label></div><a id="submitReleaseButton" class="primary release-disabled" href="https://t.me/prycot_relese_bot?start=release" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">SUBMIT A RELEASE →</a></div></div><div class="releases-head"></div><div class="release-list" id="releaseList"><div class="empty-releases">No releases yet.</div></div><div class="status" id="dashboardStatus"></div></div>

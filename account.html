@@ -225,6 +225,58 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
 /* Match the LOG OUT hover state to the other secondary account buttons. */
 #logoutButton:hover{background:#a0522d!important;border-color:#a0522d!important;color:#fff!important}
 #logoutButton:focus-visible{outline:1px solid #a0522d!important;outline-offset:3px}
+
+/* MOBILE ACCOUNT UX — isolated to small screens; desktop layout remains untouched. */
+@media(max-width:700px){
+  .page{padding:22px 16px 28px!important}
+  .brand{top:22px!important;left:20px!important}
+  .brand>a{display:block!important;width:max-content!important;max-width:none!important}
+  .brand .logo{font-size:42px!important;line-height:.82!important}
+  .brand .tagline{top:62px!important;left:28px!important;font-size:8px!important;line-height:1.18!important;letter-spacing:.08em!important}
+  .account-shell{width:100%!important;max-width:none!important;margin:75px 0 0!important}
+  .account-top{width:100%!important;min-width:0!important;gap:12px!important;margin:0 0 16px!important;justify-content:space-between!important}
+  .user-summary{min-width:0!important;gap:10px!important}
+  .avatar{width:42px!important;height:42px!important;flex:0 0 42px!important;font-size:15px!important}
+  .user-name{font-size:15px!important;overflow-wrap:anywhere}
+  .user-email{font-size:10px!important}
+  .account-top #logoutButton{min-width:88px!important;padding:10px 12px!important;font-size:9px!important}
+  .dashboard-card,.prycotlink-card{width:100%!important;min-width:0!important;margin-top:14px!important;padding:14px!important;border-radius:14px!important}
+  .dashboard-heading,.prycotlink-heading{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:12px!important;margin:0 0 16px!important;width:100%!important;min-width:0!important}
+  .dashboard-heading .card-heading-box,.prycotlink-heading .card-heading-box{display:block!important;flex:1 1 auto!important;width:100%!important;min-width:0!important;padding:15px 14px!important;border-radius:12px!important}
+  .card-title{font-size:21px!important;line-height:1.15!important}
+  .card-subtitle{font-size:12px!important;line-height:1.45!important;margin-top:5px!important}
+  .dashboard-heading-actions,.prycotlink-heading-actions{display:flex!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:11px!important;width:100%!important;min-width:0!important}
+  .dashboard-heading-actions .release-agreement{display:flex!important;align-items:flex-start!important;gap:8px!important;width:100%!important;white-space:normal!important;line-height:1.45!important}
+  .dashboard-heading-actions .release-agreement input{flex:0 0 15px!important;width:15px!important;height:15px!important;margin-top:1px!important}
+  .dashboard-heading-actions .release-agreement label{font-size:11px!important;line-height:1.45!important}
+  .dashboard-heading-actions .primary,.prycotlink-heading-actions .primary{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;min-width:0!important;min-height:42px!important;padding:12px 14px!important;text-align:center!important;font-size:10px!important;white-space:normal!important}
+  .prycotlink-heading-actions .release-summary{align-self:flex-start!important;font-size:10px!important}
+  .release-list,.prycotlink-list{display:flex!important;flex-direction:column!important;gap:10px!important;width:100%!important;min-width:0!important;border:0!important}
+  .release-table-head,.prycotlink-table-head{display:none!important}
+  .release-row{display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;align-items:center!important;gap:10px 12px!important;width:100%!important;min-width:0!important;margin:0!important;padding:12px!important;border:1px solid var(--line)!important;border-radius:12px!important;background:#101010!important}
+  .release-card-main{display:flex!important;align-items:center!important;gap:10px!important;grid-column:1/-1!important;min-width:0!important}
+  .release-cover,.release-cover-fallback{width:48px!important;height:48px!important;flex:0 0 48px!important;grid-column:1!important;grid-row:1!important}
+  .release-card-copy,.release-main{grid-column:2!important;grid-row:1!important;min-width:0!important}
+  .release-title{font-size:13px!important;line-height:1.35!important;overflow-wrap:anywhere!important}
+  .release-artist{font-size:10px!important;line-height:1.4!important;overflow-wrap:anywhere!important}
+  .release-card-details{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;flex-wrap:wrap!important;gap:8px 14px!important;grid-column:1/-1!important;width:100%!important;min-width:0!important;margin:0!important;padding:10px 0 0!important;border-top:1px solid var(--line)!important}
+  .release-card-details .release-meta,.release-card-details .release-status{display:inline-flex!important;align-items:center!important;justify-self:auto!important;text-align:left!important;font-size:10px!important;line-height:1.4!important;white-space:normal!important}
+  .release-details-button{grid-column:1/-1!important;width:100%!important;min-width:0!important;min-height:40px!important;margin:0!important}
+  .release-detail-panel{grid-column:1/-1!important;width:100%!important;min-width:0!important;margin:0!important}
+  .empty-releases{width:100%!important;padding:16px 4px!important;font-size:12px!important}
+  .prycotlink-entry{display:grid!important;grid-template-columns:48px minmax(0,1fr)!important;align-items:center!important;gap:10px 12px!important;width:100%!important;min-width:0!important;margin:0!important;padding:12px!important;border:1px solid var(--line)!important;border-radius:12px!important;background:#101010!important}
+  .prycotlink-entry .prycotlink-cover,.prycotlink-entry .prycotlink-cover-fallback{display:block!important;grid-column:1!important;grid-row:1!important;width:48px!important;height:48px!important;min-width:48px!important;max-width:48px!important}
+  .prycotlink-entry .prycotlink-info{display:block!important;grid-column:2!important;grid-row:1!important;width:100%!important;min-width:0!important;max-width:100%!important}
+  .prycotlink-entry .prycotlink-title{font-size:13px!important;line-height:1.35!important;overflow-wrap:anywhere!important}
+  .prycotlink-entry .prycotlink-url{font-size:10px!important;line-height:1.4!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+  .prycotlink-entry .prycotlink-date{grid-column:1/-1!important;min-width:0!important;font-size:10px!important}
+  .prycotlink-entry .prycotlink-status{grid-column:1/-1!important;min-width:0!important;font-size:10px!important}
+  .prycotlink-actions{display:flex!important;grid-column:1/-1!important;align-items:stretch!important;justify-content:stretch!important;gap:8px!important;width:100%!important;min-width:0!important;margin-top:2px!important}
+  .prycotlink-actions a,.prycotlink-open,.prycotlink-analytics{display:inline-flex!important;flex:1 1 0!important;align-items:center!important;justify-content:center!important;width:50%!important;min-width:0!important;min-height:40px!important;padding:10px 8px!important;font-size:9px!important;letter-spacing:.05em!important;text-align:center!important;white-space:normal!important}
+  .prycotlink-create{margin:0!important}
+  .site-footer{width:100%!important;margin-top:36px!important;padding-top:18px!important;gap:8px!important;align-items:flex-start!important;font-size:9px!important}
+}
+
 </style>
 </head>
 <body>

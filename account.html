@@ -56,6 +56,32 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 @media(max-width:900px){.dashboard-heading,.prycotlink-heading{align-items:stretch;flex-direction:column;gap:14px}.dashboard-heading-actions,.prycotlink-heading-actions{justify-content:space-between;flex-wrap:wrap}.dashboard-heading-actions .release-agreement{white-space:normal}}
 @media(max-width:650px){.dashboard-card,.prycotlink-card{padding:16px!important}.dashboard-heading,.prycotlink-heading{margin-bottom:18px}.dashboard-heading-actions{align-items:flex-start;flex-direction:column;gap:14px}.dashboard-heading-actions .primary,.prycotlink-heading-actions .primary{width:100%}.prycotlink-heading-actions{align-items:stretch;flex-direction:column;gap:12px}.release-table-head{display:none}.release-row{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:16px 10px}.release-main{grid-column:1 / -1}.release-row .release-meta{font-size:11px}.release-row .release-status{justify-self:end;text-align:right}.prycotlink-entry{grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:14px 8px}.prycotlink-entry .prycotlink-row{grid-column:1 / -1}.prycotlink-open,.prycotlink-analytics{min-height:38px;padding:10px 12px;font-size:8px}.prycotlink-entry .prycotlink-analytics{grid-column:2}.prycotlink-entry .prycotlink-open{grid-column:1}}
 
+
+/* Release entries are compact artwork cards in the dashboard. */
+.release-table-head{display:none!important}
+.release-row{display:grid;grid-template-columns:minmax(0,1fr);gap:0;padding:16px!important;margin:0 0 10px;border:1px solid var(--line)!important;border-radius:14px;background:#101010;min-width:0}
+.release-row:last-child{margin-bottom:0}
+.release-card-main{display:flex;align-items:center;gap:15px;min-width:0}
+.release-cover{display:block;flex:0 0 56px;width:56px;height:56px;border-radius:8px;object-fit:cover;background:#1b1b1b;border:1px solid #303030}
+.release-cover-fallback{display:grid;place-items:center;flex:0 0 56px;width:56px;height:56px;border-radius:8px;background:#1b1b1b;border:1px solid #303030;color:#A0522D;font-size:20px;font-style:italic;font-weight:700;letter-spacing:-.08em}
+.release-card-copy{flex:1;min-width:0}
+.release-card-copy .release-title{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+.release-card-copy .release-artist{margin-top:5px;font-size:10px;color:var(--muted);text-transform:none;overflow-wrap:anywhere}
+.release-card-details{display:flex;align-items:center;justify-content:space-between;gap:16px;margin:14px 0 0 71px;padding-top:12px;border-top:1px solid var(--line);min-width:0}
+.release-card-details .release-meta{font-size:10px;color:var(--muted);text-transform:none;overflow-wrap:anywhere}
+.release-card-details .release-status{justify-self:auto;text-align:right;font-size:10px;letter-spacing:.02em;text-transform:none;white-space:normal;overflow-wrap:anywhere}
+.release-card-details .release-status:before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#858585;vertical-align:middle}
+.release-card-details .release-status.status-live:before{background:#54c783}
+.release-card-details .release-status.status-pending:before{background:#ff7f50}
+.release-card-details .release-status.status-error:before{background:#d97878}
+@media(max-width:650px){
+ .release-row{padding:13px!important;margin-bottom:9px}
+ .release-cover,.release-cover-fallback{flex-basis:48px;width:48px;height:48px}
+ .release-card-main{gap:12px}
+ .release-card-details{margin-left:60px;gap:10px;align-items:flex-start;flex-direction:column}
+ .release-card-details .release-status{text-align:left}
+}
+
 </style>
 </head>
 <body>

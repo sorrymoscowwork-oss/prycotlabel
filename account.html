@@ -381,6 +381,12 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
   .brand .logo{font-size:42px!important}
   .account-label{font-size:28px!important;line-height:.9!important}
 }
+
+/* Mobile header titles sit beneath the logo; desktop keeps them inline. */
+@media(max-width:700px){
+ .brand{flex-direction:column!important;align-items:flex-start!important;gap:7px!important;width:max-content!important;max-width:calc(100vw - 40px)!important}
+ .brand .account-label{display:block!important;margin:0!important;padding:0!important;font-size:22px!important;line-height:.95!important;white-space:nowrap!important;max-width:none!important;overflow:visible!important}
+}
 </style>
 </head>
 <body>

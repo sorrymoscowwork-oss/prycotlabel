@@ -339,6 +339,38 @@ body:has(#cabinetView:not(.hidden)) .menu-button{display:none!important}
   #prycotlinkList .prycotlink-actions>a{flex:1 1 0!important;width:auto!important;min-width:0!important;min-height:40px!important;padding:10px 6px!important;font-size:9px!important;white-space:normal!important;text-align:center!important}
 }
 
+
+/* Mobile metadata uses the full card width in compact columns, not a vertical list. */
+@media(max-width:700px){
+  #releaseList .release-row{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    column-gap:12px!important;
+    row-gap:10px!important;
+  }
+  #releaseList .release-row>.release-cover,
+  #releaseList .release-row>.release-cover-fallback{grid-column:1!important;grid-row:1!important}
+  #releaseList .release-row>.release-card-copy{grid-column:2 / -1!important;grid-row:1!important;align-self:center!important}
+  #releaseList .release-row>.release-meta{grid-column:auto!important;grid-row:auto!important;align-self:start!important;min-width:0!important;overflow-wrap:anywhere!important}
+  #releaseList .release-row>.release-meta:nth-child(3){grid-column:1!important}
+  #releaseList .release-row>.release-meta:nth-child(4){grid-column:2!important}
+  #releaseList .release-row>.release-meta:nth-child(5){grid-column:3!important}
+  #releaseList .release-row>.release-status{grid-column:1 / -1!important;grid-row:auto!important}
+  #releaseList .release-row>.release-details-button,
+  #releaseList .release-row>.release-detail-panel{grid-column:1 / -1!important}
+  #releaseList .release-row>.release-meta::before{white-space:normal!important;font-size:7px!important;letter-spacing:.06em!important}
+  #prycotlinkList .prycotlink-entry{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    column-gap:12px!important;
+    row-gap:10px!important;
+  }
+  #prycotlinkList .prycotlink-entry>.prycotlink-cover,
+  #prycotlinkList .prycotlink-entry>.prycotlink-cover-fallback{grid-column:1!important;grid-row:1!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-info{grid-column:2 / -1!important;grid-row:1!important;align-self:center!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-url{grid-column:1 / -1!important;grid-row:auto!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-date{grid-column:1 / 3!important;grid-row:auto!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-status{grid-column:3!important;grid-row:auto!important}
+  #prycotlinkList .prycotlink-entry>.prycotlink-actions{grid-column:1 / -1!important}
+}
 </style>
 </head>
 <body>

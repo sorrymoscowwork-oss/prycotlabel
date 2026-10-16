@@ -32,7 +32,7 @@
     // The account and PRYCOTLINK pages share the same origin, so the verified
     // Telegram profile is already available to the creation page in storage.
     // Navigate directly and avoid the broken server-side handoff endpoint.
-    window.location.href=new URL(a.href,location.origin).href;
+    try{const value=JSON.stringify(u);sessionStorage.setItem(PROFILE_KEY,value);localStorage.setItem(PROFILE_KEY,value);document.cookie='prycotTelegramProfile='+encodeURIComponent(value)+'; Max-Age=604800; Path=/; Domain=.prycot.com; Secure; SameSite=Lax'}catch(_){}window.location.href=new URL(a.href,location.origin).href;
   }
   document.addEventListener('click',e=>{
     const a=e.target&&e.target.closest?e.target.closest('a.prycotlink-create'):null;

@@ -9,7 +9,7 @@
   let authRevision=0;
   if(dashboardStatus)dashboardStatus.style.display='none';
   function readCookie(){try{const m=document.cookie.match(/(?:^|; )prycotTelegramProfile=([^;]+)/);return m?JSON.parse(decodeURIComponent(m[1])):null}catch(_){return null}}
-  function profile(){try{const local=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');if(local)return local}catch(_){}return readCookie()}
+  function profile(){const valid=u=>!!(u&&u.id&&u.auth_date&&u.hash);try{const local=JSON.parse(localStorage.getItem(PROFILE_KEY)||'null');if(valid(local))return local}catch(_){}const cookie=readCookie();if(valid(cookie))return cookie;try{const session=JSON.parse(sessionStorage.getItem(PROFILE_KEY)||'null');if(valid(session))return session}catch(_){}return null}
   function save(user){const value=JSON.stringify(user);localStorage.setItem(PROFILE_KEY,value);document.cookie='prycotTelegramProfile='+encodeURIComponent(value)+'; Max-Age=604800; Path=/; Domain=.prycot.com; Secure; SameSite=Lax'}
   function clear(){localStorage.removeItem(PROFILE_KEY);document.cookie='prycotTelegramProfile=; Max-Age=0; Path=/; Domain=.prycot.com; Secure; SameSite=Lax'}
   function showAuth(){authView?.classList.remove('hidden');cabinetView?.classList.add('hidden')}

@@ -239,6 +239,15 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
   .header-brand.header-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
 }
 
+
+/* Keep the final CTA clear of the footer separator on every viewport. */
+@media (max-width: 700px) {
+  .content { padding-bottom: 52px !important; }
+}
+@media (min-width: 701px) {
+  .content { padding-bottom: 36px !important; }
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>

@@ -753,15 +753,18 @@ function releaseMarkup(r, preview=false){
 `;
  document.head.appendChild(s)}
  function removeStrayHeaderText(release){
-  const candidates=[document.body,release,release?.querySelector('.release-topbar')].filter(Boolean);
-  candidates.forEach(parent=>Array.from(parent.childNodes).forEach(node=>{
-    if(node.nodeType!==Node.TEXT_NODE)return;
-    const value=(node.nodeValue||'').trim();
-    if(value==='\\n'||value==='\\\\n')node.remove();
-  }));
+  const isArtifact=value=>{const v=String(value||'').trim();return v==='\\n'||v==='\\\\n'};
+  // The stray literal was outside the release header in some mobile renders.
+  // Scan the full page, but remove only nodes whose entire content is the artifact.
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  const textNodes=[];while(walker.nextNode())if(isArtifact(walker.currentNode.nodeValue))textNodes.push(walker.currentNode);
+  textNodes.forEach(node=>node.remove());
+  document.body.querySelectorAll('*').forEach(el=>{
+    if(el.closest('.pl-live-release .release-brand,.pl-live-release .release-tagline'))return;
+    if(el.children.length===0&&isArtifact(el.textContent))el.remove();
+  });
   release?.querySelectorAll('.release-topbar > span,.release-topbar > i,.release-topbar > small').forEach(el=>{
-    const value=(el.textContent||'').trim();
-    if(value==='\\n'||value==='\\\\n')el.remove();
+    if(isArtifact(el.textContent))el.remove();
   });
 }
 function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.pl-intro');const liveForm=document.getElementById('prycotlinkForm');if(liveIntro)liveIntro.remove();if(liveForm)liveForm.remove();document.querySelectorAll('.pl-live-release').forEach(x=>x.remove());page.classList.add('release-host');document.querySelectorAll('.brand,.tagline,.menu-button,.menu').forEach(x=>x.remove());page.insertAdjacentHTML('beforeend',releaseMarkup(r));document.documentElement.classList.remove('release-boot');const release=document.querySelector('.pl-live-release');if(release){removeStrayHeaderText(release);
@@ -888,7 +891,7 @@ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.p
 .pl-live-release .release-tagline{left:42px!important;right:auto!important;max-width:calc(100vw - 60px)!important;overflow:hidden!important;clip-path:inset(0)!important}
 @media(max-width:760px){
   .pl-live-release .release-brand{left:20px!important;top:22px!important}
-  .pl-live-release .release-tagline{left:28px!important;top:88px!important;max-width:calc(100vw - 48px)!important}
+  .pl-live-release .release-tagline{left:28px!important;top:62px!important;max-width:calc(100vw - 48px)!important}
 }
 </style>
 </body>

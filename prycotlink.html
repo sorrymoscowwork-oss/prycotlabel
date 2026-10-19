@@ -1003,6 +1003,7 @@ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.p
   outline:0!important;
   box-shadow:none!important;
 }
+</style>
 
 <style id="prycotlink-final-header-normalization">
 /* One shared header geometry for every public PRYCOTLINK release page. */
@@ -1012,5 +1013,19 @@ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.p
 <script id="prycotlink-final-artifact-cleaner">
 (function(){function clean(){var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),nodes=[];while(walker.nextNode()){var n=walker.currentNode,v=String(n.nodeValue||'');if(/^[\\s\\u200B\\uFEFF]*(?:\\\\n|\\\\\\\\n)[\\s\\u200B\\uFEFF]*$/.test(v)||/^[\\s\\u200B\\uFEFF]*\\\\n[\\s\\u200B\\uFEFF]+/.test(v))nodes.push(n)}nodes.forEach(function(n){var v=String(n.nodeValue||'');if(/^[\\s\\u200B\\uFEFF]*\\\\n/.test(v))n.nodeValue=v.replace(/^[\\s\\u200B\\uFEFF]*\\\\n[\\s\\u200B\\uFEFF]*/,'');if(!String(n.nodeValue||'').trim())n.remove()})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean);else clean();new MutationObserver(clean).observe(document.documentElement,{childList:true,subtree:true})})();
 </script>
+
+<style id="prycotlink-copy-buttons-borderless-final">
+/* Remove borders and focus outlines from COPY controls in the Crypto Donation dropdown. */
+.pl-live-release .release-donation-dialog button.release-wallet-copy,
+.pl-live-release .release-donation-dialog button.release-wallet-copy:hover,
+.pl-live-release .release-donation-dialog button.release-wallet-copy:active,
+.pl-live-release .release-donation-dialog button.release-wallet-copy:focus,
+.pl-live-release .release-donation-dialog button.release-wallet-copy:focus-visible,
+.pl-live-release .release-donation-dialog button.release-wallet-copy.is-copied {
+  border: 0!important;
+  outline: 0!important;
+  box-shadow: none!important;
+}
+</style>
 </body>
 </html>

@@ -862,8 +862,27 @@ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.p
   outline:0!important;
   box-shadow:none!important;
 }
+.pl-live-release button.release-donation-trigger,
+.pl-live-release button.release-donation-trigger:focus,
+.pl-live-release button.release-donation-trigger:focus-visible,
+.pl-live-release button.release-donation-trigger:active{
+  background:linear-gradient(110deg,#6D50E8 0%,#3C91D8 100%)!important;
+  border:1px solid #7965F2!important;
+  color:#fff!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
 .pl-live-release button.release-donation-trigger:hover{
-  background:rgba(183,165,255,.09)!important;
+  background:linear-gradient(110deg,#8A73FF 0%,#42B7E9 100%)!important;
+  border:1px solid #8A73FF!important;
+  color:#fff!important;
+}
+.pl-live-release button.release-donation-trigger .release-donation-crypto-word,
+.pl-live-release button.release-donation-trigger .release-donation-donation-word{
+  background:none!important;
+  -webkit-background-clip:border-box!important;
+  background-clip:border-box!important;
+  color:#fff!important;
 }
 
 /* Requested PRYCOTLINK fixes: brand marks, mobile header, and donation copy controls. */

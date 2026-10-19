@@ -853,6 +853,23 @@ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.p
 </script><script id="prycotlink-header-scroll-behavior">(function(){const brand=document.querySelector('.prycotlink-header .header-brand');if(!brand)return;let ticking=false;function update(){brand.classList.toggle('header-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>  <script src="/site-navigation.js?v=20261019-footer" defer></script>
 <style id="prycotlink-requested-mobile-and-donation-fixes">
 /* Requested PRYCOTLINK fixes: brand marks, mobile header, and donation copy controls. */
+/* Final optical alignment: draw the close icon with two centered strokes instead of a font glyph. */
+.pl-live-release .release-donation-dialog .release-donation-close{
+  position:relative!important;display:block!important;box-sizing:border-box!important;
+  width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;
+  flex:0 0 36px!important;padding:0!important;line-height:0!important;font-size:0!important;
+  text-indent:-9999px!important;overflow:hidden!important;
+}
+.pl-live-release .release-donation-dialog .release-donation-close::before,
+.pl-live-release .release-donation-dialog .release-donation-close::after{
+  content:""!important;display:block!important;position:absolute!important;
+  left:50%!important;top:50%!important;width:15px!important;height:1.5px!important;
+  margin:0!important;padding:0!important;border:0!important;border-radius:2px!important;
+  background:currentColor!important;transform-origin:center center!important;
+}
+.pl-live-release .release-donation-dialog .release-donation-close::before{transform:translate(-50%,-50%) rotate(45deg)!important}
+.pl-live-release .release-donation-dialog .release-donation-close::after{transform:translate(-50%,-50%) rotate(-45deg)!important}
+
 @media(max-width:700px){.prycotlink-header .header-brand .page-label,.prycotlink-header>.tagline{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important}.prycotlink-header .header-brand{gap:0!important}}
 .prycotlink-page .platform-icon img[data-platform-fallback="deezer"],.prycotlink-page img[data-platform-fallback="deezer"]{filter:brightness(0) saturate(100%) invert(32%) sepia(78%) saturate(1774%) hue-rotate(231deg) brightness(92%) contrast(94%)!important;-webkit-filter:brightness(0) saturate(100%) invert(32%) sepia(78%) saturate(1774%) hue-rotate(231deg) brightness(92%) contrast(94%)!important}
 .pl-live-release button.release-wallet-copy,.pl-live-release .release-donation-dialog button.release-wallet-copy,

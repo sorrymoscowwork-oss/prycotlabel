@@ -745,9 +745,29 @@ html body footer.site-footer .footer-bottom .visitor-counter {
   }
 }
 
-/* Subtle cursor-driven water ripple, restricted to the homepage headline only. */
+/* Local water ripple follows the pointer only across the homepage headline. */
 .hero .intro {
+  position: relative;
+}
+.hero .intro-water-overlay {
+  position: absolute !important;
+  z-index: 2 !important;
+  inset: 0 auto auto 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  pointer-events: none !important;
+  user-select: none !important;
   filter: url(#intro-water-ripple);
+  opacity: 0;
+  --ripple-x: -200px;
+  --ripple-y: -200px;
+  -webkit-mask-image: radial-gradient(circle 78px at var(--ripple-x) var(--ripple-y), #000 0%, #000 28%, transparent 100%);
+  mask-image: radial-gradient(circle 78px at var(--ripple-x) var(--ripple-y), #000 0%, #000 28%, transparent 100%);
+  transition: opacity 120ms ease-out;
+}
+.hero .intro-water-overlay.intro-water-active {
+  opacity: 1;
 }
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -820,9 +840,9 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
   <script src="/site-navigation.js?v=20261019-footer" defer></script>
 
 <svg aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none">
-  <filter id="intro-water-ripple" x="-10%" y="-15%" width="120%" height="130%" color-interpolation-filters="sRGB">
-    <feTurbulence id="intro-water-noise" type="fractalNoise" baseFrequency="0.012 0.028" numOctaves="1" seed="2" result="waterNoise"/>
-    <feDisplacementMap id="intro-water-displacement" in="SourceGraphic" in2="waterNoise" scale="0" xChannelSelector="R" yChannelSelector="G"/>
+  <filter id="intro-water-ripple" x="-8%" y="-12%" width="116%" height="124%" color-interpolation-filters="sRGB">
+    <feTurbulence id="intro-water-noise" type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="1" seed="2" result="waterNoise"/>
+    <feDisplacementMap id="intro-water-displacement" in="SourceGraphic" in2="waterNoise" scale="11" xChannelSelector="R" yChannelSelector="G"/>
   </filter>
 </svg>
 <script id="homepage-headline-water-ripple">
@@ -831,21 +851,43 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
   const displacement=document.getElementById('intro-water-displacement');
   const noise=document.getElementById('intro-water-noise');
   if(!headline||!displacement||!noise||!window.matchMedia('(hover: hover) and (pointer: fine)').matches||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  let previousX=0,previousY=0,previousTime=0,seed=2,resetTimer=0,seedTimer=0;
-  headline.addEventListener('pointerenter',function(event){previousX=event.clientX;previousY=event.clientY;previousTime=performance.now();});
+  const overlay=headline.cloneNode(true);
+  overlay.classList.add('intro-water-overlay');
+  overlay.setAttribute('aria-hidden','true');
+  overlay.removeAttribute('id');
+  overlay.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+  headline.insertAdjacentElement('afterend',overlay);
+  let previousX=0,previousY=0,previousTime=0,seed=2,resetTimer=0;
+  function resetRipple(){
+    window.clearTimeout(resetTimer);
+    overlay.classList.remove('intro-water-active');
+    overlay.style.setProperty('--ripple-x','-200px');
+    overlay.style.setProperty('--ripple-y','-200px');
+  }
+  headline.addEventListener('pointerenter',function(event){
+    const rect=headline.getBoundingClientRect();
+    previousX=event.clientX;previousY=event.clientY;previousTime=performance.now();
+    overlay.style.setProperty('--ripple-x',(event.clientX-rect.left)+'px');
+    overlay.style.setProperty('--ripple-y',(event.clientY-rect.top)+'px');
+    overlay.classList.add('intro-water-active');
+  });
   headline.addEventListener('pointermove',function(event){
+    const rect=headline.getBoundingClientRect();
     const now=performance.now();
     const elapsed=Math.max(8,now-previousTime);
     const distance=Math.hypot(event.clientX-previousX,event.clientY-previousY);
     const speed=distance/elapsed;
-    const scale=Math.min(2.8,Math.max(0.7,0.7+speed*1.35));
-    displacement.setAttribute('scale',scale.toFixed(2));
-    if(now-previousTime>18){seed=seed>=7?2:seed+1;noise.setAttribute('seed',String(seed));}
+    const scale=Math.min(15,Math.max(7,7+speed*5));
+    displacement.setAttribute('scale',scale.toFixed(1));
+    if(now-previousTime>22){seed=seed>=7?2:seed+1;noise.setAttribute('seed',String(seed));}
+    overlay.style.setProperty('--ripple-x',(event.clientX-rect.left)+'px');
+    overlay.style.setProperty('--ripple-y',(event.clientY-rect.top)+'px');
+    overlay.classList.add('intro-water-active');
     previousX=event.clientX;previousY=event.clientY;previousTime=now;
     window.clearTimeout(resetTimer);
-    resetTimer=window.setTimeout(function(){displacement.setAttribute('scale','0');},180);
+    resetTimer=window.setTimeout(resetRipple,140);
   });
-  headline.addEventListener('pointerleave',function(){window.clearTimeout(resetTimer);displacement.setAttribute('scale','0');});
+  headline.addEventListener('pointerleave',resetRipple);
 })();
 </script>
 </body>

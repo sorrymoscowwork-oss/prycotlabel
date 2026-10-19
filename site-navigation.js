@@ -50,7 +50,7 @@
       'body.site-home .brand { position: fixed !important; top: 30px !important; left: 34px !important; z-index: 10001 !important; opacity: 1; filter: blur(0); transform: translateY(0); transition: opacity 1.05s ease, filter 1.05s ease, transform 1.05s ease !important; pointer-events: auto; }',
       'body.site-home.site-logo-scrolled .brand { opacity: 0 !important; filter: blur(14px) !important; transform: translateY(-7px) !important; pointer-events: none !important; }',
       'body .menu-button { display: none !important; }',
-      'body .menu { display: none !important; visibility: hidden !important; pointer-events: none !important; }',
+      'body .menu, body .menu.open { display: none !important; visibility: hidden !important; pointer-events: none !important; }',
       '}'
     ].join(' ');
     document.head.appendChild(style);

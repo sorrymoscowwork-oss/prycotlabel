@@ -16,7 +16,7 @@ header{position:relative;display:flex;justify-content:space-between;align-items:
 .menu-button,.menu-close{border:0;background:none;color:var(--fg);padding:0;cursor:pointer;font:inherit}
 .menu-button span{display:block;width:28px;height:1px;background:var(--fg);position:absolute;left:0;top:10px}
 .menu-button span:before,.menu-button span:before{top:-7px}
-.menu{position:fixed;inset:0 0 0 auto;z-index:10;display:none;width:min(33.333vw,520px);background:rgba(10,10,10,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-left:1px solid rgba(244,244,242,.16);padding:30px 34px 42px}
+.menu{position:fixed;inset:0 0 0 auto;z-index:10;display:none;width:min(33.333vw,520px);background:rgba(10,10,10,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-left:1px solid rgba(244, 244, 244,.16);padding:30px 34px 42px}
 .menu.open{display:flex;flex-direction:column}
 .menu-header{display:flex;justify-content:flex-end}
 .menu-links{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:18px;text-align:center}
@@ -166,10 +166,10 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 .menu-links .menu-right a.active-page{color:#666666!important;font-style:italic!important}
 .menu-links .menu-right a.active-page:hover{color:#B8B8B8!important}
 @media(max-width:700px){.menu{width:50vw!important;max-width:50vw!important;min-width:0!important;padding:22px 14px 28px!important}.menu-links{width:100%!important;gap:12px!important}.menu-column{width:100%!important;gap:12px!important}.menu-right{margin-top:12px!important}.menu-links a{width:100%!important;font-size:13px!important;line-height:1.05!important;letter-spacing:-.015em!important;white-space:nowrap!important}}
-@media(max-width:700px){.menu-links{gap:18px!important}.menu-column{gap:18px!important}.menu-right{margin-top:18px!important;padding-top:18px!important;border-top:1px solid rgba(244,244,242,.18)!important}}
-@media(max-width:700px){.menu-links{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:0!important;width:100%!important}.menu-column{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:0!important;width:100%!important}.menu-column a{display:block!important;width:100%!important;margin:0 0 18px 0!important;padding:0!important;font-size:13px!important;line-height:1.05!important;white-space:nowrap!important}.menu-column a:last-child{margin-bottom:0!important}.menu-right{margin-top:0!important;padding-top:18px!important;border-top:1px solid rgba(244,244,242,.28)!important}.menu-right a:first-child{margin-top:18px!important}}
+@media(max-width:700px){.menu-links{gap:18px!important}.menu-column{gap:18px!important}.menu-right{margin-top:18px!important;padding-top:18px!important;border-top:1px solid rgba(244, 244, 244,.18)!important}}
+@media(max-width:700px){.menu-links{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;gap:0!important;width:100%!important}.menu-column{display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:0!important;width:100%!important}.menu-column a{display:block!important;width:100%!important;margin:0 0 18px 0!important;padding:0!important;font-size:13px!important;line-height:1.05!important;white-space:nowrap!important}.menu-column a:last-child{margin-bottom:0!important}.menu-right{margin-top:0!important;padding-top:18px!important;border-top:1px solid rgba(244, 244, 244,.28)!important}.menu-right a:first-child{margin-top:18px!important}}
 @media(max-width:700px){.menu-right{padding-top:36px!important}.menu-right a:first-child{margin-top:0!important}}
-@media(max-width:700px){.menu{left:auto!important;right:0!important;width:50vw!important;max-width:50vw!important;min-width:50vw!important}.menu-left a:last-child{margin-bottom:36px!important}.menu-right{margin-top:0!important;padding-top:0!important;border-top:1px solid rgba(244,244,242,.28)!important}.menu-right a:first-child{margin-top:36px!important}}
+@media(max-width:700px){.menu{left:auto!important;right:0!important;width:50vw!important;max-width:50vw!important;min-width:50vw!important}.menu-left a:last-child{margin-bottom:36px!important}.menu-right{margin-top:0!important;padding-top:0!important;border-top:1px solid rgba(244, 244, 244,.28)!important}.menu-right a:first-child{margin-top:36px!important}}
 @media(max-width:700px){.menu{position:fixed!important;top:0!important;right:0!important;bottom:0!important;left:auto!important;inset:0 0 0 auto!important;width:50vw!important;max-width:50vw!important;min-width:50vw!important;transform:none!important}}
 .brand{transition:opacity .28s ease,filter .28s ease,transform .28s ease!important;will-change:opacity,filter,transform}.brand.logo-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}
 @media (max-width:700px){.brand,.tagline{transition:opacity .56s ease,filter .56s ease,transform .56s ease!important;will-change:opacity,filter,transform}.mobile-brand-hidden .brand,.mobile-brand-hidden .tagline{opacity:0!important;filter:blur(16px)!important;transform:translateY(-4px)!important;pointer-events:none!important}}
@@ -270,7 +270,7 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 <a href="blog.html">Blog</a>
 <a href="side-projects.html">Side Projects</a>
 <a href="white-paper.html">White Paper</a>
-<a href="user-agreement.html">User Agreement</a><div style="margin-top:0;padding-top:18px;border-top:1px solid rgba(244,244,242,.28);width:100%;"><a href="prycotlink-guide.html">PRYCOTLINK Guide</a></div>
+<a href="user-agreement.html">User Agreement</a><div style="margin-top:0;padding-top:18px;border-top:1px solid rgba(244, 244, 244,.28);width:100%;"><a href="prycotlink-guide.html">PRYCOTLINK Guide</a></div>
 </div>
 </nav>
 </div>

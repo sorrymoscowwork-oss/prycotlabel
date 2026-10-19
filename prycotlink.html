@@ -753,21 +753,22 @@ function releaseMarkup(r, preview=false){
 `;
  document.head.appendChild(s)}
  function removeStrayHeaderText(release){
-  const isArtifact=value=>{const v=String(value||'').trim();return v==='\\n'||v==='\\\\n'};
+  const isArtifact=value=>{const v=String(value||'').replace(/[\\s\\u200B\\uFEFF]+/g,'');return v==='\\\\n'||v==='\\\\\\\\n'||v==='n\\\\' };
+  const cleanArtifactText=node=>{if(node&&node.nodeType===Node.TEXT_NODE){const value=String(node.nodeValue||'');if(/^[\\s\\u200B\\uFEFF]*(?:\\\\n|\\\\\\\\n)(?:[\\s\\u200B\\uFEFF]*)$/.test(value)){node.remove();return true}if(/^[\\s\\u200B\\uFEFF]*\\\\n/.test(value)){node.nodeValue=value.replace(/^[\\s\\u200B\\uFEFF]*\\\\n[\\s\\u200B\\uFEFF]*/,'');if(!node.nodeValue.trim())node.remove();return true}}return false};
   // The stray literal was outside the release header in some mobile renders.
   // Scan the full page, but remove only nodes whose entire content is the artifact.
   const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
-  const textNodes=[];while(walker.nextNode())if(isArtifact(walker.currentNode.nodeValue))textNodes.push(walker.currentNode);
+  const textNodes=[];while(walker.nextNode())if(isArtifact(walker.currentNode.nodeValue)||/^[\\s\\u200B\\uFEFF]*\\\\n/.test(String(walker.currentNode.nodeValue||'')))textNodes.push(walker.currentNode);
   textNodes.forEach(node=>node.remove());
   // Keep removing this exact stray token if another script injects it after render.
   if(!window.__prycotlinkArtifactObserver){
     window.__prycotlinkArtifactObserver=new MutationObserver(records=>{
       records.forEach(record=>{
         record.addedNodes.forEach(node=>{
-          if(node.nodeType===Node.TEXT_NODE&&isArtifact(node.nodeValue)){node.remove();return}
+          if(node.nodeType===Node.TEXT_NODE&&(isArtifact(node.nodeValue)||cleanArtifactText(node))){node.remove();return}
           if(node.nodeType===Node.ELEMENT_NODE){
             const walker=document.createTreeWalker(node,NodeFilter.SHOW_TEXT);
-            const found=[];while(walker.nextNode())if(isArtifact(walker.currentNode.nodeValue))found.push(walker.currentNode);
+            const found=[];while(walker.nextNode())if(isArtifact(walker.currentNode.nodeValue)||/^[\\s\\u200B\\uFEFF]*\\\\n/.test(String(walker.currentNode.nodeValue||'')))found.push(walker.currentNode);
             found.forEach(textNode=>textNode.remove());
             if(node.children.length===0&&isArtifact(node.textContent))node.remove();
           }
@@ -986,6 +987,14 @@ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.p
   outline:0!important;
   box-shadow:none!important;
 }
+
+<style id="prycotlink-final-header-normalization">
+/* One shared header geometry for every public PRYCOTLINK release page. */
+.pl-live-release .release-tagline{position:fixed!important;top:88px!important;left:42px!important;right:auto!important;bottom:auto!important;margin:0!important;padding:0!important;display:flex!important;flex-direction:column!important;gap:0!important;line-height:1.18!important;white-space:nowrap!important;transform:none!important}
+@media(max-width:760px){.pl-live-release .release-brand{top:22px!important;left:20px!important}.pl-live-release .release-brand span{font-size:42px!important;line-height:.82!important}.pl-live-release .release-tagline{top:62px!important;left:28px!important;font-size:8px!important;line-height:1.18!important;letter-spacing:.08em!important}}
 </style>
+<script id="prycotlink-final-artifact-cleaner">
+(function(){function clean(){var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),nodes=[];while(walker.nextNode()){var n=walker.currentNode,v=String(n.nodeValue||'');if(/^[\\s\\u200B\\uFEFF]*(?:\\\\n|\\\\\\\\n)[\\s\\u200B\\uFEFF]*$/.test(v)||/^[\\s\\u200B\\uFEFF]*\\\\n[\\s\\u200B\\uFEFF]+/.test(v))nodes.push(n)}nodes.forEach(function(n){var v=String(n.nodeValue||'');if(/^[\\s\\u200B\\uFEFF]*\\\\n/.test(v))n.nodeValue=v.replace(/^[\\s\\u200B\\uFEFF]*\\\\n[\\s\\u200B\\uFEFF]*/,'');if(!String(n.nodeValue||'').trim())n.remove()})}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',clean);else clean();new MutationObserver(clean).observe(document.documentElement,{childList:true,subtree:true})})();
+</script>
 </body>
 </html>

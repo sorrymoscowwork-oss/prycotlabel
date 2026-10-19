@@ -769,6 +769,11 @@ html body footer.site-footer .footer-bottom .visitor-counter {
 }
 .hero .intro .intro-letter:hover {
   z-index: 3;
+}
+.hero .intro .intro-letter-original {
+  display: inline;
+}
+.hero .intro .intro-letter:hover .intro-letter-original {
   visibility: hidden;
 }
 .hero .intro .intro-letter:hover::after {
@@ -1019,7 +1024,10 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
         }
         const letter=document.createElement('span');
         letter.className='intro-letter';
-        letter.textContent=character;
+        const original=document.createElement('span');
+        original.className='intro-letter-original';
+        original.textContent=character;
+        letter.appendChild(original);
         letter.setAttribute('data-char',character);
         letter.setAttribute('aria-hidden','true');
         fragment.appendChild(letter);

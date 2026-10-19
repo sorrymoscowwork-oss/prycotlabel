@@ -411,7 +411,19 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 .pl-live-release .release-donation-trigger:hover{background:linear-gradient(100deg,#8067F4 0%,#4383E2 55%,#1CB4A9 100%)!important;border-color:#8A78F4!important;color:#fff!important}
 @media(max-width:700px){.pl-live-release .release-donation-dialog{padding:18px!important;max-height:88svh!important}.pl-live-release .release-donation-wallets .release-wallet-card-v2{padding:12px!important}.platform-icon img,[data-platform-icon] img,.release-platforms .platform-icon img{width:23px!important;height:23px!important}}
 </style>
-<style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img,.release-platforms .platform-icon img,.release-social img{filter:none!important;-webkit-filter:none!important}</style></head>
+<style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img,.release-platforms .platform-icon img,.release-social img{filter:none!important;-webkit-filter:none!important}</style><style id="prycot-donation-borderless">
+/* Public release: borderless donation and wallet copy buttons, including hover/copied states. */
+.pl-live-release .release-donation-trigger,
+.pl-live-release .release-donation-trigger:hover,
+.pl-live-release .release-donation-trigger:active,
+.pl-live-release .release-donation-wallets .release-wallet-copy,
+.pl-live-release .release-donation-wallets .release-wallet-copy:hover,
+.pl-live-release .release-donation-wallets .release-wallet-copy:active,
+.pl-live-release .release-donation-wallets .release-wallet-copy.is-copied {
+  border: 0 !important;
+  box-shadow: none !important;
+}
+</style></head>
 <body>
 <div class="menu" id="menu">
 <nav class="menu-links" aria-label="Site navigation">

@@ -752,7 +752,19 @@ function releaseMarkup(r, preview=false){
 @media(prefers-reduced-motion:reduce){.pl-live-release *{scroll-behavior:auto!important;transition:none!important}}
 `;
  document.head.appendChild(s)}
- function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.pl-intro');const liveForm=document.getElementById('prycotlinkForm');if(liveIntro)liveIntro.remove();if(liveForm)liveForm.remove();document.querySelectorAll('.pl-live-release').forEach(x=>x.remove());page.classList.add('release-host');document.querySelectorAll('.brand,.tagline,.menu-button,.menu').forEach(x=>x.remove());page.insertAdjacentHTML('beforeend',releaseMarkup(r));document.documentElement.classList.remove('release-boot');const release=document.querySelector('.pl-live-release');if(release){
+ function removeStrayHeaderText(release){
+  const candidates=[document.body,release,release?.querySelector('.release-topbar')].filter(Boolean);
+  candidates.forEach(parent=>Array.from(parent.childNodes).forEach(node=>{
+    if(node.nodeType!==Node.TEXT_NODE)return;
+    const value=(node.nodeValue||'').trim();
+    if(value==='\\n'||value==='\\\\n')node.remove();
+  }));
+  release?.querySelectorAll('.release-topbar > span,.release-topbar > i,.release-topbar > small').forEach(el=>{
+    const value=(el.textContent||'').trim();
+    if(value==='\\n'||value==='\\\\n')el.remove();
+  });
+}
+function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.pl-intro');const liveForm=document.getElementById('prycotlinkForm');if(liveIntro)liveIntro.remove();if(liveForm)liveForm.remove();document.querySelectorAll('.pl-live-release').forEach(x=>x.remove());page.classList.add('release-host');document.querySelectorAll('.brand,.tagline,.menu-button,.menu').forEach(x=>x.remove());page.insertAdjacentHTML('beforeend',releaseMarkup(r));document.documentElement.classList.remove('release-boot');const release=document.querySelector('.pl-live-release');if(release){removeStrayHeaderText(release);
   const donationTrigger=release.querySelector('.release-donation-trigger'),donationOverlay=release.querySelector('.release-donation-overlay'),donationClose=release.querySelector('.release-donation-close');
   const closeDonation=()=>{if(!donationOverlay)return;donationOverlay.hidden=true;donationTrigger?.setAttribute('aria-expanded','false');document.body.style.overflow=''};
   if(donationTrigger&&donationOverlay){donationTrigger.addEventListener('click',()=>{donationOverlay.hidden=false;donationTrigger.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';donationClose?.focus()});donationClose?.addEventListener('click',closeDonation);donationOverlay.addEventListener('click',event=>{if(event.target===donationOverlay)closeDonation()});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!donationOverlay.hidden)closeDonation()})}

@@ -863,5 +863,20 @@ function releaseMarkup(r, preview=false){
   border-color:#B7A5FF!important;
 }
 </style>
+
+<style id="prycotlink-release-stray-header-artifact-fix">
+/* Release pages: remove stray clipped header glyphs and keep one clean brand/tagline block. */
+.pl-live-release .release-topbar{overflow:visible!important}
+.pl-live-release .release-brand::before,.pl-live-release .release-brand::after,
+.pl-live-release .release-brand span::before,.pl-live-release .release-brand span::after,
+.pl-live-release .release-tagline::before,.pl-live-release .release-tagline::after,
+.pl-live-release .release-tagline a::before,.pl-live-release .release-tagline a::after{content:none!important;display:none!important}
+.pl-live-release .release-brand{left:34px!important;right:auto!important;overflow:visible!important;clip-path:none!important}
+.pl-live-release .release-tagline{left:42px!important;right:auto!important;max-width:calc(100vw - 60px)!important;overflow:hidden!important;clip-path:inset(0)!important}
+@media(max-width:760px){
+  .pl-live-release .release-brand{left:20px!important;top:22px!important}
+  .pl-live-release .release-tagline{left:28px!important;top:88px!important;max-width:calc(100vw - 48px)!important}
+}
+</style>
 </body>
 </html>

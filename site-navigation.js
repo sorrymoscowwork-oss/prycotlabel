@@ -25,7 +25,7 @@
   if (!document.getElementById('prycot-global-navigation-style')) {
     const style = document.createElement('style');
     style.id = 'prycot-global-navigation-style';
-    style.textContent = \`
+    style.textContent = `
       nav.site-global-nav { display: none; }
       @media (min-width: 1000px) {
         nav.site-global-nav {
@@ -83,7 +83,7 @@
         }
         body.site-home .menu-button { display: none !important; }
       }
-    \`;
+    `;
     document.head.appendChild(style);
   }
 

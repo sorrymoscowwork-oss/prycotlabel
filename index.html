@@ -935,16 +935,23 @@ html body footer.site-footer .footer-bottom .visitor-counter {
     width: calc(100% + 40px);
     margin: 34px -20px 0;
     padding: 12px 0 18px;
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-x pan-y;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
     isolation: isolate;
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
     mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
   }
+  .prycotlink-release-carousel::-webkit-scrollbar { display: none; }
   .prycotlink-release-track {
     display: flex;
     width: max-content;
-    animation: prycotlink-release-drift 42s linear infinite;
-    will-change: transform;
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
   }
   .prycotlink-release-set {
     display: flex;

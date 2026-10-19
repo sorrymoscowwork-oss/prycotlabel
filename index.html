@@ -624,36 +624,46 @@ html body footer.site-footer .footer-bottom .visitor-counter {
 }
 
 
-/* Scenario 2: distinct interactive cards, desktop pointer devices only.
-   The existing three anchors, labels and destinations remain untouched. */
+/* Hover icons: flat, CSS-rendered vector badges in PRYCOT's copper palette.
+   Desktop hover only; original anchors and all destinations remain unchanged. */
 @media (hover: hover) and (pointer: fine) and (min-width: 701px) {
   .hero .hero-buttons > .release-button {
     position: relative !important;
     isolation: isolate !important;
     overflow: visible !important;
-    border: 1px solid rgba(244,244,242,.16) !important;
+    border: 1px solid rgba(244,244,242,.2) !important;
     border-radius: 999px !important;
+    background: rgba(255,255,255,.018) !important;
+    color: #f4f4f2 !important;
     box-shadow: 0 0 0 rgba(160,82,45,0) !important;
     transition:
-      transform .38s cubic-bezier(.2,.75,.25,1),
-      border-radius .38s cubic-bezier(.2,.75,.25,1),
-      border-color .3s ease,
-      box-shadow .38s ease,
-      background-color .3s ease,
-      color .3s ease !important;
-    will-change: transform, border-radius, box-shadow;
+      transform .32s cubic-bezier(.2,.75,.25,1),
+      border-radius .32s cubic-bezier(.2,.75,.25,1),
+      border-color .28s ease,
+      box-shadow .32s ease,
+      background-color .28s ease !important;
+    will-change: transform, box-shadow;
   }
   .hero .hero-buttons > .release-button::before {
     content: "" !important;
     position: absolute !important;
-    z-index: 0 !important;
-    right: 22px !important;
-    top: 50% !important;
-    width: 44px !important;
-    height: 34px !important;
+    z-index: 2 !important;
+    left: 50% !important;
+    top: 0 !important;
+    width: 58px !important;
+    height: 58px !important;
+    box-sizing: border-box !important;
+    border: 1px solid #A0522D !important;
+    border-radius: 50% !important;
+    background-color: #101010 !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 29px 29px !important;
+    box-shadow: 0 7px 18px rgba(0,0,0,.36), inset 0 0 0 4px rgba(160,82,45,.07) !important;
     opacity: 0 !important;
-    transform: translate(8px,-50%) scale(.82) !important;
-    transition: opacity .25s ease, transform .38s cubic-bezier(.2,.75,.25,1) !important;
+    transform: translate(-50%,-36%) scale(.72) !important;
+    transform-origin: center center !important;
+    transition: opacity .22s ease, transform .32s cubic-bezier(.2,.75,.25,1) !important;
     pointer-events: none !important;
   }
   .hero .hero-buttons > .release-button::after {
@@ -667,113 +677,52 @@ html body footer.site-footer .footer-bottom .visitor-counter {
     font: 400 17px/1 Helvetica,Arial,sans-serif !important;
     opacity: .72 !important;
     transform: translateY(-50%) !important;
-    transition: transform .3s ease, opacity .3s ease !important;
+    transition: transform .28s ease, opacity .28s ease !important;
     pointer-events: none !important;
   }
   .hero .hero-buttons > .release-button:hover {
     transform: translateY(-5px) scale(1.018) !important;
-    border-radius: 17px 17px 5px 17px !important;
-    border-color: rgba(244,244,242,.48) !important;
-    box-shadow:
-      0 16px 36px rgba(0,0,0,.42),
-      0 0 0 1px rgba(160,82,45,.22),
-      0 0 26px rgba(160,82,45,.12) !important;
+    border-radius: 18px !important;
+    border-color: rgba(160,82,45,.92) !important;
+    background: rgba(255,255,255,.025) !important;
+    color: #f4f4f2 !important;
+    box-shadow: 0 14px 32px rgba(0,0,0,.38), 0 0 22px rgba(160,82,45,.12) !important;
   }
   .hero .hero-buttons > .release-button:hover::before {
     opacity: 1 !important;
-    transform: translate(0,-50%) scale(1) !important;
+    transform: translate(-50%,-72%) scale(1) !important;
   }
   .hero .hero-buttons > .release-button:hover::after {
     opacity: 1 !important;
     transform: translate(3px,-50%) !important;
   }
-  /* ACCOUNT: an inset profile-card motif stays fully inside the button. */
+
+  /* ACCOUNT — simple profile glyph. */
   .hero .hero-buttons > .release-button:first-child::before {
-    top: 50% !important;
-    right: 58px !important;
-    width: 34px !important;
-    height: 30px !important;
-    border: 1px solid rgba(255,235,220,.55) !important;
-    border-radius: 5px !important;
-    background:
-      radial-gradient(circle at 50% 34%, rgba(255,245,235,.88) 0 3px, transparent 3.5px),
-      linear-gradient(rgba(255,235,220,.7),rgba(255,235,220,.7)) 50% 72%/12px 2px no-repeat,
-      linear-gradient(rgba(255,235,220,.42),rgba(255,235,220,.42)) 50% 83%/17px 2px no-repeat,
-      linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.015)) !important;
-    box-shadow: inset 0 0 0 3px rgba(255,255,255,.025) !important;
-    transform: translate(8px,-50%) scale(.82) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='10' r='5' fill='%23D17A50'/%3E%3Cpath d='M5 28c.7-6.2 4.7-10 11-10s10.3 3.8 11 10' fill='%23D17A50'/%3E%3C/svg%3E") !important;
   }
   .hero .hero-buttons > .release-button:first-child:hover {
-    background: #A0522D !important;
-    color: #fff !important;
-    border-color: rgba(255,190,150,.72) !important;
-    border-radius: 17px 17px 5px 17px !important;
+    background: rgba(255,255,255,.025) !important;
+    color: #f4f4f2 !important;
   }
-  .hero .hero-buttons > .release-button:first-child:hover::before {
-    transform: translate(0,-50%) scale(1) !important;
-    border-color: rgba(255,235,220,.82) !important;
-    box-shadow: 0 0 14px rgba(255,210,180,.13), inset 0 0 0 3px rgba(255,255,255,.035) !important;
-  }
-  /* PRYCOTLINK: three offset release-cover tiles, CSS-drawn without images. */
+
+  /* PRYCOTLINK — interlocking chain glyph. */
   .hero .hero-buttons > .release-button:nth-child(2)::before {
-    right: 58px !important;
-    width: 36px !important;
-    height: 36px !important;
-    border: 1px solid rgba(244,244,242,.38) !important;
-    border-radius: 3px !important;
-    background:
-      linear-gradient(145deg,transparent 48%,rgba(244,244,242,.78) 49% 52%,transparent 53%),
-      linear-gradient(180deg,transparent 0 66%,rgba(244,244,242,.2) 66% 69%,transparent 69%),
-      linear-gradient(135deg,#A0522D 0 38%,#24201e 38% 100%) !important;
-    box-shadow: -7px 4px 0 -1px #171717, -7px 4px 0 0 rgba(244,244,242,.3), -13px 8px 0 -1px #24201e, -13px 8px 0 0 rgba(244,244,242,.18) !important;
-    transform: translate(8px,-50%) rotate(5deg) scale(.8) !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23D17A50' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M13 20l-2 2a5 5 0 0 1-7-7l5-5a5 5 0 0 1 7 0'/%3E%3Cpath d='M19 12l2-2a5 5 0 0 1 7 7l-5 5a5 5 0 0 1-7 0'/%3E%3Cpath d='M11 21l10-10'/%3E%3C/svg%3E") !important;
   }
-  .hero .hero-buttons > .release-button:nth-child(2):hover {
-    background: rgba(255,255,255,.035) !important;
-    color: #f4f4f2 !important;
-    border-color: #A0522D !important;
-    border-radius: 17px 17px 5px 17px !important;
-    box-shadow:
-      0 16px 36px rgba(0,0,0,.42),
-      0 0 0 1px rgba(160,82,45,.30),
-      0 0 26px rgba(160,82,45,.16) !important;
-  }
-  .hero .hero-buttons > .release-button:nth-child(2):hover::before {
-    transform: translate(0,-50%) rotate(0) scale(1) !important;
-  }
-  /* LABEL SERVICE: a compact sound-wave motif unfolds on hover. */
+
+  /* LABEL SERVICE — a clean split-brain outline, in warm copper. */
   .hero .hero-buttons > .release-button:nth-child(3)::before {
-    width: 46px !important;
-    height: 32px !important;
-    right: 58px !important;
-    border-radius: 4px !important;
-    background:
-      linear-gradient(#D17A50,#D17A50) 0 50%/2px 9px no-repeat,
-      linear-gradient(#D17A50,#D17A50) 5px 50%/2px 17px no-repeat,
-      linear-gradient(#D17A50,#D17A50) 10px 50%/2px 25px no-repeat,
-      linear-gradient(#D17A50,#D17A50) 15px 50%/2px 13px no-repeat,
-      linear-gradient(#D17A50,#D17A50) 20px 50%/2px 21px no-repeat,
-      linear-gradient(#D17A50,#D17A50) 25px 50%/2px 11px no-repeat,
-      linear-gradient(#D17A50,#D17A50) 30px 50%/2px 24px no-repeat,
-      linear-gradient(#D17A50,#D17A50) 35px 50%/2px 15px no-repeat,
-      linear-gradient(#D17A50,#D17A50) 40px 50%/2px 8px no-repeat !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23D17A50' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 5c-3-3-7 0-7 3-4 0-5 5-2 7-3 3-1 7 2 8 0 4 4 6 7 3V5Z'/%3E%3Cpath d='M17 5c3-3 7 0 7 3 4 0 5 5 2 7 3 3 1 7-2 8 0 4-4 6-7 3V5Z'/%3E%3Cpath d='M16 4v24M10 10l3 2M9 18l4-1M22 10l-3 2M23 18l-4-1'/%3E%3C/svg%3E") !important;
   }
-  .hero .hero-buttons > .release-button:nth-child(3):hover {
-    background: rgba(255,255,255,.035) !important;
-    color: #f4f4f2 !important;
-    border-color: #A0522D !important;
-    border-radius: 17px 17px 5px 17px !important;
-    box-shadow:
-      0 16px 36px rgba(0,0,0,.42),
-      0 0 0 1px rgba(160,82,45,.30),
-      0 0 26px rgba(160,82,45,.16) !important;
-  }
-  .hero .hero-buttons > .release-button:nth-child(3):hover::before {
-    transform: translate(0,-50%) scale(1) !important;
-  }
+
   .hero .hero-buttons > .release-button:active {
-    transform: translateY(-1px) scale(1.005) !important;
-    transition-duration: .12s !important;
+    transform: translateY(-1px) scale(.99) !important;
+    box-shadow: 0 5px 12px rgba(0,0,0,.32), 0 0 12px rgba(160,82,45,.12) !important;
+    transition-duration: .1s !important;
+  }
+  .hero .hero-buttons > .release-button:active::before {
+    transform: translate(-50%,-72%) scale(.96) !important;
   }
   @media (prefers-reduced-motion: reduce) {
     .hero .hero-buttons > .release-button,
@@ -783,7 +732,6 @@ html body footer.site-footer .footer-bottom .visitor-counter {
     }
   }
 }
-
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>

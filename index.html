@@ -878,6 +878,39 @@ html body footer.site-footer .footer-bottom .visitor-counter {
   .prycotlink-release-track { animation: none !important; }
   .prycotlink-release-tile { transition: none !important; }
 }
+
+/* Desktop hero buttons: text-only pills with a restrained grayscale hover. */
+@media (hover: hover) and (pointer: fine) and (min-width: 701px) {
+  .hero .hero-buttons > .release-button {
+    border-radius: 999px !important;
+    background: rgba(255,255,255,.025) !important;
+    color: #F4F4F4 !important;
+    padding: 15px 30px !important;
+    transform: scale(1) !important;
+    box-shadow: none !important;
+    transition: transform .22s ease, background-color .22s ease, color .22s ease, border-color .22s ease, box-shadow .22s ease !important;
+  }
+  .hero .hero-buttons > .release-button::before,
+  .hero .hero-buttons > .release-button::after {
+    content: none !important;
+    display: none !important;
+    background-image: none !important;
+  }
+  .hero .hero-buttons > .release-button:hover,
+  .hero .hero-buttons > .release-button:focus-visible {
+    border-radius: 999px !important;
+    background: #777777 !important;
+    border-color: #777777 !important;
+    color: #FFFFFF !important;
+    transform: translateY(-2px) scale(1.06) !important;
+    box-shadow: 0 8px 22px rgba(0,0,0,.28) !important;
+  }
+  .hero .hero-buttons > .release-button:active {
+    border-radius: 999px !important;
+    transform: translateY(0) scale(1.02) !important;
+  }
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style></head>

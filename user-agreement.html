@@ -130,6 +130,15 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 @media(min-width:701px){.header-brand .logo{font-size:clamp(34px,4.5vw,62px)!important}.header-brand.header-hidden .page-label{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}}
 @media(max-width:700px){.header-brand{top:22px!important;left:20px!important;right:20px!important;width:auto!important;max-width:none!important;flex-direction:column!important;align-items:flex-start!important;gap:7px!important;transition:opacity .28s ease,filter .28s ease,transform .28s ease!important}.header-brand .logo{font-size:42px!important}.header-brand .page-label{font-size:22px!important;line-height:.95!important;white-space:normal!important;overflow-wrap:anywhere!important}.header-brand.header-hidden{opacity:0!important;filter:blur(10px)!important;transform:translateY(-4px)!important;pointer-events:none!important}}
 
+
+/* Keep the final CTA clear of the footer separator on every viewport. */
+@media (max-width: 700px) {
+  .content { padding-bottom: 52px !important; }
+}
+@media (min-width: 701px) {
+  .content { padding-bottom: 36px !important; }
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>

@@ -1063,5 +1063,39 @@ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.p
   }
 }
 </style>
+
+<style id="prycotlink-desktop-footer-alignment">
+/* Keep the release footer copy directly to the right of the QR code on desktop. */
+@media(min-width:761px){
+  .pl-live-release .release-bottom{
+    display:flex!important;
+    flex-direction:row!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:16px!important;
+    width:100%!important;
+    max-width:1180px!important;
+    margin:24px auto 0!important;
+    text-align:left!important;
+  }
+  .pl-live-release .release-bottom .release-qr-wrap{
+    display:flex!important;
+    flex:0 0 112px!important;
+    width:112px!important;
+    height:112px!important;
+    margin:0!important;
+    align-self:center!important;
+  }
+  .pl-live-release .release-bottom .release-footer-copy{
+    display:block!important;
+    flex:0 0 auto!important;
+    margin:0!important;
+    padding:0!important;
+    text-align:left!important;
+    align-self:center!important;
+    line-height:1.5!important;
+  }
+}
+</style>
 </body>
 </html>

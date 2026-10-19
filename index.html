@@ -265,19 +265,20 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
     max-width: 540px; margin: 24px 0 0; color: var(--muted);
     font-size: 18px; line-height: 1.38; text-align: left;
   }
+  .sub span { display: block; }
   .hero-buttons {
     width: 100%; margin-top: 28px; gap: 16px;
     justify-content: flex-start; align-items: stretch;
   }
   .hero-buttons .release-button {
-    display: flex; align-items: center; justify-content: space-between;
-    flex: 1 1 0; min-width: 0; min-height: 62px; margin: 0;
+    position: relative; display: flex; align-items: center; justify-content: center;
+    flex: 1 1 0; min-width: 0; min-height: 62px; margin: 0; text-align: center;
     padding: 0 24px !important; border: 1px solid transparent !important;
     border-radius: 999px !important;
     font: 500 11px/1 Helvetica, Arial, sans-serif !important;
     letter-spacing: .09em !important; text-align: left;
   }
-  .hero-buttons .release-button::after { content: "→"; margin-left: 18px; font-size: 18px; line-height: 1; }
+  .hero-buttons .release-button::after { content: "→"; position: absolute; right: 24px; margin-left: 0; font-size: 18px; line-height: 1; }
   .hero-buttons .release-button:first-child { background: #A0522D !important; color: #fff !important; }
   .hero-buttons .release-button:first-child:hover { background: #FF7F50 !important; color: #000 !important; }
   .hero-buttons .release-button:nth-child(2),

@@ -716,6 +716,18 @@ html body footer.site-footer .footer-bottom .visitor-counter {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' fill='none' stroke='%23D17A50' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 5c-3-3-7 0-7 3-4 0-5 5-2 7-3 3-1 7 2 8 0 4 4 6 7 3V5Z'/%3E%3Cpath d='M17 5c3-3 7 0 7 3 4 0 5 5 2 7 3 3 1 7-2 8 0 4-4 6-7 3V5Z'/%3E%3Cpath d='M16 4v24M10 10l3 2M9 18l4-1M22 10l-3 2M23 18l-4-1'/%3E%3C/svg%3E") !important;
   }
 
+  /* Explicit per-button stacking prevents theme overrides from clipping any badge. */
+  .hero .hero-buttons > .release-button:first-child::before,
+  .hero .hero-buttons > .release-button:nth-child(2)::before,
+  .hero .hero-buttons > .release-button:nth-child(3)::before {
+    z-index: 10 !important;
+  }
+  .hero .hero-buttons > .release-button:first-child:hover::before,
+  .hero .hero-buttons > .release-button:nth-child(2):hover::before,
+  .hero .hero-buttons > .release-button:nth-child(3):hover::before {
+    opacity: 1 !important;
+    transform: translate(-50%,-95%) scale(1) !important;
+  }
   .hero .hero-buttons > .release-button:active {
     transform: translateY(-1px) scale(.99) !important;
     box-shadow: 0 5px 12px rgba(0,0,0,.32), 0 0 12px rgba(160,82,45,.12) !important;

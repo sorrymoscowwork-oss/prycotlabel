@@ -604,9 +604,9 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
  document.addEventListener('error',function(event){const img=event.target;if(!(img instanceof HTMLImageElement))return;if(img.dataset.platformFallback){const k=img.dataset.platformFallback;const marks={apple:'♫',yandex:'Я',spotify:'●',youtubeMusic:'▶',vk:'VK',deezer:'D',mts:'M',zvuk:'З',tidal:'T',soundcloud:'☁'};const colors={apple:'#FA243C',yandex:'#FFCC00',spotify:'#1DB954',youtubeMusic:'#FF0033',vk:'#0077FF',deezer:'#A238FF',mts:'#E30613',zvuk:'#FFFFFF',tidal:'#FFFFFF',soundcloud:'#FF5500'};const span=document.createElement('span');span.className='brand-icon-fallback';span.dataset.brand=k;span.textContent=marks[k]||'♫';span.style.color=colors[k]||'#fff';img.replaceWith(span)}else if(img.dataset.coinFallback){const k=img.dataset.coinFallback;const marks={btc:'₿',eth:'Ξ',sol:'◎',usdt:'₮',usdc:'＄'};const span=document.createElement('span');span.className='coin-icon-fallback coin-'+k;span.textContent=marks[k]||k.toUpperCase();img.replaceWith(span)}},true);
 function platformIcon(k){
 const fixed={
-apple:'<svg class="brand-mark brand-mark-apple" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="appleMusicGradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FA243C"/><stop offset="1" stop-color="#FB5C74"/></linearGradient></defs><rect width="32" height="32" rx="7" fill="url(#appleMusicGradient)"/><path fill="#fff" d="M22.5 5.5v15.2a4.1 4.1 0 1 1-2.1-3.6V10l-7.7 1.7v11.1a4.1 4.1 0 1 1-2.1-3.6V10l11.9-4.5Z"/></svg>',
-yandex:'<svg class="brand-mark brand-mark-yandex" viewBox="0 0 120 32" aria-hidden="true"><text x="1" y="21" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" fill="#FFCC00">Яндекс</text><text x="1" y="31" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="500" fill="#F4F4F4">Музыка</text></svg>',
-mts:'<svg class="brand-mark brand-mark-mts" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#E30613"/><circle cx="16" cy="16" r="10" fill="none" stroke="#fff" stroke-width="3.4"/><path d="M8 13.2h4.2l3.8 5.4 3.8-5.4H24v8.6h-3.4v-4.2l-4.6 5.6-4.6-5.6v4.2H8z" fill="#fff"/></svg>'
+apple:'<svg class="brand-mark brand-mark-apple" viewBox="0 0 32 32" aria-hidden="true"><path fill="#FA243C" d="M23.5 4.2v17.1a4.3 4.3 0 1 1-2.2-3.8V9.8l-8.1 1.9v12.2a4.3 4.3 0 1 1-2.2-3.8V9.5L23.5 4.2Z"/></svg>',
+yandex:'<svg class="brand-mark brand-mark-yandex" viewBox="0 0 447 447" aria-hidden="true"><path fill="#FFB900" d="M255 0 304 97 347 31 342 116 403 86 367 149 442 161 374 185 447 250 370 219 422 328 342 248 361 399 305 257 244 447 252 246 42 360 212 203 0 181 206 151 58 68 231 114 148 8 264 94 255 0Z"/></svg>',
+mts:'<svg class="brand-mark brand-mark-mts" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" fill="#FF0032"/><path fill="#fff" d="M16.5 7 23 10.4V20l-6.5-3.4Z"/><circle cx="12.8" cy="21.5" r="3.7" fill="#fff"/></svg>'
 };
 const icons={spotify:'https://cdn.simpleicons.org/spotify/1DB954',youtubeMusic:'https://cdn.simpleicons.org/youtubemusic/FF0033',vk:'https://cdn.simpleicons.org/vk/0077FF',deezer:'https://cdn.simpleicons.org/deezer/A238FF',zvuk:'https://zvuk.com/favicon.svg',tidal:'https://cdn.simpleicons.org/tidal/FFFFFF',soundcloud:'https://cdn.simpleicons.org/soundcloud/FF5500'};
 if(fixed[k])return fixed[k];
@@ -817,9 +817,9 @@ function releaseMarkup(r, preview=false){
 </script><script id="prycotlink-header-scroll-behavior">(function(){const brand=document.querySelector('.prycotlink-header .header-brand');if(!brand)return;let ticking=false;function update(){brand.classList.toggle('header-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>  <script src="/site-navigation.js?v=20261019-footer" defer></script>
 <style id="prycotlink-requested-mobile-and-donation-fixes">
 /* Requested PRYCOTLINK fixes: brand marks, mobile header, and donation copy controls. */
-@media(max-width:700px){.prycotlink-header .page-label{display:none!important}}
-.prycotlink-page .platform-icon img[data-platform-fallback="deezer"]{filter:none!important;-webkit-filter:none!important}
-.pl-live-release .release-donation-dialog .release-wallet-copy,
+@media(max-width:700px){.prycotlink-header .header-brand .page-label,.prycotlink-header>.tagline{display:none!important;visibility:hidden!important;height:0!important;max-height:0!important;overflow:hidden!important;margin:0!important;padding:0!important}.prycotlink-header .header-brand{gap:0!important}}
+.prycotlink-page .platform-icon img[data-platform-fallback="deezer"],.prycotlink-page img[data-platform-fallback="deezer"]{filter:brightness(0) saturate(100%) invert(32%) sepia(78%) saturate(1774%) hue-rotate(231deg) brightness(92%) contrast(94%)!important;-webkit-filter:brightness(0) saturate(100%) invert(32%) sepia(78%) saturate(1774%) hue-rotate(231deg) brightness(92%) contrast(94%)!important}
+.pl-live-release button.release-wallet-copy,.pl-live-release .release-donation-dialog button.release-wallet-copy,
 .pl-live-release .release-donation-wallets .release-wallet-copy,
 .pl-live-release .release-wallets .release-wallet-copy{
   background:linear-gradient(110deg,#6D50E8 0%,#3C91D8 100%)!important;
@@ -827,19 +827,19 @@ function releaseMarkup(r, preview=false){
   color:#fff!important;
   box-shadow:none!important;
 }
-.pl-live-release .release-donation-dialog .release-wallet-copy:hover,
+.pl-live-release button.release-wallet-copy:hover,.pl-live-release .release-donation-dialog button.release-wallet-copy:hover,
 .pl-live-release .release-donation-wallets .release-wallet-copy:hover,
 .pl-live-release .release-wallets .release-wallet-copy:hover{
   background:linear-gradient(110deg,#8A73FF 0%,#42B7E9 100%)!important;
   border-color:#8A73FF!important;color:#fff!important;
 }
-.pl-live-release .release-donation-dialog .release-wallet-copy.is-copied,
+.pl-live-release button.release-wallet-copy.is-copied,.pl-live-release .release-donation-dialog button.release-wallet-copy.is-copied,
 .pl-live-release .release-donation-wallets .release-wallet-copy.is-copied,
 .pl-live-release .release-wallets .release-wallet-copy.is-copied{
   background:linear-gradient(110deg,#167D78 0%,#2587A8 100%)!important;
   border-color:#63E6BE!important;color:#fff!important;
 }
-.brand-mark-yandex{width:92px!important;height:25px!important;max-width:92px!important}
+.brand-mark-yandex{width:24px!important;height:24px!important;max-width:24px!important;max-height:24px!important}.brand-mark-mts{width:24px!important;height:24px!important;max-width:24px!important;max-height:24px!important}.brand-mark-apple{width:24px!important;height:24px!important;max-width:24px!important;max-height:24px!important}
 </style>
 </body>
 </html>

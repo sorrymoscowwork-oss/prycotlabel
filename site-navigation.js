@@ -36,6 +36,7 @@
     style.textContent = [
       'html { scrollbar-gutter: stable; }',
       '.site-mobile-menu { display: none !important; }',
+      'body:not(.site-home) .platform-footer { display: none !important; visibility: hidden !important; height: 0 !important; min-height: 0 !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; }',
       '@media (max-width: 999px) {',
       'body .menu-button { position: fixed !important; top: 22px !important; right: 20px !important; z-index: 10003 !important; display: block !important; visibility: visible !important; opacity: 1 !important; width: 30px !important; height: 30px !important; padding: 0 !important; margin: 0 !important; border: 0 !important; background: transparent !important; cursor: pointer !important; }',
       'body .menu-button span, body .menu-button span::before, body .menu-button span::after { width: 25px !important; left: 2px !important; transition: transform .24s ease, top .24s ease, opacity .18s ease !important; }',

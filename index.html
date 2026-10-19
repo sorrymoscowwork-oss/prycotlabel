@@ -745,18 +745,34 @@ html body footer.site-footer .footer-bottom .visitor-counter {
   }
 }
 
-/* Individual headline letters enlarge on hover; no color or filter effects. */
+/* Each hovered glyph is typeset at 2x size for crisp rendering, without scaling a rasterized layer. */
 .hero .intro .intro-letter {
   display: inline-block;
   position: relative;
-  transform: scale(1);
+  white-space: pre;
+}
+.hero .intro .intro-letter::after {
+  content: attr(data-char);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  font: inherit;
+  font-size: 2em;
+  line-height: 1;
+  letter-spacing: inherit;
+  white-space: pre;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
   transform-origin: center center;
-  transition: transform 280ms cubic-bezier(.2,.75,.25,1);
-  will-change: transform;
 }
 .hero .intro .intro-letter:hover {
   z-index: 3;
-  transform: scale(2);
+  visibility: hidden;
+}
+.hero .intro .intro-letter:hover::after {
+  visibility: visible;
 }
 
 /* Desktop homepage: quiet, continuously moving PRYCOTLINK cover carousel. */
@@ -1004,6 +1020,7 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
         const letter=document.createElement('span');
         letter.className='intro-letter';
         letter.textContent=character;
+        letter.setAttribute('data-char',character);
         letter.setAttribute('aria-hidden','true');
         fragment.appendChild(letter);
       });

@@ -492,6 +492,72 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
   .visitor-counter-number { font-size: 10px !important; }
 }
 
+
+/* Homepage footer: keep copyright, label, socials and visitor count on one horizontal line. */
+.site-footer {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 28px !important;
+  white-space: nowrap !important;
+}
+.site-footer > span { flex: 0 0 auto !important; }
+.site-footer .footer-social {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  gap: 12px !important;
+  margin: 0 !important;
+}
+.site-footer .visitor-counter { flex: 0 0 auto !important; }
+@media (max-width: 700px) {
+  .site-footer {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: clamp(6px, 1.8vw, 10px) !important;
+    margin-top: 28px !important;
+    padding-top: 16px !important;
+    white-space: nowrap !important;
+    font-size: 7px !important;
+    letter-spacing: .045em !important;
+  }
+  .site-footer > span {
+    display: inline-block !important;
+    flex: 0 0 auto !important;
+    font-size: 7px !important;
+    letter-spacing: .045em !important;
+  }
+  .site-footer .footer-social {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 7px !important;
+    margin: 0 !important;
+  }
+  .site-footer .footer-social a {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  .site-footer .visitor-counter {
+    gap: 4px !important;
+    margin-left: 0 !important;
+    padding-left: 7px !important;
+    font-size: 6px !important;
+    letter-spacing: .035em !important;
+  }
+  .site-footer .visitor-counter-number {
+    font-size: 8px !important;
+  }
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>

@@ -752,8 +752,10 @@ html body footer.site-footer .footer-bottom .visitor-counter {
 .hero .intro-water-overlay {
   position: absolute !important;
   z-index: 2 !important;
-  inset: 0 auto auto 0 !important;
-  width: 100% !important;
+  left: var(--headline-left) !important;
+  top: var(--headline-top) !important;
+  width: var(--headline-width) !important;
+  height: var(--headline-height) !important;
   max-width: none !important;
   margin: 0 !important;
   pointer-events: none !important;
@@ -857,6 +859,18 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
   overlay.removeAttribute('id');
   overlay.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
   headline.insertAdjacentElement('afterend',overlay);
+  const hero=headline.closest('.hero');
+  if(!hero)return;
+  function syncOverlayBox(){
+    const headlineRect=headline.getBoundingClientRect();
+    const heroRect=hero.getBoundingClientRect();
+    overlay.style.setProperty('--headline-left',(headlineRect.left-heroRect.left)+'px');
+    overlay.style.setProperty('--headline-top',(headlineRect.top-heroRect.top)+'px');
+    overlay.style.setProperty('--headline-width',headlineRect.width+'px');
+    overlay.style.setProperty('--headline-height',headlineRect.height+'px');
+  }
+  syncOverlayBox();
+  window.addEventListener('resize',syncOverlayBox,{passive:true});
   let previousX=0,previousY=0,previousTime=0,seed=2,resetTimer=0;
   function resetRipple(){
     window.clearTimeout(resetTimer);

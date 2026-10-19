@@ -28,9 +28,11 @@
     style.textContent = [
       'nav.site-global-nav { display: none; }',
       '@media (min-width: 1000px) {',
-      'nav.site-global-nav { position: fixed !important; top: 0 !important; left: clamp(230px, 20vw, 288px) !important; right: 24px !important; z-index: 10000 !important; display: flex !important; flex-flow: row nowrap !important; align-items: center !important; justify-content: space-between !important; gap: clamp(4px, .65vw, 10px) !important; height: 84px !important; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; overflow: visible !important; white-space: nowrap !important; }',
+      'nav.site-global-nav { position: fixed !important; top: 0 !important; left: clamp(230px, 20vw, 288px) !important; right: 64px !important; z-index: 10000 !important; display: flex !important; flex-flow: row nowrap !important; align-items: center !important; justify-content: space-between !important; gap: clamp(4px, .65vw, 10px) !important; height: 84px !important; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; overflow: visible !important; white-space: nowrap !important; }',
       'nav.site-global-nav a { display: inline-block !important; flex: 0 0 auto !important; margin: 0 !important; padding: 8px 0 !important; border: 0 !important; background: transparent !important; color: #f4f4f2 !important; font: 500 clamp(6.8px, .58vw, 8.5px)/1 Helvetica, Arial, sans-serif !important; letter-spacing: .035em !important; text-align: center !important; text-decoration: none !important; text-transform: uppercase !important; white-space: nowrap !important; transition: color .2s ease, opacity .2s ease !important; }',
-      'nav.site-global-nav a:hover { color: #FF7F50 !important; opacity: 1 !important; }',
+      'nav.site-global-nav a:hover { color: #FF7F50 !important; opacity: 1 !important; text-decoration: none !important; }',
+      'body.site-home nav.site-global-nav { right: 24px !important; }',
+      'body:not(.site-home) .page-label, body:not(.site-home) .account-label { display: none !important; }',
       'body.site-home .brand { position: fixed !important; top: 30px !important; left: 34px !important; z-index: 10001 !important; opacity: 1; filter: blur(0); transform: translateY(0); transition: opacity 1.05s ease, filter 1.05s ease, transform 1.05s ease !important; pointer-events: auto; }',
       'body.site-home.site-logo-scrolled .brand { opacity: 0 !important; filter: blur(14px) !important; transform: translateY(-7px) !important; pointer-events: none !important; }',
       'body.site-home .menu-button { display: none !important; }',

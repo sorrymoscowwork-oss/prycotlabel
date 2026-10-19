@@ -450,24 +450,20 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
     white-space: normal !important;
   }
   .platform-footer {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    justify-content: flex-start !important;
-    gap: 22px !important;
-    width: calc(100% + 40px) !important;
-    max-width: none !important;
-    margin: 0 -20px 18px !important;
-    padding: 8px 20px 12px !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    overscroll-behavior-x: contain !important;
-    scrollbar-width: none !important;
-    -webkit-overflow-scrolling: touch !important;
+    display: grid !important;
+    grid-template-columns: repeat(15, minmax(0, 1fr)) !important;
+    align-items: center !important;
+    justify-items: center !important;
+    gap: 3px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 18px !important;
+    padding: 8px 0 12px !important;
+    overflow: visible !important;
   }
-  .platform-footer::-webkit-scrollbar { display: none !important; }
-  .platform-logo { flex: 0 0 34px !important; width: 34px !important; height: 22px !important; }
-  .platform-logo img { max-width: 32px !important; height: 17px !important; }
-  .platform-wordmark { font-size: 7px !important; }
+  .platform-logo { flex: none !important; width: 100% !important; min-width: 0 !important; height: 18px !important; }
+  .platform-logo img { max-width: 17px !important; height: 12px !important; }
+  .platform-wordmark { font-size: 4px !important; letter-spacing: -.04em !important; }
   .footer-bottom {
     display: flex !important;
     flex-direction: column !important;

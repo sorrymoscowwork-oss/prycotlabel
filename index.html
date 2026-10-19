@@ -988,6 +988,35 @@ html body footer.site-footer .footer-bottom .visitor-counter {
   .prycotlink-release-track { animation: none !important; }
 }
 
+/* Mobile hero buttons: mirror desktop hover feedback with touch press/focus states. */
+@media (max-width: 700px) {
+  .hero .hero-buttons > .release-button {
+    border-radius: 999px !important;
+    background: rgba(255,255,255,.025) !important;
+    border: 1px solid rgba(244,244,244,.25) !important;
+    color: #F4F4F4 !important;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease !important;
+  }
+  .hero .hero-buttons > .release-button:active,
+  .hero .hero-buttons > .release-button:focus-visible {
+    background: #777777 !important;
+    border-color: #777777 !important;
+    color: #FFFFFF !important;
+    border-radius: 999px !important;
+    transform: scale(.97) !important;
+    box-shadow: 0 5px 14px rgba(0,0,0,.3) !important;
+  }
+  .hero .hero-buttons > .release-button::before,
+  .hero .hero-buttons > .release-button::after {
+    content: none !important;
+    display: none !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero .hero-buttons > .release-button { transition: none !important; }
+  }
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}.platform-logo img{filter:brightness(0) invert(1)!important}</style></head>

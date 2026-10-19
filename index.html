@@ -911,6 +911,76 @@ html body footer.site-footer .footer-bottom .visitor-counter {
   }
 }
 
+
+/* Requested refinements: equal desktop button fills and a colored mobile release carousel. */
+@media (min-width: 701px) {
+  .hero .hero-buttons > .release-button {
+    background: rgba(255,255,255,.025) !important;
+    border: 1px solid rgba(244,244,244,.25) !important;
+    color: #F4F4F4 !important;
+  }
+  .hero .hero-buttons > .release-button:hover,
+  .hero .hero-buttons > .release-button:focus-visible {
+    background: #777777 !important;
+    border-color: #777777 !important;
+    color: #FFFFFF !important;
+    border-radius: 999px !important;
+    transform: translateY(-2px) scale(1.06) !important;
+  }
+}
+@media (max-width: 700px) {
+  .prycotlink-release-carousel {
+    display: block !important;
+    position: relative;
+    width: calc(100% + 40px);
+    margin: 34px -20px 0;
+    padding: 12px 0 18px;
+    overflow: hidden;
+    isolation: isolate;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 4%, #000 96%, transparent 100%);
+  }
+  .prycotlink-release-track {
+    display: flex;
+    width: max-content;
+    animation: prycotlink-release-drift 42s linear infinite;
+    will-change: transform;
+  }
+  .prycotlink-release-set {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: flex-start;
+    gap: 10px;
+    padding-right: 10px;
+  }
+  .prycotlink-release-tile {
+    display: block;
+    position: relative;
+    flex: 0 0 76px;
+    width: 76px;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1px solid rgba(244,244,244,.18);
+    border-radius: 8px;
+    background: #111;
+    box-shadow: 0 5px 14px rgba(0,0,0,.22);
+  }
+  .prycotlink-release-tile img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: none !important;
+  }
+  .prycotlink-release-carousel:hover .prycotlink-release-track,
+  .prycotlink-release-carousel:focus-within .prycotlink-release-track {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .prycotlink-release-track { animation: none !important; }
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style></head>
@@ -989,7 +1059,7 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
 (function(){
   const carousel=document.querySelector('.prycotlink-release-carousel');
   const track=carousel&&carousel.querySelector('.prycotlink-release-track');
-  if(!carousel||!track||!window.matchMedia('(min-width: 701px)').matches)return;
+  if(!carousel||!track)return;
   const api='https://prycotlink-api.sorrymoscowwork.workers.dev';
   const placeholders=8;
   function makeSet(releases){

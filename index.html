@@ -222,6 +222,95 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 
 /* Restore original homepage slogan placement in the hero. */
 .header-slogan{display:none!important}
+
+/* Desktop homepage refresh: typography and layout only; mobile styles remain untouched. */
+.desktop-nav { display: none; }
+@media (min-width: 1000px) {
+  .desktop-nav {
+    position: fixed; top: 31px; left: 250px; right: 88px; z-index: 19;
+    display: flex; align-items: center; justify-content: flex-end;
+    gap: clamp(14px, 1.8vw, 28px); white-space: nowrap;
+  }
+  .desktop-nav a {
+    color: var(--fg); font: 500 11px/1 Helvetica, Arial, sans-serif;
+    letter-spacing: -.015em;
+    transition: color .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .desktop-nav a:hover { color: #FF7F50; }
+  .desktop-nav .desktop-account {
+    display: inline-flex; align-items: center; justify-content: center; gap: 16px;
+    min-width: 108px; min-height: 42px; margin-left: 2px; padding: 0 16px;
+    border: 1px solid rgba(244,244,242,.48); border-radius: 999px;
+    color: var(--fg); font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .desktop-nav .desktop-account::after { content: "→"; font-size: 16px; line-height: 1; }
+  .desktop-nav .desktop-account:hover { border-color: #FF7F50; background: rgba(160,82,45,.12); }
+
+  .page { padding: 30px 34px 28px; }
+  header { min-height: 76px; }
+  .hero {
+    min-height: 0; height: auto; flex: 0 0 auto;
+    align-items: flex-start; justify-content: flex-start;
+    padding: 38px 0 42px; overflow: visible; text-align: left;
+  }
+  .hero-video, .hero-video-overlay { display: none !important; }
+  .intro {
+    width: 100%; max-width: 1020px; margin: 0;
+    font-size: clamp(58px, 6.7vw, 100px); font-weight: 800;
+    line-height: .91; letter-spacing: -.067em; text-align: left;
+  }
+  .intro-strong { font-weight: 800; }
+  .intro-light { font-weight: 300; }
+  .sub {
+    max-width: 540px; margin: 24px 0 0; color: var(--muted);
+    font-size: 18px; line-height: 1.38; text-align: left;
+  }
+  .hero-buttons {
+    width: 100%; margin-top: 28px; gap: 16px;
+    justify-content: flex-start; align-items: stretch;
+  }
+  .hero-buttons .release-button {
+    display: flex; align-items: center; justify-content: space-between;
+    flex: 1 1 0; min-width: 0; min-height: 62px; margin: 0;
+    padding: 0 24px !important; border: 1px solid transparent !important;
+    border-radius: 999px !important;
+    font: 500 11px/1 Helvetica, Arial, sans-serif !important;
+    letter-spacing: .09em !important; text-align: left;
+  }
+  .hero-buttons .release-button::after { content: "→"; margin-left: 18px; font-size: 18px; line-height: 1; }
+  .hero-buttons .release-button:first-child { background: #A0522D !important; color: #fff !important; }
+  .hero-buttons .release-button:first-child:hover { background: #FF7F50 !important; color: #000 !important; }
+  .hero-buttons .release-button:nth-child(2),
+  .hero-buttons .release-button:nth-child(3) {
+    background: rgba(255,255,255,.015) !important;
+    border-color: rgba(244,244,242,.25) !important; color: var(--fg) !important;
+  }
+  .hero-buttons .release-button:nth-child(2):hover,
+  .hero-buttons .release-button:nth-child(3):hover {
+    background: rgba(160,82,45,.14) !important;
+    border-color: #A0522D !important; color: var(--fg) !important;
+  }
+  .services {
+    grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0;
+    padding: 34px 0 36px;
+    border-top: 1px solid var(--line) !important;
+    border-bottom: 1px solid var(--line) !important;
+  }
+  .service, .service + .service {
+    min-height: 160px; padding: 20px 28px 14px 0;
+    border-right: 1px solid var(--line); border-bottom: 0 !important;
+  }
+  .service + .service { padding-left: 28px; }
+  .service:last-child { padding-right: 0; border-right: 0; }
+  .number { display: none !important; }
+  .service h2 {
+    margin: 0 0 12px; font-size: clamp(21px, 1.8vw, 27px);
+    font-weight: 700; line-height: 1.05; letter-spacing: -.045em;
+  }
+  .service p { max-width: 340px; font-size: 14px; line-height: 1.48; }
+  .site-footer { margin-top: 30px !important; padding-top: 20px !important; }
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -251,13 +340,20 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
   <main class="page">
     <header>
       <a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a>
-      
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="about.html">About PRYCOT.</a>
+        <a href="label-services.html">Label Service</a>
+        <a href="prycotlink-guide.html">PRYCOTLINK</a>
+        <a href="blog.html">Blog</a>
+        <a href="side-projects.html">Side Projects</a>
+        <a class="desktop-account" href="/account.html">Account</a>
+      </nav>
       <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 
 </header>
     <section class="hero">
       <video class="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true"><source src="https://www.pexels.com/download/video/8135089/" type="video/mp4"></video><div class="hero-video-overlay" aria-hidden="true"></div>
-      <h2 class="intro">Independent music label &amp; digital distribution.</h2>
+      <h2 class="intro"><span class="intro-strong">Independent music label</span> <span class="intro-light">&amp; digital distribution.</span></h2>
       <p class="sub"><span>Release worldwide.</span><span>Pay in crypto.</span><span>Get your royalties in crypto.</span></p>
       
       <div class="hero-buttons"><a class="release-button" href="/account.html">Account</a><a class="release-button" href="prycotlink-guide.html">PRYCOTLINK</a><a class="release-button" href="label-services.html">Label Service</a></div>

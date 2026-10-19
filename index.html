@@ -624,51 +624,158 @@ html body footer.site-footer .footer-bottom .visitor-counter {
 }
 
 
-/* Desktop-only premium hover treatment for the three homepage actions.
-   Keep mobile touch states and every link destination unchanged. */
+/* Scenario 2: distinct interactive cards, desktop pointer devices only.
+   The existing three anchors, labels and destinations remain untouched. */
 @media (hover: hover) and (pointer: fine) and (min-width: 701px) {
   .hero .hero-buttons > .release-button {
     position: relative !important;
-    transform: translateY(0) scale(1) !important;
+    isolation: isolate !important;
+    overflow: visible !important;
     border: 1px solid rgba(244,244,242,.16) !important;
     border-radius: 999px !important;
     box-shadow: 0 0 0 rgba(160,82,45,0) !important;
     transition:
-      transform .34s cubic-bezier(.2,.75,.25,1),
-      border-radius .34s cubic-bezier(.2,.75,.25,1),
-      border-color .28s ease,
-      box-shadow .34s ease,
-      background-color .28s ease,
-      color .28s ease !important;
+      transform .38s cubic-bezier(.2,.75,.25,1),
+      border-radius .38s cubic-bezier(.2,.75,.25,1),
+      border-color .3s ease,
+      box-shadow .38s ease,
+      background-color .3s ease,
+      color .3s ease !important;
     will-change: transform, border-radius, box-shadow;
   }
+  .hero .hero-buttons > .release-button::before {
+    content: "" !important;
+    position: absolute !important;
+    z-index: -1 !important;
+    right: 22px !important;
+    top: 50% !important;
+    width: 44px !important;
+    height: 34px !important;
+    opacity: 0 !important;
+    transform: translate(8px,-50%) scale(.82) !important;
+    transition: opacity .25s ease, transform .38s cubic-bezier(.2,.75,.25,1) !important;
+    pointer-events: none !important;
+  }
+  .hero .hero-buttons > .release-button::after {
+    content: "↗" !important;
+    position: absolute !important;
+    z-index: 1 !important;
+    right: 24px !important;
+    top: 50% !important;
+    margin: 0 !important;
+    color: currentColor !important;
+    font: 400 17px/1 Helvetica,Arial,sans-serif !important;
+    opacity: .72 !important;
+    transform: translateY(-50%) !important;
+    transition: transform .3s ease, opacity .3s ease !important;
+    pointer-events: none !important;
+  }
   .hero .hero-buttons > .release-button:hover {
-    transform: translateY(-4px) scale(1.025) !important;
-    border-radius: 15px !important;
-    border-color: rgba(244,244,242,.58) !important;
+    transform: translateY(-5px) scale(1.018) !important;
+    border-radius: 17px 17px 5px 17px !important;
+    border-color: rgba(244,244,242,.48) !important;
     box-shadow:
-      0 10px 28px rgba(0,0,0,.38),
+      0 16px 36px rgba(0,0,0,.42),
       0 0 0 1px rgba(160,82,45,.22),
-      0 0 24px rgba(160,82,45,.13) !important;
+      0 0 26px rgba(160,82,45,.12) !important;
+  }
+  .hero .hero-buttons > .release-button:hover::before {
+    opacity: 1 !important;
+    transform: translate(0,-50%) scale(1) !important;
+  }
+  .hero .hero-buttons > .release-button:hover::after {
+    opacity: 1 !important;
+    transform: translate(3px,-50%) !important;
+  }
+  /* ACCOUNT: a small tab-like silhouette emerges above the card. */
+  .hero .hero-buttons > .release-button:first-child::before {
+    right: 22px !important;
+    top: 0 !important;
+    width: 48px !important;
+    height: 8px !important;
+    border: 1px solid rgba(255,190,150,.8) !important;
+    border-bottom: 0 !important;
+    border-radius: 7px 7px 0 0 !important;
+    background: linear-gradient(90deg,rgba(255,190,150,.08),rgba(255,190,150,.48)) !important;
+    transform: translate(0,0) scaleX(.55) !important;
+    transform-origin: right center !important;
   }
   .hero .hero-buttons > .release-button:first-child:hover {
     background: #A0522D !important;
     color: #fff !important;
     border-color: rgba(255,190,150,.72) !important;
+    border-radius: 17px 17px 5px 17px !important;
   }
-  .hero .hero-buttons > .release-button:nth-child(2):hover,
+  .hero .hero-buttons > .release-button:first-child:hover::before {
+    transform: translate(0,-8px) scaleX(1) !important;
+  }
+  /* PRYCOTLINK: three offset release-cover tiles, CSS-drawn without images. */
+  .hero .hero-buttons > .release-button:nth-child(2)::before {
+    right: 24px !important;
+    width: 36px !important;
+    height: 36px !important;
+    border: 1px solid rgba(244,244,242,.38) !important;
+    border-radius: 3px !important;
+    background:
+      linear-gradient(145deg,transparent 48%,rgba(244,244,242,.78) 49% 52%,transparent 53%),
+      linear-gradient(180deg,transparent 0 66%,rgba(244,244,242,.2) 66% 69%,transparent 69%),
+      linear-gradient(135deg,#A0522D 0 38%,#24201e 38% 100%) !important;
+    box-shadow: -7px 4px 0 -1px #171717, -7px 4px 0 0 rgba(244,244,242,.3), -13px 8px 0 -1px #24201e, -13px 8px 0 0 rgba(244,244,242,.18) !important;
+    transform: translate(8px,-50%) rotate(5deg) scale(.8) !important;
+  }
+  .hero .hero-buttons > .release-button:nth-child(2):hover {
+    background: rgba(255,255,255,.035) !important;
+    color: #f4f4f2 !important;
+    border-color: #A0522D !important;
+    border-radius: 17px 17px 5px 17px !important;
+    box-shadow:
+      0 16px 36px rgba(0,0,0,.42),
+      0 0 0 1px rgba(160,82,45,.30),
+      0 0 26px rgba(160,82,45,.16) !important;
+  }
+  .hero .hero-buttons > .release-button:nth-child(2):hover::before {
+    transform: translate(0,-50%) rotate(0) scale(1) !important;
+  }
+  /* LABEL SERVICE: a compact sound-wave motif unfolds on hover. */
+  .hero .hero-buttons > .release-button:nth-child(3)::before {
+    width: 46px !important;
+    height: 32px !important;
+    right: 22px !important;
+    border-radius: 4px !important;
+    background:
+      linear-gradient(#D17A50,#D17A50) 0 50%/2px 9px no-repeat,
+      linear-gradient(#D17A50,#D17A50) 5px 50%/2px 17px no-repeat,
+      linear-gradient(#D17A50,#D17A50) 10px 50%/2px 25px no-repeat,
+      linear-gradient(#D17A50,#D17A50) 15px 50%/2px 13px no-repeat,
+      linear-gradient(#D17A50,#D17A50) 20px 50%/2px 21px no-repeat,
+      linear-gradient(#D17A50,#D17A50) 25px 50%/2px 11px no-repeat,
+      linear-gradient(#D17A50,#D17A50) 30px 50%/2px 24px no-repeat,
+      linear-gradient(#D17A50,#D17A50) 35px 50%/2px 15px no-repeat,
+      linear-gradient(#D17A50,#D17A50) 40px 50%/2px 8px no-repeat !important;
+  }
   .hero .hero-buttons > .release-button:nth-child(3):hover {
     background: rgba(255,255,255,.035) !important;
     color: #f4f4f2 !important;
     border-color: #A0522D !important;
+    border-radius: 17px 17px 5px 17px !important;
     box-shadow:
-      0 10px 28px rgba(0,0,0,.38),
+      0 16px 36px rgba(0,0,0,.42),
       0 0 0 1px rgba(160,82,45,.30),
-      0 0 24px rgba(160,82,45,.16) !important;
+      0 0 26px rgba(160,82,45,.16) !important;
+  }
+  .hero .hero-buttons > .release-button:nth-child(3):hover::before {
+    transform: translate(0,-50%) scale(1) !important;
   }
   .hero .hero-buttons > .release-button:active {
     transform: translateY(-1px) scale(1.005) !important;
     transition-duration: .12s !important;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero .hero-buttons > .release-button,
+    .hero .hero-buttons > .release-button::before,
+    .hero .hero-buttons > .release-button::after {
+      transition: none !important;
+    }
   }
 }
 

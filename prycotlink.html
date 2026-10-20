@@ -1129,12 +1129,12 @@ function renderRelease(r){addLiveStyles();const liveIntro=page.querySelector('.p
 
 /* Final specificity guard: the release markup injects wallet styles asynchronously,
    so this selector must outrank its generic wallet button rule on all viewports. */
-.pl-live-release .release-wallets .release-wallet-copy,
-.pl-live-release .release-wallets .release-wallet-copy:hover,
-.pl-live-release .release-wallets .release-wallet-copy:active,
-.pl-live-release .release-wallets .release-wallet-copy:focus,
-.pl-live-release .release-wallets .release-wallet-copy:focus-visible,
-.pl-live-release .release-wallets .release-wallet-copy.is-copied {
+html body .pl-live-release .release-donation-wallets button.release-wallet-copy,
+html body .pl-live-release .release-donation-wallets button.release-wallet-copy:hover,
+html body .pl-live-release .release-donation-wallets button.release-wallet-copy:active,
+html body .pl-live-release .release-donation-wallets button.release-wallet-copy:focus,
+html body .pl-live-release .release-donation-wallets button.release-wallet-copy:focus-visible,
+html body .pl-live-release .release-donation-wallets button.release-wallet-copy.is-copied {
   border: 0 !important;
   border-width: 0 !important;
   border-style: none !important;

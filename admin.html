@@ -11,6 +11,24 @@
 
 /* Unified pill shape for interactive buttons across desktop and mobile */
 button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.secondary,[class*="btn"],[class*="button"]:not(.menu-button),[class*="cta"]{border-radius:999px!important}.menu-button{border-radius:0!important}
+
+/* Organic metric colors for PRYCOT admin analytics; keep the rest of the admin interface monochrome. */
+:root{--metric-visitors:#9db7a0;--metric-streaming:#8eafba;--metric-social:#d3a08d;--metric-panel-visitors:#151c16;--metric-panel-streaming:#141b1e;--metric-panel-social:#1d1715}
+#prycotlinkStats{border-bottom-color:#405344}
+#prycotlinkStats strong{color:var(--metric-visitors)}
+#prycotlinkStats span{color:#b5c7b7}
+#tabLinks.active{border-bottom-color:var(--metric-visitors);color:var(--metric-visitors)}
+#prycotlinks .request{border-bottom-color:#303a32}
+#prycotlinks .request:nth-child(3n+1) .title{color:var(--metric-visitors)}
+#prycotlinks .request:nth-child(3n+2) .title{color:var(--metric-streaming)}
+#prycotlinks .request:nth-child(3n) .title{color:var(--metric-social)}
+#prycotlinks .request:nth-child(3n+1) .request-head{border-left:2px solid #405344;padding-left:12px}
+#prycotlinks .request:nth-child(3n+2) .request-head{border-left:2px solid #354d54;padding-left:12px}
+#prycotlinks .request:nth-child(3n) .request-head{border-left:2px solid #574238;padding-left:12px}
+#prycotlinks .prycotlink-url{ text-decoration-color:#526a56}
+#prycotlinks .request:nth-child(3n+1) .prycotlink-url{color:var(--metric-visitors)}
+#prycotlinks .request:nth-child(3n+2) .prycotlink-url{color:var(--metric-streaming);text-decoration-color:#49646b}
+#prycotlinks .request:nth-child(3n) .prycotlink-url{color:var(--metric-social);text-decoration-color:#765648}
 </style>
 <style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style></head>
 <body>

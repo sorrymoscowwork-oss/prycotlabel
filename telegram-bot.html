@@ -155,7 +155,7 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style></head>
+<style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style><link rel="stylesheet" href="/site-design.css?v=20261021"></head>
 <body>
 <div class="menu" id="menu">
 <nav class="menu-links" aria-label="Site navigation">
@@ -225,5 +225,5 @@ document.querySelectorAll('.menu-links a').forEach(link=>{
 
 <script id="page-header-scroll-behavior">(function(){const brand=document.querySelector('.header-brand');if(!brand)return;let ticking=false;function update(){brand.classList.toggle('header-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>
   <script src="/site-navigation.js?v=20261019-footer" defer></script>
-</body>
+<script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body>
 </html>

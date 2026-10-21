@@ -617,11 +617,19 @@ body .content.contact-minimal > .telegram-cta > span{
 }
 </style>
 
+<style id="contact-mobile-vertical-centering">
+@media(max-width:700px){
+  body .page.contact-page{display:flex!important;flex-direction:column!important;min-height:100vh!important;min-height:100svh!important}
+  body .page.contact-page>.content.contact-minimal{flex:0 0 auto!important;margin-top:auto!important;margin-bottom:auto!important;transform:translateY(28px)!important}
+  body.site-public-header .page.contact-page>.site-footer{flex:0 0 auto!important;margin:0 auto!important}
+}
+</style>
+
 
 </head>
 <body>
 
-<main class="page">
+<main class="page contact-page">
 <header>
 <div class="brand header-brand"><a class="brand-logo" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><span class="page-label">Contact</span></div>
 
@@ -636,6 +644,6 @@ body .content.contact-minimal > .telegram-cta > span{
 <script id="scroll-logo-hide-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function updateLogo(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(updateLogo);ticking=true}},{passive:true});updateLogo()})();</script><script id="mobile-logo-tagline-scroll-final-js">(function(){const brand=document.querySelector('.brand'),tagline=document.querySelector('.tagline');if(!brand||!tagline)return;const page=document.querySelector('.page')||document.body;let ticking=false;function update(){if(innerWidth>700){page.classList.remove('mobile-brand-hidden');ticking=false;return}page.classList.toggle('mobile-brand-hidden',scrollY>80);ticking=false}addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();</script><script src="/platforms-footer.js?v=20261019-home-only"></script>
 
 <script id="page-header-scroll-behavior">(function(){const brand=document.querySelector('.header-brand');if(!brand)return;let ticking=false;function update(){brand.classList.toggle('header-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>
-  <script src="/site-navigation.js?v=20261022-mobile-carousel-4" defer></script>
+  <script src="/site-navigation.js?v=20261022-mobile-carousel-5" defer></script>
 <script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body>
 </html>

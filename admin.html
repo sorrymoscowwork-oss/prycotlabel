@@ -96,6 +96,6 @@ async function enter(){const p=passwordInput.value;if(!p){setStatus(loginStatus,
 loginButton.onclick=enter;passwordInput.addEventListener("keydown",e=>{if(e.key==="Enter")enter()});tabBot.onclick=()=>switchTab("bot");tabLinks.onclick=()=>switchTab("links");document.getElementById("refresh").onclick=()=>activeTab==="bot"?load():loadPrycotlinks();logout.onclick=()=>{sessionStorage.removeItem("prycot_admin_password");adminPassword="";location.reload()};
 if(adminPassword){loginView.classList.add("hidden");adminView.classList.remove("hidden");logout.classList.remove("hidden");load().catch(()=>{sessionStorage.removeItem("prycot_admin_password");location.reload()})}
 </script>
-  <script src="/site-navigation.js?v=20261021-nav-recovered" defer></script>
+  <script src="/site-navigation.js?v=20261021-desktop-size" defer></script>
 </body>
 </html>

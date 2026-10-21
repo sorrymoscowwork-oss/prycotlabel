@@ -95,7 +95,6 @@
       'body.site-home .brand { position: fixed !important; top: 30px !important; left: 34px !important; z-index: 10001 !important; opacity: 1; filter: blur(0); transform: translateY(0); transition: opacity 1.05s ease, filter 1.05s ease, transform 1.05s ease !important; pointer-events: auto; }',
       'body.site-home.site-logo-scrolled .brand { opacity: 0 !important; filter: blur(14px) !important; transform: translateY(-7px) !important; pointer-events: none !important; }',
       'body .menu-button { display: none !important; }',
-      '@media (max-width: 999px) { html body button.menu-button#menuButton { position: fixed !important; top: 20px !important; right: 20px !important; left: auto !important; bottom: auto !important; z-index: 2147483647 !important; display: block !important; visibility: visible !important; opacity: 1 !important; width: 30px !important; height: 30px !important; min-width: 30px !important; min-height: 30px !important; padding: 0 !important; margin: 0 !important; border: 0 !important; background: transparent !important; pointer-events: auto !important; } html body button.menu-button#menuButton span { position: absolute !important; display: block !important; left: 2px !important; top: 14px !important; width: 25px !important; height: 1px !important; background: #f4f4f2 !important; box-shadow: 0 -7px 0 #f4f4f2, 0 7px 0 #f4f4f2 !important; } }',
       'body .menu, body .menu.open { display: none !important; visibility: hidden !important; pointer-events: none !important; }',
       '}'
     ].join(' ');
@@ -287,7 +286,7 @@
 
   let mobileMenuButton = null;
   function syncMobileMenuButton() {
-    if (window.innerWidth < 1000) {
+    if (window.innerWidth <= 700) {
       if (!mobileMenuButton || !mobileMenuButton.isConnected) {
         mobileMenuButton = document.createElement('button');
         mobileMenuButton.className = 'menu-button';

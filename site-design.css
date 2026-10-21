@@ -514,3 +514,21 @@ body:not(.site-home) :is(.release-cta a, .guide-cta a, .cta a, .site-button, .re
   margin-left:0!important;
   margin-right:0!important;
 }
+
+
+/* Prices page: CTA should size to its label, not stretch across the content column. */
+body:not(.site-home) .release-button-wrap > .release-button{
+  display:inline-flex!important;
+  width:max-content!important;
+  max-width:100%!important;
+  min-width:0!important;
+  flex:0 0 auto!important;
+  align-self:center!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+  padding:0 30px!important;
+  min-height:43px!important;
+  line-height:1!important;
+}

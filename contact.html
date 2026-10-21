@@ -559,6 +559,61 @@ html body .page > .content .contact-block > .social-links > a{
 }
 </style>
 
+
+<style id="contact-minimal-layout">
+body .content.contact-minimal{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:calc(100% - 2 * clamp(20px,3.5vw,64px))!important;
+  max-width:none!important;
+  margin:calc(18vh + 20px) auto 0!important;
+  padding:0!important;
+  gap:clamp(42px,7vh,84px)!important;
+  border:0!important;
+  text-align:center!important;
+}
+body .content.contact-minimal > .contact-email-full{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0 0 18px!important;
+  border-bottom:1px solid var(--line,#292929)!important;
+  font-size:clamp(30px,7.5vw,112px)!important;
+  font-weight:400!important;
+  line-height:1.02!important;
+  letter-spacing:-.055em!important;
+  text-align:center!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+  text-decoration:none!important;
+}
+body .content.contact-minimal > .telegram-cta{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  margin:0!important;
+  text-align:center!important;
+}
+body .content.contact-minimal > .telegram-cta > span{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:43px!important;
+  height:43px!important;
+  padding:0 30px!important;
+  text-align:center!important;
+}
+@media(max-width:700px){
+  body .content.contact-minimal{margin:calc(16vh + 20px) auto 0!important;gap:42px!important}
+  body .content.contact-minimal > .contact-email-full{font-size:clamp(27px,8vw,48px)!important;letter-spacing:-.045em!important}
+  body .content.contact-minimal > .telegram-cta > span{max-width:100%!important;padding:0 20px!important}
+}
+</style>
+
 </head>
 <body>
 <div class="menu" id="menu">
@@ -587,16 +642,9 @@ html body .page > .content .contact-block > .social-links > a{
 <div class="brand header-brand"><a class="brand-logo" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><span class="page-label">Contact</span></div>
 <button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
 </header>
-<section class="content">
-<p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / CONTACT</span><span class="mobile-eyebrow">CONTACT</span></p>
-<h2 class="contact-title">Contact<span style="color:#B8B8B8">.</span></h2>
-<div class="contact-block">
-
-<div class="contact-details"><a class="email" href="mailto:info@prycot.com">info@prycot.com</a></div>
-<p class="response">Response time: within 24 hours.</p>
-<span class="social-links" aria-label="PRYCOT. social media"><a href="https://www.instagram.com/prycot.label" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></a><a href="https://x.com/prycotlabel" target="_blank" rel="noopener noreferrer" aria-label="X"><svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.4l-5.02-6.55L6.05 22H2.94l7.24-8.28L2.8 2h6.56l4.54 5.98L18.9 2Zm-1.1 18h1.73L8.25 3.88H6.4L17.8 20Z"/></svg></a></span>
+<section class="content contact-minimal">
+<a class="email contact-email-full" href="mailto:info@prycot.com">info@prycot.com</a>
 <div class="telegram-cta"><span>QUICK CONTACT ON TELEGRAM</span></div>
-</div>
 </section>
 
 <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main>

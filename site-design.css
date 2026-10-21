@@ -568,3 +568,94 @@ body:not(.site-home) .telegram-cta > span{
   text-transform:uppercase!important;
   white-space:nowrap!important;
 }
+
+
+/* CONTACT PAGE — final override: one centered vertical column, no legacy two-column grid. */
+@media (min-width:701px){
+  body:not(.site-home) .content:has(> .contact-title) > .eyebrow,
+  body:not(.site-home) .content:has(> .contact-title) > .contact-title{
+    width:100%!important;
+    text-align:center!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    gap:0!important;
+    width:100%!important;
+    margin:34px 0 0!important;
+    padding:34px 0 0!important;
+    border-top:1px solid var(--line,#292929)!important;
+    border-bottom:0!important;
+    text-align:center!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-label,
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-details,
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .response,
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .telegram-cta{
+    display:flex!important;
+    position:static!important;
+    float:none!important;
+    grid-column:auto!important;
+    grid-row:auto!important;
+    justify-self:center!important;
+    align-self:center!important;
+    width:100%!important;
+    max-width:none!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    text-align:center!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-label{
+    display:block!important;
+    margin-top:0!important;
+    margin-bottom:24px!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-details{
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:0!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-details > .email{
+    align-self:center!important;
+    margin:0 auto!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-details > .social-links{
+    display:flex!important;
+    justify-content:center!important;
+    align-items:center!important;
+    width:100%!important;
+    margin:22px auto 0!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .response{
+    display:block!important;
+    margin-top:24px!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .telegram-cta{
+    justify-content:center!important;
+    margin-top:30px!important;
+  }
+}
+@media (max-width:700px){
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    text-align:center!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > *{
+    grid-column:auto!important;
+    grid-row:auto!important;
+    justify-self:center!important;
+    align-self:center!important;
+    text-align:center!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-details{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+  }
+}

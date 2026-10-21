@@ -532,3 +532,17 @@ body:not(.site-home) .release-button-wrap > .release-button{
   min-height:43px!important;
   line-height:1!important;
 }
+
+
+/* Keep the Prices page CTA centered inside its wrapper while preserving compact width. */
+body:not(.site-home) .release-button-wrap{
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  width:100%!important;
+  text-align:center!important;
+}
+body:not(.site-home) .release-button-wrap > .release-button{
+  margin-left:auto!important;
+  margin-right:auto!important;
+}

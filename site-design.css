@@ -90,3 +90,8 @@
     text-wrap:balance;
   }
 }
+
+@media (min-width:701px){
+  body:not(.site-home) .about-block>.about-number{display:none!important}
+  body:not(.site-home) .about-block{grid-template-columns:minmax(280px,32%) minmax(0,1fr)!important;column-gap:4%!important}
+}

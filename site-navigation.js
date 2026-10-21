@@ -28,7 +28,20 @@
 
   const isHome = window.location.pathname === '/' ||
     window.location.pathname.endsWith('/index.html');
+  const currentPath = window.location.pathname.toLowerCase();
+  const publicPagePaths = new Set([
+    '/', '/index.html', '/404.html', '/about.html', '/blog.html',
+    '/blog-prycot-is-not-just-distribution.html',
+    '/blog-stolicabolgarii-dorogobuzh-grime.html',
+    '/blog-stolicabolgarii-dorogobuzh-grime-ru.html',
+    '/contact.html', '/donate.html', '/how-to-release.html',
+    '/label-services.html', '/prices.html', '/prycotlink-guide.html',
+    '/side-projects.html', '/telegram-bot.html', '/terms.html',
+    '/user-agreement.html', '/white-paper.html'
+  ]);
+  const isPublicPage = publicPagePaths.has(currentPath);
   document.body.classList.toggle('site-home', isHome);
+  document.body.classList.toggle('site-public-header', isPublicPage);
 
   if (!document.getElementById('prycot-global-navigation-style')) {
     const style = document.createElement('style');
@@ -78,9 +91,18 @@
       '}',
       'nav.site-global-nav { display: none; }',
       '@media (min-width: 701px) {',
-      'nav.site-global-nav { position: fixed !important; top: 30px !important; left: 50vw !important; right: auto !important; width: max-content !important; max-width: calc(100vw - 40px) !important; transform: translateX(-50%) translateY(0) !important; z-index: 10000 !important; display: flex !important; flex-flow: row nowrap !important; align-items: center !important; justify-content: center !important; gap: clamp(5px, .55vw, 9px) !important; height: 46px !important; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; overflow: visible !important; white-space: nowrap !important; opacity: 1; filter: blur(0); pointer-events: auto; transition: opacity 1.05s ease, filter 1.05s ease, transform 1.05s ease !important; }',
-      'body.site-home nav.site-global-nav { top: calc(21.648vw + 35px) !important; width: calc(100vw - 68px) !important; max-width: none !important; justify-content: space-between !important; gap: 0 !important; }',
-      'body.site-logo-scrolled nav.site-global-nav { opacity: 0 !important; filter: blur(14px) !important; transform: translateX(-50%) translateY(-7px) !important; pointer-events: none !important; }',
+      'nav.site-global-nav { position: fixed !important; top: 30px !important; left: 50vw !important; right: auto !important; width: max-content !important; max-width: calc(100vw - 40px) !important; transform: translateX(-50%) translateY(0) !important; z-index: 10002 !important; display: flex !important; flex-flow: row nowrap !important; align-items: center !important; justify-content: center !important; gap: clamp(5px, .55vw, 9px) !important; height: 46px !important; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; overflow: visible !important; white-space: nowrap !important; opacity: 1; filter: blur(0); pointer-events: auto; transition: opacity 1.05s ease, filter 1.05s ease, transform 1.05s ease !important; }',
+      'body.site-public-header nav.site-global-nav { top: calc(21.648vw + 35px) !important; left: 34px !important; right: 34px !important; width: auto !important; max-width: none !important; transform: translateY(0) !important; justify-content: space-between !important; gap: 0 !important; }',
+      'body.site-public-header:not(.site-home) .brand { position: fixed !important; top: 30px !important; left: 34px !important; right: 34px !important; z-index: 10001 !important; display: flex !important; flex-direction: column !important; align-items: center !important; width: auto !important; max-width: none !important; overflow: visible !important; opacity: 1; filter: blur(0); transform: translateY(0); transition: opacity .35s ease, filter .35s ease, transform .35s ease !important; }',
+      'body.site-public-header:not(.site-home) .brand .brand-logo { display: contents !important; }',
+      'body.site-public-header .brand .logo { position: relative !important; left: -16px !important; display: block !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; font-size: calc(25.75vw - 17.55px) !important; line-height: .82 !important; text-align: center !important; white-space: nowrap !important; overflow: visible !important; }',
+      'body.site-public-header:not(.site-home) .brand .page-label, body.site-public-header:not(.site-home) .brand .account-label { display: none !important; }',
+      'body.site-public-header:not(.site-home) .tagline { display: none !important; }',
+      'body.site-public-header:not(.site-home) .page > header { min-height: calc(21.648vw + 71px) !important; }',
+      'body.site-public-header:not(.site-home) .page > .content { margin-top: 28px !important; }',
+      'body.site-public-header:not(.site-home) .page > main.content { margin-top: calc(21.648vw + 91px) !important; }',
+      'body.site-public-header.site-header-scrolled:not(.site-home) .brand, body.site-public-header.site-header-scrolled:not(.site-home) nav.site-global-nav { opacity: 0 !important; filter: blur(14px) !important; transform: translateY(-7px) !important; pointer-events: none !important; }',
+      'body.site-logo-scrolled nav.site-global-nav { opacity: 0 !important; filter: blur(14px) !important; transform: translateY(-7px) !important; pointer-events: none !important; }',
       'nav.site-global-nav > a, nav.site-global-nav .site-nav-dropdown-trigger { display: inline-flex !important; flex: 0 1 auto !important; align-items: center !important; justify-content: center !important; gap: 7px !important; margin: 0 !important; padding: 12px 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; color: #f4f4f2 !important; font: 500 clamp(10px, .78vw, 15px)/1 Helvetica, Arial, sans-serif !important; letter-spacing: .035em !important; text-align: center !important; text-decoration: none !important; text-transform: uppercase !important; white-space: nowrap !important; cursor: pointer !important; transition: color .2s ease, opacity .2s ease !important; }',
 
       'body:not(.site-home) nav.site-global-nav .site-nav-dropdown-trigger { font: 500 clamp(10px, .78vw, 15px)/1 Helvetica, Arial, sans-serif !important; letter-spacing: .035em !important; line-height: 1 !important; padding: 12px 0 !important; min-height: 0 !important; height: auto !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; text-transform: uppercase !important; box-shadow: none !important; }',
@@ -140,18 +162,29 @@
       menu.appendChild(link);
     });
 
-    trigger.addEventListener('click', function (event) {
-      event.stopPropagation();
-      const opening = !wrapper.classList.contains('is-open');
-      nav.querySelectorAll('.site-nav-dropdown.is-open').forEach(function (openMenu) {
-        openMenu.classList.remove('is-open');
-        const openTrigger = openMenu.querySelector('.site-nav-dropdown-trigger');
-        if (openTrigger) openTrigger.setAttribute('aria-expanded', 'false');
-      });
+    function setDropdownOpen(opening) {
       if (opening) {
-        wrapper.classList.add('is-open');
-        trigger.setAttribute('aria-expanded', 'true');
+        nav.querySelectorAll('.site-nav-dropdown.is-open').forEach(function (openMenu) {
+          if (openMenu === wrapper) return;
+          openMenu.classList.remove('is-open');
+          const openTrigger = openMenu.querySelector('.site-nav-dropdown-trigger');
+          if (openTrigger) openTrigger.setAttribute('aria-expanded', 'false');
+        });
       }
+      wrapper.classList.toggle('is-open', opening);
+      trigger.setAttribute('aria-expanded', String(opening));
+    }
+
+    wrapper.addEventListener('mouseenter', function () {
+      setDropdownOpen(true);
+    });
+    wrapper.addEventListener('mouseleave', function () {
+      setDropdownOpen(false);
+    });
+    trigger.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      setDropdownOpen(wrapper.matches(':hover') || !wrapper.classList.contains('is-open'));
     });
 
     wrapper.appendChild(trigger);
@@ -395,6 +428,9 @@
   });
 
   function updateHomeLogo() {
+    if (isPublicPage && !isHome) {
+      document.body.classList.toggle('site-header-scrolled', window.scrollY > 80);
+    }
     if (window.innerWidth < 1000) {
       document.body.classList.remove('site-logo-scrolled');
       return;

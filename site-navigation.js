@@ -218,6 +218,29 @@
     document.body.appendChild(panel);
   }
 
+  let mobileMenuButton = null;
+  function syncMobileMenuButton() {
+    if (window.innerWidth < 1000) {
+      if (!mobileMenuButton || !mobileMenuButton.isConnected) {
+        mobileMenuButton = document.createElement('button');
+        mobileMenuButton.className = 'menu-button';
+        mobileMenuButton.id = 'menuButton';
+        mobileMenuButton.type = 'button';
+        mobileMenuButton.setAttribute('aria-label', 'Open menu');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenuButton.innerHTML = '<span></span>';
+        document.body.appendChild(mobileMenuButton);
+      }
+    } else {
+      if (mobileMenuButton && mobileMenuButton.isConnected) mobileMenuButton.remove();
+      mobileMenuButton = null;
+      document.body.classList.remove('site-mobile-menu-open');
+      const panel = document.querySelector('.site-mobile-menu');
+      if (panel) panel.setAttribute('aria-hidden', 'true');
+    }
+  }
+  syncMobileMenuButton();
+  window.addEventListener('resize', syncMobileMenuButton);
   buildMobileMenu();
 
   function setMobileMenu(open) {

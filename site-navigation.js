@@ -166,11 +166,32 @@
     panel.setAttribute('aria-label', 'Mobile navigation');
     panel.setAttribute('aria-hidden', 'true');
 
+    function isCurrentPage(href) {
+      const current = window.location.pathname.replace(/\\/+$/, '') || '/';
+      const target = new URL(href, window.location.origin).pathname.replace(/\\/+$/, '') || '/';
+      const normalizedCurrent = current === '/index.html' ? '/' : current;
+      const normalizedTarget = target === '/index.html' ? '/' : target;
+      return normalizedCurrent === normalizedTarget;
+    }
+
+    function markCurrent(link, href) {
+      if (!isCurrentPage(href)) return;
+      link.classList.add('is-current');
+      link.setAttribute('aria-current', 'page');
+      link.style.setProperty('color', '#f4f4f2', 'important');
+      link.style.setProperty('font-weight', '700', 'important');
+      link.style.setProperty('text-decoration', 'underline', 'important');
+      link.style.setProperty('text-decoration-color', '#f4f4f2', 'important');
+      link.style.setProperty('text-decoration-thickness', '1px', 'important');
+      link.style.setProperty('text-underline-offset', '5px', 'important');
+    }
+
     function addMobileLink(label, href) {
       const link = document.createElement('a');
       link.className = 'mobile-nav-link';
       link.href = href;
       link.textContent = label;
+      markCurrent(link, href);
       panel.appendChild(link);
     }
 
@@ -222,6 +243,11 @@
         link.className = 'mobile-nav-sub-link';
         link.href = child[1];
         link.textContent = child[0];
+        markCurrent(link, child[1]);
+        if (isCurrentPage(child[1])) {
+          group.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
         submenu.appendChild(link);
       });
 
@@ -251,6 +277,7 @@
     guide.className = 'mobile-nav-link';
     guide.href = '/prycotlink-guide.html';
     guide.textContent = 'PRYCOTLINK GUIDE';
+    markCurrent(guide, guide.href);
     footer.appendChild(guide);
     panel.appendChild(footer);
 

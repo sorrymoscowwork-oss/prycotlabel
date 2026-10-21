@@ -491,3 +491,26 @@ body:not(.site-home) button[aria-label] {
   line-height:normal!important;
   letter-spacing:normal!important;
 }
+
+
+/* Button text centering fix: neutralize inherited transforms/positioning on inner text wrappers. */
+body:not(.site-home) :is(.release-cta a, .guide-cta a, .cta a, .site-button, .release-button, .label-button, .order-button, .download-doc, .telegram-cta a, .primary, .secondary, a[class*="button"], a[class*="btn"], button:not(.menu-button):not([aria-label]), input[type="submit"], input[type="button"]) {
+  position:relative!important;
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  white-space:normal!important;
+  text-indent:0!important;
+}
+body:not(.site-home) :is(.release-cta a, .guide-cta a, .cta a, .site-button, .release-button, .label-button, .order-button, .download-doc, .telegram-cta a, .primary, .secondary, a[class*="button"], a[class*="btn"], button:not(.menu-button):not([aria-label])) * {
+  position:static!important;
+  inset:auto!important;
+  float:none!important;
+  transform:none!important;
+  text-align:center!important;
+  text-indent:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}

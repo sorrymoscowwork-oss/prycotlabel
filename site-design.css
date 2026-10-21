@@ -423,3 +423,38 @@
     margin-right:auto!important;
   }
 }
+
+
+/* Global button system: match the Release Terms "SUBMIT A RELEASE" CTA. */
+:where(a.release-cta, .release-cta a, .guide-cta a, .cta a, .site-button, .release-button, .label-button, .order-button, .download-doc, .telegram-cta, .primary, .secondary, button:not(.menu-button):not(.icon-button):not([aria-label]), input[type="submit"], input[type="button"]) {
+  box-sizing:border-box!important;
+  min-height:43px!important;
+  padding:15px 30px!important;
+  border-radius:999px!important;
+  font-family:Helvetica,Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:400!important;
+  line-height:13px!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+  vertical-align:middle!important;
+}
+:where(a.release-cta, .release-cta a, .guide-cta a, .cta a, .site-button, .release-button, .label-button, .order-button, .download-doc, .telegram-cta, .primary, .secondary, button:not(.menu-button):not(.icon-button):not([aria-label]), input[type="submit"], input[type="button"]) {
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+/* Keep navigation and icon-only controls compact. */
+.menu-button, .icon-button, button[aria-label], button[data-icon-only] {
+  min-height:0!important;
+  padding:0!important;
+  line-height:normal!important;
+  letter-spacing:normal!important;
+}
+@media(max-width:700px){
+  :where(a.release-cta, .release-cta a, .guide-cta a, .cta a, .site-button, .release-button, .label-button, .order-button, .download-doc, .telegram-cta, .primary, .secondary, button:not(.menu-button):not(.icon-button):not([aria-label]), input[type="submit"], input[type="button"]) {
+    min-height:43px!important;
+    padding:15px 30px!important;
+    font-size:11px!important;
+  }
+}

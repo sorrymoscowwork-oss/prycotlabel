@@ -167,8 +167,8 @@
     panel.setAttribute('aria-hidden', 'true');
 
     function isCurrentPage(href) {
-      const current = window.location.pathname.replace(/\\/+$/, '') || '/';
-      const target = new URL(href, window.location.origin).pathname.replace(/\\/+$/, '') || '/';
+      const current = window.location.pathname.replace(/\/+$/, '') || '/';
+      const target = new URL(href, window.location.origin).pathname.replace(/\/+$/, '') || '/';
       const normalizedCurrent = current === '/index.html' ? '/' : current;
       const normalizedTarget = target === '/index.html' ? '/' : target;
       return normalizedCurrent === normalizedTarget;

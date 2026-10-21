@@ -446,6 +446,27 @@ img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-r
 @media(max-width:760px){.pl-live-release .release-social-tiktok{width:17px!important;height:17px!important;min-width:17px!important;min-height:17px!important;flex-basis:17px!important}}
 
 </style><link rel="stylesheet" href="/site-design.css?v=20261021-nav-trigger-fix">
+
+<style id="prycot-analytics-color-system">
+/* PRYCOTLINK editor controls only. Public artist release-page styling remains untouched. */
+:root{--prycot-lime:#B6F36B;--prycot-cyan:#53D9F5;--prycot-coral:#FF8A70;--prycot-lime-bg:#182216;--prycot-cyan-bg:#102027;--prycot-coral-bg:#251613}
+.pl-section{border-color:#303a32!important;transition:border-color .18s ease,background-color .18s ease!important}
+.pl-section-head,.pl-kicker{color:var(--prycot-lime)!important}
+.pl-hint,.pl-stats-footer{color:#b9c5b6!important}
+.pl-primary,.pl-secondary,.pl-remove-platform,.pl-custom-remove,.pl-upload button,.pl-form button{
+  border:1px solid rgba(182,243,107,.42)!important;background:var(--prycot-lime-bg)!important;color:var(--prycot-lime)!important;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease!important
+}
+.pl-secondary,.pl-remove-platform,.pl-custom-remove{border-color:rgba(83,217,245,.42)!important;background:var(--prycot-cyan-bg)!important;color:var(--prycot-cyan)!important}
+.pl-primary:hover,.pl-secondary:hover,.pl-remove-platform:hover,.pl-custom-remove:hover,.pl-upload button:hover,.pl-form button:hover{
+  background:var(--prycot-lime)!important;border-color:var(--prycot-lime)!important;color:#101010!important;transform:translateY(-1px)
+}
+.pl-secondary:hover,.pl-remove-platform:hover,.pl-custom-remove:hover{background:var(--prycot-cyan)!important;border-color:var(--prycot-cyan)!important}
+.pl-field input:focus,.pl-field textarea:focus,.pl-field select:focus{outline:1px solid var(--prycot-cyan)!important;border-color:var(--prycot-cyan)!important}
+.pl-platform{border-color:#354d54!important}
+.pl-platform:has(input:checked){border-color:var(--prycot-cyan)!important;background:var(--prycot-cyan-bg)!important}
+.pl-upload{border-color:rgba(83,217,245,.38)!important}
+</style>
 </head>
 <body>
 

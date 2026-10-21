@@ -510,6 +510,22 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
   .site-footer{margin-top:64px!important}
 }
 
+
+/* Contact: hide the section label and place social links below response-time text. */
+.contact-block > .contact-label{display:none!important}
+.contact-details > .social-links{display:none!important}
+.contact-block > .response{order:2!important}
+.contact-block > .response + .social-links{
+  display:flex!important;
+  order:3!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:18px!important;
+  width:100%!important;
+  margin:18px auto 0!important;
+}
+.contact-block > .telegram-cta{order:4!important}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style><link rel="stylesheet" href="/site-design.css?v=20261021-contact-single-column"></head>
@@ -544,9 +560,10 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 <p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / CONTACT</span><span class="mobile-eyebrow">CONTACT</span></p>
 <h2 class="contact-title">Contact<span style="color:#B8B8B8">.</span></h2>
 <div class="contact-block">
-<p class="contact-label">General inquiries</p>
-<div class="contact-details"><a class="email" href="mailto:info@prycot.com">info@prycot.com</a><span class="social-links" aria-label="PRYCOT. social media"><a href="https://www.instagram.com/prycot.label" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></a><a href="https://x.com/prycotlabel" target="_blank" rel="noopener noreferrer" aria-label="X"><svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.4l-5.02-6.55L6.05 22H2.94l7.24-8.28L2.8 2h6.56l4.54 5.98L18.9 2Zm-1.1 18h1.73L8.25 3.88H6.4L17.8 20Z"/></svg></a></span></div>
+<p class="contact-label" aria-hidden="true" style="display:none">General inquiries</p>
+<div class="contact-details"><a class="email" href="mailto:info@prycot.com">info@prycot.com</a></div>
 <p class="response">Response time: within 24 hours.</p>
+<span class="social-links" aria-label="PRYCOT. social media"><a href="https://www.instagram.com/prycot.label" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9Zm9.75 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg></a><a href="https://x.com/prycotlabel" target="_blank" rel="noopener noreferrer" aria-label="X"><svg class="x-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.4l-5.02-6.55L6.05 22H2.94l7.24-8.28L2.8 2h6.56l4.54 5.98L18.9 2Zm-1.1 18h1.73L8.25 3.88H6.4L17.8 20Z"/></svg></a></span>
 <div class="telegram-cta"><span>QUICK CONTACT ON TELEGRAM</span></div>
 </div>
 </section>

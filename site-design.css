@@ -244,3 +244,28 @@
     margin-top:100px!important;
   }
 }
+
+
+/* Contact layout correction: keep email and social icons together in the right column. */
+@media (min-width:701px){
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-details{
+    grid-column:2!important;
+    grid-row:1!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-self:start!important;
+    flex-wrap:wrap!important;
+    gap:20px!important;
+    min-width:0!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-details .social-links{
+    margin-left:0!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .contact-label{
+    grid-row:1!important;
+  }
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .response,
+  body:not(.site-home) .content:has(> .contact-title) > .contact-block > .telegram-cta{
+    grid-column:2!important;
+  }
+}

@@ -465,4 +465,50 @@ html body .menu-button,html body button[aria-label]{min-height:0!important;paddi
 <div class="prycotlink-card profile-card"><div class="prycotlink-heading"><div class="card-heading-box"><div class="card-title">PRYCOTLINK</div><div class="card-subtitle">Your public release pages.</div></div><div class="prycotlink-heading-actions"><div class="release-summary" id="prycotlinkSummary">0 PAGES</div><a class="primary prycotlink-create" href="prycotlink.html?create=1">CREATE PRYCOTLINK →</a></div></div><div class="prycotlink-list" id="prycotlinkList"><div class="empty-releases">No PRYCOTLINK pages yet.</div></div></div></div></section>
 <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main></div>
 <script src="account-auth.js?v=20261016-prycotlink-auth-bridge-1"></script><script id="account-brand-scroll-behavior">(function(){const brand=document.querySelector('.brand');if(!brand)return;let ticking=false;function update(){if(window.innerWidth>700){brand.classList.remove('logo-hidden');document.querySelector('.page')?.classList.remove('mobile-brand-hidden');ticking=false;return}const hidden=window.scrollY>80;brand.classList.toggle('logo-hidden',hidden);document.querySelector('.page')?.classList.toggle('mobile-brand-hidden',hidden);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>  <script src="/site-navigation.js?v=20261022-nav-recovered" defer></script>
+
+<style id="prycot-release-agreement-fix">
+#cabinetView .release-agreement{display:flex!important;align-items:center!important;gap:9px!important;padding:10px 12px!important;border:1px solid rgba(255,138,112,.55)!important;border-radius:10px!important;background:#251613!important}
+#cabinetView .release-agreement input[type="checkbox"]{-webkit-appearance:none!important;appearance:none!important;display:inline-grid!important;place-content:center!important;flex:0 0 19px!important;width:19px!important;height:19px!important;margin:0!important;border:2px solid #FF8A70!important;border-radius:5px!important;background:#160f0d!important;cursor:pointer!important}
+#cabinetView .release-agreement input[type="checkbox"]::before{content:""!important;width:9px!important;height:5px!important;border-left:2px solid #101010!important;border-bottom:2px solid #101010!important;transform:rotate(-45deg) scale(0)!important;transform-origin:center!important;transition:transform .12s ease!important}
+#cabinetView .release-agreement input[type="checkbox"]:checked{background:#B6F36B!important;border-color:#B6F36B!important;box-shadow:0 0 0 3px rgba(182,243,107,.15)!important}
+#cabinetView .release-agreement input[type="checkbox"]:checked::before{transform:rotate(-45deg) scale(1)!important}
+#cabinetView .release-agreement:has(input:checked){border-color:rgba(182,243,107,.65)!important;background:#182216!important}
+#cabinetView .release-agreement label{color:#F4F4F4!important;cursor:pointer!important}
+#cabinetView .release-agreement label a{color:#FF8A70!important;text-decoration:underline!important;text-underline-offset:3px!important}
+#cabinetView #submitReleaseButton.release-disabled{background:#222!important;border:1px solid #444!important;color:#777!important;opacity:.72!important;cursor:not-allowed!important;pointer-events:none!important}
+#cabinetView #submitReleaseButton.release-enabled{background:#B6F36B!important;border:1px solid #B6F36B!important;color:#101010!important;opacity:1!important;cursor:pointer!important;pointer-events:auto!important}
+#cabinetView #submitReleaseButton.release-enabled:hover{background:#C9FF8C!important;border-color:#C9FF8C!important;transform:translateY(-1px)!important}
+@media(max-width:900px){#cabinetView .release-agreement{white-space:normal!important}}
+</style>
+
+<script id="prycot-release-agreement-behavior">
+(function(){
+  function init(){
+    const checkbox=document.getElementById('releaseAgreement');
+    const button=document.getElementById('submitReleaseButton');
+    if(!checkbox||!button)return;
+    function sync(){
+      const accepted=checkbox.checked;
+      button.classList.toggle('release-enabled',accepted);
+      button.classList.toggle('release-disabled',!accepted);
+      button.setAttribute('aria-disabled',String(!accepted));
+      button.tabIndex=accepted?0:-1;
+      if(!accepted)button.setAttribute('data-release-blocked','true');
+      else button.removeAttribute('data-release-blocked');
+    }
+    checkbox.addEventListener('change',sync);
+    button.addEventListener('click',function(event){
+      if(!checkbox.checked){
+        event.preventDefault();
+        checkbox.focus();
+        const agreement=checkbox.closest('.release-agreement');
+        if(agreement){agreement.style.boxShadow='0 0 0 2px rgba(255,138,112,.25)';setTimeout(function(){agreement.style.boxShadow=''},700)}
+      }
+    });
+    sync();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
+  else init();
+})();
+</script>
 </body></html>

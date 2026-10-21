@@ -66,3 +66,16 @@
   body:not(.site-home) .brand{transition:opacity .35s ease,filter .35s ease,transform .35s ease!important}
   body:not(.site-home) .brand.prycot-scroll-hidden{opacity:0!important;filter:blur(12px)!important;transform:translateY(-6px)!important;pointer-events:none!important}
 }
+
+@media (min-width:701px){
+  body:not(.site-home) .steps>.step>.step-number{display:none!important}
+  body:not(.site-home) .steps>.step>div{display:contents!important}
+  body:not(.site-home) .steps>.step h2{grid-column:1;grid-row:1}
+  body:not(.site-home) .steps>.step p{grid-column:2}
+  body:not(.site-home) .faq .step>div{display:contents!important}
+  body:not(.site-home) .faq .step h3{grid-column:1;grid-row:1}
+  body:not(.site-home) .faq .step p{grid-column:2}
+  body:not(.site-home) .about-block>.about-number,
+  body:not(.site-home) .term>.term-number{font-size:11px;letter-spacing:.14em;color:var(--muted,#9b9b9b)}
+  body:not(.site-home) .post-card .post-number{font-size:11px;letter-spacing:.14em;color:var(--muted,#9b9b9b)}
+}

@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
 <!-- Desktop header cleanup: hide legacy controls before first paint -->
-<style id="prycot-desktop-legacy-header-cleanup">@media (min-width: 1000px) { .menu-button, #menuButton, header .desktop-account, header .account-label, header a[href="account.html"], header a[href="/account.html"] { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; } .menu, .menu.open { display: none !important; visibility: hidden !important; pointer-events: none !important; } }</style>
+
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,13 +41,10 @@ a{color:inherit;text-decoration:none}.page{min-height:100vh;padding:30px 34px 42
 @media(max-width:700px){.brand{top:22px!important;left:20px!important}.logo{font-size:42px!important}}
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style><link rel="stylesheet" href="/site-design.css?v=20261022-button-center2"><style id="prycot-desktop-header-final-override">@media (min-width: 1000px) { html body .menu-button, html body #menuButton, html body header .desktop-account, html body header .account-label, html body header a[href="account.html"], html body header a[href="/account.html"] { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; } html body .menu, html body .menu.open { display: none !important; visibility: hidden !important; pointer-events: none !important; } }</style>
+<style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style><link rel="stylesheet" href="/site-design.css?v=20261022-button-center2">
 </head>
 <body>
-<div class="menu" id="menu"><nav class="menu-links" aria-label="Site navigation">
-<div class="menu-column menu-left"><a href="/">Home</a><a href="account.html">Account</a><a href="about.html">About PRYCOT.</a><a href="terms.html">Release Terms</a><a href="how-to-release.html">How to Release</a><a href="telegram-bot.html">Telegram Bot Guide</a><a href="prices.html">Prices</a><a href="label-services.html">Label Services</a><a href="contact.html">Contact</a></div>
-<div class="menu-column menu-right"><a href="blog.html" class="active-page">Blog</a><a href="side-projects.html">Side Projects</a><a href="white-paper.html">White Paper</a><a href="user-agreement.html">User Agreement</a><a href="prycotlink-guide.html">PRYCOTLINK Guide</a></div>
-</nav></div>
+
 <main class="page"><header><a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><button class="menu-button" id="menuButton" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button></header>
 <section class="content"><p class="eyebrow">PRYCOT. / BLOG / MUSIC</p><h1 class="article-title">Stolicabolgarii — <span style="color:#666666">Дорогобужский</span> <span style="color:#B8B8B8">грайм</span>: Six Songs Outside the Rules</h1><p class="meta">11.10.2026 / MUSIC REVIEW / ANTON GVITSEVICH</p>
 <article class="article">
@@ -81,11 +78,6 @@ a{color:inherit;text-decoration:none}.page{min-height:100vh;padding:30px 34px 42
 <p class="byline"><strong>Антон Гвицевич</strong></p>
 </article><a class="back" href="blog.html">← Назад в блог</a><a class="language-switch" href="blog-stolicabolgarii-dorogobuzh-grime.html">English version</a></section>
 <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer></main>
-<script>
-const menu=document.getElementById('menu'),btn=document.getElementById('menuButton');
-btn.addEventListener('click',e=>{e.preventDefault();menu.classList.toggle('open');btn.setAttribute('aria-expanded',menu.classList.contains('open'))});
-document.addEventListener('click',e=>{if(menu.classList.contains('open')&&!menu.contains(e.target)&&e.target!==btn){menu.classList.remove('open');btn.setAttribute('aria-expanded','false')}});
-(function(){const page=document.querySelector('.page')||document.body;let ticking=false;function update(){if(innerWidth>700){page.classList.remove('mobile-brand-hidden');ticking=false;return}page.classList.toggle('mobile-brand-hidden',scrollY>80);ticking=false}addEventListener('scroll',function(){if(!ticking){requestAnimationFrame(update);ticking=true}},{passive:true});addEventListener('resize',update);update()})();
-</script>
+
   <script src="/site-navigation.js?v=20261022-desktop-size2" defer></script>
 <script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body></html>

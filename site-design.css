@@ -546,3 +546,25 @@ body:not(.site-home) .release-button-wrap > .release-button{
   margin-left:auto!important;
   margin-right:auto!important;
 }
+
+
+/* Contact page Telegram CTA: match the shared public-page button dimensions and centered label. */
+body:not(.site-home) .telegram-cta > span{
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:43px!important;
+  height:43px!important;
+  padding:0 30px!important;
+  border:0!important;
+  border-radius:999px!important;
+  font-family:Helvetica,Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:400!important;
+  line-height:1!important;
+  letter-spacing:.12em!important;
+  text-align:center!important;
+  text-transform:uppercase!important;
+  white-space:nowrap!important;
+}

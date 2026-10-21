@@ -16,22 +16,22 @@
 button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.secondary,[class*="btn"],[class*="button"]:not(.menu-button),[class*="cta"]{border-radius:999px!important}.menu-button{border-radius:0!important}
 
 /* Organic metric colors for PRYCOT admin analytics; keep the rest of the admin interface monochrome. */
-:root{--metric-visitors:#9db7a0;--metric-streaming:#8eafba;--metric-social:#d3a08d;--metric-panel-visitors:#151c16;--metric-panel-streaming:#141b1e;--metric-panel-social:#1d1715}
-#prycotlinkStats{border-bottom-color:#405344}
+:root{--metric-visitors:#B6F36B;--metric-streaming:#53D9F5;--metric-social:#FF8A70;--metric-panel-visitors:#182216;--metric-panel-streaming:#102027;--metric-panel-social:#251613}
+#prycotlinkStats{border-bottom-color:#547a38}
 #prycotlinkStats strong{color:var(--metric-visitors)}
-#prycotlinkStats span{color:#b5c7b7}
+#prycotlinkStats span{color:#D6F7B5}
 #tabLinks.active{border-bottom-color:var(--metric-visitors);color:var(--metric-visitors)}
 #prycotlinks .request{border-bottom-color:#303a32}
 #prycotlinks .request:nth-child(3n+1) .title{color:var(--metric-visitors)}
 #prycotlinks .request:nth-child(3n+2) .title{color:var(--metric-streaming)}
 #prycotlinks .request:nth-child(3n) .title{color:var(--metric-social)}
-#prycotlinks .request:nth-child(3n+1) .request-head{border-left:2px solid #405344;padding-left:12px}
-#prycotlinks .request:nth-child(3n+2) .request-head{border-left:2px solid #354d54;padding-left:12px}
-#prycotlinks .request:nth-child(3n) .request-head{border-left:2px solid #574238;padding-left:12px}
-#prycotlinks .prycotlink-url{ text-decoration-color:#526a56}
+#prycotlinks .request:nth-child(3n+1) .request-head{border-left:2px solid #547a38;padding-left:12px}
+#prycotlinks .request:nth-child(3n+2) .request-head{border-left:2px solid #347486;padding-left:12px}
+#prycotlinks .request:nth-child(3n) .request-head{border-left:2px solid #9A5140;padding-left:12px}
+#prycotlinks .prycotlink-url{ text-decoration-color:#C9FF8C}
 #prycotlinks .request:nth-child(3n+1) .prycotlink-url{color:var(--metric-visitors)}
-#prycotlinks .request:nth-child(3n+2) .prycotlink-url{color:var(--metric-streaming);text-decoration-color:#49646b}
-#prycotlinks .request:nth-child(3n) .prycotlink-url{color:var(--metric-social);text-decoration-color:#765648}
+#prycotlinks .request:nth-child(3n+2) .prycotlink-url{color:var(--metric-streaming);text-decoration-color:#347486}
+#prycotlinks .request:nth-child(3n) .prycotlink-url{color:var(--metric-social);text-decoration-color:#9A5140}
 
 /* Matching organic palette for Bot Releases; color-only styling. */
 #tabBot.active{border-bottom-color:var(--metric-visitors);color:var(--metric-visitors)}
@@ -39,11 +39,11 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 #releases .request:nth-child(3n+1) .title{color:var(--metric-visitors)}
 #releases .request:nth-child(3n+2) .title{color:var(--metric-streaming)}
 #releases .request:nth-child(3n) .title{color:var(--metric-social)}
-#releases .request:nth-child(3n+1) .request-head{border-left:2px solid #405344;padding-left:12px}
-#releases .request:nth-child(3n+2) .request-head{border-left:2px solid #354d54;padding-left:12px}
-#releases .request:nth-child(3n) .request-head{border-left:2px solid #574238;padding-left:12px}
-#releases .request .save{background:#405344}
-#releases .request .save:hover{background:#526a56;color:#fff}
+#releases .request:nth-child(3n+1) .request-head{border-left:2px solid #547a38;padding-left:12px}
+#releases .request:nth-child(3n+2) .request-head{border-left:2px solid #347486;padding-left:12px}
+#releases .request:nth-child(3n) .request-head{border-left:2px solid #9A5140;padding-left:12px}
+#releases .request .save{background:#547a38}
+#releases .request .save:hover{background:#C9FF8C;color:#fff}
 #releases .request .delete{border-color:#b94b43;background:#b8322b;color:#fff}
 #releases .request .delete:hover{border-color:#e05249;background:#e05249;color:#fff}
 #releases .request .delete:disabled{opacity:.55}
@@ -60,6 +60,28 @@ html body button:not(.menu-button):not([aria-label]),html body input[type="submi
 }
 html body button:not(.menu-button):not([aria-label]),html body input[type="submit"],html body input[type="button"],html body .primary,html body .secondary,html body [class*="btn"],html body [class*="button"]:not(.menu-button),html body [class*="cta"] a{display:inline-flex!important;align-items:center!important;justify-content:center!important}
 html body .menu-button,html body button[aria-label]{min-height:0!important;padding:0!important;line-height:normal!important;letter-spacing:normal!important;border-radius:0!important}
+</style>
+
+<style id="prycot-admin-bright-color-system">
+:root{--admin-lime:#B6F36B;--admin-cyan:#53D9F5;--admin-coral:#FF8A70;--admin-lime-bg:#182216;--admin-cyan-bg:#102027;--admin-coral-bg:#251613}
+#adminView .tabs .tab{border:1px solid #303a32!important;background:#101010!important;color:#9B9B9B!important;transition:all .18s ease!important}
+#adminView .tabs .tab.active,#tabBot.active{background:var(--admin-lime-bg)!important;border-color:var(--admin-lime)!important;color:var(--admin-lime)!important}
+#tabLinks.active{background:var(--admin-cyan-bg)!important;border-color:var(--admin-cyan)!important;color:var(--admin-cyan)!important}
+#adminView button.button,#adminView .save,#login{border:1px solid var(--admin-lime)!important;background:var(--admin-lime-bg)!important;color:var(--admin-lime)!important;transition:all .18s ease!important}
+#adminView button.button:hover,#adminView .save:hover,#login:hover{background:var(--admin-lime)!important;border-color:var(--admin-lime)!important;color:#101010!important}
+#adminView .delete{border:1px solid rgba(255,138,112,.65)!important;background:var(--admin-coral-bg)!important;color:var(--admin-coral)!important}
+#adminView .delete:hover{background:var(--admin-coral)!important;border-color:var(--admin-coral)!important;color:#101010!important}
+#adminView input:focus,#adminView select:focus{outline:1px solid var(--admin-cyan)!important;border-color:var(--admin-cyan)!important}
+#adminView .request{border-bottom-color:#303a32!important}
+#adminView .request:nth-child(3n+1) .title{color:var(--admin-lime)!important}
+#adminView .request:nth-child(3n+2) .title{color:var(--admin-cyan)!important}
+#adminView .request:nth-child(3n) .title{color:var(--admin-coral)!important}
+#adminView .request:nth-child(3n+1) .request-head{border-left-color:#547a38!important}
+#adminView .request:nth-child(3n+2) .request-head{border-left-color:#347486!important}
+#adminView .request:nth-child(3n) .request-head{border-left-color:#9A5140!important}
+#prycotlinkStats{background:#182216!important;border:1px solid #547a38!important;border-radius:12px!important;padding:18px!important}
+#prycotlinkStats strong{color:var(--admin-lime)!important}
+#prycotlinkStats span{color:#D6F7B5!important}
 </style>
 </head>
 <body>

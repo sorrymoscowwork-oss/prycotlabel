@@ -180,41 +180,39 @@
 
       const trigger = document.createElement('button');
       trigger.type = 'button';
-      trigger.style.setProperty('display', 'flex', 'important');
-      trigger.style.setProperty('flex-direction', 'row', 'important');
-      trigger.style.setProperty('flex-wrap', 'nowrap', 'important');
-      trigger.style.setProperty('align-items', 'center', 'important');
-      trigger.style.setProperty('justify-content', 'space-between', 'important');
-      trigger.style.setProperty('width', '100%', 'important');
-      trigger.style.setProperty('text-align', 'left', 'important');
-      trigger.style.setProperty('border-radius', '0', 'important');
-      trigger.style.setProperty('padding', '12px 0', 'important');
-      trigger.style.setProperty('background', 'transparent', 'important');
-      trigger.style.setProperty('box-shadow', 'none', 'important');
-      trigger.style.setProperty('transform', 'none', 'important');
+      [
+        ['display', 'flex'], ['position', 'relative'], ['flex-direction', 'row'],
+        ['flex-wrap', 'nowrap'], ['align-items', 'center'], ['justify-content', 'space-between'],
+        ['gap', '12px'], ['width', '100%'], ['min-width', '0'], ['min-height', '49px'],
+        ['height', 'auto'], ['margin', '0'], ['padding', '12px 0'], ['border', '0'],
+        ['border-radius', '0'], ['background', 'transparent'], ['box-shadow', 'none'],
+        ['transform', 'none'], ['color', '#f4f4f2'], ['font', '500 15px/1.15 Helvetica, Arial, sans-serif'],
+        ['letter-spacing', '.015em'], ['text-align', 'left'], ['text-indent', '0'],
+        ['text-transform', 'uppercase'], ['white-space', 'nowrap'], ['cursor', 'pointer']
+      ].forEach(function (rule) { trigger.style.setProperty(rule[0], rule[1], 'important'); });
       trigger.setAttribute('aria-expanded', 'false');
       const label = document.createElement('span');
       label.className = 'mobile-nav-label';
       label.textContent = item.label;
-      label.style.setProperty('display', 'block', 'important');
-      label.style.setProperty('flex', '1 1 auto', 'important');
-      label.style.setProperty('width', 'auto', 'important');
-      label.style.setProperty('min-width', '0', 'important');
-      label.style.setProperty('margin', '0', 'important');
-      label.style.setProperty('padding', '0', 'important');
-      label.style.setProperty('text-align', 'left', 'important');
-      label.style.setProperty('font', 'inherit', 'important');
-      label.style.setProperty('letter-spacing', 'inherit', 'important');
-      label.style.setProperty('transform', 'none', 'important');
+      [
+        ['display', 'block'], ['position', 'static'], ['flex', '1 1 auto'], ['width', 'auto'],
+        ['min-width', '0'], ['height', 'auto'], ['margin', '0'], ['padding', '0'],
+        ['border', '0'], ['border-radius', '0'], ['background', 'transparent'],
+        ['box-shadow', 'none'], ['transform', 'none'], ['text-align', 'left'],
+        ['text-indent', '0'], ['font', 'inherit'], ['letter-spacing', 'inherit'],
+        ['text-transform', 'uppercase'], ['white-space', 'nowrap']
+      ].forEach(function (rule) { label.style.setProperty(rule[0], rule[1], 'important'); });
       trigger.appendChild(label);
       const chevron = document.createElement('span');
       chevron.setAttribute('aria-hidden', 'true');
-      chevron.style.setProperty('display', 'block', 'important');
-      chevron.style.setProperty('flex', '0 0 7px', 'important');
-      chevron.style.setProperty('width', '7px', 'important');
-      chevron.style.setProperty('height', '7px', 'important');
-      chevron.style.setProperty('margin', '0 3px 0 12px', 'important');
-      chevron.style.setProperty('align-self', 'center', 'important');
+      [
+        ['position', 'static'], ['display', 'block'], ['flex', '0 0 7px'],
+        ['width', '7px'], ['min-width', '7px'], ['height', '7px'], ['min-height', '7px'],
+        ['margin', '0 3px 0 12px'], ['padding', '0'], ['border', '0'],
+        ['border-right', '1px solid currentColor'], ['border-bottom', '1px solid currentColor'],
+        ['border-radius', '0'], ['background', 'transparent'], ['box-shadow', 'none'],
+        ['transform', 'rotate(45deg) translateY(-2px)'], ['align-self', 'center']
+      ].forEach(function (rule) { chevron.style.setProperty(rule[0], rule[1], 'important'); });
       trigger.appendChild(chevron);
 
       const submenu = document.createElement('div');

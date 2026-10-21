@@ -393,3 +393,18 @@
     margin-top:40px!important;
   }
 }
+
+
+/* Blog article body: align the text column with the site's left content/menu grid, not centered. */
+@media (min-width:701px){
+  body:not(.site-home) .content:has(> .article) > .article{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  body:not(.site-home) .content:has(> .article) > .article p,
+  body:not(.site-home) .content:has(> .article) > .article h2,
+  body:not(.site-home) .content:has(> .article) > .article figure{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+}

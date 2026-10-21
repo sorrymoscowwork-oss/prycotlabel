@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- Desktop header cleanup: hide legacy controls before first paint -->
+<style id="prycot-desktop-legacy-header-cleanup">@media (min-width: 1000px) { .menu-button, #menuButton, header .desktop-account, header .account-label, header a[href="account.html"], header a[href="/account.html"] { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; } .menu, .menu.open { display: none !important; visibility: hidden !important; pointer-events: none !important; } }</style>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style id="release-boot-style">html{background:#0a0a0a!important}html.release-boot body{display:none!important}html.release-boot body>*{display:none!important}html.release-boot body{overflow:hidden!important}html.release-leaving,html.release-leaving body{background:#0a0a0a!important}html.release-leaving body,html.release-leaving body>*{display:none!important}

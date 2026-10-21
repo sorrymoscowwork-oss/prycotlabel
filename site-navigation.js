@@ -295,6 +295,21 @@
         mobileMenuButton.setAttribute('aria-label', 'Open menu');
         mobileMenuButton.setAttribute('aria-expanded', 'false');
         mobileMenuButton.innerHTML = '<span></span>';
+        [
+          ['position', 'fixed'], ['top', '20px'], ['right', '20px'], ['z-index', '2147483647'],
+          ['display', 'block'], ['visibility', 'visible'], ['opacity', '1'], ['width', '30px'],
+          ['height', '30px'], ['padding', '0'], ['margin', '0'], ['border', '0'],
+          ['border-radius', '0'], ['background', 'transparent'], ['color', '#f4f4f2'],
+          ['cursor', 'pointer'], ['font-size', '0'], ['line-height', '0']
+        ].forEach(function (rule) { mobileMenuButton.style.setProperty(rule[0], rule[1], 'important'); });
+        const bars = mobileMenuButton.querySelector('span');
+        if (bars) {
+          [
+            ['position', 'absolute'], ['display', 'block'], ['left', '2px'], ['top', '14px'],
+            ['width', '25px'], ['height', '1px'], ['background', '#f4f4f2'], ['margin', '0']
+          ].forEach(function (rule) { bars.style.setProperty(rule[0], rule[1], 'important'); });
+          bars.style.setProperty('box-shadow', '0 -7px 0 #f4f4f2, 0 7px 0 #f4f4f2', 'important');
+        }
         document.body.appendChild(mobileMenuButton);
       }
     } else {

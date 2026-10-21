@@ -67,7 +67,7 @@
       'body.site-mobile-menu-open .page.mobile-brand-hidden .brand, body.site-mobile-menu-open .page.mobile-brand-hidden .tagline { opacity: 1 !important; filter: blur(0) !important; transform: none !important; }',
       '}',
       'nav.site-global-nav { display: none; }',
-      '@media (min-width: 1000px) {',
+      '@media (min-width: 701px) {',
       'nav.site-global-nav { position: fixed !important; top: 30px !important; left: 50vw !important; right: auto !important; width: max-content !important; max-width: calc(100vw - 40px) !important; transform: translateX(-50%) translateY(0) !important; z-index: 10000 !important; display: flex !important; flex-flow: row nowrap !important; align-items: center !important; justify-content: center !important; gap: clamp(5px, .55vw, 9px) !important; height: 46px !important; margin: 0 !important; padding: 0 !important; border: 0 !important; background: transparent !important; overflow: visible !important; white-space: nowrap !important; opacity: 1; filter: blur(0); pointer-events: auto; transition: opacity 1.05s ease, filter 1.05s ease, transform 1.05s ease !important; }',
       'body.site-logo-scrolled nav.site-global-nav { opacity: 0 !important; filter: blur(14px) !important; transform: translateX(-50%) translateY(-7px) !important; pointer-events: none !important; }',
       'nav.site-global-nav > a, nav.site-global-nav .site-nav-dropdown-trigger { display: inline-flex !important; flex: 0 1 auto !important; align-items: center !important; justify-content: center !important; gap: 7px !important; margin: 0 !important; padding: 12px 0 !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; color: #f4f4f2 !important; font: 500 clamp(10px, .78vw, 15px)/1 Helvetica, Arial, sans-serif !important; letter-spacing: .035em !important; text-align: center !important; text-decoration: none !important; text-transform: uppercase !important; white-space: nowrap !important; cursor: pointer !important; transition: color .2s ease, opacity .2s ease !important; }',
@@ -220,7 +220,7 @@
 
   let mobileMenuButton = null;
   function syncMobileMenuButton() {
-    if (window.innerWidth < 1000) {
+    if (window.innerWidth <= 700) {
       if (!mobileMenuButton || !mobileMenuButton.isConnected) {
         mobileMenuButton = document.createElement('button');
         mobileMenuButton.className = 'menu-button';

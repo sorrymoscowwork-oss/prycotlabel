@@ -408,3 +408,18 @@
     margin-right:0!important;
   }
 }
+
+
+/* Blog article body: center the readable text column within the article canvas. */
+@media (min-width:701px){
+  body:not(.site-home) .content:has(> .article) > .article{
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  body:not(.site-home) .content:has(> .article) > .article p,
+  body:not(.site-home) .content:has(> .article) > .article h2,
+  body:not(.site-home) .content:has(> .article) > .article figure{
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}

@@ -458,3 +458,36 @@
     font-size:11px!important;
   }
 }
+
+
+/* Final shared button component: normalize the text box and its alignment on all public pages. */
+body:not(.site-home) :is(a.release-cta, .release-cta a, .guide-cta a, .cta a, .site-button, .release-button, .label-button, .order-button, .download-doc, .telegram-cta a, .primary, .secondary, a[class*="button"], a[class*="btn"], button:not(.menu-button):not([aria-label]), input[type="submit"], input[type="button"]) {
+  box-sizing:border-box!important;
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  vertical-align:middle!important;
+  min-height:43px!important;
+  padding:0 30px!important;
+  line-height:1!important;
+  font-family:Helvetica,Arial,sans-serif!important;
+  font-size:11px!important;
+  font-weight:400!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+body:not(.site-home) :is(a.release-cta, .release-cta a, .guide-cta a, .cta a, .site-button, .release-button, .label-button, .order-button, .download-doc, .telegram-cta a, .primary, .secondary, a[class*="button"], a[class*="btn"], button:not(.menu-button):not([aria-label]), input[type="submit"], input[type="button"]) > :is(span, strong, em) {
+  display:inline!important;
+  text-align:center!important;
+  line-height:inherit!important;
+  margin-block:0!important;
+}
+body:not(.site-home) .menu-button,
+body:not(.site-home) button[aria-label] {
+  display:block!important;
+  min-height:0!important;
+  padding:0!important;
+  line-height:normal!important;
+  letter-spacing:normal!important;
+}

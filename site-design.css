@@ -79,3 +79,14 @@
   body:not(.site-home) .term>.term-number{font-size:11px;letter-spacing:.14em;color:var(--muted,#9b9b9b)}
   body:not(.site-home) .post-card .post-number{font-size:11px;letter-spacing:.14em;color:var(--muted,#9b9b9b)}
 }
+/* About page: let the main headline use the full desktop canvas. */
+@media (min-width:701px){
+  body:not(.site-home) .content:has(> .eyebrow .desktop-eyebrow) > h2{
+    width:100%!important;
+    max-width:none!important;
+    font-size:clamp(54px,6.2vw,100px)!important;
+    line-height:.98!important;
+    letter-spacing:-.055em!important;
+    text-wrap:balance;
+  }
+}

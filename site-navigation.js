@@ -419,3 +419,25 @@
   updateHomeLogo();
   updatePageLabels();
 })();
+
+/* PRYCOT site-wide analytics: anonymous unique visits and outbound link clicks. */
+(function(){
+  const API="https://misty-rain-65f3prycot-release-bot.sorrymoscowwork.workers.dev/site/analytics";
+  const path=(location.pathname||"/").replace(/\\/+$/,"")||"/";
+  if(/^\\/(admin|account|prycotlink-analytics)(\\.html)?$/i.test(path))return;
+  if(/^\\/[^/]+$/.test(path)&&! /\\.html$/i.test(path)&&path!=="/")return;
+  let visitorId="";
+  try{visitorId=localStorage.getItem("prycot_site_visitor_id")||"";if(!/^[A-Za-z0-9_-]{16,80}$/.test(visitorId)){visitorId=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+"_"+Math.random().toString(36).slice(2)).replace(/[^A-Za-z0-9_-]/g,"");localStorage.setItem("prycot_site_visitor_id",visitorId)}}catch(_){visitorId=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+"_"+Math.random().toString(36).slice(2)).replace(/[^A-Za-z0-9_-]/g,"")}
+  const send=(payload)=>fetch(API,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(Object.assign({visitorId,pageKey:path},payload)),keepalive:true}).catch(()=>{});
+  send({action:"visit"});
+  const streaming=/spotify\\.|music\\.apple|music\\.youtube|youtu\\.be|youtube\\.com|deezer\\.|tidal\\.|soundcloud\\.|bandcamp\\.|yandex\\.(ru|com)\\/music|zvuk\\.com|music\\.amazon|music\\.163\\.com/i;
+  const social=/instagram\\.|tiktok\\.|telegram\\.|t\\.me|facebook\\.|x\\.com|twitter\\.|threads\\.|vk\\.com|discord\\.gg|wa\\.me/i;
+  document.addEventListener("click",function(event){
+    const a=event.target&&event.target.closest?event.target.closest("a[href]"):null;if(!a)return;
+    let u;try{u=new URL(a.href,location.href)}catch(_){return}
+    if(u.origin===location.origin)return;
+    const href=u.href;let category="";
+    if(streaming.test(href))category="streaming";else if(social.test(href)||u.protocol==="mailto:"||u.protocol==="tel:")category="social";else return;
+    send({action:"click",category,linkKey:href,linkLabel:(a.textContent||a.getAttribute("aria-label")||u.hostname).trim().slice(0,180)});
+  },true);
+})();

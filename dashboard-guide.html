@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
+<!-- Desktop header cleanup: hide legacy controls before first paint -->
+<style id="prycot-desktop-legacy-header-cleanup">@media (min-width: 1000px) { .menu-button, #menuButton, header .desktop-account, header .account-label, header a[href="account.html"], header a[href="/account.html"] { display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important; } .menu, .menu.open { display: none !important; visibility: hidden !important; pointer-events: none !important; } }</style>
+
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>PRYCOT. — Dashboard Guide</title><meta name="description" content="A simple guide to the PRYCOT. Dashboard and Telegram release workflow.">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="mask-icon" href="/favicon.svg" color="#333333"><link rel="apple-touch-icon" href="/favicon.svg"><link rel="manifest" href="/site.webmanifest"><meta name="theme-color" content="#0a0a0a">
 <style>

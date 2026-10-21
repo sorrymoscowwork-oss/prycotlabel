@@ -1018,22 +1018,29 @@ html body footer.site-footer .footer-bottom .visitor-counter {
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}.platform-logo img{filter:brightness(0) invert(1)!important}</style><link rel="stylesheet" href="/site-design.css?v=20261022-button-align"><style id="prycot-home-desktop-button-size-fix">
-/* Restore the original desktop pill proportions shown before the unintended resize. */
+/* Desktop: distribute the three homepage buttons across the full available width. */
 @media (min-width: 701px) {
-  .hero .hero-buttons { align-items: center !important; gap: 14px !important; }
+  .hero .hero-buttons {
+    display: flex !important;
+    width: 100% !important;
+    align-items: center !important;
+    justify-content: stretch !important;
+    gap: 14px !important;
+  }
   .hero .hero-buttons > .release-button {
     box-sizing: border-box !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 222px !important;
-    min-width: 222px !important;
-    max-width: 222px !important;
-    height: 51px !important;
-    min-height: 51px !important;
-    max-height: 51px !important;
+    flex: 1 1 0 !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 34px !important;
+    min-height: 34px !important;
+    max-height: 34px !important;
     margin: 0 !important;
-    padding: 15px 30px !important;
+    padding: 0 16px !important;
     font-size: 11px !important;
     line-height: 1 !important;
     letter-spacing: .12em !important;
@@ -1041,7 +1048,7 @@ html body footer.site-footer .footer-bottom .visitor-counter {
   }
   .hero .hero-buttons > .release-button:hover,
   .hero .hero-buttons > .release-button:focus-visible {
-    transform: translateY(-2px) scale(1.06) !important;
+    transform: translateY(-2px) !important;
   }
 }
 </style>

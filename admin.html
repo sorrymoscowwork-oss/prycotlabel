@@ -49,7 +49,15 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 #prycotlinks .request .delete:disabled{opacity:.55}
 
 </style>
-<style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style></head>
+<style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style><style id="prycot-global-button-system">
+html body button:not(.menu-button):not([aria-label]),html body input[type="submit"],html body input[type="button"],html body .primary,html body .secondary,html body [class*="btn"],html body [class*="button"]:not(.menu-button),html body [class*="cta"] a{
+ box-sizing:border-box!important;min-height:43px!important;padding:15px 30px!important;border-radius:999px!important;
+ font-family:Helvetica,Arial,sans-serif!important;font-size:11px!important;font-weight:400!important;line-height:13px!important;
+ letter-spacing:.12em!important;text-transform:uppercase!important;vertical-align:middle!important;
+}
+html body button:not(.menu-button):not([aria-label]),html body input[type="submit"],html body input[type="button"],html body .primary,html body .secondary,html body [class*="btn"],html body [class*="button"]:not(.menu-button),html body [class*="cta"] a{display:inline-flex!important;align-items:center!important;justify-content:center!important}
+html body .menu-button,html body button[aria-label]{min-height:0!important;padding:0!important;line-height:normal!important;letter-spacing:normal!important;border-radius:0!important}
+</style></head>
 <body>
 <div class="page">
 <div class="brand"><a href="/">PRYCOT.</a><div class="tag">ADMIN / RELEASES</div></div>

@@ -186,6 +186,23 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 
 
 /* CONTACT PAGE GRID — consistent left/right edges and a single content column system. */
+
+/* Contact page final alignment: one divider and consistent grid edges. */
+.contact-title{border-bottom:0!important;padding-bottom:0!important}
+.contact-block{
+  border-top:1px solid var(--line)!important;
+  margin-top:28px!important;
+  padding-top:34px!important;
+}
+.contact-label{margin-top:5px!important}
+.contact-details,.response,.telegram-cta{margin-left:0!important}
+.telegram-cta{justify-content:flex-start!important}
+.site-footer{margin-top:100px!important}
+@media(max-width:700px){
+  .contact-block{margin-top:22px!important;padding-top:24px!important}
+  .site-footer{margin-top:64px!important}
+}
+
 .contact-page-grid{}
 .content{
   width:100%!important;
@@ -199,7 +216,7 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
   max-width:none!important;
   margin:0!important;
   padding:0 0 28px!important;
-  border-bottom:1px solid var(--line)!important;
+  border-bottom:0!important;
 }
 .contact-block{
   width:100%!important;

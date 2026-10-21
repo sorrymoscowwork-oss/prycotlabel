@@ -1,0 +1,68 @@
+/* PRYCOT site-wide desktop design system. Mobile layouts are intentionally untouched. */
+@media (min-width:701px){
+  body:not(.site-home) .page{padding:30px 3.5vw 48px!important}
+  body:not(.site-home) .content{width:100%!important;max-width:none!important;margin:calc(13vh + 36px) 0 0!important;position:relative!important;top:0!important;left:auto!important;right:auto!important}
+  body:not(.site-home) .content>.eyebrow{margin:0 0 28px!important}
+  body:not(.site-home) .content>h1{max-width:1200px;font-size:clamp(58px,7.2vw,112px)!important;line-height:.94!important;letter-spacing:-.06em!important}
+  body:not(.site-home) .content>.intro{max-width:1120px!important;margin:34px 0 96px!important;font-size:clamp(18px,1.35vw,22px)!important;line-height:1.75!important}
+  body:not(.site-home) .content>.steps,
+  body:not(.site-home) .content>.about,
+  body:not(.site-home) .content>.terms,
+  body:not(.site-home) .content>.services,
+  body:not(.site-home) .content>.posts{width:100%;border-top:1px solid var(--line,#292929)}
+  body:not(.site-home) .steps>.step,
+  body:not(.site-home) .about-block,
+  body:not(.site-home) .terms>.term,
+  body:not(.site-home) .services>.service,
+  body:not(.site-home) .posts>.post-card{
+    display:grid;grid-template-columns:minmax(280px,32%) minmax(0,1fr);column-gap:4%;align-items:start;
+    padding:36px 0!important;border-bottom:1px solid var(--line,#292929)!important;
+  }
+  body:not(.site-home) .steps>.step>div,
+  body:not(.site-home) .about-block>div,
+  body:not(.site-home) .terms>.term>div,
+  body:not(.site-home) .services>.service>div,
+  body:not(.site-home) .posts>.post-card>div{min-width:0}
+  body:not(.site-home) .steps>.step h2,
+  body:not(.site-home) .about-block h2,
+  body:not(.site-home) .terms>.term h2,
+  body:not(.site-home) .services>.service h2,
+  body:not(.site-home) .posts>.post-card h2{
+    margin:0!important;font-size:clamp(24px,2.2vw,34px)!important;line-height:1.2!important;letter-spacing:-.03em!important;font-weight:500!important
+  }
+  body:not(.site-home) .steps>.step p,
+  body:not(.site-home) .about-block p,
+  body:not(.site-home) .terms>.term p,
+  body:not(.site-home) .services>.service p,
+  body:not(.site-home) .posts>.post-card p{
+    max-width:none!important;width:100%;font-size:clamp(17px,1.25vw,21px)!important;line-height:1.75!important;margin:0 0 18px!important
+  }
+  body:not(.site-home) .steps>.step p:last-child,
+  body:not(.site-home) .about-block p:last-child,
+  body:not(.site-home) .terms>.term p:last-child,
+  body:not(.site-home) .services>.service p:last-child,
+  body:not(.site-home) .posts>.post-card p:last-child{margin-bottom:0!important}
+  body:not(.site-home) .content>.note,
+  body:not(.site-home) .content>.crypto-note,
+  body:not(.site-home) .content>.notice{margin-top:34px!important;padding:26px 30px!important;font-size:14px!important;line-height:1.7!important;border-radius:0!important}
+  body:not(.site-home) .content>.faq{margin-top:100px!important}
+  body:not(.site-home) .faq>h2{font-size:clamp(36px,4vw,58px)!important;margin:0 0 34px!important;letter-spacing:-.05em!important}
+  body:not(.site-home) .faq .step{display:grid;grid-template-columns:minmax(280px,32%) minmax(0,1fr);column-gap:4%;align-items:start;padding:32px 0!important;border-bottom:1px solid var(--line,#292929)!important}
+  body:not(.site-home) .faq .step h3{grid-column:1;font-size:clamp(22px,2vw,30px)!important;line-height:1.2!important;margin:0!important}
+  body:not(.site-home) .faq .step p{grid-column:2;max-width:none!important;width:100%;font-size:clamp(16px,1.15vw,20px)!important;line-height:1.75!important;margin:0 0 16px!important}
+  body:not(.site-home) .content>.article,
+  body:not(.site-home) .content>article{max-width:1100px;width:100%;margin:0}
+  body:not(.site-home) .article p,
+  body:not(.site-home) article p{max-width:1000px;font-size:clamp(17px,1.15vw,20px);line-height:1.85}
+  body:not(.site-home) .content>.guide-cta,
+  body:not(.site-home) .content>.release-cta,
+  body:not(.site-home) .content>.cta{justify-content:flex-start!important;margin-top:64px!important;padding-left:36%!important}
+  body:not(.site-home) .content>.site-footer{margin-top:100px!important;padding-top:24px!important}
+  body:not(.site-home) .content .price-table,
+  body:not(.site-home) .content .payment-methods,
+  body:not(.site-home) .content .coin-grid,
+  body:not(.site-home) .content .rate-card{max-width:none}
+  body:not(.site-home) .content .post-card{transition:background .2s ease}
+  body:not(.site-home) .brand{transition:opacity .35s ease,filter .35s ease,transform .35s ease!important}
+  body:not(.site-home) .brand.prycot-scroll-hidden{opacity:0!important;filter:blur(12px)!important;transform:translateY(-6px)!important;pointer-events:none!important}
+}

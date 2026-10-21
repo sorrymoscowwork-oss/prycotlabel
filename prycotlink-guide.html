@@ -40,6 +40,35 @@ button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.sec
 
 
 @media(min-width:701px){.content{width:min(920px,65%);max-width:920px;margin-left:31.3%;margin-right:0}}
+
+/* Desktop redesign: full-width editorial layout; mobile styles remain unchanged. */
+@media(min-width:701px){
+  .page{padding:30px 3.5vw 48px}
+  .header-brand{transition:opacity .35s ease,filter .35s ease,transform .35s ease}
+  .header-brand.header-hidden{opacity:0!important;filter:blur(12px)!important;transform:translateY(-6px)!important;pointer-events:none!important}
+  .content{width:100%;max-width:none;margin:calc(13vh + 36px) 0 0;top:0;left:auto;right:auto}
+  .eyebrow{margin-bottom:28px}
+  .content>h1{max-width:1120px;font-size:clamp(58px,7.2vw,112px);line-height:.94;letter-spacing:-.06em}
+  .intro{max-width:760px;margin:34px 0 100px;font-size:16px;line-height:1.7}
+  .steps{border-top:1px solid var(--line)}
+  .step{grid-template-columns:minmax(220px,28%) minmax(0,1fr);column-gap:5%;padding:38px 0}
+  .step h2{font-size:clamp(20px,2vw,27px);margin:0;line-height:1.2}
+  .step p{max-width:900px;font-size:14px;line-height:1.75;margin:0 0 14px}
+  .step p:last-child{margin-bottom:0}
+  .note{margin-top:34px;padding:26px 30px;font-size:14px;line-height:1.7;border-radius:0}
+  .note-return-line{display:block}
+  .donate-note{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .donate-note strong{flex:0 0 auto}
+  .donate-support-copy{display:inline}
+  .donate-note a{margin:0 0 0 auto}
+  .faq{margin-top:110px}
+  .faq>h2{font-size:clamp(36px,4vw,58px);margin:0 0 34px;letter-spacing:-.05em}
+  .faq .step{grid-template-columns:minmax(220px,28%) minmax(0,1fr);column-gap:5%;padding:32px 0}
+  .faq .step h3{font-size:clamp(20px,2vw,27px);line-height:1.2;margin:0}
+  .faq .step p{max-width:900px;font-size:14px;line-height:1.75;margin:0 0 14px}
+  .guide-cta{justify-content:flex-start;margin-top:64px}
+  footer.site-footer{margin-top:100px;padding-top:24px}
+}
 </style>
 <style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style></head>
 <body><div class="page"><div class="brand header-brand"><a class="brand-logo" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><span class="page-label">PRYCOTLINK Guide</span></div><button class="menu-button" id="menuButton" aria-label="Open menu"><span></span></button><div class="menu" id="menu"><nav class="menu-links" aria-label="Site navigation"><div class="menu-column menu-left"><a href="/">Home</a><a href="account.html">Account</a><a href="about.html">About PRYCOT.</a><a href="terms.html">Release Terms</a><a href="how-to-release.html">How to Release</a><a href="telegram-bot.html">Telegram Bot Guide</a><a href="prices.html">Prices</a><a href="label-services.html">Label Services</a><a href="contact.html">Contact</a></div><div class="menu-column menu-right"><a href="blog.html">Blog</a><a href="side-projects.html">Side Projects</a><a href="white-paper.html">White Paper</a><a href="user-agreement.html">User Agreement</a><div style="margin-top:0;padding-top:18px;border-top:1px solid rgba(244, 244, 244,.28);width:100%;"><a href="prycotlink-guide.html">PRYCOTLINK Guide</a></div></div></nav></div><main class="content">

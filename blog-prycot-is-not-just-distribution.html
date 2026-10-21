@@ -115,12 +115,17 @@ button:not(.menu-button):hover,.site-button:hover,.release-cta a:hover,.release-
 
 /* Unified pill shape for interactive buttons across desktop and mobile */
 button:not(.menu-button),input[type="submit"],input[type="button"],.primary,.secondary,[class*="btn"],[class*="button"]:not(.menu-button),[class*="cta"]{border-radius:999px!important}.menu-button{border-radius:0!important}
+
+/* Blog article header: match the shared PRYCOT wordmark; no tagline under the logo. */
+.brand{position:fixed!important;top:30px!important;left:34px!important;z-index:20!important;display:flex!important;align-items:flex-start!important;width:auto!important;max-width:none!important;overflow:visible!important}
+.logo{display:block!important;width:auto!important;max-width:none!important;margin:0!important;font-size:clamp(34px,4.5vw,62px)!important;line-height:.82!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important;white-space:nowrap!important}
+@media(max-width:700px){.brand{top:22px!important;left:20px!important}.logo{font-size:42px!important}}
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <style id="prycot-monochrome-images">img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-release-tile img{filter:none!important}</style><link rel="stylesheet" href="/site-design.css?v=20261022-articles"></head>
 <body>
 <div class="menu" id="menu"><nav class="menu-links" aria-label="Site navigation"><div class="menu-column menu-left"><a href="/">Home</a><a href="account.html">Account</a><a href="about.html">About PRYCOT.</a><a href="terms.html">Release Terms</a><a href="how-to-release.html">How to Release</a><a href="telegram-bot.html">Telegram Bot Guide</a><a href="prices.html">Prices</a><a href="label-services.html">Label Services</a><a href="contact.html">Contact</a></div><div class="menu-column menu-right"><a href="blog.html" class="active-page">Blog</a><a href="side-projects.html">Side Projects</a><a href="white-paper.html">White Paper</a><a href="user-agreement.html">User Agreement</a><div style="margin-top:0;padding-top:18px;border-top:1px solid rgba(244, 244, 244,.28);width:100%;"><a href="prycotlink-guide.html">PRYCOTLINK Guide</a></div></div></nav></div>
-<main class="page"><header><a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><p class="tagline"><a href="/">RELEASE WORLDWIDE.</a><a href="/">PAY IN CRYPTO.</a><a href="/">ROYALTIES IN CRYPTO.</a></p><button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false"><span></span></button></header>
+<main class="page"><header><a class="brand" href="/" aria-label="PRYCOT."><h1 class="logo">PRYCOT.</h1></a><button class="menu-button" id="menuButton" aria-label="Open menu" aria-expanded="false"><span></span></button></header>
 <section class="content"><p class="eyebrow">PRYCOT. / BLOG</p><h1>PRYCOT. — Not Just Distribution</h1><p class="meta">05.10.2026 / PRYCOT.</p><article class="article">
 <p>PRYCOT. began with a simple idea: make it easier for independent musicians to bring their work into the world.</p>
 <p>A musician writes a song, records it, mixes it, creates the artwork — and then enters a space where the music itself almost disappears. Forms, platforms, metadata, payments, intermediaries. Music becomes an object that has to be properly packaged and delivered.</p>

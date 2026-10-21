@@ -269,3 +269,56 @@
     grid-column:2!important;
   }
 }
+
+
+/* Blog page: match the full-width headline and two-column editorial layout. */
+@media (min-width:701px){
+  body:not(.site-home) .content:has(> .posts) > h2{
+    width:100%!important;
+    max-width:none!important;
+    font-size:clamp(54px,6.2vw,100px)!important;
+    line-height:.98!important;
+    letter-spacing:-.055em!important;
+  }
+  body:not(.site-home) .content:has(> .posts) > .intro{
+    max-width:1120px!important;
+    margin:34px 0 96px!important;
+    font-size:clamp(18px,1.35vw,22px)!important;
+    line-height:1.75!important;
+  }
+  body:not(.site-home) .content>.posts>.post-card{
+    display:grid!important;
+    grid-template-columns:minmax(280px,32%) minmax(0,1fr)!important;
+    column-gap:4%!important;
+    align-items:start!important;
+    padding:36px 0!important;
+    border-bottom:1px solid var(--line,#292929)!important;
+  }
+  body:not(.site-home) .content>.posts>.post-card .post-number{
+    grid-column:1!important;
+    grid-row:1!important;
+    margin:0 0 14px!important;
+    font-size:10px!important;
+    line-height:1.4!important;
+  }
+  body:not(.site-home) .content>.posts>.post-card h3{
+    grid-column:1!important;
+    grid-row:2!important;
+    max-width:none!important;
+    margin:0!important;
+    font-size:clamp(24px,2.2vw,34px)!important;
+    line-height:1.2!important;
+    letter-spacing:-.03em!important;
+    font-weight:500!important;
+  }
+  body:not(.site-home) .content>.posts>.post-card .post-excerpt{
+    grid-column:2!important;
+    grid-row:1 / span 2!important;
+    align-self:start!important;
+    max-width:none!important;
+    width:100%!important;
+    margin:0!important;
+    font-size:clamp(17px,1.25vw,21px)!important;
+    line-height:1.75!important;
+  }
+}

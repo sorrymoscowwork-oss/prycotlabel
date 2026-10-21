@@ -54,8 +54,13 @@
       'body:not(.site-home) footer > span, body:not(.site-home) .site-footer > span { display: inline-block !important; flex: 0 0 auto !important; margin: 0 !important; padding: 0 !important; color: inherit !important; font: inherit !important; letter-spacing: inherit !important; white-space: nowrap !important; }',
       'body:not(.site-home) footer > :nth-child(n+3), body:not(.site-home) .site-footer > :nth-child(n+3) { display: none !important; }',
       '@media (max-width: 700px) { body:not(.site-home) footer, body:not(.site-home) .site-footer { gap: 8px !important; margin-top: 36px !important; padding: 16px 8px 20px !important; font-size: 7px !important; letter-spacing: .035em !important; } }',
+      '.site-mobile-carousel { display: none !important; }',
       '@media (max-width: 999px) {',
       'body .menu-button { position: fixed !important; top: 22px !important; right: 20px !important; z-index: 10003 !important; display: block !important; visibility: visible !important; opacity: 1 !important; width: 30px !important; height: 30px !important; padding: 0 !important; margin: 0 !important; border: 0 !important; background: transparent !important; cursor: pointer !important; }',
+      '@media (max-width: 700px) { body.site-public-header .brand { position: fixed !important; top: 22px !important; left: 20px !important; right: 20px !important; z-index: 10001 !important; display: flex !important; flex-direction: column !important; align-items: center !important; width: calc(100vw - 40px) !important; max-width: none !important; overflow: visible !important; } body.site-public-header .brand .brand-logo { display: block !important; flex: 0 0 auto !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; text-align: center !important; } body.site-public-header .brand .logo { position: relative !important; left: 0 !important; display: block !important; width: 100% !important; max-width: none !important; margin: 0 !important; padding: 0 !important; font-size: clamp(44px, calc(28.8vw - 20px), 155px) !important; line-height: .82 !important; text-align: center !important; white-space: nowrap !important; overflow: visible !important; } body.site-public-header.site-home .menu-button { top: calc(23.62vw + 14px) !important; } body.site-public-header:not(.site-home) .menu-button { top: calc(23.62vw + 43px) !important; } }',
+      '.site-mobile-carousel { display: none !important; }',
+      '@media (max-width: 700px) { body.site-public-header .menu-button { display: none !important; } body.site-public-header .site-mobile-carousel { position: fixed !important; top: calc(23.62vw + 14px) !important; left: 0 !important; z-index: 10002 !important; display: flex !important; align-items: center !important; gap: 10px !important; width: 100vw !important; height: 42px !important; box-sizing: border-box !important; margin: 0 !important; padding: 3px 50% !important; overflow-x: auto !important; overflow-y: hidden !important; overscroll-behavior-x: contain !important; scroll-snap-type: x mandatory !important; scroll-padding-inline: 50% !important; scrollbar-width: none !important; -webkit-overflow-scrolling: touch !important; touch-action: pan-x pan-y !important; mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%) !important; } body.site-public-header:not(.site-home) .site-mobile-carousel { top: calc(23.62vw + 43px) !important; } body.site-public-header .site-mobile-carousel::-webkit-scrollbar { display: none !important; } body.site-public-header .site-mobile-carousel a { display: inline-flex !important; flex: 0 0 auto !important; align-items: center !important; justify-content: center !important; min-height: 34px !important; padding: 0 15px !important; border: 1px solid #353535 !important; border-radius: 999px !important; background: rgba(10,10,10,.94) !important; color: #a7a7a4 !important; font: 500 10px/1 Helvetica, Arial, sans-serif !important; letter-spacing: .075em !important; text-align: center !important; text-decoration: none !important; text-transform: uppercase !important; white-space: nowrap !important; scroll-snap-align: center !important; transform-style: preserve-3d !important; transition: color .2s ease, border-color .2s ease, opacity .2s ease, transform .18s ease !important; } body.site-public-header .site-mobile-carousel a.is-centered { border-color: #777 !important; color: #f4f4f2 !important; } body.site-public-header .site-mobile-carousel.is-dragging { cursor: grabbing !important; scroll-snap-type: none !important; user-select: none !important; } body.site-public-header .site-mobile-carousel.is-dragging a { pointer-events: none !important; } body.site-public-header.site-mobile-header-scrolled .site-mobile-carousel { opacity: 0 !important; pointer-events: none !important; transform: translateY(-8px) !important; } body.site-home.site-public-header .hero { padding-top: calc(11vh + 35px) !important; } }',
+      '@media (max-width: 700px) { body.site-home.site-public-header .site-mobile-carousel { padding-left: 20px !important; padding-right: 20px !important; scroll-padding-inline: 20px !important; } body.site-home.site-public-header .site-mobile-carousel.is-at-start { mask-image: linear-gradient(90deg, #000 0, #000 82%, transparent 100%) !important; } body.site-home.site-public-header .site-mobile-carousel a:first-child { scroll-snap-align: start !important; } body.site-home.site-public-header .hero { padding-top: clamp(55px, calc(6vh + 15px), 70px) !important; } }',
       'body .menu-button span, body .menu-button span::before, body .menu-button span::after { width: 25px !important; left: 2px !important; transition: transform .24s ease, top .24s ease, opacity .18s ease !important; }',
       'body.site-mobile-menu-open .menu-button { opacity: 0 !important; pointer-events: none !important; }',
       'body .menu, body .menu.open { display: none !important; visibility: hidden !important; pointer-events: none !important; }',
@@ -318,9 +323,71 @@
     document.body.appendChild(panel);
   }
 
+  function buildMobileCarousel() {
+    if (!isPublicPage || document.querySelector('.site-mobile-carousel')) return;
+    const carousel = document.createElement('nav');
+    carousel.className = 'site-mobile-carousel';
+    carousel.setAttribute('aria-label', 'Page navigation');
+    const links = [{ label: 'HOME', href: '/' }];
+    navItems.forEach(function (item) {
+      if (item.children) item.children.forEach(function (child) {
+        links.push({ label: child[0], href: child[1] });
+      });
+      else links.push({ label: item.label, href: item.href });
+    });
+    links.push({ label: 'PRYCOTLINK GUIDE', href: '/prycotlink-guide.html' });
+
+    const currentPathname = window.location.pathname.replace(/\/+$/, '') || '/';
+    const normalizedCurrent = currentPathname === '/index.html' ? '/' : currentPathname;
+    let activeLink = null;
+    links.forEach(function (item) {
+      const link = document.createElement('a');
+      link.href = item.href;
+      link.textContent = item.label;
+      const target = new URL(item.href, window.location.origin).pathname.replace(/\/+$/, '') || '/';
+      const normalizedTarget = target === '/index.html' ? '/' : target;
+      const isCurrent = normalizedCurrent === normalizedTarget ||
+        (normalizedCurrent.indexOf('/blog-') === 0 && normalizedTarget === '/blog.html');
+      if (isCurrent) {
+        link.classList.add('is-centered');
+        link.setAttribute('aria-current', 'page');
+        activeLink = link;
+      }
+      carousel.appendChild(link);
+    });
+
+    let frame = 0;
+    function updateWheel() {
+      frame = 0;
+      const firstLink = carousel.querySelector('a');
+      const startCenter = firstLink ? firstLink.offsetLeft + firstLink.offsetWidth / 2 : 20;
+      const startProgress = isHome ? Math.min(1, carousel.scrollLeft / (carousel.clientWidth * .4)) : 1;
+      const center = carousel.scrollLeft + startCenter * (1 - startProgress) + carousel.clientWidth / 2 * startProgress;
+      carousel.classList.toggle('is-at-start', carousel.scrollLeft < 2);
+      carousel.querySelectorAll('a').forEach(function (link) {
+        const linkCenter = link.offsetLeft + link.offsetWidth / 2;
+        const distance = linkCenter - center;
+        const amount = Math.min(1, Math.abs(distance) / (carousel.clientWidth * .58));
+        const angle = Math.sign(distance) * amount * 18;
+        link.style.transform = 'perspective(420px) rotateY(' + angle.toFixed(1) + 'deg) scale(' + (1 - amount * .08).toFixed(3) + ')';
+        link.classList.toggle('is-centered', amount < .10);
+      });
+    }
+    carousel.addEventListener('scroll', function () {
+      if (!frame) frame = window.requestAnimationFrame(updateWheel);
+    }, { passive: true });
+
+    document.body.appendChild(carousel);
+    updateWheel();
+    if (activeLink) requestAnimationFrame(function () {
+      carousel.scrollLeft = isHome ? 0 : activeLink.offsetLeft + activeLink.offsetWidth / 2 - carousel.clientWidth / 2;
+      updateWheel();
+    });
+  }
+
   let mobileMenuButton = null;
   function syncMobileMenuButton() {
-    if (window.innerWidth <= 700) {
+    if (window.innerWidth <= 700 && !isPublicPage) {
       if (!mobileMenuButton || !mobileMenuButton.isConnected) {
         mobileMenuButton = document.createElement('button');
         mobileMenuButton.className = 'menu-button';
@@ -330,7 +397,7 @@
         mobileMenuButton.setAttribute('aria-expanded', 'false');
         mobileMenuButton.innerHTML = '<span></span>';
         [
-          ['position', 'fixed'], ['top', '20px'], ['right', '20px'], ['z-index', '2147483647'],
+          ['position', 'fixed'], ['top', isPublicPage ? (isHome ? 'calc(23.62vw + 14px)' : 'calc(23.62vw + 43px)') : '20px'], ['right', '20px'], ['z-index', '2147483647'],
           ['display', 'block'], ['visibility', 'visible'], ['opacity', '1'], ['width', '30px'],
           ['height', '30px'], ['padding', '0'], ['margin', '0'], ['border', '0'],
           ['border-radius', '0'], ['background', 'transparent'], ['color', '#f4f4f2'],
@@ -356,7 +423,7 @@
   }
   syncMobileMenuButton();
   window.addEventListener('resize', syncMobileMenuButton);
-  buildMobileMenu();
+  if (!isPublicPage) buildMobileMenu();
 
   function setMobileMenu(open) {
     document.body.classList.toggle('site-mobile-menu-open', open);
@@ -407,6 +474,7 @@
     link.textContent = item.label;
     nav.appendChild(link);
   });
+  buildMobileCarousel();
 
   document.addEventListener('click', function (event) {
     if (nav.contains(event.target)) return;
@@ -428,6 +496,9 @@
   });
 
   function updateHomeLogo() {
+    if (isPublicPage && window.innerWidth <= 700) {
+      document.body.classList.toggle('site-mobile-header-scrolled', window.scrollY > 80);
+    }
     if (isPublicPage && !isHome) {
       document.body.classList.toggle('site-header-scrolled', window.scrollY > 80);
     }

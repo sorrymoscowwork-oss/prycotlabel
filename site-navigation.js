@@ -321,6 +321,7 @@
       } else if (pagePaddingWasChanged) {
         if (originalPaddingTop) pageRoot.style.setProperty('padding-top', originalPaddingTop, originalPaddingPriority);
         else pageRoot.style.removeProperty('padding-top');
+        if (isAccountPage) pageRoot.style.removeProperty('padding-top');
         originalTranslations.forEach(function (state) {
           if (state[1]) state[0].style.setProperty('translate', state[1], state[2]);
           else state[0].style.removeProperty('translate');
@@ -328,6 +329,9 @@
         pagePaddingWasChanged = false;
       }
     });
+    window.addEventListener('scroll', function () {
+      if (isAccountPage && !sections.classList.contains('is-open')) pageRoot.style.removeProperty('padding-top');
+    }, { passive: true });
     panel.addEventListener('wheel', function (event) {
       if (window.innerWidth <= 700 || !sections.classList.contains('is-open') || !event.deltaY) return;
       window.scrollBy(0, event.deltaY);

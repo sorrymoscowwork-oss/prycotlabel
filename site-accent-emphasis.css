@@ -1,0 +1,85 @@
+/* Editorial accent treatment, applied only to existing highlighted heading fragments. */
+h1 span[data-brand-accent],
+h2 span[data-brand-accent],
+h3 span[data-brand-accent] {
+  font-style: italic !important;
+}
+
+h1 span[data-brand-accent="lime"],
+h2 span[data-brand-accent="lime"],
+h3 span[data-brand-accent="lime"] { color: #B6F36B !important; }
+h1 span[data-brand-accent="cyan"],
+h2 span[data-brand-accent="cyan"],
+h3 span[data-brand-accent="cyan"] { color: #53D9F5 !important; }
+h1 span[data-brand-accent="coral"],
+h2 span[data-brand-accent="coral"],
+h3 span[data-brand-accent="coral"] { color: #FF8A70 !important; }
+
+/* Primary actions use lime, utility actions cyan, and secondary/editorial actions coral. */
+main .release-cta a,
+main .guide-cta a,
+main .release-button,
+main .order-button,
+main .site-button,
+main .cta a,
+main .button,
+main .save {
+  background: #B6F36B !important;
+  color: #0A0A0A !important;
+}
+main .release-cta a:hover,
+main .guide-cta a:hover,
+main .release-button:hover,
+main .order-button:hover,
+main .site-button:hover,
+main .cta a:hover,
+main .button:hover,
+main .save:hover {
+  background: #D1FF9A !important;
+  color: #0A0A0A !important;
+}
+main .copy-button,
+main .search-button,
+main .telegram-cta span {
+  background: #53D9F5 !important;
+  color: #0A0A0A !important;
+}
+main .copy-button:hover,
+main .search-button:hover,
+main .telegram-cta span:hover {
+  background: #A0ECFA !important;
+  color: #0A0A0A !important;
+}
+main .copy-button.copied { background: #A0ECFA !important; }
+main .download-doc,
+main .label-services-cta a {
+  background: #FF8A70 !important;
+  color: #0A0A0A !important;
+}
+main .download-doc:hover,
+main .label-services-cta a:hover {
+  background: #FFB09E !important;
+  color: #0A0A0A !important;
+}
+body .support-prycotlink-cta {
+  background: #FF8A70 !important;
+  color: #0A0A0A !important;
+}
+body .support-prycotlink-cta:hover,
+body .support-prycotlink-cta:focus-visible {
+  background: #FFB09E !important;
+  color: #0A0A0A !important;
+}
+
+#adminView .button,
+#adminView .save {
+  background: #B6F36B !important;
+  color: #0A0A0A !important;
+}
+#adminView .button:hover,
+#adminView .save:hover {
+  background: #D1FF9A !important;
+  color: #0A0A0A !important;
+}
+#adminView #pageHeading { color: #53D9F5 !important; }
+#adminView .site-section-title { color: #FF8A70 !important; font-style: italic !important; }

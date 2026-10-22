@@ -29,7 +29,8 @@
   const isHome = window.location.pathname === '/' ||
     window.location.pathname.endsWith('/index.html');
   const currentPath = window.location.pathname.toLowerCase();
-  const isAccountPage = currentPath === '/account.html';
+  const routeFileName = currentPath.split('/').pop();
+  const isAccountPage = routeFileName === 'account.html';
   const publicPagePaths = new Set([
     '/', '/index.html', '/404.html', '/about.html', '/blog.html',
     '/blog-prycot-is-not-just-distribution.html',
@@ -40,11 +41,10 @@
     '/side-projects.html', '/telegram-bot.html', '/terms.html',
     '/user-agreement.html', '/white-paper.html'
   ]);
-  const isPublicPage = publicPagePaths.has(currentPath);
-  const releaseQuery = new URLSearchParams(window.location.search);
-  const isPublicPrycotlinkRelease =
-    (currentPath !== '/prycotlink.html' && !isPublicPage) ||
-    (currentPath === '/prycotlink.html' && releaseQuery.has('release') && !releaseQuery.has('edit'));
+  const isPublicPage = publicPagePaths.has(currentPath) || publicPagePaths.has('/' + routeFileName);
+  const isPrycotlinkRoute = routeFileName === 'prycotlink.html' ||
+    (currentPath !== '/' && !isPublicPage);
+  if (isPrycotlinkRoute) return;
   document.body.classList.toggle('site-home', isHome);
   document.body.classList.toggle('site-public-header', isPublicPage);
   document.body.classList.add('site-mobile-standard-header');
@@ -112,15 +112,6 @@
       '@media (max-width: 700px) { html body.site-mobile-standard-header .brand { top: 22px !important; left: 20px !important; right: auto !important; width: max-content !important; max-width: none !important; } html body.site-mobile-standard-header .brand .logo, html body.site-mobile-standard-header .header-brand .logo, html body.site-mobile-standard-header .release-brand .logo { width: max-content !important; max-width: none !important; font-size: clamp(7.335px, calc(4.8vw - 3.335px), 25.835px) !important; text-align: left !important; } html body.site-mobile-standard-header nav.site-mobile-sections { top: calc(28.2px + 2.639vw + clamp(40px, 7vw, 140px)) !important; left: 20px !important; right: 20px !important; width: auto !important; } }',
     ].join(' ');
     document.head.appendChild(style);
-  }
-
-  // Public PRYCOTLINK release pages use their own focused layout without site navigation.
-  if (isPublicPrycotlinkRelease) {
-    document.body.classList.add('prycotlink-public-release');
-    document.querySelectorAll('nav.site-global-nav, nav.site-mobile-sections').forEach(function (element) {
-      element.remove();
-    });
-    return;
   }
 
   let nav = document.querySelector('nav.desktop-nav, nav.site-global-nav');

@@ -255,7 +255,7 @@
       if (firstFlowChild) contentTargets.push(firstFlowChild);
     }
     function reserveCollapsedHeaderSpace() {
-      if (sections.classList.contains('is-open') || window.scrollY > 1) return;
+      if (isAccountPage || sections.classList.contains('is-open') || window.scrollY > 1) return;
       const firstContent = contentTargets[0];
       if (!firstContent) return;
       const logo = document.querySelector('.brand');

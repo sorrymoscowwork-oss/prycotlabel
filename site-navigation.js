@@ -284,6 +284,16 @@
         });
         pagePaddingWasChanged = true;
         requestAnimationFrame(function () {
+          const accountTop = isAccountPage ? document.querySelector('#cabinetView:not(.hidden) .account-top') : null;
+          if (accountTop) {
+            const panelBottom = sections.getBoundingClientRect().bottom;
+            const clearance = Math.max(0, panelBottom + 14 - accountTop.getBoundingClientRect().top);
+            if (clearance) {
+              const currentPadding = parseFloat(getComputedStyle(pageRoot).paddingTop) || 0;
+              pageRoot.style.setProperty('padding-top', (currentPadding + clearance) + 'px', 'important');
+            }
+            return;
+          }
           if (window.innerWidth <= 700) {
             const firstContent = contentTargets[0];
             if (!firstContent) return;

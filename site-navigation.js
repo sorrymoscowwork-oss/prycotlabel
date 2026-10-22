@@ -281,6 +281,17 @@
         });
         pagePaddingWasChanged = true;
         requestAnimationFrame(function () {
+          if (window.innerWidth <= 700) {
+            const firstContent = contentTargets[0];
+            if (!firstContent) return;
+            const panelBottom = sections.getBoundingClientRect().bottom;
+            const clearance = Math.max(0, panelBottom + 14 - firstContent.getBoundingClientRect().top);
+            if (clearance) {
+              const currentPadding = parseFloat(getComputedStyle(pageRoot).paddingTop) || 0;
+              pageRoot.style.setProperty('padding-top', (currentPadding + clearance) + 'px', 'important');
+            }
+            return;
+          }
           const panelHeight = panel.getBoundingClientRect().height;
           const extra = Math.max(0, panelHeight + 8);
           const currentPadding = parseFloat(getComputedStyle(pageRoot).paddingTop) || 0;

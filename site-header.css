@@ -1,0 +1,108 @@
+/* Desktop header rules load with the document to prevent the legacy header from flashing. */
+@media (min-width: 701px) {
+  body.site-desktop-unified-header:not(.site-home) .brand,
+  body.site-desktop-unified-header:not(.site-home) .header-brand {
+    position: fixed !important;
+    top: 30px !important;
+    left: 34px !important;
+    right: auto !important;
+    bottom: auto !important;
+    z-index: 10003 !important;
+    display: block !important;
+    width: max-content !important;
+    max-width: none !important;
+    margin: 0 !important;
+    align-items: flex-start !important;
+    overflow: visible !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .brand .brand-logo {
+    display: block !important;
+    width: max-content !important;
+    max-width: none !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .brand .logo {
+    position: static !important;
+    left: auto !important;
+    display: inline-block !important;
+    box-sizing: content-box !important;
+    width: max-content !important;
+    max-width: calc(100vw - 68px) !important;
+    margin-right: -.18em !important;
+    padding-right: .18em !important;
+    font-size: clamp(20px, calc(3vw - 1px), 96px) !important;
+    line-height: .82 !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .page-label,
+  body.site-desktop-unified-header:not(.site-home) .account-label {
+    display: none !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .tagline {
+    display: none !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .page > header {
+    height: 0 !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  html body.site-desktop-unified-header.site-public-header:not(.site-home) .page > .content,
+  html body.site-desktop-unified-header.site-public-header.user-agreement-page:not(.site-home) .page > .content,
+  html body.site-desktop-unified-header:not(.site-home) .page > .content {
+    margin-top: calc(14vh + 24px) !important;
+    top: 32px !important;
+  }
+
+  html body.site-desktop-unified-header:not(.site-home).site-mobile-standard-header nav.site-mobile-sections {
+    top: calc(28.2px + 2.639vw + clamp(40px, 7vw, 140px)) !important;
+    left: 34px !important;
+    right: 34px !important;
+    width: auto !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .site-mobile-sections-panel {
+    gap: 0 32px !important;
+    max-height: min(58vh, 520px) !important;
+    max-height: min(58svh, 520px) !important;
+    margin-top: 10px !important;
+    padding: 18px 22px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, .38) !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .site-mobile-sections-group {
+    padding: 12px 0 14px !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .site-mobile-sections-group-title {
+    margin-bottom: 10px !important;
+    font-size: 11px !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .site-mobile-sections-panel a {
+    padding: 10px 0 !important;
+    font-size: clamp(12px, .95vw, 15px) !important;
+  }
+
+  body.site-desktop-unified-header:not(.site-home) .brand,
+  body.site-desktop-unified-header:not(.site-home) nav.site-mobile-sections {
+    transition: opacity 1.05s ease, filter 1.05s ease, transform 1.05s ease !important;
+    will-change: opacity, filter, transform !important;
+  }
+
+  body.site-desktop-unified-header.site-header-scrolled:not(.site-home) .brand,
+  body.site-desktop-unified-header.site-header-scrolled:not(.site-home) nav.site-mobile-sections:not(.is-open) {
+    opacity: 0 !important;
+    filter: blur(14px) !important;
+    transform: translateY(-7px) !important;
+    pointer-events: none !important;
+  }
+}

@@ -1,0 +1,39 @@
+/* One shared utility size for public page actions.
+   Navigation, icon-only controls, account/admin UI and PRYCOTLINK release pages stay untouched. */
+html body:not(.site-home) main :is(
+  .release-cta > a,
+  .guide-cta > a,
+  .cta > a,
+  .release-button,
+  .site-button,
+  .label-button,
+  .order-button,
+  .download-doc,
+  .support-prycotlink-cta,
+  .copy-button,
+  .search-button,
+  .telegram-cta > span,
+  button:not(.site-mobile-sections-toggle):not(.site-nav-dropdown-trigger):not(.icon-button):not([aria-label]),
+  input[type="submit"],
+  input[type="button"]
+) {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 44px !important;
+  max-width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  padding: 0 22px !important;
+  font-family: Helvetica, Arial, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  letter-spacing: 0.08em !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  vertical-align: middle !important;
+  white-space: nowrap !important;
+}

@@ -148,6 +148,6 @@ async function enter(){const p=passwordInput.value;if(!p){setStatus(loginStatus,
 loginButton.onclick=enter;passwordInput.addEventListener("keydown",e=>{if(e.key==="Enter")enter()});tabBot.onclick=()=>switchTab("bot");tabLinks.onclick=()=>switchTab("links");document.getElementById("tabSite").onclick=()=>switchTab("site");document.getElementById("refresh").onclick=()=>activeTab==="bot"?load():activeTab==="links"?loadPrycotlinks():loadSiteAnalytics();logout.onclick=()=>{sessionStorage.removeItem("prycot_admin_password");adminPassword="";location.reload()};
 if(adminPassword){loginView.classList.add("hidden");adminView.classList.remove("hidden");logout.classList.remove("hidden");load().catch(()=>{sessionStorage.removeItem("prycot_admin_password");location.reload()})}
 </script>
-  <script src="/site-navigation.js?v=20261022-sections-22" defer></script>
+  <script src="/site-navigation.js?v=20261022-sections-24" defer></script>
 </body>
 </html>

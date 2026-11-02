@@ -564,6 +564,26 @@ body .content.contact-minimal > .telegram-cta > span{
 <link rel="stylesheet" href="site-header.css?v=20261022-prepaint-2">
 <link rel="stylesheet" href="./site-accent-emphasis.css?v=20261022-accent-5">
 <link rel="stylesheet" href="./site-public-button-size.css?v=20261022-1">
+<style id="contact-directory-layout">
+body .content.contact-minimal{gap:clamp(28px,5vh,56px)!important}
+.contact-directory{width:100%;max-width:1040px;text-align:left}
+.contact-intro{margin:0 0 26px;color:var(--muted);font-size:14px;line-height:1.5}
+.contact-card{display:grid;grid-template-columns:minmax(190px, .75fr) minmax(0, 1.6fr);gap:28px;padding:24px 0;border-top:1px solid var(--line);text-align:left}
+.contact-card:last-child{border-bottom:1px solid var(--line)}
+.contact-card-label{padding-top:4px;color:var(--muted);font-size:10px;line-height:1.4;letter-spacing:.14em;text-transform:uppercase}
+.contact-card-content{min-width:0}
+.contact-card .contact-address{display:inline-block;margin:0;padding:0;border:0;font-size:clamp(20px,2.2vw,26px);line-height:1.2;letter-spacing:-.035em;overflow-wrap:anywhere}
+.contact-card-content p{max-width:680px;margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.6}
+body .content.contact-minimal>.telegram-cta{margin-top:0!important}
+@media(max-width:700px){
+ .contact-directory{max-width:520px}
+ .contact-intro{margin-bottom:18px;font-size:13px}
+ .contact-card{grid-template-columns:1fr;gap:9px;padding:20px 0}
+ .contact-card-label{padding-top:0}
+ .contact-card .contact-address{font-size:21px}
+ .contact-card-content p{margin-top:8px;font-size:13px;line-height:1.55}
+}
+</style>
 </head>
 <body class="site-desktop-unified-header site-mobile-standard-header site-public-header">
 
@@ -573,7 +593,30 @@ body .content.contact-minimal > .telegram-cta > span{
 
 </header>
 <section class="content contact-minimal">
-<a class="email contact-email-full" href="mailto:info@prycot.com">info@prycot.com</a>
+<div class="contact-directory">
+<p class="contact-intro">Choose the address that best fits your inquiry.</p>
+<article class="contact-card">
+<div class="contact-card-label">ARTISTS &amp; MANAGEMENT</div>
+<div class="contact-card-content">
+<a class="email contact-address" href="mailto:info@prycot.com">info@prycot.com</a>
+<p>Artist management, concerts, collaborations with PRYCOT artists, advertising, video shoots and photo sessions.</p>
+</div>
+</article>
+<article class="contact-card">
+<div class="contact-card-label">RELEASES &amp; COLLABORATION</div>
+<div class="contact-card-content">
+<a class="email contact-address" href="mailto:goto@prycot.com">goto@prycot.com</a>
+<p>Working with PRYCOT — for musicians, directors, music video makers, editors, creative directors and other people in culture and the arts. Send release inquiries, get help with releases, discuss support or propose a joint project.</p>
+</div>
+</article>
+<article class="contact-card">
+<div class="contact-card-label">LEADERSHIP &amp; BUSINESS</div>
+<div class="contact-card-content">
+<a class="email contact-address" href="mailto:ceo@prycot.com">ceo@prycot.com</a>
+<p>Contact PRYCOT’s leadership about investment, project development, business and economics, international relations, branches or franchising. This address is also for label services, music production, arrangement, mixing and mastering.</p>
+</div>
+</article>
+</div>
 <div class="telegram-cta"><span>QUICK CONTACT ON TELEGRAM</span></div>
 </section>
 

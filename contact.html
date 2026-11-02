@@ -594,9 +594,30 @@ body .page.contact-page>.site-footer{border-top:0!important}
  .contact-card-content p{max-width:550px;margin-top:6px;font-size:12px;line-height:1.45}
 }
 </style>
-<style id="contact-desktop-directory-scale">
+<style id="contact-desktop-three-columns">
 @media(min-width:701px){
-  body .page.contact-page .content.contact-minimal .contact-directory{zoom:.5!important}
+  body .page.contact-page .content.contact-minimal .contact-directory{
+    zoom:1!important;
+    width:100%!important;
+    max-width:1400px!important;
+    display:grid!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    align-items:start!important;
+    gap:clamp(20px,3vw,44px)!important;
+  }
+  body .page.contact-page .content.contact-minimal .contact-card{
+    display:flex!important;
+    flex-direction:column!important;
+    min-width:0!important;
+    gap:10px!important;
+    padding:16px 12px!important;
+    border-top:1px solid var(--line)!important;
+    border-bottom:1px solid var(--line)!important;
+    text-align:left!important;
+  }
+  body .page.contact-page .content.contact-minimal .contact-card-content{width:100%!important}
+  body .page.contact-page .content.contact-minimal .contact-card:nth-child(2){text-align:center!important}
+  body .page.contact-page .content.contact-minimal .contact-card:nth-child(3){text-align:right!important}
 }
 </style>
 </head>

@@ -584,6 +584,15 @@ body .page.contact-page>.site-footer{border-top:0!important}
  .contact-card .contact-address{font-size:19px}
  .contact-card-content p{margin-top:6px;font-size:12px;line-height:1.45}
 }
+
+@media(min-width:701px){
+ body .content.contact-minimal{gap:clamp(24px,4vh,40px)!important}
+ .contact-directory{max-width:820px}
+ .contact-card{grid-template-columns:minmax(170px,.65fr) minmax(0,1.35fr);gap:20px;padding:16px 0}
+ .contact-card-label{font-size:8px}
+ .contact-card .contact-address{font-size:clamp(16px,1.4vw,19px);line-height:1.15}
+ .contact-card-content p{max-width:550px;margin-top:6px;font-size:12px;line-height:1.45}
+}
 </style>
 </head>
 <body class="site-desktop-unified-header site-mobile-standard-header site-public-header">

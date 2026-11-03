@@ -1,0 +1,186 @@
+/* PRYCOT blog — shared article system.
+   All editorial pages load this file so typography, spacing and layout stay consistent. */
+:root{
+  --blog-bg:#0a0a0a;
+  --blog-fg:#F4F4F4;
+  --blog-muted:#9B9B9B;
+  --blog-line:#292929;
+  --blog-content:760px;
+}
+body.site-public-header main.page:has(article.article),
+body.site-public-header main.article-page{
+  min-height:100vh!important;
+  padding:30px 34px 42px!important;
+  background:var(--blog-bg)!important;
+  color:var(--blog-fg)!important;
+  font-family:Helvetica,Arial,sans-serif!important;
+}
+body.site-public-header main.page:has(article.article) > .content,
+body.site-public-header main.article-page > .article-content{
+  width:min(100%,920px)!important;
+  max-width:920px!important;
+  margin:calc(14vh + 24px) auto 0!important;
+  position:relative!important;
+  top:0!important;
+}
+body.site-public-header main.page:has(article.article) .eyebrow,
+body.site-public-header main.article-page .article-label{
+  margin:0 0 22px!important;
+  color:var(--blog-muted)!important;
+  font-size:10px!important;
+  line-height:1.4!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+}
+body.site-public-header main.page:has(article.article) h1,
+body.site-public-header main.article-page h1{
+  display:block!important;
+  width:100%!important;
+  max-width:850px!important;
+  margin:0!important;
+  color:var(--blog-fg)!important;
+  font-size:clamp(42px,6.5vw,78px)!important;
+  line-height:.98!important;
+  font-weight:500!important;
+  letter-spacing:-.05em!important;
+  overflow-wrap:break-word!important;
+}
+body.site-public-header main.page:has(article.article) .meta,
+body.site-public-header main.article-page .article-meta{
+  margin:24px 0 42px!important;
+  color:var(--blog-muted)!important;
+  font-size:10px!important;
+  line-height:1.5!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+body.site-public-header main.page:has(article.article) article.article,
+body.site-public-header main.article-page .article-body{
+  display:block!important;
+  width:100%!important;
+  max-width:var(--blog-content)!important;
+  margin:0 auto!important;
+  padding:30px 0 0!important;
+  border-top:1px solid var(--blog-line)!important;
+  color:#d0d0d0!important;
+  font-size:16px!important;
+  line-height:1.8!important;
+  font-weight:400!important;
+}
+body.site-public-header main.page:has(article.article) article.article p,
+body.site-public-header main.article-page .article-body p{
+  margin:0 0 24px!important;
+  color:#d0d0d0!important;
+  font-size:inherit!important;
+  line-height:inherit!important;
+}
+body.site-public-header main.page:has(article.article) article.article h2,
+body.site-public-header main.article-page .article-body h2{
+  max-width:none!important;
+  margin:54px 0 20px!important;
+  color:var(--blog-fg)!important;
+  font-size:clamp(25px,4vw,36px)!important;
+  line-height:1.1!important;
+  font-weight:500!important;
+  letter-spacing:-.035em!important;
+}
+body.site-public-header main.page:has(article.article) article.article h3,
+body.site-public-header main.article-page .article-body h3{
+  margin:36px 0 16px!important;
+  color:var(--blog-fg)!important;
+  font-size:22px!important;
+  line-height:1.2!important;
+  font-weight:500!important;
+}
+body.site-public-header main.page:has(article.article) article.article figure,
+body.site-public-header main.article-page .article-body figure{
+  width:100%!important;
+  max-width:700px!important;
+  margin:32px auto 38px!important;
+}
+body.site-public-header main.page:has(article.article) article.article figure img,
+body.site-public-header main.article-page .article-body figure img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+}
+body.site-public-header main.page:has(article.article) article.article figcaption,
+body.site-public-header main.article-page .article-body figcaption{
+  margin-top:10px!important;
+  color:var(--blog-muted)!important;
+  font-size:10px!important;
+  line-height:1.5!important;
+  letter-spacing:.06em!important;
+  text-transform:uppercase!important;
+}
+body.site-public-header main.page:has(article.article) article.article .byline{
+  margin-top:36px!important;
+  color:var(--blog-muted)!important;
+  font-size:12px!important;
+  line-height:1.6!important;
+}
+body.site-public-header main.page:has(article.article) .back,
+body.site-public-header main.article-page .back-link{
+  display:inline-block!important;
+  margin-top:48px!important;
+  color:var(--blog-muted)!important;
+  font-size:10px!important;
+  line-height:1.5!important;
+  letter-spacing:.1em!important;
+  text-transform:uppercase!important;
+  text-decoration:underline!important;
+  text-underline-offset:5px!important;
+}
+body.site-public-header main.page:has(article.article) .language-switch{
+  display:inline-block!important;
+  margin:48px 0 0 20px!important;
+  padding:7px 10px!important;
+  border:1px solid var(--blog-line)!important;
+  border-radius:2px!important;
+  color:var(--blog-muted)!important;
+  font-size:10px!important;
+  letter-spacing:.04em!important;
+}
+body.site-public-header main.page:has(article.article) footer.site-footer,
+body.site-public-header main.article-page footer.article-footer{
+  display:flex!important;
+  justify-content:space-between!important;
+  align-items:center!important;
+  gap:20px!important;
+  margin-top:80px!important;
+  padding-top:22px!important;
+  border-top:1px solid var(--blog-line)!important;
+  color:var(--blog-muted)!important;
+  font-size:10px!important;
+  line-height:1.5!important;
+  letter-spacing:.1em!important;
+  text-transform:uppercase!important;
+}
+body.site-public-header .header-brand .page-label{
+  display:block!important;
+  margin-top:12px!important;
+  color:var(--blog-muted)!important;
+  font-size:9px!important;
+  line-height:1!important;
+  letter-spacing:.14em!important;
+  text-transform:uppercase!important;
+}
+@media(max-width:700px){
+  body.site-public-header main.page:has(article.article),
+  body.site-public-header main.article-page{padding:22px 20px 30px!important}
+  body.site-public-header main.page:has(article.article) > .content,
+  body.site-public-header main.article-page > .article-content{margin:calc(12vh + 34px) auto 0!important}
+  body.site-public-header main.page:has(article.article) h1,
+  body.site-public-header main.article-page h1{font-size:clamp(38px,10vw,58px)!important;line-height:1!important}
+  body.site-public-header main.page:has(article.article) .meta,
+  body.site-public-header main.article-page .article-meta{margin:20px 0 30px!important}
+  body.site-public-header main.page:has(article.article) article.article,
+  body.site-public-header main.article-page .article-body{padding-top:24px!important;font-size:15px!important;line-height:1.72!important}
+  body.site-public-header main.page:has(article.article) article.article h2,
+  body.site-public-header main.article-page .article-body h2{margin:42px 0 16px!important;font-size:28px!important}
+  body.site-public-header main.page:has(article.article) article.article figure,
+  body.site-public-header main.article-page .article-body figure{margin:26px 0 30px!important;max-width:100%!important}
+  body.site-public-header main.page:has(article.article) footer.site-footer,
+  body.site-public-header main.article-page footer.article-footer{flex-direction:column!important;align-items:flex-start!important;gap:8px!important;margin-top:56px!important;padding-top:18px!important;font-size:8px!important;letter-spacing:.08em!important}
+}

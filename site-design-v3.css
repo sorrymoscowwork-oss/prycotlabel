@@ -903,3 +903,13 @@ html body.site-account-home-header #cabinetView:not(.hidden) .account-shell { ma
     font-size: 9px !important;
   }
 }
+
+
+/* Reserve enough desktop width for the two PRYCOTLINK action buttons. */
+@media (min-width: 761px) {
+  #cabinetView .prycotlink-entry {
+    grid-template-columns: 54px minmax(120px, 1.15fr) minmax(120px, 1.2fr) minmax(85px, .75fr) minmax(92px, .8fr) minmax(280px, 1.5fr) !important;
+  }
+  #cabinetView .prycotlink-actions { width: 100% !important; min-width: 0 !important; gap: 8px !important; }
+  #cabinetView .prycotlink-actions a { flex: 1 1 0 !important; width: auto !important; min-width: 0 !important; padding-inline: 8px !important; }
+}

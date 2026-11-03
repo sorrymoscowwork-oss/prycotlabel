@@ -873,3 +873,13 @@ input[type="submit"], input[type="button"],
   body.site-account-home-header .page { padding-top: calc(var(--header) + 10px) !important; }
   body.site-account-home-header #cabinetView .account-shell { margin-top: 8px !important; }
 }
+
+
+/* Match the signed-in account content start to the shared page grid. */
+html body.site-account-home-header .page > main.content:has(#cabinetView:not(.hidden)) {
+  margin: 0 !important;
+  top: auto !important;
+  padding-top: 0 !important;
+}
+html body.site-account-home-header #cabinetView:not(.hidden) { padding-top: 0 !important; }
+html body.site-account-home-header #cabinetView:not(.hidden) .account-shell { margin-top: 0 !important; }

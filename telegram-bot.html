@@ -142,6 +142,7 @@ button:not(.site-mobile-sections-toggle),input[type="submit"],input[type="button
 <link rel="stylesheet" href="site-header.css?v=20261022-prepaint-2">
 <link rel="stylesheet" href="./site-accent-emphasis.css?v=20261022-accent-5">
 <link rel="stylesheet" href="./site-public-button-size.css?v=20261102-public-footer-1">
+  <link rel="stylesheet" href="/site-design-v3.css?v=20261103-1">
 </head>
 <body class="site-desktop-unified-header site-mobile-standard-header site-public-header">
 
@@ -181,6 +182,5 @@ button:not(.site-mobile-sections-toggle),input[type="submit"],input[type="button
 
 <script id="page-header-scroll-behavior">(function(){const brand=document.querySelector('.header-brand');if(!brand)return;let ticking=false;function update(){brand.classList.toggle('header-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>
   <script src="/site-navigation-v3.js?v=20261103-1"></script>
-<script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script><link rel="stylesheet" href="/site-design-v3.css?v=20261103-1">
-</body>
+<script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body>
 </html>

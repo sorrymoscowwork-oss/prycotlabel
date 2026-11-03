@@ -184,3 +184,66 @@ body.site-public-header .header-brand .page-label{
   body.site-public-header main.page:has(article.article) footer.site-footer,
   body.site-public-header main.article-page footer.article-footer{flex-direction:column!important;align-items:flex-start!important;gap:8px!important;margin-top:56px!important;padding-top:18px!important;font-size:8px!important;letter-spacing:.08em!important}
 }
+
+
+/* Mobile article canvas: match the original PRYCOT editorial page edge-to-edge. */
+html:has(body.site-public-header main.article-page),
+body.site-public-header:has(main.article-page){
+  min-height:100%!important;
+  margin:0!important;
+  background:#0a0a0a!important;
+  color:#F4F4F4!important;
+}
+body.site-public-header:has(main.article-page){
+  width:100%!important;
+  overflow-x:hidden!important;
+  -webkit-font-smoothing:antialiased!important;
+}
+body.site-public-header main.article-page{
+  display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:none!important;
+  min-height:100vh!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:#0a0a0a!important;
+}
+body.site-public-header main.article-page .header-brand{
+  position:fixed!important;
+  top:30px!important;
+  left:34px!important;
+  z-index:10003!important;
+  display:block!important;
+  width:max-content!important;
+  margin:0!important;
+}
+body.site-public-header main.article-page .header-brand .brand-logo,
+body.site-public-header main.article-page .header-brand .brand-logo .logo{
+  display:block!important;
+  width:max-content!important;
+  color:#F4F4F4!important;
+  font-family:Helvetica,Arial,sans-serif!important;
+  font-size:clamp(34px,4.5vw,62px)!important;
+  line-height:.82!important;
+  font-weight:800!important;
+  font-style:italic!important;
+  letter-spacing:-.075em!important;
+  text-decoration:none!important;
+}
+body.site-public-header main.article-page .header-brand .page-label{display:none!important}
+@media(max-width:700px){
+  body.site-public-header main.article-page{padding:22px 20px 30px!important}
+  body.site-public-header main.article-page > .article-content{
+    width:100%!important;
+    max-width:none!important;
+    margin:36px auto 0!important;
+  }
+  body.site-public-header main.article-page .header-brand{top:30px!important;left:20px!important}
+  body.site-public-header main.article-page .header-brand .brand-logo,
+  body.site-public-header main.article-page .header-brand .brand-logo .logo{
+    font-size:42px!important;
+  }
+}

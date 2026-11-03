@@ -992,3 +992,6 @@ html body.site-account-home-header #cabinetView:not(.hidden) .account-shell { ma
     text-overflow: ellipsis !important;
   }
 }
+
+/* Public PRYCOTLINK pages use the full viewport without the product card frame. */
+body.prycotlink-public-release .prycotlink-page.release-host > .pl-live-release { width: 100% !important; max-width: none !important; min-height: 100svh !important; margin: 0 !important; border: 0 !important; outline: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: #0a0a0a !important; }

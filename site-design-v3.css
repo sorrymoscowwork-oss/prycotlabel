@@ -757,3 +757,14 @@ input[type="submit"], input[type="button"],
     hyphens: none !important;
   }
 }
+
+
+/* Mobile navigation: use the full screen width for clear, readable page groups. */
+@media (max-width: 760px) {
+  .v3-overlay-inner { grid-template-columns: minmax(0,1fr) !important; gap: 28px !important; }
+  .v3-menu-kicker { grid-column: 1 !important; }
+  .v3-menu-group { min-width: 0 !important; }
+  .v3-menu-link { align-items: center !important; min-height: 48px !important; font-size: 16px !important; }
+  .v3-menu-link::after { display: none !important; content: none !important; }
+  .v3-menu-link.is-current::after { display: inline !important; content: "•" !important; }
+}

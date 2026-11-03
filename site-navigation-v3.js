@@ -57,6 +57,15 @@
       transform: "translateY(-50%)", textAlign: "center", fontSize: "12px", lineHeight: "1",
       fontWeight: "700", letterSpacing: ".08em", whiteSpace: "nowrap"
     });
+    const syncMenuScale = () => {
+      const mobile = window.matchMedia("(max-width: 760px)").matches;
+      pinStyle(toggle, {
+        transform: mobile ? "translateY(-50%) scale(.7)" : "translateY(-50%)",
+        transformOrigin: mobile ? "right center" : "center center"
+      });
+    };
+    syncMenuScale();
+    window.addEventListener("resize", syncMenuScale, { passive: true });
     const label = toggle.querySelector("span:first-child");
     const symbol = toggle.querySelector(".v3-menu-symbol");
     if (label) pinStyle(label, {

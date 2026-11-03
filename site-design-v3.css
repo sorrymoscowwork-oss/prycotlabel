@@ -835,3 +835,7 @@ input[type="submit"], input[type="button"],
   .price-table tbody tr td:nth-child(2) { grid-column: 1; color: var(--muted) !important; }
   .price-table tbody tr td:nth-child(3) { grid-column: 2; grid-row: 1 / span 2; align-self: center; text-align: right !important; }
 }
+
+
+.label-services-page .services:not(.site-home .services) > .service > .number { position: static !important; grid-column: 1 !important; grid-row: 1 !important; }
+@media (max-width: 760px) { .label-services-page .services:not(.site-home .services) > .service > .number { position: static !important; } }

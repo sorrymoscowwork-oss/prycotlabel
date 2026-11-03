@@ -655,3 +655,15 @@ body.site-home .services .service h2 .home-word-emphasis { color: var(--blue) !i
     font-size: clamp(46px,5.5vw,72px) !important;
   }
 }
+
+/* Keep the homepage hero headline from breaking inside words. */
+@media (min-width: 761px) {
+  body.site-home main.page.page > .hero .intro {
+    max-width: 100% !important;
+    font-size: clamp(40px, 3.2vw, 58px) !important;
+    letter-spacing: -.06em !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+  }
+}

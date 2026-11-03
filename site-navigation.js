@@ -36,6 +36,7 @@
     '/blog-prycot-is-not-just-distribution.html',
     '/blog-stolicabolgarii-dorogobuzh-grime.html',
     '/blog-stolicabolgarii-dorogobuzh-grime-ru.html',
+    '/blog-carhartt-how-workwear-became-part-of-music-culture.html',
     '/contact.html', '/donate.html', '/how-to-release.html',
     '/label-services.html', '/prices.html', '/prycotlink-guide.html',
     '/side-projects.html', '/telegram-bot.html', '/terms.html',

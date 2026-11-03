@@ -49,7 +49,7 @@
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-controls", "v3-menu");
     toggle.innerHTML = '<span>PAGES</span><span class="v3-menu-symbol" aria-hidden="true">+</span>';
-    const pinStyle = (element, values) => Object.entries(values).forEach(([property, value]) => element.style.setProperty(property, value, "important"));
+    const pinStyle = (element, values) => Object.entries(values).forEach(([property, value]) => element.style.setProperty(property.replace(/[A-Z]/g, letter => "-" + letter.toLowerCase()), value, "important"));
     pinStyle(toggle, {
       position: "absolute", top: "50%", right: "var(--gutter)", bottom: "auto", left: "auto",
       display: "block", width: "160px", minWidth: "160px", maxWidth: "160px",

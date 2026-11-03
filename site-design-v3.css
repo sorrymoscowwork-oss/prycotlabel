@@ -667,3 +667,111 @@ body.site-home .services .service h2 .home-word-emphasis { color: var(--blue) !i
     hyphens: none !important;
   }
 }
+
+
+/* Stable desktop and mobile geometry for the shared menu button. */
+.v3-header .v3-menu-toggle {
+  position: absolute !important;
+  inset: 50% var(--gutter) auto auto !important;
+  display: block !important;
+  width: 160px !important;
+  min-width: 160px !important;
+  max-width: 160px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  transform: translateY(-50%) !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  letter-spacing: .08em !important;
+  white-space: nowrap !important;
+}
+.v3-header .v3-menu-toggle > span:first-child {
+  position: absolute !important;
+  inset: 50% auto auto 50% !important;
+  transform: translate(-50%,-50%) !important;
+}
+.v3-header .v3-menu-toggle .v3-menu-symbol {
+  position: absolute !important;
+  top: 50% !important;
+  right: 18px !important;
+  width: 18px !important;
+  transform: translateY(-50%) !important;
+}
+.v3-header .v3-menu-toggle[aria-expanded="true"] .v3-menu-symbol {
+  transform: translateY(-50%) rotate(45deg) !important;
+}
+.v3-header .v3-menu-toggle:active { transform: translateY(calc(-50% + 1px)) !important; }
+
+/* Each PRYCOTLINK table row contains six cells. Keep them inside the card. */
+#cabinetView .prycotlink-card,
+#cabinetView .prycotlink-list {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+#cabinetView .prycotlink-card { overflow: hidden !important; }
+#cabinetView .prycotlink-entry {
+  display: grid !important;
+  grid-template-columns: 54px minmax(150px,1.2fr) minmax(145px,1fr) minmax(95px,.6fr) minmax(105px,.6fr) minmax(205px,auto) !important;
+  align-items: center !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  gap: 12px !important;
+  overflow: hidden !important;
+}
+#cabinetView .prycotlink-info,
+#cabinetView .prycotlink-url,
+#cabinetView .prycotlink-date,
+#cabinetView .prycotlink-status,
+#cabinetView .prycotlink-actions { min-width: 0 !important; }
+#cabinetView .prycotlink-status {
+  white-space: nowrap !important;
+  word-break: keep-all !important;
+  overflow-wrap: normal !important;
+}
+#cabinetView .prycotlink-actions { flex-wrap: nowrap !important; }
+
+/* Keep remove-link controls compact despite generic button sizing. */
+button.pl-remove-platform {
+  display: inline-grid !important;
+  place-items: center !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  max-width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  max-height: 36px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  font-size: 18px !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+}
+
+/* Safari's reduced-motion cascade reduced button gradients to one frame. */
+button:not(.site-mobile-sections-toggle),
+input[type="submit"], input[type="button"],
+.primary, .secondary, .order-button, .site-button,
+.prycotlink-actions a, .release-details-button, .v3-menu-toggle {
+  background-size: 200% 100% !important;
+  animation: button-gradient-loop 6s linear infinite !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  button:not(.site-mobile-sections-toggle),
+  input[type="submit"], input[type="button"],
+  .primary, .secondary, .order-button, .site-button,
+  .prycotlink-actions a, .release-details-button, .v3-menu-toggle {
+    animation-duration: 6s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+@media (max-width: 760px) {
+  #cabinetView .prycotlink-entry { grid-template-columns: 48px minmax(0,1fr) !important; }
+}

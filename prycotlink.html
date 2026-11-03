@@ -446,7 +446,7 @@ img{filter:grayscale(1)!important}.release-cover,.pl-cover-preview,.prycotlink-r
 body:not(.site-home) .page.prycotlink-page:not(.release-host){padding-top:220px!important}
 @media(max-width:700px){body:not(.site-home) .page.prycotlink-page:not(.release-host){padding-top:170px!important}}
 </style>
-  <link rel="stylesheet" href="/site-design-v3.css?v=20261104-prycotlink-public-v2">
+  <link rel="stylesheet" href="/site-design-v3.css?v=20261104-prycotlink-public-v3">
 </head>
 <body>
 
@@ -635,7 +635,8 @@ function releaseMarkup(r, preview=false){
   return `<section class="pl-live-release ${preview?'pl-live-preview':''}">
     <header class="release-topbar">
       ${(r.canEdit||telegramProfile())?`<a class="release-edit" href="/prycotlink.html?edit=${encodeURIComponent(r.slug)}">EDIT</a>`:``}
-      <div class="release-brand release-brand-label">independent music label</div>
+      <a class="release-brand" href="https://prycot.com/" aria-label="PRYCOT."><span>PRYCOT.</span></a>
+      <p class="release-tagline">independent music label</p>
     </header>
     <section class="release-content" aria-label="Release">
       <div class="release-left-column">
@@ -663,9 +664,9 @@ function releaseMarkup(r, preview=false){
   </section>`;
  }
  function addLiveStyles(){if(document.getElementById('prycotlink-live-styles'))return;const s=document.createElement('style');s.id='prycotlink-live-styles';s.textContent=`
-.prycotlink-page.release-host{max-width:none!important;margin:0!important;padding:0!important}
+.prycotlink-page.release-host{width:100vw!important;max-width:none!important;margin:0!important;padding:0!important;position:relative!important;left:50%!important;transform:translateX(-50%)!important;overflow-x:clip!important}
 body.prycotlink-public-release .prycotlink-page.release-host > .pl-live-release{width:100%!important;max-width:none!important;min-height:100svh!important;margin:0!important;padding:clamp(22px,3vw,42px) clamp(20px,4vw,64px) 34px!important;border:0!important;outline:0!important;border-radius:0!important;box-shadow:none!important;background:#0a0a0a!important}
-.release-brand-label{position:fixed!important;left:34px!important;top:30px!important;z-index:20!important;color:#F4F4F4!important;font-size:clamp(14px,1.4vw,18px)!important;line-height:1.2!important;font-weight:500!important;font-style:normal!important;letter-spacing:.01em!important;text-transform:none!important;white-space:nowrap!important}
+.release-tagline{position:fixed!important;top:88px!important;left:42px!important;margin:0!important;display:block!important;width:auto!important;color:#919191!important;font:italic 300 11px/1.25 Helvetica,Arial,sans-serif!important;letter-spacing:0!important;text-transform:none!important;white-space:nowrap!important;z-index:20!important}
 .prycotlink-page.release-host > *:not(.pl-live-release){display:none!important}
 .pl-live-release{min-height:100svh;padding:clamp(22px,3vw,42px) clamp(20px,4vw,64px) 34px;display:flex;flex-direction:column;width:100%;background:#0a0a0a;color:#F4F4F4}
  .release-topbar{display:flex;justify-content:center;align-items:flex-start;position:relative;min-height:96px;flex:0 0 auto}
@@ -756,6 +757,17 @@ body.prycotlink-public-release .prycotlink-page.release-host > .pl-live-release{
 .pl-live-release .release-donation-warning{margin:14px 0 0!important;padding-top:14px!important;border-top:1px solid #292929!important;color:#777!important;font-size:10px!important;line-height:1.5!important}
 @media(max-width:700px){.pl-live-release .release-wallets{width:100%!important;max-width:100%!important;margin-top:24px!important}.pl-live-release .release-donation-dialog{padding:20px!important;max-height:86svh!important}.pl-live-release .release-donation-dialog-head h2{font-size:24px!important}.pl-live-release .release-donation-wallets .release-wallet-address{align-items:flex-start!important}.pl-live-release .release-donation-wallets .release-wallet-address code{font-size:10px!important;word-break:break-all!important}.pl-live-release .release-donation-wallets .release-wallet-copy{min-width:60px!important;padding:9px 8px!important;font-size:9px!important}}
 @media(prefers-reduced-motion:reduce){.pl-live-release *{scroll-behavior:auto!important;transition:none!important}}
+body.prycotlink-public-release .prycotlink-page.release-host > .pl-live-release { width:100% !important; max-width:none !important; margin:0 !important; }
+body.prycotlink-public-release .prycotlink-page.release-host .release-content { width:min(100%,760px) !important; max-width:760px !important; margin-inline:auto !important; padding:clamp(20px,4vw,55px) 0 !important; }
+body.prycotlink-public-release .prycotlink-page.release-host .release-stats,
+body.prycotlink-public-release .prycotlink-page.release-host .release-bottom,
+body.prycotlink-public-release .prycotlink-page.release-host .release-videos { width:min(100%,540px) !important; max-width:540px !important; margin-left:auto !important; margin-right:auto !important; }
+@media(max-width:760px){
+ body.prycotlink-public-release .prycotlink-page.release-host { width:100vw !important; }
+ body.prycotlink-public-release .prycotlink-page.release-host .release-content { width:100% !important; max-width:100% !important; padding:22px 0 30px !important; }
+ body.prycotlink-public-release .prycotlink-page.release-host .release-tagline { left:20px !important; top:62px !important; font:italic 300 10px/1.2 Helvetica,Arial,sans-serif !important; text-transform:none !important; }
+}
+
 `;
  document.head.appendChild(s)}
  function removeStrayHeaderText(release){

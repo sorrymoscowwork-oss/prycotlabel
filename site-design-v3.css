@@ -866,3 +866,10 @@ input[type="submit"], input[type="button"],
   .payment-methods .rate-label { font-size: 12px !important; line-height: 1.3 !important; }
   .payment-methods .rate-text { font-size: 10px !important; line-height: 1.45 !important; overflow-wrap: anywhere !important; }
 }
+
+
+/* Reduce the gap above the signed-in account dashboard on mobile only. */
+@media (max-width: 760px) {
+  body.site-account-home-header .page { padding-top: calc(var(--header) + 10px) !important; }
+  body.site-account-home-header #cabinetView .account-shell { margin-top: 8px !important; }
+}

@@ -518,3 +518,120 @@ body.prycotlink-public-release .v3-header, body.prycotlink-public-release .v3-ov
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Final compatibility layer: older page-specific !important rules must not
+   resize or reveal the source header over the unified V3 navigation. */
+body > header.v3-header,
+body header.v3-header {
+  position: fixed !important;
+  inset: 0 0 auto !important;
+  display: flex !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: var(--header) !important;
+  max-height: var(--header) !important;
+  height: var(--header) !important;
+  margin: 0 !important;
+  padding: 0 var(--gutter) !important;
+  overflow: visible !important;
+}
+body header.v3-header .v3-brand { position: absolute !important; }
+body header.v3-header .v3-menu-toggle {
+  min-height: 44px !important;
+  max-height: 44px !important;
+  padding: 0 15px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background-color: var(--blue) !important;
+  background-image: var(--button-gradient) !important;
+  background-size: 200% 100% !important;
+  animation: button-gradient-loop 8s linear infinite !important;
+}
+body .page.page > header:not(.v3-header),
+body main.page.page > header:not(.v3-header),
+body .page.page > .brand:not(.v3-brand),
+body main.page.page > .brand:not(.v3-brand),
+body > .brand:not(.v3-brand),
+body .page.page > .tagline,
+body main.page.page > .tagline,
+body > .tagline { display: none !important; }
+
+body.site-home main.page.page {
+  width: min(100% - 2 * var(--gutter), 1320px) !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  padding: calc(var(--header) + 58px) 0 64px !important;
+}
+body.site-home main.page.page > .hero {
+  display: grid !important;
+  grid-template-columns: minmax(0,1.4fr) minmax(250px,.6fr) !important;
+  align-items: end !important;
+  gap: 22px 52px !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: clamp(28px,5vh,58px) 0 clamp(48px,7vh,82px) !important;
+  overflow: visible !important;
+  text-align: left !important;
+}
+body.site-home main.page.page > .hero .intro {
+  grid-column: 1 / -1 !important;
+  max-width: 960px !important;
+  margin: 0 !important;
+  color: var(--ink) !important;
+  font: 650 clamp(48px,7.2vw,88px)/.98 Inter,"Helvetica Neue",Arial,sans-serif !important;
+  letter-spacing: -.07em !important;
+}
+body.site-home main.page.page > .hero .intro-light { color: var(--blue) !important; }
+body.site-home main.page.page > .hero .sub {
+  grid-column: 1 !important;
+  justify-self: start !important;
+  width: min(100%,380px) !important;
+  max-width: 380px !important;
+  margin: 0 !important;
+  color: var(--muted) !important;
+  font-size: 16px !important;
+  line-height: 1.65 !important;
+  text-align: left !important;
+}
+body.site-home .home-accent-lime,
+body.site-home .home-accent-cyan,
+body.site-home .home-accent-coral,
+body.site-home .home-word-emphasis { color: var(--blue) !important; }
+body.site-home main.page.page > .services {
+  display: grid !important;
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  gap: 14px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+body.site-home main.page.page > .services > .service {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 24px !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+  background: var(--surface) !important;
+}
+body.site-home main.page.page > .services > .service .number { color: var(--blue) !important; }
+@media (max-width: 760px) {
+  body.site-home main.page.page { width: calc(100% - 2 * var(--gutter)) !important; padding-top: calc(var(--header) + 34px) !important; }
+  body.site-home main.page.page > .hero {
+    grid-template-columns: minmax(0,1fr) !important;
+    gap: 18px !important;
+    padding: 24px 0 34px !important;
+  }
+  body.site-home main.page.page > .hero .intro { grid-column: 1 !important; font-size: clamp(42px,11vw,68px) !important; }
+  body.site-home main.page.page > .hero .sub { grid-column: 1 !important; width: 100% !important; max-width: 42ch !important; }
+  body.site-home main.page.page > .services { grid-template-columns: minmax(0,1fr) !important; gap: 10px !important; }
+  body.site-home main.page.page > .services > .service { padding: 20px !important; }
+}

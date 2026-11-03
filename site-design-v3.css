@@ -993,5 +993,9 @@ html body.site-account-home-header #cabinetView:not(.hidden) .account-shell { ma
   }
 }
 
-/* Public PRYCOTLINK pages use the full viewport without the product card frame. */
-body.prycotlink-public-release .prycotlink-page.release-host > .pl-live-release { width: 100% !important; max-width: none !important; min-height: 100svh !important; margin: 0 !important; border: 0 !important; outline: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: #0a0a0a !important; }
+/* Keep every public release page centered across the viewport and its content blocks. */
+body.prycotlink-public-release .prycotlink-page.release-host { width:100vw !important; max-width:none !important; margin:0 !important; padding:0 !important; position:relative !important; left:50% !important; transform:translateX(-50%) !important; overflow-x:clip !important; }
+body.prycotlink-public-release .prycotlink-page.release-host > .pl-live-release { width:100% !important; max-width:none !important; margin:0 !important; border:0 !important; outline:0 !important; border-radius:0 !important; box-shadow:none !important; background:#0a0a0a !important; }
+body.prycotlink-public-release .prycotlink-page.release-host .release-content { width:min(100%,760px) !important; max-width:760px !important; margin-inline:auto !important; padding:clamp(20px,4vw,55px) 0 !important; }
+body.prycotlink-public-release .prycotlink-page.release-host .release-stats, body.prycotlink-public-release .prycotlink-page.release-host .release-bottom, body.prycotlink-public-release .prycotlink-page.release-host .release-videos { width:min(100%,540px) !important; max-width:540px !important; margin-left:auto !important; margin-right:auto !important; }
+@media(max-width:760px){ body.prycotlink-public-release .prycotlink-page.release-host .release-content { width:100% !important; max-width:100% !important; padding:22px 0 30px !important; } }

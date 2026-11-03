@@ -32,7 +32,11 @@ function articleHtml({title,excerpt,category,slug,date,lang,body}){const canonic
 <meta property="og:title" content="${htmlEscape(title)}"><meta property="og:description" content="${htmlEscape(excerpt)}"><meta property="og:url" content="${canonical}">
 <meta property="og:locale" content="${lang==="ru"?"ru_RU":"en_US"}"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="${htmlEscape(title)}"><meta name="twitter:description" content="${htmlEscape(excerpt)}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="stylesheet" href="/site-design.css"><link rel="stylesheet" href="/site-header.css"><link rel="stylesheet" href="/site-accent-emphasis.css"><link rel="stylesheet" href="/site-public-button-size.css"><link rel="stylesheet" href="/blog-article.css">
+<link rel="stylesheet" href="/site-design.css?v=20261022-button-center2">
+<link rel="stylesheet" href="/site-header.css?v=20261022-prepaint-2">
+<link rel="stylesheet" href="/site-accent-emphasis.css?v=20261022-accent-5">
+<link rel="stylesheet" href="/site-public-button-size.css?v=20261102-public-footer-1">
+<link rel="stylesheet" href="/blog-article.css?v=20261103-unified-template-1">
 </head>
 <body class="site-desktop-unified-header site-mobile-standard-header site-public-header">
 <main class="page"><header><div class="brand header-brand"><a class="brand-logo" href="/" aria-label="PRYCOT."><div class="logo">PRYCOT.</div></a><span class="page-label">Blog</span></div></header>

@@ -656,27 +656,13 @@ body.site-home .services .service h2 .home-word-emphasis { color: var(--blue) !i
   }
 }
 
-/* Keep the homepage hero headline from breaking inside words. */
-@media (min-width: 761px) {
-  body.site-home main.page.page > .hero .intro {
-    max-width: 100% !important;
-    font-size: clamp(40px, 3.2vw, 58px) !important;
-    letter-spacing: -.06em !important;
-    word-break: normal !important;
-    overflow-wrap: normal !important;
-    hyphens: none !important;
-  }
-}
-
-
-/* Stable desktop and mobile geometry for the shared menu button. */
- .v3-header .v3-menu-toggle {
+/* Keep the shared menu control fixed in the same place on every page. */
+.v3-header .v3-menu-toggle {
   position: absolute !important;
   top: 50% !important;
   right: var(--gutter) !important;
   bottom: auto !important;
   left: auto !important;
-  display: block !important;
   width: 160px !important;
   min-width: 160px !important;
   max-width: 160px !important;
@@ -684,39 +670,19 @@ body.site-home .services .service h2 .home-word-emphasis { color: var(--blue) !i
   min-height: 48px !important;
   max-height: 48px !important;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 0 16px !important;
+  gap: 12px !important;
   transform: translateY(-50%) !important;
-  text-align: center !important;
   font-size: 12px !important;
-  font-weight: 700 !important;
   line-height: 1 !important;
   letter-spacing: .08em !important;
   white-space: nowrap !important;
 }
-.v3-header .v3-menu-toggle > span:first-child {
-  position: absolute !important;
-  inset: 50% auto auto 50% !important;
-  transform: translate(-50%,-50%) !important;
-}
-.v3-header .v3-menu-toggle .v3-menu-symbol {
-  position: absolute !important;
-  top: 50% !important;
-  right: 18px !important;
-  width: 18px !important;
-  transform: translateY(-50%) !important;
-}
-.v3-header .v3-menu-toggle[aria-expanded="true"] .v3-menu-symbol {
-  transform: translateY(-50%) rotate(45deg) !important;
-}
 .v3-header .v3-menu-toggle:active { transform: translateY(calc(-50% + 1px)) !important; }
 
-/* Each PRYCOTLINK table row contains six cells. Keep them inside the card. */
+/* Account rows have six data cells; give each a real grid track and keep status intact. */
 #cabinetView .prycotlink-card,
-#cabinetView .prycotlink-list {
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: 100% !important;
-}
+#cabinetView .prycotlink-list { width: 100% !important; min-width: 0 !important; max-width: 100% !important; }
 #cabinetView .prycotlink-card { overflow: hidden !important; }
 #cabinetView .prycotlink-entry {
   display: grid !important;
@@ -733,14 +699,10 @@ body.site-home .services .service h2 .home-word-emphasis { color: var(--blue) !i
 #cabinetView .prycotlink-date,
 #cabinetView .prycotlink-status,
 #cabinetView .prycotlink-actions { min-width: 0 !important; }
-#cabinetView .prycotlink-status {
-  white-space: nowrap !important;
-  word-break: keep-all !important;
-  overflow-wrap: normal !important;
-}
+#cabinetView .prycotlink-status { white-space: nowrap !important; word-break: keep-all !important; overflow-wrap: normal !important; }
 #cabinetView .prycotlink-actions { flex-wrap: nowrap !important; }
 
-/* Keep remove-link controls compact despite generic button sizing. */
+/* Keep the remove-link control compact inside the builder's link rows. */
 button.pl-remove-platform {
   display: inline-grid !important;
   place-items: center !important;
@@ -758,11 +720,12 @@ button.pl-remove-platform {
   white-space: nowrap !important;
 }
 
-/* Safari's reduced-motion cascade reduced button gradients to one frame. */
+/* Safari's reduced-motion preference was collapsing every button animation to a
+   single near-instant frame. Keep the requested continuous button gradient. */
 button:not(.site-mobile-sections-toggle),
 input[type="submit"], input[type="button"],
 .primary, .secondary, .order-button, .site-button,
-.prycotlink-actions a, .release-details-button, .v3-menu-toggle {
+.prycotlink-actions a, .release-details-button {
   background-size: 200% 100% !important;
   animation: button-gradient-loop 6s linear infinite !important;
 }
@@ -770,11 +733,23 @@ input[type="submit"], input[type="button"],
   button:not(.site-mobile-sections-toggle),
   input[type="submit"], input[type="button"],
   .primary, .secondary, .order-button, .site-button,
-  .prycotlink-actions a, .release-details-button, .v3-menu-toggle {
+  .prycotlink-actions a, .release-details-button {
     animation-duration: 6s !important;
     animation-iteration-count: infinite !important;
   }
 }
 @media (max-width: 760px) {
   #cabinetView .prycotlink-entry { grid-template-columns: 48px minmax(0,1fr) !important; }
+}
+
+/* Keep the homepage hero headline from breaking inside words on desktop. */
+@media (min-width: 761px) {
+  body.site-home main.page.page > .hero .intro {
+    max-width: 100% !important;
+    font-size: clamp(40px, 3.2vw, 58px) !important;
+    letter-spacing: -.06em !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+    hyphens: none !important;
+  }
 }

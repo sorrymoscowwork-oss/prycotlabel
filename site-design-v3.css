@@ -950,3 +950,45 @@ html body.site-account-home-header #cabinetView:not(.hidden) .account-shell { ma
     white-space: nowrap !important;
   }
 }
+
+
+/* Pin the PRYCOTLINK action area to the row and fit both buttons inside it. */
+@media (min-width: 761px) {
+  #cabinetView .prycotlink-table-head,
+  #cabinetView .prycotlink-entry {
+    grid-template-columns: 54px minmax(0, 1fr) minmax(0, 1.1fr) minmax(80px, .65fr) minmax(96px, .8fr) 190px !important;
+    column-gap: 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  #cabinetView .prycotlink-entry { overflow: hidden !important; }
+  #cabinetView .prycotlink-info,
+  #cabinetView .prycotlink-url,
+  #cabinetView .prycotlink-date,
+  #cabinetView .prycotlink-status { min-width: 0 !important; overflow-wrap: anywhere !important; }
+  #cabinetView .prycotlink-actions {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    width: 190px !important;
+    min-width: 0 !important;
+    max-width: 190px !important;
+    gap: 6px !important;
+    overflow: hidden !important;
+  }
+  #cabinetView .prycotlink-actions a {
+    display: inline-flex !important;
+    flex: none !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    min-height: 38px !important;
+    padding: 0 3px !important;
+    font-size: 8px !important;
+    letter-spacing: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}

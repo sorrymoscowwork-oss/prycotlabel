@@ -670,9 +670,12 @@ body.site-home .services .service h2 .home-word-emphasis { color: var(--blue) !i
 
 
 /* Stable desktop and mobile geometry for the shared menu button. */
-.v3-header .v3-menu-toggle {
+ .v3-header .v3-menu-toggle {
   position: absolute !important;
-  inset: 50% var(--gutter) auto auto !important;
+  top: 50% !important;
+  right: var(--gutter) !important;
+  bottom: auto !important;
+  left: auto !important;
   display: block !important;
   width: 160px !important;
   min-width: 160px !important;

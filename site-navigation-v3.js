@@ -49,6 +49,24 @@
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-controls", "v3-menu");
     toggle.innerHTML = '<span>PAGES</span><span class="v3-menu-symbol" aria-hidden="true">+</span>';
+    const pinStyle = (element, values) => Object.entries(values).forEach(([property, value]) => element.style.setProperty(property, value, "important"));
+    pinStyle(toggle, {
+      position: "absolute", top: "50%", right: "var(--gutter)", bottom: "auto", left: "auto",
+      display: "block", width: "160px", minWidth: "160px", maxWidth: "160px",
+      height: "48px", minHeight: "48px", maxHeight: "48px", margin: "0", padding: "0",
+      transform: "translateY(-50%)", textAlign: "center", fontSize: "12px", lineHeight: "1",
+      fontWeight: "700", letterSpacing: ".08em", whiteSpace: "nowrap"
+    });
+    const label = toggle.querySelector("span:first-child");
+    const symbol = toggle.querySelector(".v3-menu-symbol");
+    if (label) pinStyle(label, {
+      position: "absolute", top: "50%", left: "50%", right: "auto",
+      transform: "translate(-50%,-50%)", whiteSpace: "nowrap"
+    });
+    if (symbol) pinStyle(symbol, {
+      position: "absolute", top: "50%", right: "18px", left: "auto",
+      width: "18px", transform: "translateY(-50%)"
+    });
     header.append(toggle);
 
     const overlay = document.createElement("nav");

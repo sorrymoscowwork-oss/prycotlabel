@@ -163,6 +163,10 @@ body > .prycotlink-header { display: none !important; }
 .about-block h2, .term h2, .step h2, .services:not(.site-home .services) .service h2, .request h2 { margin: 0 0 10px !important; font-size: 24px !important; }
 .about-block p, .term p, .step p, .services:not(.site-home .services) .service p, .request p { max-width: 70ch !important; margin: 0 0 13px !important; color: var(--muted) !important; font-size: 16px !important; line-height: 1.68 !important; }
 .about-block p:last-child, .term p:last-child, .step p:last-child, .service p:last-child { margin-bottom: 0 !important; }
+.faq { margin-top: 54px !important; }
+.faq > h2 { margin: 0 0 30px !important; }
+.faq > .steps > .step:first-child { padding-top: 28px !important; }
+.user-agreement-page .download-doc { margin-top: 26px !important; }
 .term ul { margin: 8px 0 0 !important; padding-left: 22px !important; color: var(--muted) !important; }
 .term li { padding: 3px 0 !important; font-size: 16px !important; line-height: 1.55 !important; }
 .services:not(.site-home .services) .service { grid-template-columns: 48px minmax(0,760px) !important; column-gap: 16px !important; }

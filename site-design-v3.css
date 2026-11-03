@@ -635,3 +635,23 @@ body.site-home main.page.page > .services > .service .number { color: var(--blue
   body.site-home main.page.page > .services { grid-template-columns: minmax(0,1fr) !important; gap: 10px !important; }
   body.site-home main.page.page > .services > .service { padding: 20px !important; }
 }
+
+/* The homepage still carries legacy brand-color selectors with higher
+   specificity; neutralize those three palette rules after the old page CSS. */
+body.site-home .hero .sub .home-accent-lime,
+body.site-home .hero .sub .home-accent-cyan,
+body.site-home .hero .sub .home-accent-coral,
+body.site-home .services .service:nth-child(1) h2,
+body.site-home .services .service:nth-child(2) h2,
+body.site-home .services .service:nth-child(3) h2 { color: var(--ink) !important; }
+body.site-home .hero .sub .home-accent-lime,
+body.site-home .hero .sub .home-accent-cyan,
+body.site-home .hero .sub .home-accent-coral,
+body.site-home .services .service h2 .home-word-emphasis { color: var(--blue) !important; }
+@media (min-width: 761px) {
+  body.site-home main.page.page > .hero { padding-top: clamp(18px,3vh,42px) !important; }
+  body.site-home main.page.page > .hero .intro {
+    max-width: 1320px !important;
+    font-size: clamp(46px,5.5vw,72px) !important;
+  }
+}

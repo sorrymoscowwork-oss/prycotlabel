@@ -97,8 +97,6 @@
       const releases=data&&data.ok&&Array.isArray(data.releases)?data.releases:[];
       const first=makeSet(releases);
       const second=first.cloneNode(true);
-      second.setAttribute('aria-hidden','true');
-      second.inert=true;
       track.replaceChildren(first,second);
     })
     .catch(function(){

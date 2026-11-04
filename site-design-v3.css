@@ -66,8 +66,15 @@ button, a, input[type="submit"] { -webkit-tap-highlight-color: transparent; }
 .v3-menu-kicker { grid-column: 1 / -1; margin: 0; padding-bottom: 20px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
 .v3-menu-group { display: grid; align-content: start; gap: 3px; }
 .v3-menu-group h2 { margin: 0 0 13px; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-/* PRYCOT peach accent for the four navigation section titles on desktop and mobile. */
-.v3-menu-group h2 { color: #E9A18F !important; }
+/* Match the exact PRYCOT homepage accent used by “digital distribution”, on desktop and mobile. */
+body .v3-overlay .v3-menu-group h2,
+body .v3-overlay-inner .v3-menu-group h2,
+.v3-menu-group h2 { color: var(--blue) !important; }
+@media (max-width: 760px) {
+  body .v3-overlay .v3-menu-group h2,
+  body .v3-overlay-inner .v3-menu-group h2,
+  .v3-menu-group h2 { color: var(--blue) !important; }
+}
 .v3-menu-link { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; min-height: 38px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: clamp(14px,1.3vw,17px); line-height: 1.35; transition: padding .18s ease, color .18s ease; }
 .v3-menu-link::after { content: "↗"; flex: 0 0 auto; color: var(--muted); font-size: 12px; }
 .v3-menu-link:hover { padding-left: 5px; color: var(--blue-dark); }

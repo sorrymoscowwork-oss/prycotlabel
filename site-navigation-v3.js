@@ -195,37 +195,74 @@
   buttonMotion.textContent += `
     @media (max-width: 760px) {
       .v3-overlay {
+        position: fixed !important;
         inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
         padding: 0 !important;
         overflow: hidden !important;
-        background: rgba(5, 5, 5, .22) !important;
-        -webkit-backdrop-filter: blur(8px) !important;
-        backdrop-filter: blur(8px) !important;
+        background: var(--paper) !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
       }
       .v3-overlay-inner {
         display: grid !important;
-        grid-template-columns: minmax(0, 1fr) !important;
-        align-content: start !important;
-        gap: 28px !important;
-        width: 50vw !important;
-        max-width: 420px !important;
+        grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important;
+        grid-template-rows: auto 1fr 1fr !important;
+        grid-template-areas:
+          "kicker kicker"
+          "overview artist"
+          "prycot information" !important;
+        align-content: stretch !important;
+        align-items: start !important;
+        justify-content: stretch !important;
+        gap: clamp(10px,2.2vh,20px) clamp(14px,4vw,24px) !important;
+        width: 100% !important;
+        max-width: none !important;
         height: 100% !important;
-        margin: 0 0 0 auto !important;
-        padding: calc(var(--header) + 22px) 18px 32px !important;
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: calc(env(safe-area-inset-top, 0px) + 88px) 20px calc(env(safe-area-inset-bottom, 0px) + 22px) !important;
+        overflow: hidden !important;
         background: var(--paper) !important;
-        box-shadow: -18px 0 48px rgba(0, 0, 0, .28) !important;
+        box-shadow: none !important;
       }
-      .v3-menu-kicker { grid-column: 1 !important; }
-      .v3-menu-group { min-width: 0 !important; }
+      .v3-menu-kicker {
+        grid-area: kicker !important;
+        margin: 0 !important;
+        padding: 0 0 12px !important;
+        font-size: 10px !important;
+      }
+      .v3-menu-group {
+        min-width: 0 !important;
+        align-self: start !important;
+        gap: 2px !important;
+      }
+      .v3-menu-group:nth-of-type(1) { grid-area: overview !important; }
+      .v3-menu-group:nth-of-type(2) { grid-area: artist !important; }
+      .v3-menu-group:nth-of-type(3) { grid-area: prycot !important; }
+      .v3-menu-group:nth-of-type(4) { grid-area: information !important; }
+      .v3-menu-group h2 {
+        margin: 0 0 7px !important;
+        font-size: 9px !important;
+        line-height: 1.2 !important;
+        letter-spacing: .11em !important;
+      }
       .v3-menu-link {
+        display: flex !important;
         align-items: center !important;
-        min-height: 48px !important;
-        font-size: 14px !important;
+        justify-content: flex-start !important;
+        min-height: 0 !important;
+        padding: clamp(5px,.9vh,8px) 0 !important;
+        border-bottom: 1px solid var(--line) !important;
+        font-size: clamp(11px,3.1vw,13px) !important;
+        line-height: 1.22 !important;
+        overflow-wrap: anywhere !important;
       }
       .v3-menu-link::after { display: none !important; content: none !important; }
-      .v3-menu-link.is-current::after { display: inline !important; content: "•" !important; }
+      .v3-menu-link.is-current::after { display: inline !important; content: "•" !important; margin-left: 5px !important; }
     }
   `;
   document.body.append(buttonMotion);

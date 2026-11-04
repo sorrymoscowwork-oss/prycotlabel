@@ -1070,3 +1070,53 @@ body:is(.site-home,.site-public-header,.site-desktop-unified-header) main :is(
   color:#0A0A0A !important;
   animation:none !important;
 }
+
+/* Account/cabinet buttons: same solid peach + lilac hover palette as public pages. */
+body.site-account #cabinetView :is(
+  button:not(.site-mobile-sections-toggle),
+  input[type="submit"],
+  input[type="button"],
+  .primary,
+  .secondary,
+  [class*="btn"],
+  [class*="button"],
+  [class*="cta"] a,
+  .prycotlink-actions a,
+  .release-details-button
+):not(.release-disabled) {
+  background:#FF8A70 !important;
+  background-image:none !important;
+  color:#0A0A0A !important;
+  border-color:#FF8A70 !important;
+  animation:none !important;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .16s ease !important;
+}
+body.site-account #cabinetView :is(
+  button:not(.site-mobile-sections-toggle),
+  input[type="submit"],
+  input[type="button"],
+  .primary,
+  .secondary,
+  [class*="btn"],
+  [class*="button"],
+  [class*="cta"] a,
+  .prycotlink-actions a,
+  .release-details-button
+):not(.release-disabled):is(:hover,:focus-visible) {
+  background:#BDA7F5 !important;
+  background-image:none !important;
+  color:#0A0A0A !important;
+  border-color:#BDA7F5 !important;
+  animation:none !important;
+}
+body.site-account #cabinetView #submitReleaseButton.release-enabled {
+  background:#FF8A70 !important;
+  background-image:none !important;
+  border-color:#FF8A70 !important;
+  color:#0A0A0A !important;
+  animation:none !important;
+}
+body.site-account #cabinetView #submitReleaseButton.release-enabled:hover {
+  background:#BDA7F5 !important;
+  border-color:#BDA7F5 !important;
+}

@@ -769,6 +769,23 @@ body.prycotlink-public-release .prycotlink-page.release-host .release-videos { w
 
 
 
+
+/* Desktop: center the release artwork on the page axis, independent of column sizing. */
+@media(min-width:761px){
+ body.prycotlink-public-release .pl-live-release .release-content{
+   display:flex!important;flex-direction:column!important;align-items:center!important;
+ }
+ body.prycotlink-public-release .pl-live-release .release-cover-wrap{
+   display:block!important;position:relative!important;left:auto!important;right:auto!important;
+   width:min(100%,540px)!important;max-width:540px!important;
+   margin-left:auto!important;margin-right:auto!important;
+   align-self:center!important;justify-self:center!important;
+   transform:none!important;
+ }
+ body.prycotlink-public-release .pl-live-release .release-cover{
+   display:block!important;width:100%!important;margin-left:auto!important;margin-right:auto!important;
+ }
+}
 /* Canonical PRYCOTLINK header for every public release. */
 body.prycotlink-public-release .pl-live-release .release-brand-group{position:fixed!important;left:34px!important;top:30px!important;right:auto!important;bottom:auto!important;z-index:20!important;display:block!important;width:max-content!important;height:auto!important;max-width:calc(100vw - 68px)!important;margin:0!important;padding:0!important;overflow:visible!important;transform:none!important}
 body.prycotlink-public-release .pl-live-release .release-brand-group>.release-brand{position:relative!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;display:block!important;width:max-content!important;height:auto!important;margin:0!important;padding:0!important}

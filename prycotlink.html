@@ -1325,6 +1325,31 @@ html body .pl-live-release .release-donation-wallets button.release-wallet-copy.
     white-space:nowrap!important;
   }
 }
+
+/* Last-cascade mobile header spacing fix. */
+@media screen and (max-width:760px){
+  html body .pl-live-release .release-brand-group{
+    display:block!important;
+    position:fixed!important;
+    height:auto!important;
+  }
+  html body .pl-live-release .release-brand-group > p.release-tagline{
+    position:absolute!important;
+    inset:auto auto auto 0!important;
+    top:calc(100% + 5px)!important;
+    margin:0!important;
+    padding:0!important;
+    font-family:Helvetica,Arial,sans-serif!important;
+    font-size:12px!important;
+    font-style:italic!important;
+    font-weight:300!important;
+    line-height:1.2!important;
+    letter-spacing:0!important;
+    text-transform:none!important;
+    white-space:nowrap!important;
+    transform:none!important;
+  }
+}
 </style>
 <script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body>
 </html>

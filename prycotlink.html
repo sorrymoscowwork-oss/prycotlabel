@@ -1132,6 +1132,15 @@ html body .pl-live-release .release-donation-wallets button.release-wallet-copy.
   -webkit-appearance: none !important;
   appearance: none !important;
 }
+
+/* Shared release template: one logo/tagline group and centered release title. */
+.pl-live-release .release-brand-group{position:fixed!important;left:34px!important;top:30px!important;right:auto!important;bottom:auto!important;z-index:20!important;display:block!important;width:max-content!important;max-width:calc(100vw - 68px)!important;overflow:visible!important;transform:none!important}
+.pl-live-release .release-brand-group>.release-brand{position:relative!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;display:block!important;width:max-content!important;max-width:100%!important;overflow:visible!important}
+.pl-live-release .release-brand-group>.release-brand span{display:block!important;font-size:clamp(23.8px,3.15vw,43.4px)!important;line-height:.82!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important}
+.pl-live-release .release-brand-group>.release-tagline{position:absolute!important;left:0!important;right:auto!important;top:calc(100% + 5px)!important;bottom:auto!important;display:block!important;width:max-content!important;max-width:calc(100vw - 68px)!important;margin:0!important;padding:0!important;overflow:visible!important;clip-path:none!important;color:#919191!important;font:italic 300 12px/1.2 Helvetica,Arial,sans-serif!important;letter-spacing:0!important;text-transform:none!important;text-align:left!important;white-space:nowrap!important;transform:none!important;transform-origin:left top!important}
+.pl-live-release .release-meta{align-items:center!important}
+.pl-live-release .release-meta h1{display:block!important;align-self:stretch!important;width:100%!important;max-width:100%!important;text-align:center!important}
+@media(max-width:760px){.pl-live-release .release-brand-group{left:20px!important;top:22px!important;max-width:calc(100vw - 40px)!important}.pl-live-release .release-brand-group>.release-brand span{font-size:42px!important;line-height:.82!important}.pl-live-release .release-brand-group>.release-tagline{top:calc(100% + 5px)!important;font-size:11px!important;max-width:calc(100vw - 40px)!important}}
 </style>
 <script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body>
 </html>

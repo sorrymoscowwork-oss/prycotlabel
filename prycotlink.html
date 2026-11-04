@@ -631,7 +631,7 @@ function coinLogo(key){const logos={btc:'https://cdn.simpleicons.org/bitcoin/F79
 document.querySelectorAll('.pl-coin-icon.btc').forEach(el=>el.innerHTML=coinLogo('btc'));document.querySelectorAll('.pl-coin-icon.eth').forEach(el=>el.innerHTML=coinLogo('eth'));document.querySelectorAll('.pl-coin-icon.sol').forEach(el=>el.innerHTML=coinLogo('sol'));document.querySelectorAll('.pl-coin-icon.usdt').forEach(el=>el.innerHTML=coinLogo('usdt'));document.querySelectorAll('.pl-coin-icon.usdc').forEach(el=>el.innerHTML=coinLogo('usdc'));
 function releaseMarkup(r, preview=false){
   const vids=(r.videos||[]).map(youtubeId).filter(Boolean);
-  const qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&qzone=1&color=255-255-255&bgcolor=10-10-10&data='+encodeURIComponent(location.origin+'/'+(r.slug||makeSlug(r.title||'release')));
+  const qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=H&qzone=1&color=255-255-255&bgcolor=10-10-10&format=png&margin=0&v=4&data='+encodeURIComponent(location.origin+'/'+(r.slug||makeSlug(r.title||'release')));
   return `<section class="pl-live-release ${preview?'pl-live-preview':''}">
     <header class="release-topbar">
       ${(r.canEdit||telegramProfile())?`<a class="release-edit" href="/prycotlink.html?edit=${encodeURIComponent(r.slug)}">EDIT</a>`:``}
@@ -768,53 +768,17 @@ body.prycotlink-public-release .prycotlink-page.release-host .release-videos { w
 }
 
 
-/* Final mobile header alignment: keep the tagline in normal flow directly below the wordmark. */
-body.prycotlink-public-release .pl-live-release .release-brand-group{
-  display:flex!important;
-  flex-direction:column!important;
-  align-items:flex-start!important;
-  justify-content:flex-start!important;
-  gap:0!important;
-  width:max-content!important;
-  max-width:calc(100vw - 40px)!important;
-  height:auto!important;
-  overflow:visible!important;
-}
-body.prycotlink-public-release .pl-live-release .release-brand-group > .release-brand{
-  position:static!important;
-  flex:none!important;
-  margin:0!important;
-  padding:0!important;
-  line-height:1!important;
-}
-body.prycotlink-public-release .pl-live-release .release-brand-group > .release-brand span{
-  display:block!important;
-  width:max-content!important;
-  font-size:42px!important;
-  line-height:.82!important;
-  white-space:nowrap!important;
-}
-body.prycotlink-public-release .pl-live-release .release-brand-group > .prycot-brand-tagline{
-  position:static!important;
-  inset:auto!important;
-  display:block!important;
-  flex:none!important;
-  width:max-content!important;
-  max-width:calc(100vw - 40px)!important;
-  margin:2px 0 0 0!important;
-  padding:0!important;
-  font:500 8px/1.18 Helvetica,Arial,sans-serif!important;
-  letter-spacing:.08em!important;
-  text-transform:uppercase!important;
-  text-align:left!important;
-  white-space:nowrap!important;
-  transform:none!important;
-}
-@media(min-width:761px){
-  body.prycotlink-public-release .pl-live-release .release-brand-group{max-width:calc(100vw - 68px)!important}
-  body.prycotlink-public-release .pl-live-release .release-brand-group > .release-brand span{font-size:clamp(34px,4.5vw,62px)!important}
-  body.prycotlink-public-release .pl-live-release .release-brand-group > .prycot-brand-tagline{font-size:9px!important;letter-spacing:.11em!important}
-}
+
+/* Canonical PRYCOTLINK header for every public release. */
+body.prycotlink-public-release .pl-live-release .release-brand-group{position:fixed!important;left:34px!important;top:30px!important;right:auto!important;bottom:auto!important;z-index:20!important;display:block!important;width:max-content!important;height:auto!important;max-width:calc(100vw - 68px)!important;margin:0!important;padding:0!important;overflow:visible!important;transform:none!important}
+body.prycotlink-public-release .pl-live-release .release-brand-group>.release-brand{position:relative!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;display:block!important;width:max-content!important;height:auto!important;margin:0!important;padding:0!important}
+body.prycotlink-public-release .pl-live-release .release-brand-group>.release-brand span{display:block!important;width:max-content!important;margin:0!important;padding:0!important;font:italic 800 clamp(34px,4.5vw,62px)/.82 Helvetica,Arial,sans-serif!important;letter-spacing:-.075em!important}
+body.prycotlink-public-release .pl-live-release .release-brand-group>.prycot-brand-tagline{position:absolute!important;left:0!important;top:calc(100% + 5px)!important;right:auto!important;bottom:auto!important;display:block!important;width:max-content!important;margin:0!important;padding:0!important;font:italic 300 12px/1.2 Helvetica,Arial,sans-serif!important;letter-spacing:0!important;text-transform:none!important;text-align:left!important;white-space:nowrap!important;transform:none!important}
+@media(max-width:760px){body.prycotlink-public-release .pl-live-release .release-brand-group{left:20px!important;top:22px!important;max-width:calc(100vw - 40px)!important}body.prycotlink-public-release .pl-live-release .release-brand-group>.release-brand span{font-size:42px!important;line-height:.82!important}body.prycotlink-public-release .pl-live-release .release-brand-group>.prycot-brand-tagline{top:calc(100% + 5px)!important}}
+body.prycotlink-public-release .pl-live-release .release-qr-wrap,body.prycotlink-public-release .pl-live-release .release-qr-wrap:hover,body.prycotlink-public-release .pl-live-release .release-qr-wrap:focus,body.prycotlink-public-release .pl-live-release .release-qr-wrap:focus-visible,body.prycotlink-public-release .pl-live-release .release-qr-wrap:active{background:transparent!important;background-color:transparent!important;background-image:none!important;border:0!important;outline:0!important;box-shadow:none!important;padding:0!important}
+body.prycotlink-public-release .pl-live-release .release-qr-wrap::before,body.prycotlink-public-release .pl-live-release .release-qr-wrap::after{content:none!important;display:none!important}
+body.prycotlink-public-release .pl-live-release .release-qr-wrap .release-qr{display:block!important;background:transparent!important;background-color:transparent!important;background-image:none!important;border:0!important;outline:0!important;box-shadow:none!important}
+
 
 `;
  document.head.appendChild(s)}

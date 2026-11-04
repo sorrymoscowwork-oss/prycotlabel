@@ -1008,3 +1008,65 @@ body.prycotlink-public-release .prycotlink-page.release-host > .pl-live-release 
 body.prycotlink-public-release .prycotlink-page.release-host .release-content { width:min(100%,760px) !important; max-width:760px !important; margin-inline:auto !important; padding:clamp(20px,4vw,55px) 0 !important; }
 body.prycotlink-public-release .prycotlink-page.release-host .release-stats, body.prycotlink-public-release .prycotlink-page.release-host .release-bottom, body.prycotlink-public-release .prycotlink-page.release-host .release-videos { width:min(100%,540px) !important; max-width:540px !important; margin-left:auto !important; margin-right:auto !important; }
 @media(max-width:760px){ body.prycotlink-public-release .prycotlink-page.release-host .release-content { width:100% !important; max-width:100% !important; padding:22px 0 30px !important; } }
+
+/* PRYCOT public-site button palette: solid peach with lilac hover.
+   Scoped to public page body classes; cabinet/admin/PRYCOTLINK creation are excluded. */
+body:is(.site-home,.site-public-header,.site-desktop-unified-header) main :is(
+  button:not(.v3-menu-toggle):not(.site-mobile-sections-toggle),
+  input[type="submit"],
+  input[type="button"],
+  a[class*="button"],
+  a[class*="btn"],
+  .primary,
+  .secondary,
+  .order-button,
+  .site-button,
+  .release-cta a,
+  .release-button,
+  .label-button,
+  .label-services-cta a,
+  .download-doc,
+  .telegram-cta span,
+  .cta a,
+  .search-button,
+  .guide-cta a,
+  .copy-button,
+  .prycotlink-actions a,
+  .release-details-button
+) {
+  background-color:#FF8A70 !important;
+  background-image:none !important;
+  background:#FF8A70 !important;
+  color:#0A0A0A !important;
+  animation:none !important;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .16s ease !important;
+}
+body:is(.site-home,.site-public-header,.site-desktop-unified-header) main :is(
+  button:not(.v3-menu-toggle):not(.site-mobile-sections-toggle),
+  input[type="submit"],
+  input[type="button"],
+  a[class*="button"],
+  a[class*="btn"],
+  .primary,
+  .secondary,
+  .order-button,
+  .site-button,
+  .release-cta a,
+  .release-button,
+  .label-button,
+  .label-services-cta a,
+  .download-doc,
+  .telegram-cta span,
+  .cta a,
+  .search-button,
+  .guide-cta a,
+  .copy-button,
+  .prycotlink-actions a,
+  .release-details-button
+):is(:hover,:focus-visible) {
+  background-color:#BDA7F5 !important;
+  background-image:none !important;
+  background:#BDA7F5 !important;
+  color:#0A0A0A !important;
+  animation:none !important;
+}

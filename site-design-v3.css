@@ -1072,7 +1072,7 @@ body:is(.site-home,.site-public-header,.site-desktop-unified-header) main :is(
 }
 
 /* Account/cabinet buttons: same solid peach + lilac hover palette as public pages. */
-body.site-account #cabinetView :is(
+body:is(.site-account,.site-account-home-header) #cabinetView :is(
   button:not(.site-mobile-sections-toggle),
   input[type="submit"],
   input[type="button"],
@@ -1091,7 +1091,7 @@ body.site-account #cabinetView :is(
   animation:none !important;
   transition:background-color .18s ease,color .18s ease,border-color .18s ease,transform .16s ease !important;
 }
-body.site-account #cabinetView :is(
+body:is(.site-account,.site-account-home-header) #cabinetView :is(
   button:not(.site-mobile-sections-toggle),
   input[type="submit"],
   input[type="button"],
@@ -1109,14 +1109,14 @@ body.site-account #cabinetView :is(
   border-color:#BDA7F5 !important;
   animation:none !important;
 }
-body.site-account #cabinetView #submitReleaseButton.release-enabled {
+body:is(.site-account,.site-account-home-header) #cabinetView #submitReleaseButton.release-enabled {
   background:#FF8A70 !important;
   background-image:none !important;
   border-color:#FF8A70 !important;
   color:#0A0A0A !important;
   animation:none !important;
 }
-body.site-account #cabinetView #submitReleaseButton.release-enabled:hover {
+body:is(.site-account,.site-account-home-header) #cabinetView #submitReleaseButton.release-enabled:hover {
   background:#BDA7F5 !important;
   border-color:#BDA7F5 !important;
 }

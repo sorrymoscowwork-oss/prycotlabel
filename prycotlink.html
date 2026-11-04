@@ -767,6 +767,55 @@ body.prycotlink-public-release .prycotlink-page.release-host .release-videos { w
  body.prycotlink-public-release .prycotlink-page.release-host .release-tagline { left:20px !important; top:62px !important; font:italic 300 10px/1.2 Helvetica,Arial,sans-serif !important; text-transform:none !important; }
 }
 
+
+/* Final mobile header alignment: keep the tagline in normal flow directly below the wordmark. */
+body.prycotlink-public-release .pl-live-release .release-brand-group{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-start!important;
+  gap:0!important;
+  width:max-content!important;
+  max-width:calc(100vw - 40px)!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+body.prycotlink-public-release .pl-live-release .release-brand-group > .release-brand{
+  position:static!important;
+  flex:none!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:1!important;
+}
+body.prycotlink-public-release .pl-live-release .release-brand-group > .release-brand span{
+  display:block!important;
+  width:max-content!important;
+  font-size:42px!important;
+  line-height:.82!important;
+  white-space:nowrap!important;
+}
+body.prycotlink-public-release .pl-live-release .release-brand-group > .release-tagline{
+  position:static!important;
+  inset:auto!important;
+  display:block!important;
+  flex:none!important;
+  width:max-content!important;
+  max-width:calc(100vw - 40px)!important;
+  margin:5px 0 0 0!important;
+  padding:0!important;
+  font:500 8px/1.18 Helvetica,Arial,sans-serif!important;
+  letter-spacing:.08em!important;
+  text-transform:uppercase!important;
+  text-align:left!important;
+  white-space:nowrap!important;
+  transform:none!important;
+}
+@media(min-width:761px){
+  body.prycotlink-public-release .pl-live-release .release-brand-group{max-width:calc(100vw - 68px)!important}
+  body.prycotlink-public-release .pl-live-release .release-brand-group > .release-brand span{font-size:clamp(34px,4.5vw,62px)!important}
+  body.prycotlink-public-release .pl-live-release .release-brand-group > .release-tagline{font-size:9px!important;letter-spacing:.11em!important}
+}
+
 `;
  document.head.appendChild(s)}
  function removeStrayHeaderText(release){

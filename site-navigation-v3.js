@@ -192,6 +192,42 @@
       animation: none !important;
     }
   `;
+  buttonMotion.textContent += `
+    @media (max-width: 760px) {
+      .v3-overlay {
+        inset: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+        background: rgba(5, 5, 5, .22) !important;
+        -webkit-backdrop-filter: blur(8px) !important;
+        backdrop-filter: blur(8px) !important;
+      }
+      .v3-overlay-inner {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        align-content: start !important;
+        gap: 28px !important;
+        width: 50vw !important;
+        max-width: 420px !important;
+        height: 100% !important;
+        margin: 0 0 0 auto !important;
+        padding: calc(var(--header) + 22px) 18px 32px !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        background: var(--paper) !important;
+        box-shadow: -18px 0 48px rgba(0, 0, 0, .28) !important;
+      }
+      .v3-menu-kicker { grid-column: 1 !important; }
+      .v3-menu-group { min-width: 0 !important; }
+      .v3-menu-link {
+        align-items: center !important;
+        min-height: 48px !important;
+        font-size: 14px !important;
+      }
+      .v3-menu-link::after { display: none !important; content: none !important; }
+      .v3-menu-link.is-current::after { display: inline !important; content: "•" !important; }
+    }
+  `;
   document.body.append(buttonMotion);
   document.querySelectorAll('.about-block, .step, .term, .request').forEach(block => {
     const marker = block.matches('.about-block') ? '.about-number' : block.matches('.step') ? '.step-number' : block.matches('.term') ? '.term-number' : '.request-number';

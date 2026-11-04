@@ -15,53 +15,6 @@ h1 span[data-brand-accent="coral"],
 h2 span[data-brand-accent="coral"],
 h3 span[data-brand-accent="coral"] { color: #FF8A70 !important; }
 
-/* Public-page buttons: solid PRYCOT peach, lilac hover. Admin/account UI is intentionally excluded. */
-body:is(.site-home,.site-public-header,.site-desktop-unified-header) main :is(
-  .release-cta a,
-  .guide-cta a,
-  .release-button,
-  .order-button,
-  .site-button,
-  .cta a,
-  .button,
-  .save,
-  .copy-button,
-  .search-button,
-  .telegram-cta span,
-  .download-doc,
-  .label-services-cta a
-) {
-  background-color:#FF8A70 !important;
-  background-image:none !important;
-  color:#0A0A0A !important;
-  animation:none !important;
-  transition:background-color .18s ease,color .18s ease,border-color .18s ease !important;
-}
-body:is(.site-home,.site-public-header,.site-desktop-unified-header) main :is(
-  .release-cta a,
-  .guide-cta a,
-  .release-button,
-  .order-button,
-  .site-button,
-  .cta a,
-  .button,
-  .save,
-  .copy-button,
-  .search-button,
-  .telegram-cta span,
-  .download-doc,
-  .label-services-cta a
-):is(:hover,:focus-visible) {
-  background-color:#BDA7F5 !important;
-  background-image:none !important;
-  color:#0A0A0A !important;
-  animation:none !important;
-}
-body:is(.site-home,.site-public-header,.site-desktop-unified-header) main .copy-button.copied {
-  background-color:#BDA7F5 !important;
-  background-image:none !important;
-}
-
 #adminView .button,
 #adminView .save {
   background: #B6F36B !important;

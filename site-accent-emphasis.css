@@ -15,60 +15,51 @@ h1 span[data-brand-accent="coral"],
 h2 span[data-brand-accent="coral"],
 h3 span[data-brand-accent="coral"] { color: #FF8A70 !important; }
 
-/* Primary actions use lime, utility actions cyan, and secondary/editorial actions coral. */
-main .release-cta a,
-main .guide-cta a,
-main .release-button,
-main .order-button,
-main .site-button,
-main .cta a,
-main .button,
-main .save {
-  background: #B6F36B !important;
-  color: #0A0A0A !important;
+/* Public-page buttons: solid PRYCOT peach, lilac hover. Admin/account UI is intentionally excluded. */
+body:is(.site-home,.site-public-header,.site-desktop-unified-header) main :is(
+  .release-cta a,
+  .guide-cta a,
+  .release-button,
+  .order-button,
+  .site-button,
+  .cta a,
+  .button,
+  .save,
+  .copy-button,
+  .search-button,
+  .telegram-cta span,
+  .download-doc,
+  .label-services-cta a
+) {
+  background-color:#FF8A70 !important;
+  background-image:none !important;
+  color:#0A0A0A !important;
+  animation:none !important;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease !important;
 }
-main .release-cta a:hover,
-main .guide-cta a:hover,
-main .release-button:hover,
-main .order-button:hover,
-main .site-button:hover,
-main .cta a:hover,
-main .button:hover,
-main .save:hover {
-  background: #D1FF9A !important;
-  color: #0A0A0A !important;
+body:is(.site-home,.site-public-header,.site-desktop-unified-header) main :is(
+  .release-cta a,
+  .guide-cta a,
+  .release-button,
+  .order-button,
+  .site-button,
+  .cta a,
+  .button,
+  .save,
+  .copy-button,
+  .search-button,
+  .telegram-cta span,
+  .download-doc,
+  .label-services-cta a
+):is(:hover,:focus-visible) {
+  background-color:#BDA7F5 !important;
+  background-image:none !important;
+  color:#0A0A0A !important;
+  animation:none !important;
 }
-main .copy-button,
-main .search-button,
-main .telegram-cta span {
-  background: #53D9F5 !important;
-  color: #0A0A0A !important;
-}
-main .copy-button:hover,
-main .search-button:hover,
-main .telegram-cta span:hover {
-  background: #A0ECFA !important;
-  color: #0A0A0A !important;
-}
-main .copy-button.copied { background: #A0ECFA !important; }
-main .download-doc,
-main .label-services-cta a {
-  background: #FF8A70 !important;
-  color: #0A0A0A !important;
-}
-main .download-doc:hover,
-main .label-services-cta a:hover {
-  background: #FFB09E !important;
-  color: #0A0A0A !important;
-}
-body .support-prycotlink-cta {
-  background: #FF8A70 !important;
-  color: #0A0A0A !important;
-}
-body .support-prycotlink-cta:hover,
-body .support-prycotlink-cta:focus-visible {
-  background: #FFB09E !important;
-  color: #0A0A0A !important;
+body:is(.site-home,.site-public-header,.site-desktop-unified-header) main .copy-button.copied {
+  background-color:#BDA7F5 !important;
+  background-image:none !important;
 }
 
 #adminView .button,

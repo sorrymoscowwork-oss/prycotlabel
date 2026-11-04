@@ -96,6 +96,7 @@
       section.className = "v3-menu-group";
       const heading = document.createElement("h2");
       heading.textContent = groupName;
+      heading.style.setProperty("color", "var(--blue)", "important");
       section.append(heading);
       for (const [label, href] of entries) {
         const link = document.createElement("a");

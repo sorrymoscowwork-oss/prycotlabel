@@ -1120,3 +1120,22 @@ body:is(.site-account,.site-account-home-header) #cabinetView #submitReleaseButt
   background:#BDA7F5 !important;
   border-color:#BDA7F5 !important;
 }
+
+/* Final override: Pages menu toggle and legacy global animation rules. */
+body header.v3-header .v3-menu-toggle,
+body header.v3-header .v3-menu-toggle:visited {
+  background:#FF8A70 !important;
+  background-color:#FF8A70 !important;
+  background-image:none !important;
+  background-size:auto !important;
+  color:#0A0A0A !important;
+  animation:none !important;
+}
+body header.v3-header .v3-menu-toggle:hover,
+body header.v3-header .v3-menu-toggle:focus-visible {
+  background:#BDA7F5 !important;
+  background-color:#BDA7F5 !important;
+  background-image:none !important;
+  color:#0A0A0A !important;
+  animation:none !important;
+}

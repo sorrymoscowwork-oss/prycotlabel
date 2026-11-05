@@ -1139,3 +1139,42 @@ body header.v3-header .v3-menu-toggle:focus-visible {
   color:#0A0A0A !important;
   animation:none !important;
 }
+
+
+/* Contact page social links: centered standalone white brand icons. */
+.contact-social-links {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: clamp(24px, 4vw, 38px) !important;
+  width: 100% !important;
+  margin: 38px auto 0 !important;
+}
+.contact-social-links a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: #fff !important;
+  transition: opacity .18s ease, transform .18s ease !important;
+}
+.contact-social-links svg {
+  display: block !important;
+  width: 30px !important;
+  height: 30px !important;
+  overflow: visible !important;
+}
+.contact-social-links a:hover,
+.contact-social-links a:focus-visible {
+  opacity: .72 !important;
+  transform: translateY(-2px) !important;
+}
+@media (max-width: 760px) {
+  .contact-social-links { margin-top: 30px !important; gap: 30px !important; }
+  .contact-social-links a { width: 36px !important; height: 36px !important; }
+  .contact-social-links svg { width: 30px !important; height: 30px !important; }
+}

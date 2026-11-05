@@ -27,6 +27,7 @@
 
 <link rel="stylesheet" href="site-design-v3.css?v=20261104-peach-lilac-buttons-v3">
 <script defer src="site-navigation-v3.js?v=20261104-mobile-menu-v4"></script>
+<style id="blog-language-tabs-style">.blog-language-tabs{display:flex;align-items:center;gap:22px;margin:0 0 26px;border-bottom:1px solid var(--line,#292929)}.blog-language-tab{appearance:none;border:0;border-bottom:2px solid transparent;border-radius:0!important;background:transparent;color:var(--muted,#999);padding:0 0 11px;font:inherit;font-size:10px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer}.blog-language-tab:hover{color:var(--ink,#fff)}.blog-language-tab.active{color:var(--ink,#fff);border-bottom-color:var(--ink,#fff)}.post-card[hidden]{display:none!important}</style>
 </head>
 <body class="site-desktop-unified-header site-mobile-standard-header site-public-header">
 
@@ -36,18 +37,24 @@
 <p class="eyebrow"><span class="desktop-eyebrow">PRYCOT. / BLOG</span><span class="mobile-eyebrow">BLOG</span></p>
 <h1><span data-brand-accent="lime">Ideas</span>, music &amp; the <span data-brand-accent="cyan">industry</span>.</h1>
 <p class="intro">The PRYCOT. corporate blog. Articles about music distribution, independent artists, releases, promotion, technology and the changing music industry.</p>
+<div class="blog-language-tabs" role="group" aria-label="Blog language"><button class="blog-language-tab active" type="button" data-blog-language="en" aria-pressed="true">English</button><button class="blog-language-tab" type="button" data-blog-language="ru" aria-pressed="false">Русский</button></div>
 <div class="posts">
-<a class="post-card" href="blog-carhartt-how-workwear-became-part-of-music-culture.html">
+<a class="post-card" data-language="en" href="blog-carhartt-how-workwear-became-part-of-music-culture.html">
 <span class="post-number">03.11.2026 / PRYCOT.</span>
 <h2>CARHARTT: HOW WORKWEAR BECAME PART OF MUSIC CULTURE</h2>
 <p class="post-excerpt">From Detroit hip-hop to Berlin techno. The story of a brand that didn’t just dress musicians, but gradually became part of the underground itself.</p>
 </a>
-<a class="post-card" href="blog-stolicabolgarii-dorogobuzh-grime.html">
+<a class="post-card" data-language="en" href="blog-stolicabolgarii-dorogobuzh-grime.html">
 <span class="post-number">11.10.2026 / MUSIC</span>
 <h2>Stolicabolgarii — Дорогобужский грайм: Six Songs Outside the Rules</h2>
 <p class="post-excerpt">A six-track debut built from classical instincts, broken beats and theatrical vocals. A deliberately unruly record that is more interesting than its genre label suggests.</p>
 </a>
-<a class="post-card" href="blog-prycot-is-not-just-distribution.html">
+<a class="post-card" data-language="ru" href="blog-stolicabolgarii-dorogobuzh-grime-ru.html">
+<span class="post-number">11.10.2026 / MUSIC</span>
+<h2>Stolicabolgarii — «Дорогобужский грайм»: шесть песен вне правил</h2>
+<p class="post-excerpt">Рецензия на мини-альбом: шесть треков, ломаные биты, театральный вокал и музыка вне жанровых рамок.</p>
+</a>
+<a class="post-card" data-language="en" href="blog-prycot-is-not-just-distribution.html">
 <span class="post-number">05.10.2026 / PRYCOT.</span>
 <h2>PRYCOT. — <span data-brand-accent="coral">Not Just Distribution</span></h2>
 <p class="post-excerpt">PRYCOT. began with a simple idea: make it easier for independent musicians to bring their work into the world. But somewhere along the way, it became clear that distribution was only one part of what we wanted to build.</p>
@@ -61,4 +68,5 @@
 
 <script id="page-header-scroll-behavior">(function(){const brand=document.querySelector('.header-brand');if(!brand)return;let ticking=false;function update(){brand.classList.toggle('header-hidden',window.scrollY>80);ticking=false}window.addEventListener('scroll',function(){if(!ticking){window.requestAnimationFrame(update);ticking=true}},{passive:true});window.addEventListener('resize',update);update()})();</script>
   
-<script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body></html>
+<script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script><script id="blog-language-filter">(function(){const tabs=[...document.querySelectorAll("[data-blog-language]")],cards=[...document.querySelectorAll(".posts .post-card")];if(!tabs.length||!cards.length)return;function setLanguage(language){tabs.forEach(tab=>{const active=tab.dataset.blogLanguage===language;tab.classList.toggle("active",active);tab.setAttribute("aria-pressed",String(active))});cards.forEach(card=>{card.hidden=(card.dataset.language||"en")!==language})}tabs.forEach(tab=>tab.addEventListener("click",()=>setLanguage(tab.dataset.blogLanguage)));setLanguage("en")})();</script>
+</body></html>

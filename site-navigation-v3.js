@@ -2,6 +2,8 @@
   const pages = [
     ["Home", "index.html", "Overview"],
     ["About PRYCOT.", "about.html", "Overview"],
+    ["Crew", "crew.html", "Overview"],
+    ["Shop", "shop.html", "Overview"],
     ["Blog", "blog.html", "Overview"],
     ["Side projects", "side-projects.html", "Overview"],
     ["Contact", "contact.html", "Overview"],

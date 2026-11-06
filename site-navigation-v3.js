@@ -18,6 +18,7 @@
     ["Support the project", "donate.html", "PRYCOTLINK"],
     ["White paper", "white-paper.html", "Information"],
     ["User agreement", "user-agreement.html", "Information"],
+    ["Privacy Policy", "privacy-policy.html", "Information"],
   ];
 
   function buildHeader() {

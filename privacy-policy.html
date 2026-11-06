@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="How PRYCOT handles personal information across its website, music distribution services and PRYCOTLINK.">
 <link rel="icon" type="image/svg+xml" href="https://prycot.com/favicon.svg">
 <link rel="stylesheet" href="site-design-v3.css?v=20261104-peach-lilac-buttons-v3">
-<script defer src="site-navigation-v3.js?v=20261104-mobile-menu-v4"></script>
+<script src="/privacy-consent.js"></script><script defer src="site-navigation-v3.js?v=20261104-mobile-menu-v4"></script>
 <style>
 .privacy-policy{max-width:980px;margin:0 auto}
 .privacy-policy .policy-meta{margin:0 0 34px;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
@@ -107,16 +107,16 @@
 <p>PRYCOT currently uses the following first-party browser technologies:</p>
 <ul>
 <li><strong>Telegram authentication cookie:</strong> the PRYCOTLINK flow may set a cookie named <code>prycotTelegramProfile</code> on the PRYCOT domain. The code sets a seven-day maximum age, the Secure attribute and SameSite=Lax. The same authentication payload may also be kept in session storage and local storage so the user can remain signed in and make authenticated requests.</li>
-<li><strong>Visitor identifiers:</strong> random identifiers are stored in local storage for the homepage visitor counter and PRYCOTLINK analytics. They are used to distinguish repeat visits from the same browser and are not used as a login credential.</li>
+<li><strong>Optional analytics identifiers:</strong> only if you accept optional analytics, random identifiers are stored in local storage for the homepage visitor counter and PRYCOTLINK analytics. They distinguish repeat visits from the same browser and are not used as a login credential. If you reject analytics, these identifiers are not created or sent by the analytics scripts.</li>
 <li><strong>Temporary handoff token:</strong> a short-lived account-to-editor handoff token may be stored in session storage while a user moves from the account area to edit a PRYCOTLINK page. The server-side handoff token expires after approximately ten minutes.</li>
 </ul>
-<p>These technologies support account access, page editing and the statistics displayed by PRYCOTLINK. Clearing or blocking browser storage may sign you out, prevent page editing or affect visitor statistics.</p>
+<p>The Telegram authentication cookie and temporary handoff token support account access and page editing. Optional analytics storage is used only after you give consent through the privacy choices panel. You can reject or later withdraw consent using the “Privacy choices” control displayed on the website. Clearing or blocking browser storage may sign you out, prevent page editing or reset the browser-specific analytics identifier.</p>
 <p>In the website code reviewed for this policy, we did not identify advertising cookies, cross-site advertising trackers, Google Analytics or Meta Pixel. This is a code review of the current site files, not a guarantee that infrastructure providers never process request or security data. Telegram Login and third-party asset hosts may receive technical information when your browser loads their content. Browser settings let you clear or block local storage and cookies, but this may affect sign-in, editing and visitor statistics.</p>
 </div></article>
 
 <article class="policy-section"><div class="policy-number">08</div><div><h2>Analytics and measurement</h2>
 <p>PRYCOT analytics record homepage and PRYCOTLINK page visits, unique browser visitors and clicks on streaming and social links. A random visitor ID is generated in the browser and stored in local storage. The backend records this identifier with the page type and page key, event timestamp and, for release-page visits, a referring-source category and approximate country. Country is derived from Cloudflare request metadata. The PRYCOT analytics tables do not contain a raw IP-address field, although Cloudflare necessarily processes IP addresses as part of network delivery and security.</p>
-<p>Analytics are used to display statistics to page owners, count unique visitors, measure link engagement and maintain and improve the service. The identifier is browser-specific: clearing local storage or using another browser or device may cause a visitor to be counted as a new visitor. Country estimates may be inaccurate when a visitor uses a VPN or proxy. Referring-source information may be missing or generalized by the browser or app.</p>
+<p>Optional analytics are disabled by default and are activated only after you select “Accept analytics” in the privacy choices panel. If you reject optional analytics, PRYCOT does not create or send the browser visitor identifier or new page-view and link-click events. You can change your choice at any time using the “Privacy choices” control. Analytics are used to display statistics to page owners, count unique visitors and measure link engagement. The identifier is browser-specific: clearing local storage or using another browser or device may cause a visitor to be counted as new. Country estimates may be inaccurate when a visitor uses a VPN or proxy. Referring-source information may be missing or generalized by the browser or app. Statistics collected before you change your choice are not automatically erased when you withdraw consent; you may request deletion using the privacy contact below.</p>
 </div></article>
 
 <article class="policy-section"><div class="policy-number">09</div><div><h2>Data retention</h2>

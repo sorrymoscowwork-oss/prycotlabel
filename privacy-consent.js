@@ -16,10 +16,10 @@
       '#'+PANEL_ID+' strong{color:#fff;font-weight:600}'+
       '#'+PANEL_ID+' a{color:#f4b38f;text-decoration:underline}'+
       '#'+PANEL_ID+' .pc-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center}'+
-      '#'+PANEL_ID+' button{appearance:none;border:1px solid #FF8A70;border-radius:999px;padding:9px 15px;background:#FF8A70;color:#0A0A0A;font:600 11px Helvetica,Arial,sans-serif;letter-spacing:.04em;cursor:pointer;transition:background-color .18s ease,color .18s ease,border-color .18s ease}'+
-      '#'+PANEL_ID+' button:hover,#'+PANEL_ID+' button:focus-visible{background:#BDA7F5;border-color:#BDA7F5;color:#0A0A0A}'+
-      '#prycot-privacy-settings{position:fixed;z-index:9998;right:16px;bottom:12px;border:1px solid #FF8A70;border-radius:999px;padding:7px 11px;background:#FF8A70;color:#0A0A0A;font:10px Helvetica,Arial,sans-serif;letter-spacing:.04em;cursor:pointer;opacity:1;transition:background-color .18s ease,color .18s ease,border-color .18s ease}'+
-      '#prycot-privacy-settings:hover,#prycot-privacy-settings:focus-visible{background:#BDA7F5;border-color:#BDA7F5;color:#0A0A0A}'+
+      '#'+PANEL_ID+' button{appearance:none!important;border:1px solid #FF8A70!important;border-radius:999px!important;padding:9px 15px!important;background:#FF8A70!important;background-color:#FF8A70!important;background-image:none!important;color:#0A0A0A!important;font:600 11px Helvetica,Arial,sans-serif!important;letter-spacing:.04em!important;cursor:pointer!important;animation:none!important;transition:background-color .18s ease,color .18s ease,border-color .18s ease!important}'+
+      '#'+PANEL_ID+' button:hover,#'+PANEL_ID+' button:focus-visible{background:#BDA7F5!important;background-color:#BDA7F5!important;background-image:none!important;border-color:#BDA7F5!important;color:#0A0A0A!important}'+
+      'body #prycot-privacy-settings{position:fixed!important;z-index:9998!important;right:16px!important;bottom:12px!important;border:1px solid #FF8A70!important;border-radius:999px!important;padding:7px 11px!important;background:#FF8A70!important;background-color:#FF8A70!important;background-image:none!important;color:#0A0A0A!important;font:10px Helvetica,Arial,sans-serif!important;letter-spacing:.04em!important;cursor:pointer!important;opacity:1!important;animation:none!important;transition:background-color .18s ease,color .18s ease,border-color .18s ease!important}'+
+      'body #prycot-privacy-settings:hover,body #prycot-privacy-settings:focus-visible{background:#BDA7F5!important;background-color:#BDA7F5!important;background-image:none!important;border-color:#BDA7F5!important;color:#0A0A0A!important}'+
       '@media(max-width:600px){#'+PANEL_ID+'{left:10px;right:10px;bottom:10px;padding:16px;border-radius:10px}#'+PANEL_ID+' .pc-actions{gap:7px}#'+PANEL_ID+' button{padding:9px 12px;font-size:10px}#prycot-privacy-settings{right:10px;bottom:8px}}';
     document.head.appendChild(s);
   }

@@ -34,14 +34,18 @@
     if(footer){
       var link=footer.querySelector('[data-prycot-privacy-link]');
       if(!link){
-        link=document.createElement('a');link.href='#privacy-choices';link.textContent='PRIVACY CHOICES';link.setAttribute('data-prycot-privacy-link','true');
-        link.style.cssText='display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border:1px solid #FF8A70;border-radius:999px;background:#FF8A70;color:#0A0A0A;text-decoration:none;font:600 10px Helvetica,Arial,sans-serif;letter-spacing:.06em;white-space:nowrap;cursor:pointer;transition:background-color .18s ease,color .18s ease,border-color .18s ease;';
-        link.addEventListener('mouseenter',function(){link.style.backgroundColor='#BDA7F5';link.style.borderColor='#BDA7F5'});
-        link.addEventListener('mouseleave',function(){link.style.backgroundColor='#FF8A70';link.style.borderColor='#FF8A70'});
+        link=document.createElement('a');link.href='#privacy-choices';link.textContent='PRIVACY';link.setAttribute('data-prycot-privacy-link','true');
+        link.style.cssText='display:inline-flex;align-items:center;justify-content:center;width:auto;height:auto;min-width:0;padding:0;margin:0 4px 0 0;border:0;border-radius:0;background:transparent;color:#b8b8b8;text-decoration:none;font:600 10px Helvetica,Arial,sans-serif;letter-spacing:.08em;line-height:1;white-space:nowrap;cursor:pointer;box-shadow:none;';
+        link.addEventListener('mouseenter',function(){link.style.color='#BDA7F5'});
+        link.addEventListener('mouseleave',function(){link.style.color='#b8b8b8'});
         link.addEventListener('click',function(e){e.preventDefault();var p=document.getElementById(PANEL_ID);if(p)p.setAttribute('data-open','true')});
       }
       var social=footer.querySelector('.footer-social');
-      if(social){social.insertBefore(link,social.firstElementChild)}
+      if(social){
+        var footerLinkStyle=document.getElementById('prycot-footer-privacy-link-style');
+        if(!footerLinkStyle){footerLinkStyle=document.createElement('style');footerLinkStyle.id='prycot-footer-privacy-link-style';footerLinkStyle.textContent='.footer-social a[data-prycot-privacy-link]{display:inline-flex!important;place-items:initial!important;align-items:center!important;justify-content:center!important;width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;padding:0!important;margin:0 5px 0 0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#b8b8b8!important;box-shadow:none!important;font:600 10px Helvetica,Arial,sans-serif!important;letter-spacing:.08em!important;line-height:1!important;white-space:nowrap!important;text-decoration:none!important}.footer-social a[data-prycot-privacy-link]:hover{color:#BDA7F5!important;background:transparent!important;border:0!important}';document.head.appendChild(footerLinkStyle)}
+        social.insertBefore(link,social.firstElementChild)
+      }
       else if(!link.parentElement)footer.appendChild(link);
     }
     if(!read())document.getElementById(PANEL_ID).setAttribute('data-open','true');

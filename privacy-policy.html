@@ -53,13 +53,13 @@
 <article class="policy-section"><div class="policy-number">02</div><div><h2>Information we collect</h2>
 <p>The information we collect depends on how you use PRYCOT. It may include:</p>
 <ul>
-<li><strong>Telegram account information:</strong> Telegram user identifier, username, first and last name, profile photo URL, and authentication data returned during sign-in. We use Telegram as the account sign-in method.</li>
+<li><strong>Telegram account and authentication information:</strong> Telegram user ID, first and last name, username and, where supplied, profile photo URL. The Telegram Login flow also returns authentication fields such as an authentication timestamp and signature. The PRYCOTLINK browser flow may temporarily store the authentication payload in session storage, local storage and a first-party cookie so that the session can be restored and authenticated requests can be made.</li>
 <li><strong>Account and communication information:</strong> information you provide when contacting us, discussing a release, requesting support or communicating with our team, including your contact details and the contents of your messages.</li>
-<li><strong>Release information and materials:</strong> artist and release names, track titles, release type, genre, release date, explicit-content information, audio files, artwork, video, descriptions, contributor details, links and other metadata or materials you submit for review and distribution.</li>
+<li><strong>Release information and materials:</strong> artist and release names, track titles, release type, genre, release date, explicit-content information, audio files, artwork, descriptions, contributor details and other metadata or materials you submit through PRYCOT’s website, Telegram bot or other service-provided channels. Telegram message, chat and file references may also be processed to handle a submission.</li>
 <li><strong>PRYCOTLINK information:</strong> public-page titles, descriptions, artwork, videos, streaming and social links, custom links, donation details or other content you choose to add to a PRYCOTLINK page, together with information needed to create and manage that page.</li>
 <li><strong>Payment and royalty information:</strong> payment status and records, cryptocurrency wallet addresses, transaction identifiers and amounts where provided or needed to verify a service payment or royalty payout. Blockchain transactions may be publicly visible on the relevant network.</li>
-<li><strong>Technical and usage information:</strong> IP address and request data made available to our hosting and security infrastructure, device and browser information where available, referring page, approximate country, pages visited, timestamps and interactions with public links.</li>
-<li><strong>Analytics events:</strong> records used to calculate page visits, unique visitors and clicks on streaming, social or other links. The available analytics may include a browser identifier, referral source and approximate country.</li>
+<li><strong>Technical and usage information:</strong> page and request information, browser/device information where made available, referring source, timestamps and approximate country. Our Cloudflare-powered backend receives network request information; the PRYCOT application analytics endpoint uses Cloudflare’s country metadata to record an approximate country for certain events. We do not currently use the PRYCOT analytics tables to store raw visitor IP addresses.</li>
+<li><strong>Analytics events and identifiers:</strong> PRYCOTLINK creates a random visitor identifier and stores it in your browser’s local storage under a PRYCOT-specific key. The identifier is sent with page-view and link-click events to distinguish repeat visits and calculate unique visitors. Events may include the page or release slug, event time, link category and label, referring-source category and approximate country.</li>
 </ul>
 <p>We do not ask you to provide sensitive personal information to use the ordinary website features. Please do not submit sensitive information unless it is genuinely necessary and we have requested it.</p>
 </div></article>
@@ -87,11 +87,11 @@
 <article class="policy-section"><div class="policy-number">05</div><div><h2>When information is shared</h2>
 <p>We do not sell personal information. We share information only as reasonably necessary to operate the services, fulfil your requests, protect the service or meet legal obligations. Recipients may include:</p>
 <ul>
-<li><strong>Telegram:</strong> account authentication is performed through Telegram. Telegram processes information under its own terms and privacy policy.</li>
-<li><strong>Hosting, cloud and security infrastructure:</strong> providers that host the website and backend services, store or transmit submitted data, protect the service, and support operational analytics.</li>
+<li><strong>Telegram:</strong> PRYCOT uses Telegram Login and Telegram bot workflows for account authentication, release submissions and service communications. Information you send through Telegram is also processed by Telegram under its own terms and privacy policy.</li>
+<li><strong>Cloudflare infrastructure:</strong> PRYCOT currently uses Cloudflare Workers for backend processing, Cloudflare D1 for application and analytics records, and Cloudflare R2 for PRYCOTLINK cover-image storage. Cloudflare may also provide network delivery, security and request processing. The exact locations and retention periods applied by infrastructure providers depend on their service configuration and terms.</li>
 <li><strong>Independent international backend music-distribution service:</strong> when you submit a release, we may transmit the audio, artwork, metadata, rights-related declarations and other information required to process and deliver that release through the distribution infrastructure.</li>
 <li><strong>Digital music platforms and stores:</strong> release metadata, audio, artwork and other delivery information are supplied to platforms selected for distribution, as required to make the release available.</li>
-<li><strong>Payment and blockchain services:</strong> wallet addresses, transaction details and payment-related information may be used to verify payments or payouts. Public blockchain data is governed by the relevant network and cannot be edited by PRYCOT.</li>
+<li><strong>Public blockchain networks:</strong> PRYCOT accepts cryptocurrency payments and makes royalty payouts in USDT on the TRC20 or TON networks, as applicable. Wallet addresses and transaction identifiers may be used to reconcile payments and payouts. Blockchain transactions are recorded on public networks and may be visible to anyone; PRYCOT cannot alter or erase public blockchain records. The current website does not identify a third-party card-payment processor.</li>
 <li><strong>Professional advisers and authorities:</strong> where disclosure is reasonably necessary for legal, accounting, security or regulatory purposes, or where required by valid legal process.</li>
 </ul>
 <p>Service providers may process information on our behalf or under their own terms, depending on the service they provide. Their handling of information is also subject to their own privacy documentation.</p>
@@ -103,19 +103,24 @@
 </div></article>
 
 <article class="policy-section"><div class="policy-number">07</div><div><h2>Cookies, local storage and similar technologies</h2>
-<p>Our account sign-in currently uses browser storage technologies to maintain a Telegram-authenticated session. In particular, the website may store a Telegram profile/session value in local storage and in a first-party cookie on the PRYCOT domain. The observed authentication cookie is configured with a seven-day lifetime and security attributes.</p>
-<p>These technologies support sign-in, session restoration and account security. Your browser settings allow you to clear or block cookies and local storage, but doing so may prevent account sign-in or other features from working correctly.</p>
-<p>Our website and infrastructure may also use technical mechanisms needed to deliver pages, protect the service and produce usage statistics. The exact set of analytics, cookie and similar technologies is being reviewed. We will update this section if the review identifies additional technologies or consent requirements.</p>
+<p>PRYCOT currently uses the following first-party browser technologies:</p>
+<ul>
+<li><strong>Telegram authentication cookie:</strong> the PRYCOTLINK flow may set a cookie named <code>prycotTelegramProfile</code> on the PRYCOT domain. The code sets a seven-day maximum age, the Secure attribute and SameSite=Lax. The same authentication payload may also be kept in session storage and local storage so the user can remain signed in and make authenticated requests.</li>
+<li><strong>PRYCOTLINK visitor identifier:</strong> a random identifier is stored in local storage to calculate unique visitors and associate page visits and link clicks with the same browser.</li>
+<li><strong>Temporary handoff token:</strong> a short-lived account-to-editor handoff token may be stored in session storage while a user moves from the account area to edit a PRYCOTLINK page. The server-side handoff token expires after approximately ten minutes.</li>
+</ul>
+<p>These technologies support account access, page editing and the statistics displayed by PRYCOTLINK. Clearing or blocking browser storage may sign you out, prevent page editing or affect visitor statistics.</p>
+<p>We do not currently identify advertising cookies or cross-site advertising trackers in the reviewed PRYCOT application code. Third-party features and infrastructure, including Telegram Login and Cloudflare, may process technical information when your browser connects to them. We will revise this section if additional technologies are introduced.</p>
 </div></article>
 
 <article class="policy-section"><div class="policy-number">08</div><div><h2>Analytics and measurement</h2>
-<p>We measure activity on public PRYCOTLINK pages, including unique visitors and clicks on streaming, social and other links. Depending on the available technical data, analytics may use a browser-level identifier, referral information and an approximate country derived from network request metadata.</p>
-<p>Analytics are used to provide page statistics, understand how people discover and use release pages, maintain the service and improve its performance. Country estimates may be inaccurate, for example when a visitor uses a VPN, proxy or privacy-focused browser. Referring websites may be unavailable or hidden by the visitor’s browser or app.</p>
+<p>PRYCOTLINK analytics record page views and clicks on streaming and social links. A random visitor ID is generated in the browser and stored in local storage. The backend records this identifier with the page type and page key, event timestamp and, for release-page visits, a referring-source category and approximate country. The backend derives country from Cloudflare request metadata; it does not need to store the visitor’s raw IP address in the PRYCOT analytics event.</p>
+<p>Analytics are used to display statistics to page owners, count unique visitors, measure link engagement and maintain and improve the service. The identifier is browser-specific: clearing local storage or using another browser or device may cause a visitor to be counted as a new visitor. Country estimates may be inaccurate when a visitor uses a VPN or proxy. Referring-source information may be missing or generalized by the browser or app.</p>
 </div></article>
 
 <article class="policy-section"><div class="policy-number">09</div><div><h2>Data retention</h2>
-<p>We keep information for no longer than reasonably necessary for the purposes described in this policy, including providing the services, maintaining account and release records, resolving disputes, preventing abuse, and meeting legal, accounting or reporting obligations.</p>
-<p>Retention periods depend on the type of information and the reason it was collected. For example, release and royalty records may need to be retained for operational and accounting purposes, while technical logs and analytics identifiers may have different retention cycles. Specific retention periods will be stated here once the relevant systems and provider settings have been fully reviewed.</p>
+<p>We retain information for as long as it is reasonably needed to provide the requested service, maintain account and release records, calculate or reconcile royalties, respond to support requests, prevent abuse, resolve disputes and meet applicable legal or accounting obligations.</p>
+<p>PRYCOT’s current application database stores account-linking records, release requests, PRYCOTLINK page data and analytics events. Cover images are stored separately in object storage. The exact retention and deletion schedule for each database table, uploaded file, backup and infrastructure log has not yet been verified. We will not state a fixed deletion period until those settings have been confirmed. Where information is no longer required, we intend to delete it or remove identifying details, subject to legitimate operational, legal and security needs.</p>
 </div></article>
 
 <article class="policy-section"><div class="policy-number">10</div><div><h2>Security</h2>
@@ -123,14 +128,15 @@
 </div></article>
 
 <article class="policy-section"><div class="policy-number">11</div><div><h2>Your privacy choices and rights</h2>
-<p>Depending on where you live and which privacy law applies, you may have rights to request access to personal information, correction, deletion, a copy or portability of certain information, or to object to or restrict certain processing. Some rights are subject to exceptions and verification requirements.</p>
+<p>Privacy rights in the United States vary by state and by the scope of the law that applies to a particular business and processing activity. New Mexico has enacted a data-breach notification law, but the comprehensive Consumer Information and Data Protection Act proposed as House Bill 214 in the 2026 session did not become law. This policy does not promise statutory rights that do not apply to the relevant person or activity.</p>
+<p>Regardless of whether a particular state privacy statute applies, you may contact us to ask what personal information we hold about you or to request correction or deletion where reasonably possible. We will review and respond to requests in accordance with applicable law. Certain records may need to be retained for distribution, royalty accounting, security, dispute-resolution or legal purposes. Public blockchain records cannot be edited or deleted by PRYCOT.</p>
 <p>To make a privacy request, contact us at <a href="mailto:info@prycot.com">info@prycot.com</a> with the subject line “Privacy Request”. We may ask for information needed to verify your identity and locate the relevant account or records. We will respond within the period required by applicable law.</p>
 <p>For account information obtained through Telegram, you can also manage aspects of your Telegram profile through Telegram. Deleting local browser data may sign you out but does not by itself delete information already held by PRYCOT or third-party services.</p>
-<p>Residents of New Mexico and other U.S. states may have additional rights under applicable state law. The scope and availability of those rights depend on the law in force and whether it applies to PRYCOT’s activities.</p>
+<p>If a state privacy law applies to PRYCOT, we will honor the rights and obligations required by that law, including any applicable appeal or opt-out process. We do not currently sell personal information or use it for cross-context behavioral advertising.</p>
 </div></article>
 
 <article class="policy-section"><div class="policy-number">12</div><div><h2>Children’s privacy</h2>
-<p>Our services are not directed to children under 13, and we do not knowingly collect personal information directly from children under 13. If you believe a child has provided personal information to us, contact us so we can review the matter and take appropriate steps.</p>
+<p>Our services are not directed to children under 13, and we do not knowingly collect personal information directly from children under 13. If you believe a child has provided personal information to us, contact us so we can review the matter and take appropriate steps. Users who submit music or manage an artist account should have the legal capacity and authority to do so.</p>
 </div></article>
 
 <article class="policy-section"><div class="policy-number">13</div><div><h2>Third-party websites and services</h2>
@@ -144,7 +150,7 @@
 <article class="policy-section"><div class="policy-number">15</div><div><h2>Contact</h2>
 <p>For questions about this Privacy Policy or requests concerning personal information, contact:</p>
 <p><strong>PRYCOT. — Privacy inquiries</strong><br><a href="mailto:info@prycot.com">info@prycot.com</a><br><a href="https://prycot.com">prycot.com</a></p>
-<p>The legal name and mailing address of the service operator will be added once the operating entity and its registered details are confirmed.</p>
+<p>PRYCOT is a service brand. The legal name and mailing address of the entity or person operating the service will be added once the operating entity and its registered details are confirmed.</p>
 </div></article>
 <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span></footer>
 </section>

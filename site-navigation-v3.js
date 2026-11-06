@@ -17,7 +17,8 @@
     ["PRYCOTLINK guide", "prycotlink-guide.html", "PRYCOTLINK"],
     ["Support the project", "donate.html", "PRYCOTLINK"],
     ["White paper", "white-paper.html", "Information"],
-    ["User agreement", "user-agreement.html", "Information"],
+    ["Terms of Service", "terms-of-service.html", "Information"],
+    ["Music Distribution Agreement", "user-agreement.html", "Information"],
     ["Privacy Policy", "privacy-policy.html", "Information"],
   ];
 

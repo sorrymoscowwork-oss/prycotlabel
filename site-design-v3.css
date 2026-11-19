@@ -1178,3 +1178,9 @@ body header.v3-header .v3-menu-toggle:focus-visible {
   .contact-social-links a { width: 36px !important; height: 36px !important; }
   .contact-social-links svg { width: 30px !important; height: 30px !important; }
 }
+
+
+/* PRYCOT supplied textured wordmark: retain the previous text-logo visual size. */
+.v3-brand { align-items: center !important; }
+.v3-brand .v3-logo { display: block !important; flex: 0 0 auto !important; width: auto !important; height: 22px !important; max-width: none !important; margin: 0 !important; padding: 0 !important; object-fit: contain !important; font-size: 0 !important; line-height: 0 !important; }
+@media (max-width: 760px) { .v3-brand .v3-logo { height: 20px !important; } }

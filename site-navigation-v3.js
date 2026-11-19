@@ -23,15 +23,16 @@
   ];
 
   function buildHeader() {
-    const sourceLogo = document.querySelector(".page .brand .logo, body > .brand .logo, .prycotlink-header .logo");
     const sourceTitle = document.querySelector(".page-label, .account-label");
     const brand = document.createElement("a");
     brand.className = "v3-brand";
     brand.href = "index.html";
     brand.setAttribute("aria-label", "PRYCOT. — Home");
-    const logo = document.createElement("span");
+    const logo = document.createElement("img");
     logo.className = "v3-logo";
-    logo.textContent = sourceLogo?.textContent?.trim() || "PRYCOT.";
+    logo.src = "/images/prycot-header-logo.webp";
+    logo.alt = "";
+    logo.setAttribute("aria-hidden", "true");
     brand.append(logo);
 
     const pageName = sourceTitle?.textContent?.trim() || "";

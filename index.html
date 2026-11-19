@@ -173,29 +173,54 @@
 (function(){
   const list=document.getElementById('homepage-blog-list');
   if(!list)return;
-  fetch('/blog.html?homepage-blog=latest',{cache:'no-store'})
+  const BLOG_URL='/blog.html?homepage-blog=latest';
+  const PODCAST_API='https://prycot-podcast-api.sorrymoscowwork.workers.dev/public/podcasts';
+  function parseDate(value){
+    if(!value)return 0;
+    const text=String(value).trim();
+    let match=text.match(/(\d{2})\.(\d{2})\.(\d{4})/);
+    if(match)return new Date(Number(match[3]),Number(match[2])-1,Number(match[1])).getTime();
+    const parsed=Date.parse(text);
+    return Number.isNaN(parsed)?0:parsed;
+  }
+  const articlesPromise=fetch(BLOG_URL,{cache:'no-store'})
     .then(function(response){if(!response.ok)throw new Error('Blog is unavailable');return response.text()})
     .then(function(markup){
-      const documentCopy=new DOMParser().parseFromString(markup,'text/html');
-      const sourceCards=Array.from(documentCopy.querySelectorAll('.posts > .post-card')).filter(function(card){return card.matches('a.post-card[href]')&&card.querySelector('h2')&&card.querySelector('.post-excerpt')}).slice(0,3);
-      const fragment=document.createDocumentFragment();
-      sourceCards.forEach(function(source){
-        const href=source.getAttribute('href');
-        if(!href)return;
-        const link=document.createElement('a');
-        link.className='homepage-blog-post';
-        link.href=new URL(href,location.origin).href;
-        const meta=source.querySelector('.post-number');
-        const title=source.querySelector('h2');
-        const excerpt=source.querySelector('.post-excerpt');
-        const date=document.createElement('span');date.className='post-number';date.textContent=meta?meta.textContent.trim():'PRYCOT. / BLOG';
-        const heading=document.createElement('h2');heading.textContent=title.textContent.trim();
-        const description=document.createElement('p');description.textContent=excerpt.textContent.trim();
-        link.append(date,heading,description);fragment.append(link);
-      });
-      list.replaceChildren(fragment);
-    })
-    .catch(function(){list.replaceChildren();});
+      const doc=new DOMParser().parseFromString(markup,'text/html');
+      return Array.from(doc.querySelectorAll('.posts > a.post-card[href]')).map(function(card){
+        const title=card.querySelector('h2'),excerpt=card.querySelector('.post-excerpt'),meta=card.querySelector('.post-number');
+        if(!title||!excerpt)return null;
+        const dateText=meta?meta.textContent.trim():'';
+        return {type:'article',title:title.textContent.trim(),description:excerpt.textContent.trim(),dateText:dateText,dateValue:parseDate(dateText),href:new URL(card.getAttribute('href'),location.origin).href};
+      }).filter(Boolean);
+    });
+  const podcastsPromise=fetch(PODCAST_API,{cache:'no-store',headers:{'Accept':'application/json'}})
+    .then(function(response){if(!response.ok)throw new Error('Podcast feed is unavailable');return response.json()})
+    .then(function(data){
+      return (data.podcasts||[]).map(function(p){
+        return {type:'podcast',title:String(p.title||'').trim(),description:String(p.description||'').trim(),dateText:p.date||'',dateValue:parseDate(p.date),language:p.language==='ru'?'Russian':'English',audioUrl:p.audioUrl||''};
+      }).filter(function(p){return p.title&&p.audioUrl});
+    }).catch(function(){return []});
+  Promise.all([articlesPromise,podcastsPromise]).then(function(results){
+    const items=results[0].concat(results[1]).sort(function(a,b){return b.dateValue-a.dateValue}).slice(0,3);
+    const fragment=document.createDocumentFragment();
+    items.forEach(function(item){
+      const card=document.createElement(item.type==='article'?'a':'article');
+      card.className='homepage-blog-post'+(item.type==='podcast'?' homepage-blog-podcast':'');
+      if(item.type==='article')card.href=item.href;
+      const meta=document.createElement('span');meta.className='post-number';
+      meta.textContent=item.type==='podcast'?'PODCAST / '+item.language.toUpperCase()+(item.dateText?' / '+item.dateText:''):(item.dateText||'PRYCOT. / BLOG');
+      const heading=document.createElement('h2');heading.textContent=item.title;
+      const description=document.createElement('p');description.textContent=item.description;
+      card.append(meta,heading,description);
+      if(item.type==='podcast'){
+        const player=document.createElement('audio');player.controls=true;player.preload='none';player.src=item.audioUrl;player.setAttribute('aria-label','Play '+item.title);player.style.width='100%';player.style.marginTop='14px';card.append(player);
+      }
+      fragment.append(card);
+    });
+    if(items.length)list.replaceChildren(fragment);
+    else list.replaceChildren();
+  }).catch(function(){list.replaceChildren();});
 })();
 </script>
 </body>

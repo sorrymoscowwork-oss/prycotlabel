@@ -30,7 +30,7 @@
     brand.setAttribute("aria-label", "PRYCOT. — Home");
     const logo = document.createElement("img");
     logo.className = "v3-logo";
-    logo.src = "/images/prycot-header-logo.svg?v=20261120-svgfix2";
+    logo.src = "/images/prycot-header-logo.png?v=20261120-brush1";
     logo.alt = "PRYCOT.";
     brand.append(logo);
 

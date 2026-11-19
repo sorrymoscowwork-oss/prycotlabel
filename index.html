@@ -29,6 +29,22 @@
 .brand img.logo,.brand-logo img.logo,a.brand img.logo{display:block!important;width:auto!important;height:44px!important;max-width:min(42vw,230px)!important;object-fit:contain!important;object-position:left center!important;filter:none!important;margin:0!important;padding:0!important}
 @media(max-width:700px){.brand img.logo,.brand-logo img.logo,a.brand img.logo{height:32px!important;max-width:min(42vw,170px)!important}}
 </style>
+
+<style id="homepage-blog-section-style">
+.homepage-blog{width:100%;margin:clamp(42px,6vw,76px) 0 0;padding:0;border-top:1px solid var(--line)}
+.homepage-blog-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin:0 0 24px;padding-top:24px}
+.homepage-blog-eyebrow{display:block;margin:0 0 12px;color:var(--blue);font-size:11px;font-weight:750;letter-spacing:.13em;text-transform:uppercase}
+.homepage-blog-title{margin:0;color:var(--ink);font-size:clamp(30px,4vw,48px);font-weight:650;line-height:1.05;letter-spacing:-.055em}
+.homepage-blog-all{flex:0 0 auto;color:var(--ink);font-size:12px;font-weight:700;letter-spacing:.08em;text-decoration:none;text-transform:uppercase;border-bottom:1px solid var(--blue);padding:0 0 5px}
+.homepage-blog-list{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.homepage-blog-post{display:flex;flex-direction:column;align-items:flex-start;min-width:0;padding:22px 24px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:inherit;text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.homepage-blog-post:hover{transform:translateY(-2px);border-color:var(--blue-dark);box-shadow:0 10px 24px #0005}
+.homepage-blog-post .post-number{color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em}
+.homepage-blog-post h2{margin:12px 0 7px;color:var(--ink);font-size:clamp(19px,2.2vw,26px);font-weight:650;line-height:1.18;letter-spacing:-.035em}
+.homepage-blog-post p{max-width:72ch;margin:0;color:var(--muted);font-size:14px;line-height:1.6}
+.homepage-blog-empty{color:var(--muted);font-size:14px}
+@media(max-width:760px){.homepage-blog{margin-top:34px}.homepage-blog-heading{align-items:flex-start;margin-bottom:18px;padding-top:20px}.homepage-blog-title{font-size:32px}.homepage-blog-all{font-size:10px;letter-spacing:.05em;margin-top:22px}.homepage-blog-post{padding:18px 17px}.homepage-blog-post h2{font-size:20px;margin-top:10px}.homepage-blog-post p{font-size:13px;line-height:1.55}}
+</style>
 </head>
 <body class="site-home">
   
@@ -51,6 +67,14 @@
 
   <section class="prycotlink-release-carousel" aria-label="PRYCOTLINK releases">
     <div class="prycotlink-release-track" aria-live="off"></div>
+  </section>
+
+  <section class="homepage-blog" id="homepage-blog-section" aria-labelledby="homepage-blog-title">
+    <div class="homepage-blog-heading">
+      <div><span class="homepage-blog-eyebrow">PRYCOT. / BLOG</span><h2 class="homepage-blog-title" id="homepage-blog-title">Latest stories.</h2></div>
+      <a class="homepage-blog-all" href="/blog.html">All articles ↗</a>
+    </div>
+    <div class="homepage-blog-list" id="homepage-blog-list" aria-live="polite"><p class="homepage-blog-empty">Loading latest articles…</p></div>
   </section>
 
   <footer class="site-footer"><span>PRYCOT. — 2026</span><span>INDEPENDENT MUSIC LABEL</span><div class="footer-social" aria-label="Social media"><a href="https://www.youtube.com/@prycot" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.2 3.6-6.2 3.6Z"/></svg></a><a href="https://www.instagram.com/prycot.label" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor"/></svg></a><a href="https://www.threads.com/@prycot.label" target="_blank" rel="noopener noreferrer" aria-label="Threads"><svg viewBox="-48 -48 384 384" aria-hidden="true"><rect width="288" height="288" rx="52" fill="#fff"/><path d="M120,38 L119,39 L116,39 L115,40 L104,43 L101,45 L99,45 L86,53 L72,67 L67,74 L60,87 L60,89 L58,92 L58,94 L54,104 L53,112 L52,113 L52,117 L51,118 L51,125 L50,126 L50,160 L51,161 L52,174 L53,175 L56,190 L57,191 L59,199 L61,202 L61,204 L65,212 L73,223 L86,234 L106,245 L108,245 L114,248 L117,248 L122,250 L128,250 L129,251 L160,251 L161,250 L167,250 L168,249 L172,249 L173,248 L180,247 L196,240 L210,228 L218,217 L223,207 L223,205 L226,198 L226,193 L227,192 L227,178 L226,177 L226,173 L225,172 L224,167 L222,164 L222,162 L220,160 L217,154 L207,143 L200,138 L192,134 L190,119 L189,118 L188,113 L183,104 L174,95 L163,89 L157,88 L156,87 L143,86 L142,87 L130,88 L118,93 L114,96 L106,105 L106,107 L119,116 L121,116 L128,109 L135,106 L139,106 L140,105 L152,105 L153,106 L156,106 L160,108 L168,116 L173,126 L173,128 L172,129 L147,128 L146,129 L136,129 L135,130 L131,130 L121,134 L110,144 L104,156 L104,160 L103,161 L103,170 L104,171 L105,178 L110,187 L119,195 L125,198 L127,198 L131,200 L135,200 L136,201 L150,201 L151,200 L155,200 L156,199 L161,198 L171,193 L179,186 L186,176 L187,172 L189,169 L189,166 L191,161 L191,157 L192,156 L200,162 L205,169 L208,176 L208,180 L209,181 L209,190 L208,191 L207,198 L205,201 L204,205 L200,211 L190,221 L176,229 L174,229 L170,231 L167,231 L166,232 L154,233 L153,234 L134,234 L133,233 L123,232 L122,231 L114,229 L104,224 L94,217 L86,209 L78,197 L78,195 L75,190 L75,188 L72,181 L71,173 L70,172 L70,167 L69,166 L69,159 L68,158 L68,131 L69,130 L70,117 L71,116 L71,113 L72,112 L74,102 L84,82 L97,68 L106,62 L119,57 L128,56 L129,55 L142,55 L143,54 L161,55 L162,56 L171,57 L172,58 L177,59 L190,66 L194,69 L206,82 L213,94 L213,96 L215,99 L215,101 L218,108 L224,107 L228,105 L231,105 L232,104 L237,103 L228,82 L218,67 L205,54 L196,48 L193,47 L191,45 L175,39 L167,38 L166,37 L160,37 L159,36 L133,36 L132,37Z M125,154 L134,148 L141,147 L142,146 L161,146 L162,147 L167,147 L168,148 L172,148 L173,149 L173,157 L172,158 L172,162 L166,174 L159,180 L157,180 L154,182 L150,182 L149,183 L139,183 L138,182 L135,182 L129,179 L124,174 L121,168 L121,161Z" fill="#000" fill-rule="evenodd"/></svg></a></div></footer></main>
@@ -144,6 +168,36 @@
 })();
 </script>
 
+
+<script id="homepage-latest-blog-posts">
+(function(){
+  const list=document.getElementById('homepage-blog-list');
+  if(!list)return;
+  fetch('/blog.html?homepage-blog=latest',{cache:'no-store'})
+    .then(function(response){if(!response.ok)throw new Error('Blog is unavailable');return response.text()})
+    .then(function(markup){
+      const documentCopy=new DOMParser().parseFromString(markup,'text/html');
+      const sourceCards=Array.from(documentCopy.querySelectorAll('.posts > .post-card')).filter(function(card){return card.matches('a.post-card[href]')&&card.querySelector('h2')&&card.querySelector('.post-excerpt')}).slice(0,3);
+      const fragment=document.createDocumentFragment();
+      sourceCards.forEach(function(source){
+        const href=source.getAttribute('href');
+        if(!href)return;
+        const link=document.createElement('a');
+        link.className='homepage-blog-post';
+        link.href=new URL(href,location.origin).href;
+        const meta=source.querySelector('.post-number');
+        const title=source.querySelector('h2');
+        const excerpt=source.querySelector('.post-excerpt');
+        const date=document.createElement('span');date.className='post-number';date.textContent=meta?meta.textContent.trim():'PRYCOT. / BLOG';
+        const heading=document.createElement('h2');heading.textContent=title.textContent.trim();
+        const description=document.createElement('p');description.textContent=excerpt.textContent.trim();
+        link.append(date,heading,description);fragment.append(link);
+      });
+      list.replaceChildren(fragment);
+    })
+    .catch(function(){list.replaceChildren();});
+})();
+</script>
 </body>
 </html>
 

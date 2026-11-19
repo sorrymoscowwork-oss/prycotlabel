@@ -87,3 +87,8 @@ button:not(.site-mobile-sections-toggle),input[type="submit"],input[type="button
 
 /* Preserve the original article-header text wordmark. */
 .brand .logo{font-size:32px!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important}
+
+
+/* Supplied transparent PRYCOT wordmark, same header height across article pages. */
+.brand img.logo{display:block!important;width:auto!important;height:44px!important;max-width:230px!important;object-fit:contain!important;filter:none!important}
+@media(max-width:700px){.brand img.logo{height:32px!important;max-width:170px!important}}

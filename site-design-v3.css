@@ -1180,7 +1180,7 @@ body header.v3-header .v3-menu-toggle:focus-visible {
 }
 
 
-/* PRYCOT supplied textured wordmark: retain the previous text-logo visual size. */
+/* Restore the reliable text wordmark until the supplied image is re-exported as a valid asset. */
 .v3-brand { align-items: center !important; }
-.v3-brand .v3-logo { display: block !important; flex: 0 0 auto !important; width: auto !important; height: 22px !important; max-width: none !important; margin: 0 !important; padding: 0 !important; object-fit: contain !important; font-size: 0 !important; line-height: 0 !important; }
-@media (max-width: 760px) { .v3-brand .v3-logo { height: 20px !important; } }
+.v3-brand .v3-logo { display: inline-block !important; width: auto !important; height: auto !important; font: italic 800 30px/.9 Helvetica, Arial, sans-serif !important; letter-spacing: -.075em !important; line-height: .9 !important; }
+@media (max-width: 760px) { .v3-brand .v3-logo { font-size: 27px !important; } }

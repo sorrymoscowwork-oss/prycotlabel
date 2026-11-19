@@ -85,6 +85,5 @@ button:not(.site-mobile-sections-toggle),input[type="submit"],input[type="button
 
 
 
-/* PRYCOT supplied textured wordmark; keep the original header logo's visible dimensions. */
-.brand img.logo{display:block!important;width:auto!important;height:45px!important;min-width:0!important;min-height:0!important;max-width:calc(100vw - 68px)!important;object-fit:contain!important;margin:0!important;padding:0!important;filter:none!important}
-@media(max-width:700px){.brand img.logo{height:31px!important;max-width:calc(100vw - 40px)!important}}
+/* Preserve the original article-header text wordmark. */
+.brand .logo{font-size:32px!important;font-weight:800!important;font-style:italic!important;letter-spacing:-.075em!important}

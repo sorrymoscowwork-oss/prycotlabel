@@ -28,11 +28,9 @@
     brand.className = "v3-brand";
     brand.href = "index.html";
     brand.setAttribute("aria-label", "PRYCOT. — Home");
-    const logo = document.createElement("img");
+    const logo = document.createElement("span");
     logo.className = "v3-logo";
-    logo.src = "/images/prycot-header-logo.webp";
-    logo.alt = "";
-    logo.setAttribute("aria-hidden", "true");
+    logo.textContent = "PRYCOT.";
     brand.append(logo);
 
     const pageName = sourceTitle?.textContent?.trim() || "";

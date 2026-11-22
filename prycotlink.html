@@ -18,56 +18,6 @@ button:not(.site-mobile-sections-toggle),input[type="submit"],input[type="button
 
 /* Mobile wallet layout hotfix 2026-10-13 */
 
-/* Public PRYCOTLINK brand lockup: tagline sits to the right, vertically centered. */
-body.prycotlink-public-release .pl-live-release .release-brand-group{
-  display:flex!important;
-  flex-direction:row!important;
-  align-items:center!important;
-  justify-content:flex-start!important;
-  gap:14px!important;
-}
-body.prycotlink-public-release .pl-live-release .release-brand-group>.prycot-brand-tagline{
-  position:static!important;
-  display:block!important;
-  width:max-content!important;
-  max-width:calc(100vw - 240px)!important;
-  margin:0!important;
-  padding:0!important;
-  line-height:1.2!important;
-  text-align:left!important;
-  white-space:nowrap!important;
-}
-@media(max-width:760px){
-  body.prycotlink-public-release .pl-live-release .release-brand-group{
-    gap:10px!important;
-    max-width:calc(100vw - 40px)!important;
-  }
-  body.prycotlink-public-release .pl-live-release .release-brand-group>.prycot-brand-tagline{
-    max-width:calc(100vw - 190px)!important;
-    font-size:10px!important;
-  }
-}
-
-
-/* Highest-specificity release header alignment override, after legacy template rules. */
-body.prycotlink-public-release .pl-live-release header.release-topbar .release-brand-group{
-  display:flex!important;flex-direction:row!important;align-items:center!important;
-  justify-content:flex-start!important;gap:14px!important;
-}
-body.prycotlink-public-release .pl-live-release header.release-topbar .release-brand-group>.prycot-brand-tagline{
-  position:static!important;left:auto!important;top:auto!important;right:auto!important;bottom:auto!important;
-  display:block!important;width:max-content!important;max-width:calc(100vw - 240px)!important;
-  margin:0!important;padding:0!important;line-height:1.2!important;text-align:left!important;
-  white-space:nowrap!important;transform:none!important;
-}
-@media(max-width:760px){
-  body.prycotlink-public-release .pl-live-release header.release-topbar .release-brand-group{
-    gap:10px!important;max-width:calc(100vw - 40px)!important;
-  }
-  body.prycotlink-public-release .pl-live-release header.release-topbar .release-brand-group>.prycot-brand-tagline{
-    max-width:calc(100vw - 190px)!important;font-size:10px!important;
-  }
-}
 
 </style>
 <script>
@@ -1494,6 +1444,58 @@ body.prycotlink-public-release .pl-live-release .release-qr-wrap .release-qr{dis
   .pl-live-release .release-brand-group{left:20px!important;top:22px!important;max-width:calc(100vw - 40px)!important}
   .pl-live-release .release-brand-group>.release-brand .release-brand-logo{height:32px!important;max-width:min(42vw,170px)!important}
   .pl-live-release .release-brand-group>.prycot-brand-tagline{max-width:calc(100vw - 40px)!important;margin:-3px 0 0 8px!important}
+}
+
+
+/* CANONICAL FIX — shared public PRYCOTLINK release header, desktop + mobile.
+   Keep the tagline inline with the logo; this must be the final brand rule in the cascade. */
+html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group{
+  position:fixed!important;
+  left:34px!important;top:30px!important;right:auto!important;bottom:auto!important;
+  z-index:30!important;
+  display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+  align-items:center!important;justify-content:flex-start!important;
+  gap:12px!important;
+  width:max-content!important;height:auto!important;
+  max-width:calc(100vw - 68px)!important;
+  margin:0!important;padding:0!important;overflow:visible!important;
+  transform:none!important;
+}
+html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group > .release-brand{
+  position:static!important;display:block!important;flex:0 0 auto!important;
+  width:max-content!important;height:auto!important;max-width:none!important;
+  margin:0!important;padding:0!important;line-height:1!important;overflow:visible!important;
+}
+html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group > .release-brand > .release-brand-logo{
+  display:block!important;width:auto!important;height:44px!important;
+  max-width:min(42vw,230px)!important;object-fit:contain!important;
+  object-position:left center!important;margin:0!important;padding:0!important;
+}
+html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group > .prycot-brand-tagline{
+  position:static!important;inset:auto!important;display:block!important;
+  flex:0 0 auto!important;align-self:center!important;
+  width:max-content!important;max-width:calc(100vw - 260px)!important;
+  margin:0!important;padding:0!important;
+  color:#919191!important;font:italic 300 12px/1.2 Helvetica,Arial,sans-serif!important;
+  letter-spacing:0!important;text-transform:none!important;text-align:left!important;
+  white-space:nowrap!important;transform:none!important;
+}
+@media screen and (max-width:760px){
+  html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group{
+    left:20px!important;top:22px!important;
+    display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+    align-items:center!important;gap:10px!important;
+    max-width:calc(100vw - 40px)!important;
+  }
+  html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group > .release-brand > .release-brand-logo{
+    height:32px!important;max-width:min(42vw,170px)!important;
+  }
+  html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group > .prycot-brand-tagline{
+    position:static!important;inset:auto!important;
+    align-self:center!important;margin:0!important;
+    max-width:calc(100vw - 190px)!important;
+    font-size:10px!important;line-height:1.2!important;
+  }
 }
 
 </style>

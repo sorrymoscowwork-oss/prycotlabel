@@ -666,7 +666,7 @@ function releaseMarkup(r, preview=false){
   <div class="release-stat"><strong data-release-stat="streamingClicks">0</strong><span>STREAMING CLICKS</span></div>
   <div class="release-stat"><strong data-release-stat="socialClicks">0</strong><span>SOCIAL &amp; WEBSITE CLICKS</span></div>
 </div>
-<footer class="release-bottom"><button class="release-qr-wrap" type="button" aria-label="Open QR code"><img class="release-qr" src="${qrUrl}" alt="QR code for this release page" loading="lazy"></button></footer>
+<footer class="release-bottom"><button class="release-qr-wrap" type="button" aria-label="Open QR code"><img class="release-qr" src="${qrUrl}" alt="QR code for this release page" loading="lazy"></button><div class="release-share"><button type="button" class="release-share-trigger" aria-expanded="false" aria-controls="release-share-menu"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.7 10.7 15.3 6.3M8.7 13.3l6.6 4.4"></path></svg><span>SHARE</span></button><div class="release-share-menu" id="release-share-menu" hidden><button type="button" class="release-share-option" data-share-action="native">Share…</button><a class="release-share-option" data-share-url="https://www.facebook.com/sharer/sharer.php?u=" target="_blank" rel="noopener noreferrer">Facebook</a><a class="release-share-option" data-share-url="https://wa.me/?text=" target="_blank" rel="noopener noreferrer">WhatsApp</a><a class="release-share-option" data-share-url="https://t.me/share/url?url=" target="_blank" rel="noopener noreferrer">Telegram</a><a class="release-share-option" data-share-url="https://twitter.com/intent/tweet?url=" target="_blank" rel="noopener noreferrer">X</a><a class="release-share-option" data-share-url="mailto:?subject=" data-share-email="true">Email</a><button type="button" class="release-share-option" data-share-action="instagram">Instagram · Copy link</button><button type="button" class="release-share-option" data-share-action="copy">Copy link</button></div><span class="release-share-status" aria-live="polite"></span></div></footer>
   </section>`;
  }
  function addLiveStyles(){if(document.getElementById('prycotlink-live-styles'))return;const s=document.createElement('style');s.id='prycotlink-live-styles';s.textContent=`
@@ -862,6 +862,29 @@ function setReleaseNoindex(){let robots=document.querySelector('meta[name="robot
     document.body.appendChild(overlay);
     const openQr=()=>{overlay.classList.add('open');document.body.style.overflow='hidden'};
     const closeQr=()=>{overlay.classList.remove('open');document.body.style.overflow=''};
+    const shareRoot=release.querySelector('.release-share');
+    if(shareRoot){
+      const shareTrigger=shareRoot.querySelector('.release-share-trigger');
+      const shareMenu=shareRoot.querySelector('.release-share-menu');
+      const shareStatus=shareRoot.querySelector('.release-share-status');
+      const shareUrl=location.origin+'/'+(r.slug||'');
+      const shareTitle=(r.title||'PRYCOTLINK')+' — '+(r.artist||'');
+      const closeShare=()=>{shareMenu.hidden=true;shareTrigger.setAttribute('aria-expanded','false')};
+      const copyShare=async()=>{try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(shareUrl)}else{const field=document.createElement('textarea');field.value=shareUrl;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();document.execCommand('copy');field.remove()}shareStatus.textContent='LINK COPIED';return true}catch(e){shareStatus.textContent='SELECT AND COPY THE PAGE URL';return false}};
+      shareTrigger.addEventListener('click',()=>{shareMenu.hidden=!shareMenu.hidden;shareTrigger.setAttribute('aria-expanded',String(!shareMenu.hidden))});
+      shareMenu.querySelectorAll('[data-share-url]').forEach(link=>{const base=link.dataset.shareUrl;link.href=link.dataset.shareEmail?base+encodeURIComponent(shareTitle)+'&body='+encodeURIComponent(shareUrl):base+encodeURIComponent(shareUrl)});
+      shareMenu.addEventListener('click',async event=>{
+        const control=event.target.closest('[data-share-action]');if(!control)return;
+        const action=control.dataset.shareAction;
+        if(action==='native'){
+          if(navigator.share){try{await navigator.share({title:shareTitle,text:shareTitle,url:shareUrl});closeShare()}catch(e){if(e.name!=='AbortError')shareStatus.textContent='SHARING UNAVAILABLE'}}
+          else{await copyShare()}
+        }else if(action==='copy'){await copyShare();closeShare()}
+        else if(action==='instagram'){const ok=await copyShare();if(ok){window.open('https://www.instagram.com/','_blank','noopener,noreferrer');shareStatus.textContent='LINK COPIED — PASTE IN INSTAGRAM'}closeShare()}
+      });
+      document.addEventListener('click',event=>{if(!shareRoot.contains(event.target))closeShare()});
+      document.addEventListener('keydown',event=>{if(event.key==='Escape')closeShare()});
+    }
     qrButton.addEventListener('click',openQr,{passive:true});
     qrButton.addEventListener('pointerup',openQr,{passive:true});
     overlay.addEventListener('click',e=>{if(e.target===overlay)closeQr()});
@@ -1250,6 +1273,19 @@ html body.prycotlink-public-release .pl-live-release header.release-topbar > .re
     font-size:9px!important;max-width:calc(100vw - 130px)!important;
   }
 }
+
+
+/* Shared footer Share control */
+.pl-live-release .release-bottom .release-share{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:7px;z-index:5}
+.pl-live-release .release-share-trigger{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-width:116px;height:42px;padding:0 18px;border:1px solid #3b3b3b;border-radius:999px;background:#171717;color:#f4f4f4;font:500 10px/1 Helvetica,Arial,sans-serif;letter-spacing:.16em;cursor:pointer;transition:background .18s,border-color .18s}
+.pl-live-release .release-share-trigger:hover,.pl-live-release .release-share-trigger[aria-expanded="true"]{background:#242424;border-color:#777}
+.pl-live-release .release-share-trigger svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.pl-live-release .release-share-menu{position:absolute;left:0;top:calc(100% + 9px);min-width:190px;padding:7px;background:#151515;border:1px solid #333;border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:2px;z-index:20}
+.pl-live-release .release-share-menu[hidden]{display:none!important}
+.pl-live-release .release-share-option{display:flex;align-items:center;width:100%;min-height:38px;padding:0 12px;border:0;border-radius:7px;background:transparent;color:#e8e8e8;text-align:left;text-decoration:none;font:400 11px/1.3 Helvetica,Arial,sans-serif;cursor:pointer}
+.pl-live-release .release-share-option:hover,.pl-live-release .release-share-option:focus-visible{background:#292929;color:#fff;outline:none}
+.pl-live-release .release-share-status{min-height:11px;color:#9a9a9a;font:9px/1.2 Helvetica,Arial,sans-serif;letter-spacing:.04em}
+@media(max-width:760px){.pl-live-release .release-bottom{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:18px!important}.pl-live-release .release-bottom .release-share{align-items:flex-start}.pl-live-release .release-share-menu{left:auto;right:0;min-width:176px}.pl-live-release .release-share-trigger{min-width:104px;height:38px;padding:0 14px}}
 
 /* Crypto Donation accents — match the artist verified badge blue. */
 html body.prycotlink-public-release .pl-live-release button.release-donation-trigger,

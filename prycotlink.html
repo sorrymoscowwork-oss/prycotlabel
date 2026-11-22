@@ -1236,6 +1236,15 @@ html body.prycotlink-public-release .pl-live-release header.release-topbar > .re
 }
 
 
+
+/* Mobile brand alignment: prevent the logo link from reserving desktop width. */
+@media screen and (max-width:760px){
+  html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group > a.release-brand{
+    width:max-content!important;min-width:0!important;max-width:none!important;
+    flex:0 0 auto!important;
+  }
+}
+
 /* Crypto Donation accents — match the artist verified badge blue. */
 html body.prycotlink-public-release .pl-live-release button.release-donation-trigger,
 html body.prycotlink-public-release .pl-live-release button.release-donation-trigger:hover,

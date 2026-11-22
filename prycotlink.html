@@ -1239,9 +1239,15 @@ html body.prycotlink-public-release .pl-live-release header.release-topbar > .re
 
 /* Mobile brand alignment: prevent the logo link from reserving desktop width. */
 @media screen and (max-width:760px){
+  html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group{
+    gap:2px!important;
+  }
   html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group > a.release-brand{
     width:max-content!important;min-width:0!important;max-width:none!important;
     flex:0 0 auto!important;
+  }
+  html body.prycotlink-public-release .pl-live-release header.release-topbar > .release-brand-group > .prycot-brand-tagline{
+    font-size:9px!important;max-width:calc(100vw - 130px)!important;
   }
 }
 

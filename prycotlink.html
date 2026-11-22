@@ -17,6 +17,37 @@ button:not(.site-mobile-sections-toggle),input[type="submit"],input[type="button
 
 
 /* Mobile wallet layout hotfix 2026-10-13 */
+
+/* Public PRYCOTLINK brand lockup: tagline sits to the right, vertically centered. */
+body.prycotlink-public-release .pl-live-release .release-brand-group{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:14px!important;
+}
+body.prycotlink-public-release .pl-live-release .release-brand-group>.prycot-brand-tagline{
+  position:static!important;
+  display:block!important;
+  width:max-content!important;
+  max-width:calc(100vw - 240px)!important;
+  margin:0!important;
+  padding:0!important;
+  line-height:1.2!important;
+  text-align:left!important;
+  white-space:nowrap!important;
+}
+@media(max-width:760px){
+  body.prycotlink-public-release .pl-live-release .release-brand-group{
+    gap:10px!important;
+    max-width:calc(100vw - 40px)!important;
+  }
+  body.prycotlink-public-release .pl-live-release .release-brand-group>.prycot-brand-tagline{
+    max-width:calc(100vw - 190px)!important;
+    font-size:10px!important;
+  }
+}
+
 </style>
 <script>
 (function(){

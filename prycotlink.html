@@ -640,7 +640,7 @@ function releaseMarkup(r, preview=false){
   return `<section class="pl-live-release ${preview?'pl-live-preview':''}">
     <header class="release-topbar">
       ${(r.canEdit||telegramProfile())?`<a class="release-edit" href="/prycotlink.html?edit=${encodeURIComponent(r.slug)}">EDIT</a>`:``}
-      <div class="release-brand-group"><a class="release-brand" href="https://prycot.com/" aria-label="PRYCOT."><span>PRYCOT.</span></a><p class="prycot-brand-tagline">independent music label</p></div>
+      <div class="release-brand-group"><a class="release-brand" href="https://prycot.com/" aria-label="PRYCOT."><img class="release-brand-logo" src="/images/prycot-header-logo.svg?v=20261120-svgfix2" alt="PRYCOT."></a><p class="prycot-brand-tagline">independent music label</p></div>
     </header>
     <section class="release-content" aria-label="Release">
       <div class="release-left-column">
@@ -1350,6 +1350,68 @@ body.prycotlink-public-release .pl-live-release .release-qr-wrap:focus,
 body.prycotlink-public-release .pl-live-release .release-qr-wrap:focus-visible,
 body.prycotlink-public-release .pl-live-release .release-qr-wrap:active{background:#0a0a0a!important;background-color:#0a0a0a!important;border:0!important;box-shadow:none!important;outline:0!important}
 body.prycotlink-public-release .pl-live-release .release-qr-wrap .release-qr{display:block!important;background:#0a0a0a!important;background-color:#0a0a0a!important;box-shadow:none!important}
+
+/* Canonical public-release logo: use the same vector wordmark as the main site. */
+.pl-live-release .release-brand-group{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  gap:0!important;
+  width:max-content!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+.pl-live-release .release-brand-group>.release-brand{
+  display:block!important;
+  width:max-content!important;
+  height:auto!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+.pl-live-release .release-brand-group>.release-brand .release-brand-logo{
+  display:block!important;
+  width:auto!important;
+  height:44px!important;
+  max-width:min(42vw,230px)!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+  filter:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+.pl-live-release .release-brand-group>.prycot-brand-tagline{
+  position:static!important;
+  display:block!important;
+  width:max-content!important;
+  max-width:calc(100vw - 68px)!important;
+  margin:-5px 0 0 8px!important;
+  padding:0!important;
+  color:#919191!important;
+  font:italic 300 12px/1.2 Helvetica,Arial,sans-serif!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  text-align:left!important;
+  white-space:nowrap!important;
+  transform:none!important;
+}
+@media(max-width:760px){
+  .pl-live-release .release-brand-group{
+    left:20px!important;
+    top:22px!important;
+    max-width:calc(100vw - 40px)!important;
+  }
+  .pl-live-release .release-brand-group>.release-brand .release-brand-logo{
+    height:32px!important;
+    max-width:min(42vw,170px)!important;
+  }
+  .pl-live-release .release-brand-group>.prycot-brand-tagline{
+    max-width:calc(100vw - 40px)!important;
+    margin:-3px 0 0 8px!important;
+    font-size:12px!important;
+  }
+}
+
 </style>
 <script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body>
 </html>

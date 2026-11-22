@@ -1235,6 +1235,86 @@ html body.prycotlink-public-release .pl-live-release header.release-topbar > .re
   }
 }
 
+
+/* Crypto Donation accents — match the artist verified badge blue. */
+html body.prycotlink-public-release .pl-live-release button.release-donation-trigger,
+html body.prycotlink-public-release .pl-live-release button.release-donation-trigger:hover,
+html body.prycotlink-public-release .pl-live-release button.release-donation-trigger:focus,
+html body.prycotlink-public-release .pl-live-release button.release-donation-trigger:focus-visible,
+html body.prycotlink-public-release .pl-live-release button.release-donation-trigger:active{
+  background:#1D9BF0!important;
+  background-image:none!important;
+  border-color:#1D9BF0!important;
+  color:#fff!important;
+  outline:0!important;box-shadow:none!important;
+}
+html body.prycotlink-public-release .pl-live-release button.release-donation-trigger:hover{
+  background:#1689D4!important;border-color:#1689D4!important;
+}
+html body.prycotlink-public-release .pl-live-release .release-donation-trigger .release-donation-crypto-word,
+html body.prycotlink-public-release .pl-live-release .release-donation-trigger .release-donation-donation-word{
+  background:none!important;background-image:none!important;
+  -webkit-background-clip:border-box!important;background-clip:border-box!important;
+  color:#fff!important;
+}
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog-head h2{
+  background:none!important;background-image:none!important;
+  -webkit-background-clip:border-box!important;background-clip:border-box!important;
+  color:#1D9BF0!important;
+}
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog button.release-donation-close,
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog button.release-donation-close:hover,
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog button.release-donation-close:focus,
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog button.release-donation-close:focus-visible,
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog button.release-donation-close:active{
+  background:#1D9BF0!important;background-image:none!important;
+  border:1px solid #1D9BF0!important;color:#fff!important;
+  outline:0!important;box-shadow:none!important;transform:none!important;
+}
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog button.release-donation-close:hover{
+  background:#1689D4!important;border-color:#1689D4!important;
+}
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog button.release-donation-close::before,
+html body.prycotlink-public-release .pl-live-release .release-donation-dialog button.release-donation-close::after{
+  background:#fff!important;
+}
+html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy,
+html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:hover,
+html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:focus,
+html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:focus-visible,
+html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:active{
+  box-sizing:border-box!important;
+  width:78px!important;min-width:78px!important;max-width:78px!important;
+  height:34px!important;min-height:34px!important;max-height:34px!important;
+  flex:0 0 78px!important;padding:0!important;
+  display:inline-flex!important;align-items:center!important;justify-content:center!important;
+  background:#1D9BF0!important;background-image:none!important;
+  border:1px solid #1D9BF0!important;border-radius:999px!important;
+  color:#fff!important;font:10px/1 Helvetica,Arial,sans-serif!important;
+  letter-spacing:.1em!important;white-space:nowrap!important;
+  outline:0!important;box-shadow:none!important;transform:none!important;
+  transition:background-color .16s ease,border-color .16s ease,color .16s ease!important;
+}
+html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:hover{
+  background:#1689D4!important;border-color:#1689D4!important;color:#fff!important;
+}
+html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy.is-copied,
+html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy.is-copied:hover{
+  background:#16A34A!important;background-image:none!important;
+  border-color:#16A34A!important;color:#fff!important;
+}
+@media(max-width:760px){
+  html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy,
+  html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:hover,
+  html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:focus,
+  html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:focus-visible,
+  html body.prycotlink-public-release .pl-live-release .release-donation-wallets button.release-wallet-copy:active{
+    width:68px!important;min-width:68px!important;max-width:68px!important;
+    height:32px!important;min-height:32px!important;max-height:32px!important;
+    flex-basis:68px!important;font-size:9px!important;
+  }
+}
+
 </style>
 <script id="prycot-desktop-brand-scroll">(function(){if(/(^|\/)account\.html$|(^|\/)admin\.html$/i.test(location.pathname))return;const brand=document.querySelector(".brand");if(!brand)return;function update(){brand.classList.toggle("prycot-scroll-hidden",window.innerWidth>700&&window.scrollY>80)}window.addEventListener("scroll",update,{passive:true});window.addEventListener("resize",update);update()})();</script></body>
 </html>
